@@ -1,0 +1,290 @@
+openapi: 3.0.3
+info:
+  title: Greeve Capstone Project - OpenAPI 3.0
+  description: |-
+    Capstone Project for Alterra Academy
+  contact:
+    email: admin@greeve.store
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Greeve
+  url: https://greeve.store
+servers:
+  - url: https://api.greeve.store/api/v1
+tags:
+  - name: users
+    description: Operations about user
+
+paths:
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Register User
+      description: User melakukan register menggunakan email dan username, dan mendapatkan response token
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - username
+                - name
+                - password
+                - address
+                - gender
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                address:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Laki-laki
+                    - Perempuan
+              example:
+                email: users@kzquandary.my.id
+                name: Kaze User
+                password: kzquandary
+                address: jalan raya cimahi
+                gender: Laki-laki
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    properties:
+                      token:
+                        type: string
+              example:
+                status: true
+                message: Register Success
+                data: []
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Email and password cannot be empty
+                  data: []
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: User already exists
+                  data: []
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Login User
+      description: User melakukan login menggunakan email dan username, dan mendapatkan response token
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              example:
+                email: users@kzquandary.my.id
+                password: kzquandary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    properties:
+                      token:
+                        type: string
+              example:
+                status: true
+                message: Login Success
+                data:
+                  - token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Email and password cannot be empty
+                  data: []
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid email or password
+                  data: []
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get User Profile
+      description: User mendapatkan profile user, untuk menggunakan route ini harus menggunakan token user
+      operationId: getUserProfile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Success
+                  data:
+                    - id: 422344
+                      name: Kaze User
+                      email: user@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+                      balance: 50000
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
+    put:
+      tags:
+        - users
+      summary: Update User
+      description: User melakukan update profile user, untuk menggunakan route ini harus menggunakan token user
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                address:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Laki-laki
+                    - Perempuan
+              example:
+                name: Kaze User
+                email: users@kzquandary.my.id
+                address: Cimahi
+                gender: Laki-laki
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                - id: 422344
+                  name: Kaze User
+                  email: users@kzquandary.my.id
+                  address: Cimahi
+                  gender: Laki-laki
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+
+security:
+  - bearerAuth: []

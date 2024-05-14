@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.prod
+go.sum
+coverage.out
+credentials.json
