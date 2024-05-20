@@ -16,11 +16,17 @@ tags:
     description: Operations about admin
   - name: user
     description: Operations about admin
+  - name: transaction
+    description: Operations about admin
   - name: product
     description: Operations about admin
   - name: challenge
     description: Operations about admin
+  - name: forum
+    description: Operations about admin
   - name: data impact
+    description: Operations about admin
+  - name: voucher
     description: Operations about admin
 
 paths:
@@ -190,7 +196,7 @@ paths:
                   data:
                     type: array
                 example:
-                - id: 422344
+                  id: 422344
                   name: Kaze User
                   email: users@kzquandary.my.id
                   address: Cimahi
@@ -242,11 +248,83 @@ paths:
                 example:
                   status: false
                   message: Not Found  
+  /admin/users/{user_id}:
+    get: 
+      tags:
+        - user
+      summary: Get User By ID
+      description: Admin mendapatkan user berdasarkan id, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getUser
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                address:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Laki-laki
+                    - Perempuan
+                phone:
+                  type: string
+              example:
+                name: Kaze User
+                email: users@kzquandary.my.id
+                address: Cimahi
+                gender: Laki-laki
+                phone: 62123456789
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Id User Success
+                  data: 
+                    - id: 422344
+                      name: Kaze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+                      phone: 62123456789
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found
     put: 
       tags:
         - user
-      summary: Update User
-      description: Admin melakukan update user, untuk menggunakan route ini harus menggunakan token admin
+      summary: Update User data
+      description: Admin dapat melakukan update data user, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -267,11 +345,88 @@ paths:
                   enum:
                     - Laki-laki
                     - Perempuan
+                phone:
+                  type: string
               example:
-                name: Kaze User
-                email: users@kzquandary.my.id
-                address: Cimahi
+                name: Kuze User
+                email: users@kzquandary2.my.id
+                address: Cimahi2
                 gender: Laki-laki
+                phone: 62123456789
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Update User Success
+                  data: 
+                      id: 422344
+                      name: Kuze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi2
+                      gender: Laki-laki
+                      phone: 62123456789
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request data
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found
+    delete: 
+      tags:
+        - user
+      summary: Delete User and user data
+      description: Admin dapat melakukan delete data user, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
       responses:
         "200":
           description: OK
@@ -288,8 +443,83 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Update User Success
+                  message: Delete User Success
                   data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: User Id Not Found
+  /transactions:
+    get: 
+      tags:
+        - transaction
+      summary: Get All Transaction Data
+      description: Admin mendapatkan semua data transaction, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getTransaction
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get All Transactions Success
+                  data: 
+                    - id: 01
+                      user_id: 422344
+                      address: Cimahi
+                      description: pembayaran
+                      total: 100000
+                      status: pending
+                      date: 2022-10-10
+                      payment:
+                        payment_method: cash
+                      created_at: 2022-10-10
+                    - id: 02
+                      user_id: 422344
+                      address: Cimahi
+                      description: pembayaran
+                      total: 1000000
+                      status: pending
+                      date: 2022-10-10
+                      payment:
+                        payment_method: cash
+                      created_at: 2022-10-10
         "404":
           description: Not Found
           content:
@@ -304,6 +534,962 @@ paths:
                 example:
                   status: false
                   message: Not Found
+  /admin/transactions/{transaction_id}:
+    get: 
+      tags:
+        - transaction
+      summary: Get Transaction Data By ID
+      description: Admin mendapatkan semua data transaction, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getTransactionbyID
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Data by ID Transaction Success
+                  data: 
+                    - id: 01
+                      user_id: 422344
+                      address: Cimahi
+                      description: pembayaran
+                      total: 100000
+                      status: pending
+                      date: 2022-10-10
+                      payment:
+                        payment_method: cash
+                      created_at: 2022-10-10
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Transaction Not Found
+    put: 
+      tags:
+        - transaction
+      summary: Update Data Transactions By Admin
+      description: Admin dapat melakukan update data transaction, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateTransaction
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                  status: Success
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Update Data Transaction Success
+                  data: 
+                    - id: 01
+                      user_id: 422344
+                      address: Cimahi
+                      description: pembayaran
+                      total: 100000
+                      status: Success
+                      date: 2022-10-10
+                      payment:
+                        payment_method: cash
+                      created_at: 2022-10-10
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Transaction Not Found
+  /product:
+    get: 
+      tags:
+        - product
+      summary: Get All Product Data
+      description: Users dan Admin mendapatkan semua data product
+      operationId: getAllProduct
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Data Product Success
+                  data: 
+                    - id: 011
+                      name: product 1
+                      price: 100000
+                      description: product
+                      image_url: https://example.com/images/water-bottle.jpg
+                    - id: 012
+                      name: product 2
+                      price: 50000
+                      description: product
+                      image_url: https://example.com/images/water-bottle2.jpg
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found
+    post:
+      tags:
+        - product
+      summary: Add Product Data
+      description: Users dan Admin dapat menambahkan data product
+      operationId: addProduct
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                description:
+                  type: string
+                stock:
+                  type: number
+                category:
+                  type: array
+                image_url:
+                  type: array
+              example:
+                  name: product 3
+                  description: product
+                  coin: 200
+                  price: 30000
+                  category:
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9d
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9e
+                  image_url: 
+                  - https://example.com/images/water-bottle3.jpg
+                  - https://example.com/images/water-bottle3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Add Data Product Success
+                  data: null 
+                      
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+  /admin/product/{product_id}:
+    put: 
+      tags:
+        - product
+      summary: Update Data Product By Admin
+      description: Admin dapat melakukan update data product, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateProduct
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                  name: product 3
+                  price: 30000
+                  description: product keren
+                  image_url: https://example.com/images/item3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Update Data Transaction Success
+                  data: 
+                      id: 014
+                      name: product 3
+                      price: 30000
+                      description: product keren
+                      image_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Product Not Found
+    delete:
+      tags:
+        - product
+      summary: Delete Data Product By Admin
+      description: Admin dapat menghapus data product, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteProduct
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Product Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Product Not Found
+  /admin/challenge:
+    post:
+      tags:
+        - challenge
+      summary: Add Challenge
+      description: Admin dapat menambahkan data challenge
+      operationId: addChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                exp:
+                  type: integer
+                point:
+                  type: integer
+                date_start:
+                  type: string
+                date_end:
+                  type: string
+                difficulty:
+                  type: string
+              example:
+                title: Relaxation Week Challenge
+                dificulty: Easy
+                description: Mungut sampah sejauh 10km JALAN KAKI
+                exp: 10000
+                coin: 100
+                category: 
+                  - e965bc1d-9bfa-4512-8e28-64a101201d9d
+                  - e965bc1d-9bfa-4512-8e28-64a101201d9e
+                image_url: https://example.com/images/item3.jpg
+                date_start: 2024-10-10
+                date_end: 2024-10-11
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Add Challenge Success
+                  data: 
+                      id: 01
+                      author: John Doe
+                      title: Relaxation Week Challenge
+                      description: Mungut sampah sejauh 10km JALAN KAKI
+                      experience: 10000
+                      point: 100
+                      date_start: 2024-10-10
+                      date_end: 2024-10-11
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+    put:
+      tags:
+        - challenge
+      summary: Update Challenge
+      description: Admin dapat melakukan update data challenge, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  date_end:
+                    type: string
+              example:
+                date_end: 2024-10-15
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Challenge Success
+                  data:
+                      id: 01
+                      author: John Doe
+                      title: Relaxation Week Challenge
+                      description: Mungut sampah sejauh 10km JALAN KAKI
+                      experience: 10000
+                      point: 100
+                      date_start: 2024-10-10
+                      date_end: 2024-10-15
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Challenge Not Found
+  /admin/challenge/{challenge_id}:
+    put: 
+      tags:
+        - challenge
+      summary: Update Confirmation Challenge By Admin
+      description: Admin dapat melakukan update status terhadap Confirmation status dari challenge, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateConfirmationChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  status:
+                    type: boolean
+              example:
+                status: Accept
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Confirmation Challenge Success
+                  data:
+                      id: 001
+                      challenge_data:
+                        - challenge_id: 01
+                          title: Relaxation Week Challenge
+                          coin: 100
+                          exp: 10000
+                          date_start: 2024-10-10
+                          date_end: 2024-10-15
+                      user_data: 
+                        - user_id: 01
+                          name: Kaze User
+                          email: users@kzquandary.my.id
+                      description: Mungut sampah sejauh 10km JALAN KAKI
+                      image_url: https://example.com/images/item3.jpg
+                      date_upload: 2024-10-12
+                      status: true
+    delete:
+      tags:
+        - challenge
+      summary: Delete Data Challenge By Admin
+      description: Admin dapat menghapus data challenge, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteChallenge
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Challenge Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Challenge Not Found
+  /admin/forum/{forum_id}:
+    delete:
+      tags:
+        - forum
+      summary: Delete Data Forum By Admin
+      description: Admin dapat menghapus data forum, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteForum
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Forum Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Forum Not Found
+  /admin/impact:
+    post:
+      tags:
+        - data impact
+      summary: Add Data Impact By Admin
+      description: Admin dapat menambahkan data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: addDataImpact
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                impact_poin: 
+                  type: integer
+                icon_url: 
+                  type: string
+              example:
+                name: Name
+                impact_poin: 100
+                icon_url: https://example.com/images/item3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Add Data Impact Success
+                  data: 
+                    id: 001
+                    name: Name
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Impact Not Found                                   
+  /admin/voucher:
+    post:
+      tags:
+        - voucher
+      summary: Add Data Voucher By Admin 
+      description: Admin dapat menambahkan data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: addDataVoucher
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string            
+                discount:
+                  type: string
+                description:
+                  type: string
+                expired_at:
+                  type: string
+              example: 
+                name: Discount Hari Raya
+                code: A10238013
+                discount: 10%
+                description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                expired_at: 2024-10-30
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Add Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Voucher Not Found
+  /admin/voucher/{id}:
+    delete:
+      tags:
+        - voucher
+      summary: Delete Voucher Data By Admin
+      description: Admin dapat melakukan perintah delete data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteDataVoucher
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Voucher Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: ID Voucher Not Found
 components:
   securitySchemes:
     bearerAuth:
