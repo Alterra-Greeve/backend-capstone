@@ -14,7 +14,14 @@ servers:
 tags:
   - name: users
     description: Operations about user
-
+  - name: products
+    description: Operations about product
+  - name: shopping cart
+    description: Operations about shopping cart
+  - name: transactions
+    description: Operations about transaction
+  - name: challenges
+    description: Operations about challenge
 paths:
   /users/register:
     post:
@@ -185,7 +192,7 @@ paths:
                   status: false
                   message: Invalid email or password
                   data: []
-  /users:
+  /user:
     get:
       tags:
         - users
@@ -274,17 +281,869 @@ paths:
                   data:
                     type: array
                 example:
-                - id: 422344
-                  name: Kaze User
-                  email: users@kzquandary.my.id
-                  address: Cimahi
-                  gender: Laki-laki
+                  - id: 422344
+                    name: Kaze User
+                    email: users@kzquandary.my.id
+                    address: Cimahi
+                    gender: Laki-laki
+    delete:
+      tags:
+        - users
+      summary: Delete User
+      description: User melakukan delete profile user, untuk menggunakan route ini harus menggunakan token user
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Delete User Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+  /forgot-password:
+    post:
+      tags:
+        - users
+      summary: Forgot Password
+      description: User melakukan forgot password, untuk menggunakan route ini harus menggunakan token user
+      operationId: forgotPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+              example:
+                email: users@kzquandary.my.id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: OTP Sent to your email
+                  data: []
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Email and password cannot be empty
+                  data: []
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Email not found
+                  data: []
+  /verify-otp:
+    post:
+      tags:
+        - users
+      summary: Verify OTP
+      description: User melakukan verify otp, untuk menggunakan route ini harus menggunakan token user
+      operationId: verifyOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - otp
+              properties:
+                email:
+                  type: string
+                otp:
+                  type: string
+              example:
+                email: users@kzquandary.my.id
+                otp: 123456
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Verify OTP Success
+                  data: []
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: OTP is invalid
+                  data: []
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Email not found
+                  data: []
+  /reset-password:
+    post:
+      tags:
+        - users
+      summary: Reset Password
+      description: User melakukan reset password, untuk menggunakan route ini harus menggunakan token user
+      operationId: resetPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - otp
+                - password
+                - confirmPassword
+              properties:
+                email:
+                  type: string
+                otp:
+                  type: string
+                password:
+                  type: string
+                confirmPassword:
+                  type: string
+              example:
+                email: users@kzquandary.my.id
+                otp: 123456
+                password: kzquandary
+                confirmPassword: kzquandary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Reset Password Success
+                  data: []
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Password and confirm password must be same
+                  data: []
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Email not found
+                  data: []
+
+  /products:
+    get:
+      tags:
+        - products
+      summary: Get Products
+      description: User mendapatkan semua products
+      operationId: getProducts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Products Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      name: Product 1
+                      description: Product 1 description
+                      price: 10000
+                      coin: 200
+                      image: 
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-3.jpg
+                      category:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 1
+                          impact_point: 100
+                          icon_url: https://www.example.com/category-1.png
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 2
+                          impact_point: 200
+                          icon_url: https://www.example.com/category-2.png
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      name: Product 1
+                      description: Product 1 description
+                      price: 10000
+                      stock: 100
+                      coin: 200
+                      image: 
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-3.jpg
+                      category:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 1
+                          impact_point: 100
+                          icon_url: https://www.example.com/category-1.png
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 2
+                          impact_point: 200
+                          icon_url: https://www.example.com/category-2.png
+
+  /products/{product_id}:
+    get:
+      tags:
+        - products
+      summary: Get Products
+      description: User mendapatkan semua products
+      operationId: getProductbyId
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Products Success
+                  data: 
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      name: Product 1
+                      description: Product 1 description
+                      price: 10000
+                      coin: 200
+                      image: 
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/product-3.jpg
+                      category:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 1
+                          impact_point: 100
+                          icon_url: https://www.example.com/category-1.png
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Category 2
+                          impact_point: 200
+                          icon_url: https://www.example.com/category-2.png
+
+  /cart:
+    post:
+      tags:
+        - shopping cart
+      summary: Add Product to Cart
+      description: User menambahkan product ke cart, untuk qty opsional, jika tidak diisi maka akan melakukan increment qty
+      operationId: addProductToCart
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+              example:
+                product_id: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Add Product to Cart Success
+                  data: null
+    put:
+      tags:
+        - shopping cart
+      summary: Update Product in Cart
+      description: User mengupdate product di cart, untuk type dan qty opsional, salah satunya harus terisi, dan untuk value qty tidak boleh 0
+      operationId: updateProductInCart
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                qty:
+                  type: number
+              example:
+                product_id: 123e4567-e89b-12d3-a456-426614174000
+                type: "increment"
+                qty: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Update Product in Cart Success
+                  data: null
+    get:
+      tags:
+        - shopping cart
+      summary: Get Cart
+      description: User mendapatkan semua product di cart
+      operationId: getCart
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Cart Success
+                  data: 
+                    - cart_id: 123e4567-e89b-12d3-a456-426614174000
+                      user: 
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        name: User 1
+                      product: 
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        name: Product 1
+                        description: Product 1 description
+                        price: 10000
+                        coin: 200
+                        qty: 1
+                        image: 
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-1.jpg
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-2.jpg
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-3.jpg
+                        category:
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            name: Category 1
+                            impact_point: 100
+                            icon_url: https://www.example.com/category-1.png
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            name: Category 2
+                            impact_point: 200
+                            icon_url: https://www.example.com/category-2.png
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        name: Product 2
+                        description: Product 2 description
+                        price: 20000
+                        coin: 2000
+                        qty: 2
+                        image: 
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-1.jpg
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-2.jpg
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            url: https://www.example.com/product-3.jpg
+                        category:
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            name: Category 1
+                            impact_point: 100
+                            icon_url: https://www.example.com/category-1.png
+                          - id: 123e4567-e89b-12d3-a456-426614174000
+                            name: Category 2
+                            impact_point: 200
+                            icon_url: https://www.example.com/category-2.png
+    delete:
+      tags:
+        - shopping cart
+      summary: Delete Product in Cart
+      description: User menghapus product di cart
+      operationId: deleteProductInCart
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+              example:
+                product_id: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Delete Product in Cart Success
+                  data: null
+
+  /transactions:
+    post:
+      tags:
+        - transactions
+      summary: Create Transaction
+      description: User membuat transaksi
+      operationId: createTransaction
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voucher_code:
+                  type: string
+                address:
+                  type: string
+                description:
+                  type: string
+              example:
+                voucher_code: "DISC10"
+                address: "Jl. Raya Cikarus"
+                description: "This is a transaction description"
+                products: 
+                  - 123e4567-e89b-12d3-a456-426614174000
+                  - 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Create Transaction Success
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Voucher code is invalid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Voucher code is not found
+                  data: null
+    put:
+      tags:
+        - transactions
+      summary: Cancel Transaction
+      description: User mengcancel transaksi
+      operationId: cancelTransaction
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+              example:
+                transaction_id: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Cancel Transaction Success
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+  /validate-voucher/{voucher_code}:
+    get:
+      tags:
+        - transactions
+      summary: Validate Voucher
+      description: User mengvalidasi voucher
+      operationId: validateVoucher
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: DISC10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Validate Voucher Success
+                  data: 
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      name: Diskon Hari Raya
+                      discount: "10000"
+                      code: "DISC10"
+                      description: Diskon 10%
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Voucher code is invalid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Voucher code is not found
+                  data: null
+  /payment:
+    post:
+      tags:
+        - transactions
+      summary: Create Payment
+      description: User membuat payment
+      operationId: createPayment
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+              example:
+                transaction_id: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Create Payment Success
+                  data: 
+                    payment_id: 123e4567-e89b-12d3-a456-426614174000
+                    transaction: 
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      total: 10000
+                    user: 
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      name: User 1
+                    snap_url: https://app.sandbox.midtrans.com/snap/v1/transactions/123e4567-e89b-12d3-a456-426614174000
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT  
+      bearerFormat: JWT
 
 security:
   - bearerAuth: []
