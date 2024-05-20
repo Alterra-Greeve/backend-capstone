@@ -290,6 +290,20 @@ paths:
                   status: true
                   message: Update User Success
                   data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found
 components:
   securitySchemes:
     bearerAuth:
