@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 	"strconv"
 
@@ -9,7 +8,6 @@ import (
 )
 
 type GreeveConfig struct {
-	PORT        int
 	DB_HOST     string
 	DB_PORT     int
 	DB_USER     string
@@ -38,15 +36,10 @@ type MidtransConfig struct {
 }
 
 func InitConfig() *GreeveConfig {
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	_ = godotenv.Load(".env.local")
 
 	var res = new(GreeveConfig)
 
-	res.PORT, _ = strconv.Atoi(os.Getenv("PORT"))
 	res.DB_HOST = os.Getenv("DB_HOST")
 	res.DB_PORT, _ = strconv.Atoi(os.Getenv("DB_PORT"))
 	res.DB_USER = os.Getenv("DB_USER")
