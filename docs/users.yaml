@@ -84,7 +84,7 @@ paths:
               example:
                 status: true
                 message: Register Success
-                data: []
+                data: null
         "400":
           description: Bad Request
           content:
@@ -238,6 +238,21 @@ paths:
                     type: string
                 example:
                   message: missing or malformed jwt
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: User not found
+                  data: null
     put:
       tags:
         - users
@@ -296,6 +311,21 @@ paths:
                     type: string
                 example:
                   message: missing or malformed jwt
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: User already exists
+                  data: null
     delete:
       tags:
         - users
@@ -334,9 +364,7 @@ paths:
                   message:
                     type: string
                 example:
-                  status: false
-                  message: Unauthorized
-                  data: null
+                  message: missing or malformed jwt
   /user/{username}:
     get:
       tags:
@@ -376,6 +404,17 @@ paths:
                       gender: Laki-laki
                       exp: 50000
                       avatar_url: https://www.example.com/avatar.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
   /forgot-password:
     post:
       tags:
@@ -661,6 +700,21 @@ paths:
                           name: Category 2
                           impact_point: 200
                           icon_url: https://www.example.com/category-2.png
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
   /products/{product_id}:
     get:
       tags:
@@ -763,6 +817,55 @@ paths:
                   status: true
                   message: Add Product to Cart Success
                   data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: product id must not be empty
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or invalid jwt token
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Products id not found
+                  data: null
+
     put:
       tags:
         - shopping cart
@@ -802,6 +905,23 @@ paths:
                 example:
                   status: true
                   message: Update Product in Cart Success
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: cart id not found
                   data: null
     get:
       tags:
@@ -878,6 +998,23 @@ paths:
                             name: Category 2
                             impact_point: 200
                             icon_url: https://www.example.com/category-2.png
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
     delete:
       tags:
         - shopping cart
@@ -913,6 +1050,23 @@ paths:
                 example:
                   status: true
                   message: Delete Product in Cart Success
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Failed delete product, products id not found
                   data: null
   /transactions:
     post:
@@ -1095,7 +1249,6 @@ paths:
                       discount: "10000"
                       code: "DISC10"
                       description: Diskon 10%
-
         "400":
           description: Bad Request
           content:
@@ -1265,6 +1418,21 @@ paths:
                           url: https://www.example.com/challenge-2.jpg
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           url: https://www.example.com/challenge-3.jpg
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Challenges not found
+                  data: null
   /challenges/{challenge_id}:
     get:
       tags:
@@ -1311,7 +1479,22 @@ paths:
                           url: https://www.example.com/challenge-2.jpg
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           url: https://www.example.com/challenge-3.jpg
-  /challenges/user:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannto get data, challenge id not found
+                  data: null                  
+  /challenges/{user_id}/participate:
     get:
       tags:
         - challenges
@@ -1377,6 +1560,36 @@ paths:
                           url: https://www.example.com/challenge-2.jpg
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           url: https://www.example.com/challenge-3.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: missing or malformed jwt token
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, user id not found
+                  data: null
     post:
       tags:
         - challenges
