@@ -97,7 +97,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "409":
           description: Conflict
           content:
@@ -114,7 +114,7 @@ paths:
                 example:
                   status: false
                   message: User already exists
-                  data: []
+                  data: null
   /users/login:
     post:
       tags:
@@ -176,7 +176,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -191,13 +191,13 @@ paths:
                 example:
                   status: false
                   message: Invalid email or password
-                  data: []
+                  data: null
   /user:
     get:
       tags:
         - users
       summary: Get User Profile
-      description: User mendapatkan profile user, untuk menggunakan route ini harus menggunakan token user
+      description: User dapat melihat profile dirinya diprofile, untuk menggunakan route ini harus menggunakan token user
       operationId: getUserProfile
       security:
         - bearerAuth: []
@@ -222,7 +222,7 @@ paths:
                     - id: 422344
                       name: Kaze User
                       email: user@kzquandary.my.id
-                      address: Cimahi
+                      address: jalan raya Cimahi
                       gender: Laki-laki
                       balance: 50000
         "401":
@@ -262,10 +262,7 @@ paths:
                     - Laki-laki
                     - Perempuan
               example:
-                name: Kaze User
-                email: users@kzquandary.my.id
                 address: Cimahi
-                gender: Laki-laki
       responses:
         "200":
           description: OK
@@ -286,6 +283,17 @@ paths:
                     email: users@kzquandary.my.id
                     address: Cimahi
                     gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
     delete:
       tags:
         - users
@@ -332,7 +340,7 @@ paths:
       tags:
         - users
       summary: Forgot Password
-      description: User melakukan forgot password, untuk menggunakan route ini harus menggunakan token user
+      description: User dapat mengganti password di forgot password, untuk menggunakan route ini harus menggunakan token user
       operationId: forgotPassword
       requestBody:
         content:
@@ -363,7 +371,7 @@ paths:
                 example:
                   status: true
                   message: OTP Sent to your email
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -378,7 +386,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -393,7 +401,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
   /verify-otp:
     post:
       tags:
@@ -433,7 +441,7 @@ paths:
                 example:
                   status: true
                   message: Verify OTP Success
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -448,7 +456,7 @@ paths:
                 example:
                   status: false
                   message: OTP is invalid
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -463,7 +471,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
   /reset-password:
     post:
       tags:
@@ -512,7 +520,7 @@ paths:
                 example:
                   status: true
                   message: Reset Password Success
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -527,7 +535,7 @@ paths:
                 example:
                   status: false
                   message: Password and confirm password must be same
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -542,7 +550,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
 
   /products:
     get:
@@ -611,8 +619,7 @@ paths:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Category 2
                           impact_point: 200
-                          icon_url: https://www.example.com/category-2.png
-
+                          icon_url: https://www.example.com/category-2.png 
   /products/{product_id}:
     get:
       tags:
@@ -660,6 +667,24 @@ paths:
                           impact_point: 200
                           icon_url: https://www.example.com/category-2.png
 
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    nullable: true
+                example:
+                  status: false
+                  message: "Not Found. No products found."
+                  data: null
   /cart:
     post:
       tags:
@@ -848,6 +873,7 @@ paths:
                   status: true
                   message: Delete Product in Cart Success
                   data: null
+                  
 
   /transactions:
     post:
@@ -1137,6 +1163,419 @@ paths:
                   message: Transaction not found
                   data: null
 
+  /challenges:
+    get:
+      tags:
+        - challenges
+      summary: Get Challenges
+      description: user dapat melihat semua challenges
+      operationId: getChallenges
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string  
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Challenges Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 1
+                      dificulty: Medium
+                      description: Challenge 1 description
+                      exp: 1000
+                      coin: 100
+                      image: https://www.example.com/challenge-1.png
+                      date_start: 2024-05-01
+                      date_end: 2024-05-21
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 2
+                      dificulty: Hard
+                      description: Challenge 2 description
+                      exp: 5000
+                      coin: 200
+                      image: https://www.example.com/challenge-2.png
+                      date_start: 2024-07-10
+                      date_end: 2024-08-01
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 3
+                      dificulty: Medium
+                      description: Challenge 3 description
+                      exp: 1000
+                      coin: 100
+                      image: https://www.example.com/challenge-3.png
+                      date_start: 2024-06-01
+                      date_end: 2024-06-15
+  /challenges/{challenge_id}:
+    get:
+      tags:
+        - challenges
+      summary: Get Challenges by id
+      description: User dapat melihat detail challenges dengan id
+      operationId: getChallengesid
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string  
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Challenges Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 1
+                      dificulty: Medium
+                      description: Challenge 1 description
+                      exp: 1000
+                      coin: 100
+                      image: https://www.example.com/challenge-1.png
+                      date_start: 2024-05-01
+                      date_end: 2024-05-21
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Challenges is not found
+                  data: null
+    post: 
+      tags:
+        - challenges
+      summary: Challenge Confirmation
+      description: User mengikuti challenges dengan mengirimkan bukti keikutsertaan
+      operationId: challengeConfirmation
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                image_url:
+                  type: string
+              example:
+                description: Challenge 1 description
+                image_url: https://www.example.com/challenge-1.png  
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string  
+                example:
+                  status: true
+                  message: Success Sent Challenges Confirmation
+                  data: null
+    put: 
+      tags:
+        - challenges
+      summary: Edit Challenges Confirmation
+      description: User mengedit konfirmasi challenges, sebelum status accept atau reject
+      operationId: editjoinChallenges
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                image_url:
+                  type: string
+              example:
+                image_url: https://www.example.com/challenge-1-update.png  
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string  
+                example:
+                  status: true
+                  message: Success edit Challenges Confirmation
+                  data: null
+  /challenges/{user_id}:
+    get:
+      tags:
+        - challenges
+      summary: Get Challenges by user id
+      description: User dapat melihat semua challenges yang telah diikuti oleh dirinya sendiri.
+      operationId: getChallengesbyuserid
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string  
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Challenges Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 1
+                      dificulty: Medium
+                      description: Challenge 1 description
+                      exp: 1000
+                      coin: 100
+                      image: https://www.example.com/challenge-1.png
+                      date_start: 2024-05-01
+                      date_end: 2024-05-21
+                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      title: Challenge 3
+                      dificulty: Medium
+                      description: Challenge 3 description
+                      exp: 1000
+                      coin: 100
+                      image: https://www.example.com/challenge-3.png
+                      date_start: 2024-06-01
+                      date_end: 2024-06-15
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
+
+  /forum: 
+    get:
+      tags:
+        - forum
+      summary: Get Forum
+      description: User dapat melihat semua forum
+      operationId: getForum
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      message:
+                        - forum_message_id: 123 
+                          user:
+                            - user_id: 313344
+                              email: user1@example.com
+                          description: lorem ipsum dolor sit amet
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 2
+                      author: User2
+                      description: Forum 2 description
+                      message:
+                        - forum_message_id: 123 
+                          user:
+                            - user_id: 313344
+                              email: user1@example.com
+                          description: lorem ipsum dolor sit amet
+                        - forum_message_id: 125 
+                          user:
+                            - user_id: 213344
+                              email: user2@example.com
+                          description: Message 2 
+    post: 
+      tags:
+        - forum
+      summary: Create Forum
+      description: User dapat membuat forum
+      operationId: createForum
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              example:
+                title: Forum 1
+                description: Forum 1 description
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Create Forum Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
+  /forum/{forum_id}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum by forum id
+      description: User dapat melihat semua forum dengan id
+      operationId: getForumbyforumid
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      message:
+                        - forum_message_id: 123 
+                          user:
+                            - user_id: 313344
+                              email: user1@example.com
+                          description: lorem ipsum dolor sit amet
+  /forum/{forum_id}/message:
+    post:
+      tags:
+        - forum
+      summary: Create Forum Message
+      description: User dapat membuat pesan di forum
+      operationId: createForumMessage
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+              example:
+                description: lorem ipsum dolor sit amet
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Create Forum Message Success
+                  data: null
 
 components:
   securitySchemes:

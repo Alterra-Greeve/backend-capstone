@@ -91,7 +91,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -106,7 +106,7 @@ paths:
                 example:
                   status: false
                   message: Invalid email or password
-                  data: []
+                  data: null
   /admin:
     get:
       tags:
@@ -248,6 +248,7 @@ paths:
                 example:
                   status: false
                   message: Not Found  
+                  data: null
   /admin/users/{user_id}:
     get: 
       tags:
@@ -320,6 +321,7 @@ paths:
                 example:
                   status: false
                   message: Not Found
+                  data: null
     put: 
       tags:
         - user
@@ -470,9 +472,11 @@ paths:
                     type: boolean
                   message:
                     type: string
+                    nullable: true
                 example:
                   status: false
                   message: User Id Not Found
+                  data: null
   /transactions:
     get: 
       tags:
@@ -534,6 +538,7 @@ paths:
                 example:
                   status: false
                   message: Not Found
+                  data: null
   /admin/transactions/{transaction_id}:
     get: 
       tags:
@@ -585,6 +590,7 @@ paths:
                 example:
                   status: false
                   message: ID Transaction Not Found
+                  data: null
     put: 
       tags:
         - transaction
@@ -723,7 +729,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Not Found
+                  message: id Not Found
+                  data: null
     post:
       tags:
         - product
@@ -895,6 +902,7 @@ paths:
                 example:
                   status: false
                   message: ID Product Not Found
+                  data: null
     delete:
       tags:
         - product
@@ -1231,6 +1239,7 @@ paths:
                 example:
                   status: false
                   message: ID Challenge Not Found
+                  data: null
   /admin/forum/{forum_id}:
     delete:
       tags:
@@ -1284,6 +1293,7 @@ paths:
                 example:
                   status: false
                   message: ID Forum Not Found
+                  data: null
   /admin/impact:
     post:
       tags:
@@ -1342,21 +1352,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: ID Impact Not Found                                   
+                  message: missing or malformed jwt                               
   /admin/voucher:
     post:
       tags:
@@ -1423,20 +1419,6 @@ paths:
                 example:
                   status: false
                   message: missing or malformed jwt
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: ID Voucher Not Found
   /admin/voucher/{id}:
     delete:
       tags:
@@ -1490,6 +1472,7 @@ paths:
                 example:
                   status: false
                   message: ID Voucher Not Found
+                  data: null
 components:
   securitySchemes:
     bearerAuth:
