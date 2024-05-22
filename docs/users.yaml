@@ -99,7 +99,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "409":
           description: Conflict
           content:
@@ -116,7 +116,7 @@ paths:
                 example:
                   status: false
                   message: User already exists
-                  data: []
+                  data: null
   /users/login:
     post:
       tags:
@@ -178,7 +178,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -193,13 +193,13 @@ paths:
                 example:
                   status: false
                   message: Invalid email or password
-                  data: []
+                  data: null
   /user:
     get:
       tags:
         - users
       summary: Get User Profile
-      description: User mendapatkan profile user, untuk menggunakan route ini harus menggunakan token user
+      description: User dapat melihat profile dirinya diprofile, untuk menggunakan route ini harus menggunakan token user
       operationId: getUserProfile
       security:
         - bearerAuth: []
@@ -224,7 +224,7 @@ paths:
                     - id: 422344
                       name: Kaze User
                       email: user@kzquandary.my.id
-                      address: Cimahi
+                      address: jalan raya Cimahi
                       gender: Laki-laki
                       balance: 50000
         "401":
@@ -264,10 +264,7 @@ paths:
                     - Laki-laki
                     - Perempuan
               example:
-                name: Kaze User
-                email: users@kzquandary.my.id
                 address: Cimahi
-                gender: Laki-laki
       responses:
         "200":
           description: OK
@@ -288,6 +285,17 @@ paths:
                     email: users@kzquandary.my.id
                     address: Cimahi
                     gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: missing or malformed jwt
     delete:
       tags:
         - users
@@ -373,7 +381,7 @@ paths:
       tags:
         - users
       summary: Forgot Password
-      description: User melakukan forgot password, untuk menggunakan route ini harus menggunakan token user
+      description: User dapat mengganti password di forgot password, untuk menggunakan route ini harus menggunakan token user
       operationId: forgotPassword
       requestBody:
         content:
@@ -404,7 +412,7 @@ paths:
                 example:
                   status: true
                   message: OTP Sent to your email
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -419,7 +427,7 @@ paths:
                 example:
                   status: false
                   message: Email and password cannot be empty
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -434,7 +442,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
   /verify-otp:
     post:
       tags:
@@ -474,7 +482,7 @@ paths:
                 example:
                   status: true
                   message: Verify OTP Success
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -489,7 +497,7 @@ paths:
                 example:
                   status: false
                   message: OTP is invalid
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -504,7 +512,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
   /reset-password:
     post:
       tags:
@@ -553,7 +561,7 @@ paths:
                 example:
                   status: true
                   message: Reset Password Success
-                  data: []
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -568,7 +576,7 @@ paths:
                 example:
                   status: false
                   message: Password and confirm password must be same
-                  data: []
+                  data: null
         "404":
           description: Not Found
           content:
@@ -583,7 +591,7 @@ paths:
                 example:
                   status: false
                   message: Email not found
-                  data: []
+                  data: null
 
   /products:
     get:
@@ -700,6 +708,24 @@ paths:
                           impact_point: 200
                           icon_url: https://www.example.com/category-2.png
 
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    nullable: true
+                example:
+                  status: false
+                  message: "Not Found. No products found."
+                  data: null
   /cart:
     post:
       tags:
