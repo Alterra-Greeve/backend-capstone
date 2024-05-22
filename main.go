@@ -28,7 +28,6 @@ func main() {
 	mailer := helper.NewMailer(cfg.SMTP)
 	jwt := helper.NewJWT(cfg.JWT_Secret)
 
-
 	e := echo.New()
 
 	e.GET("/", func(c echo.Context) error {
@@ -36,7 +35,6 @@ func main() {
 	})
 	e.Static("/assets", "assets")
 	e.Static("/docs", "docs")
-
 
 	userData := UserData.New(db)
 	userService := UserService.New(userData, jwt, mailer)

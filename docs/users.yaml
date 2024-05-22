@@ -22,6 +22,8 @@ tags:
     description: Operations about transaction
   - name: challenges
     description: Operations about challenge
+  - name: forum
+    description: Operations about forum
 paths:
   /users/register:
     post:
@@ -335,6 +337,45 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
+  /user/{username}:
+    get:
+      tags:
+        - users 
+      summary: Get User by Username
+      description: User mendapatkan user by username
+      operationId: getUserByUsername
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          example: kzquandary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User by Username Success
+                  data:
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      username: kzquandary
+                      name: Kaze User
+                      email: user@kzquandary.my.id
+                      gender: Laki-laki
+                      exp: 50000
+                      avatar_url: https://www.example.com/avatar.jpg
   /forgot-password:
     post:
       tags:
@@ -619,7 +660,7 @@ paths:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Category 2
                           impact_point: 200
-                          icon_url: https://www.example.com/category-2.png 
+                          icon_url: https://www.example.com/category-2.png
   /products/{product_id}:
     get:
       tags:
@@ -873,8 +914,6 @@ paths:
                   status: true
                   message: Delete Product in Cart Success
                   data: null
-                  
-
   /transactions:
     post:
       tags:
@@ -1167,8 +1206,8 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get Challenges
-      description: user dapat melihat semua challenges
+      summary: Get All Challenges
+      description: User mendapatkan semua challenge yang belum diambil atau ditolak
       operationId: getChallenges
       security:
         - bearerAuth: []
@@ -1183,78 +1222,68 @@ paths:
                   status:
                     type: boolean
                   message:
-                    type: string  
+                    type: string
                   data:
                     type: array
                 example:
                   status: true
                   message: Get Challenges Success
-                  data: 
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Challenge 1
-                      dificulty: Medium
                       description: Challenge 1 description
-                      exp: 1000
-                      coin: 100
-                      image: https://www.example.com/challenge-1.png
-                      date_start: 2024-05-01
-                      date_end: 2024-05-21
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      point: 100
+                      exp: 100
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Challenge 2
-                      dificulty: Hard
                       description: Challenge 2 description
-                      exp: 5000
-                      coin: 200
-                      image: https://www.example.com/challenge-2.png
-                      date_start: 2024-07-10
-                      date_end: 2024-08-01
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      point: 200
+                      exp: 200
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Challenge 3
-                      dificulty: Medium
                       description: Challenge 3 description
-                      exp: 1000
-                      coin: 100
-                      image: https://www.example.com/challenge-3.png
-                      date_start: 2024-06-01
-                      date_end: 2024-06-15
+                      point: 300
+                      exp: 300
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
   /challenges/{challenge_id}:
     get:
       tags:
         - challenges
-      summary: Get Challenges by id
-      description: User dapat melihat detail challenges dengan id
-      operationId: getChallengesid
+      summary: Get Challenge Detail
+      description: User mendapatkan detail challenge
+      operationId: getChallengeDetail
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string  
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Get Challenges Success
-                  data: 
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
-                      title: Challenge 1
-                      dificulty: Medium
-                      description: Challenge 1 description
-                      exp: 1000
-                      coin: 100
-                      image: https://www.example.com/challenge-1.png
-                      date_start: 2024-05-01
-                      date_end: 2024-05-21
-        "404":
-          description: Not Found
           content:
             application/json:
               schema:
@@ -1264,90 +1293,31 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Challenges is not found
-                  data: null
-    post: 
-      tags:
-        - challenges
-      summary: Challenge Confirmation
-      description: User mengikuti challenges dengan mengirimkan bukti keikutsertaan
-      operationId: challengeConfirmation
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                image_url:
-                  type: string
-              example:
-                description: Challenge 1 description
-                image_url: https://www.example.com/challenge-1.png  
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string  
+                  data:
+                    type: array
                 example:
                   status: true
-                  message: Success Sent Challenges Confirmation
-                  data: null
-    put: 
-      tags:
-        - challenges
-      summary: Edit Challenges Confirmation
-      description: User mengedit konfirmasi challenges, sebelum status accept atau reject
-      operationId: editjoinChallenges
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                image_url:
-                  type: string
-              example:
-                image_url: https://www.example.com/challenge-1-update.png  
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string  
-                example:
-                  status: true
-                  message: Success edit Challenges Confirmation
-                  data: null
-  /challenges/{user_id}:
+                  message: Get Challenge Detail Success
+                  data:
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 1
+                      description: Challenge 1 description
+                      point: 100
+                      exp: 100
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+  /challenges/user:
     get:
       tags:
         - challenges
-      summary: Get Challenges by user id
-      description: User dapat melihat semua challenges yang telah diikuti oleh dirinya sendiri.
-      operationId: getChallengesbyuserid
+      summary: Get User Challenges
+      description: User mendapatkan semua challenge yang sudah diambil
+      operationId: getUserChallenges
       security:
         - bearerAuth: []
       responses:
@@ -1361,33 +1331,76 @@ paths:
                   status:
                     type: boolean
                   message:
-                    type: string  
+                    type: string
                   data:
                     type: array
                 example:
                   status: true
-                  message: Get Challenges Success
-                  data: 
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                  message: Get User Challenges Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Challenge 1
-                      dificulty: Medium
                       description: Challenge 1 description
-                      exp: 1000
-                      coin: 100
-                      image: https://www.example.com/challenge-1.png
-                      date_start: 2024-05-01
-                      date_end: 2024-05-21
-                    - id: 123e4567-e89b-12d3-a456-4266141742222
+                      point: 100
+                      exp: 100
+                      status: Accepted
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 2
+                      description: Challenge 2 description
+                      point: 200
+                      exp: 200
+                      status: Pending
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Challenge 3
-                      dificulty: Medium
                       description: Challenge 3 description
-                      exp: 1000
-                      coin: 100
-                      image: https://www.example.com/challenge-3.png
-                      date_start: 2024-06-01
-                      date_end: 2024-06-15
-        "401":
-          description: Unauthorized
+                      point: 300
+                      exp: 300
+                      status: Declined
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+    post:
+      tags:
+        - challenges
+      summary: Create Challenge
+      description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
+      operationId: swipeChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenge_id:
+                  type: string
+                type:
+                  type: string
+              example:
+                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                type: decline
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -1397,15 +1410,103 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: array
                 example:
-                  message: missing or malformed jwt
+                  status: true
+                  message: Swipe Challenge Success
+                  data: null
+  /challenges/user/participate:
+    post:
+      tags:
+        - challenges
+      summary: User Konfirmasi Mengikuti Challenges
+      description: User mengkonfirmasi mengikuti challenge
+      operationId: userConfirmChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenge_id:
+                  type: string
+              example:
+                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                image: https://www.example.com/challenge-1.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: User Konfirmasi Mengikuti Challenges Success
+                  data: null
+ 
+  /leaderboard:
+    get:
+      tags:
+        - challenges
+      summary: Get Leaderboard
+      description: User mendapatkan leaderboard
+      operationId: getLeaderboard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Leaderboard Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user1
+                      name: User 1
+                      exp: 100
+                      avatar_url: https://www.example.com/avatar-1.jpg
+                      rank: 1
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user2
+                      name: User 2
+                      exp: 200
+                      avatar_url: https://www.example.com/avatar-2.jpg
+                      rank: 2
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user3
+                      name: User 3
+                      exp: 300
+                      avatar_url: https://www.example.com/avatar-3.jpg
+                      rank: 3
 
-  /forum: 
+  /forums:
     get:
       tags:
         - forum
       summary: Get Forum
-      description: User dapat melihat semua forum
+      description: User mendapatkan forum
       operationId: getForum
       security:
         - bearerAuth: []
@@ -1426,92 +1527,31 @@ paths:
                 example:
                   status: true
                   message: Get Forum Success
-                  data: 
+                  data:
                     - id: 123e4567-e89b-12d3-a456-426614174000
                       title: Forum 1
                       description: Forum 1 description
-                      message:
-                        - forum_message_id: 123 
-                          user:
-                            - user_id: 313344
-                              email: user1@example.com
-                          description: lorem ipsum dolor sit amet
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Forum 2
-                      author: User2
-                      description: Forum 2 description
-                      message:
-                        - forum_message_id: 123 
-                          user:
-                            - user_id: 313344
-                              email: user1@example.com
-                          description: lorem ipsum dolor sit amet
-                        - forum_message_id: 125 
-                          user:
-                            - user_id: 213344
-                              email: user2@example.com
-                          description: Message 2 
-    post: 
-      tags:
-        - forum
-      summary: Create Forum
-      description: User dapat membuat forum
-      operationId: createForum
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                description:
-                  type: string
-              example:
-                title: Forum 1
-                description: Forum 1 description
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Create Forum Success
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  message: missing or malformed jwt
-  /forum/{forum_id}:
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+  /forums/{forum_id}:
     get:
       tags:
         - forum
-      summary: Get Forum by forum id
-      description: User dapat melihat semua forum dengan id
-      operationId: getForumbyforumid
+      summary: Get Forum Detail
+      description: User mendapatkan detail forum
+      operationId: getForumDetail
       security:
         - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
@@ -1525,27 +1565,43 @@ paths:
                   message:
                     type: string
                   data:
-                    type: array
+                    type: object
                 example:
                   status: true
-                  message: Get Forum Success
-                  data: 
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Forum 1
-                      description: Forum 1 description
-                      message:
-                        - forum_message_id: 123 
-                          user:
-                            - user_id: 313344
-                              email: user1@example.com
-                          description: lorem ipsum dolor sit amet
-  /forum/{forum_id}/message:
+                  message: Get Forum Detail Success
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Forum 1
+                    description: Forum 1 description
+                    author:
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user1
+                      name: User 1
+                      avatar_url: https://www.example.com/avatar-1.jpg
+                    message:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        content: Hello, World!
+                        user:
+                          id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user1
+                          name: User 1
+                          avatar_url: https://www.example.com/avatar-1.jpg
+                          created_at: 2021-01-01 00:00:00
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        content: Hello, World!
+                        user:
+                          id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user2
+                          name: User 2
+                          avatar_url: https://www.example.com/avatar-2.jpg
+                          created_at: 2021-01-01 00:00:00
+  /forum/message:
     post:
       tags:
         - forum
-      summary: Create Forum Message
-      description: User dapat membuat pesan di forum
-      operationId: createForumMessage
+      summary: Send Message
+      description: User mengirimkan pesan
+      operationId: sendMessage
       security:
         - bearerAuth: []
       requestBody:
@@ -1554,10 +1610,13 @@ paths:
             schema:
               type: object
               properties:
-                description:
+                forum_id:
+                  type: string
+                message:
                   type: string
               example:
-                description: lorem ipsum dolor sit amet
+                forum_id: 123e4567-e89b-12d3-a456-426614174000
+                message: Hello, World!
       responses:
         "200":
           description: OK
@@ -1574,9 +1633,42 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Create Forum Message Success
+                  message: Send Message Success
                   data: null
-
+  /forum/message/{message_id}:
+    delete:
+      tags:
+        - forum
+      summary: Delete Message
+      description: User menghapus pesan
+      operationId: deleteMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Delete Message Success
+                  data: null
 components:
   securitySchemes:
     bearerAuth:
