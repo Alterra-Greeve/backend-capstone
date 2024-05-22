@@ -17,6 +17,8 @@ type User struct {
 	Address   string        `gorm:"type:varchar(255);not null;column:address"`
 	Gender    string        `gorm:"type:varchar(255);not null;column:gender"`
 	Phone     string        `gorm:"type:varchar(255);not null;column:phone"`
+	Coin      int           `gorm:"type:int;not null;column:coin"`
+	Exp       int           `gorm:"type:int;not null;column:exp"`
 	AvatarURL string        `gorm:"type:varchar(255);column:avatar_url;default:'https://example.com/default.jpg'"`
 	CreatedAt time.Time     `gorm:"not null;column:created_at"`
 	UpdatedAt time.Time     `gorm:"column:updated_at"`
