@@ -16,6 +16,7 @@ import (
 
 	"backendgreeve/helper"
 	"backendgreeve/routes"
+	"backendgreeve/utils/bucket"
 	"backendgreeve/utils/database"
 
 	"github.com/labstack/echo/v4"
@@ -31,7 +32,7 @@ func main() {
 	database.Migrate(db)
 	mailer := helper.NewMailer(cfg.SMTP)
 	jwt := helper.NewJWT(cfg.JWT_Secret)
-
+	bucket, _ := bucket.New(cfg.PROJECT_ID, cfg.BUCKET_NAME)
 	e := echo.New()
 
 	e.GET("/", func(c echo.Context) error {
@@ -53,6 +54,7 @@ func main() {
 	adminHandler := AdminHandler.New(adminService, jwt)
 
 	routes.RouteUser(e, userHandler, *cfg)
+	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))

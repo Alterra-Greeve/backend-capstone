@@ -7,6 +7,7 @@ import (
 	"backendgreeve/features/users"
 	MidtransWebhook "backendgreeve/features/webhook"
 	"backendgreeve/helper"
+	"backendgreeve/utils/bucket"
 
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
@@ -31,6 +32,14 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
+func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST("/api/v1/media/upload", bh.UploadFileHandler(), echojwt.WithConfig(jwtConfig))
+}
 func PaymentNotification(e *echo.Echo, wh MidtransWebhook.MidtransNotificationHandler, cfg config.GreeveConfig) {
 	e.POST("/midtrans-notification", wh.HandleNotification())
 }

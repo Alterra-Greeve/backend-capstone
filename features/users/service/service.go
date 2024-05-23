@@ -178,6 +178,11 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 	if userResetPassword.Email == "" || userResetPassword.OTP == "" || userResetPassword.Password == "" {
 		return constant.ErrEmptyResetPassword
 	}
+
+	if userResetPassword.Password != userResetPassword.ConfirmationPassword {
+		return constant.ErrPasswordNotMatch
+	}
+	
 	hashedPassword, err := helper.HashPassword(userResetPassword.Password)
 	if err != nil {
 		return err
