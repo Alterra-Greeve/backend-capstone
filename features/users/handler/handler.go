@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
@@ -24,8 +26,10 @@ func (h *UserHandler) Register() echo.HandlerFunc {
 		var UserRegisterRequest UserRegisterRequest
 		err := c.Bind(&UserRegisterRequest)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			err, message := helper.HandleEchoError(err)
+			return c.JSON(err, helper.FormatResponse(false, message, nil))
 		}
+
 		user := users.User{
 			Name:     UserRegisterRequest.Name,
 			Email:    UserRegisterRequest.Email,
@@ -36,29 +40,38 @@ func (h *UserHandler) Register() echo.HandlerFunc {
 			Phone:    UserRegisterRequest.Phone,
 		}
 		err = h.s.Register(user)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.UserSuccessRegister, nil))
 	}
 }
 
 func (h *UserHandler) Login() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var UserLoginRequest UserLoginRequest
+
 		err := c.Bind(&UserLoginRequest)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			err, message := helper.HandleEchoError(err)
+			return c.JSON(err, helper.FormatResponse(false, message, nil))
 		}
+
 		user := users.User{
 			Email:    UserLoginRequest.Email,
 			Password: UserLoginRequest.Password,
 		}
+
 		userLogin, err := h.s.Login(user)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{userLogin}))
+
+		var response UserLoginResponse
+		response.Token = userLogin.Token
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessLogin, response))
 	}
 }
 

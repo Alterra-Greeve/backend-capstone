@@ -1,7 +1,11 @@
 package data
 
 import (
+	"backendgreeve/constant"
 	"backendgreeve/features/users"
+	"backendgreeve/helper"
+
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -17,18 +21,43 @@ func New(db *gorm.DB) users.UserDataInterface {
 }
 
 func (u *UserData) Register(newUser users.User) error {
+	isEmailExist := u.IsEmailExist(newUser.Email)
+	if isEmailExist {
+		return constant.ErrEmailAlreadyExist
+	}
+
+	isUsernameExist := u.IsUsernameExist(newUser.Username)
+	if isUsernameExist {
+		return constant.ErrUsernameAlreadyExist
+	}
+
+	newUser.Coin = 0
+	newUser.Exp = 0
+	newUser.CreatedAt = time.Now()
+	newUser.UpdatedAt = time.Now()
 	if err := u.DB.Create(&newUser).Error; err != nil {
-		return err
+		return constant.ErrRegister
 	}
 	return nil
 }
 
 func (u *UserData) Login(user users.User) error {
-	if err := u.DB.Where("email = ? AND password = ?", user.Email, user.Password).First(&user).Error; err != nil {
-		return err
-	}
-	return nil
+    var UserLoginData users.User
+    result := u.DB.Where("email = ?", user.Email).First(&UserLoginData)
+    if result.Error != nil {
+        if result.Error == gorm.ErrRecordNotFound {
+            return constant.UserNotFound
+        }
+        return result.Error
+    }
+
+    if !helper.CheckPasswordHash(user.Password, UserLoginData.Password) {
+        return constant.ErrLoginIncorrectPassword
+    }
+
+    return nil
 }
+
 
 func (u *UserData) Update(user users.User) (users.User, error) {
 	if err := u.DB.Where("id = ?", user.ID).Updates(&user).Error; err != nil {
@@ -80,4 +109,3 @@ func (u *UserData) IsEmailExist(email string) bool {
 	}
 	return true
 }
-

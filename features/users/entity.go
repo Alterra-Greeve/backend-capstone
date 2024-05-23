@@ -15,13 +15,19 @@ type User struct {
 	Address   string
 	Gender    string
 	Phone     string
+	Coin      int
+	Exp       int
 	AvatarURL string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type VerifyOTP struct {
 	Email     string
 	OTP       string
 	ExpiredAt time.Time
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type UserLogin struct {
