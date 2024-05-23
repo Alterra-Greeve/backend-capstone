@@ -11,6 +11,8 @@ externalDocs:
   url: https://greeve.store
 servers:
   - url: https://api.greeve.store/api/v1
+  - url: https://dev.api.greeve.store/api/v1
+  - url: http://localhost:8080/api/v1
 tags:
   - name: admin
     description: Operations about admin

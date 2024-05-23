@@ -11,3 +11,6 @@ const UserSuccessResetPassword = "Password has been changed"
 const UserSuccessDelete = "Account has been deleted"
 
 // Admin Success Message
+const AdminSuccessLogin = "Successfull Login by role Admin"
+const AdminSuccessUpdate = "Successfull Edit data admin"
+const AdminSuccessDelete = "Successfull Delete data admin"

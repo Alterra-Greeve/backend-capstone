@@ -3,6 +3,7 @@ package routes
 import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
+	"backendgreeve/features/admin"
 	"backendgreeve/features/users"
 	MidtransWebhook "backendgreeve/features/webhook"
 	"backendgreeve/helper"
@@ -41,4 +42,17 @@ func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfi
 }
 func PaymentNotification(e *echo.Echo, wh MidtransWebhook.MidtransNotificationHandler, cfg config.GreeveConfig) {
 	e.POST("/midtrans-notification", wh.HandleNotification())
+}
+
+func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST(route.AdminLogin, ah.Login())
+
+	e.GET(route.AdminPath, ah.GetAdminData(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.AdminPath, ah.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.AdminPath, ah.Delete(), echojwt.WithConfig(jwtConfig))
 }

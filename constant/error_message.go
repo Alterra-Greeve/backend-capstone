@@ -36,3 +36,9 @@ var ErrGenerateJWT = errors.New("failed to generate jwt token")
 var ErrValidateJWT = errors.New("failed to validate jwt token")
 
 var ErrHashPassword = errors.New("failed to hash password")
+
+// Admin Errors
+var ErrGetDataAdmin = errors.New("Failed to get data admin")
+var ErrEmptyEmailandPasswordAdmin = errors.New("Email and Password cannot be empty")
+var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
+var ErrEditAdmin = errors.New("Field Cannot be Empty")

@@ -10,6 +10,10 @@ import (
 	WebhookMidtransHandler "backendgreeve/features/webhook/handler"
 	WebhookMidtransService "backendgreeve/features/webhook/service"
 
+	AdminData "backendgreeve/features/admin/data"
+	AdminHandler "backendgreeve/features/admin/handler"
+	AdminService "backendgreeve/features/admin/service"
+
 	"backendgreeve/helper"
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
@@ -45,8 +49,13 @@ func main() {
 	webhookService := WebhookMidtransService.New(webhookData)
 	webhookHandler := WebhookMidtransHandler.New(webhookService)
 
+	adminData := AdminData.New(db)
+	adminService := AdminService.New(adminData, jwt, mailer)
+	adminHandler := AdminHandler.New(adminService, jwt)
+
 	routes.RouteUser(e, userHandler, *cfg)
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
+	routes.RouteAdmin(e, adminHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }

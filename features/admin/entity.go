@@ -1,13 +1,19 @@
 package admin
 
-import "github.com/labstack/echo/v4"
+import (
+	"time"
+
+	"github.com/labstack/echo/v4"
+)
 
 type Admin struct {
-	ID       string
-	Name     string
-	Username string
-	Email    string
-	Password string
+	ID        string
+	Name      string
+	Username  string
+	Email     string
+	Password  string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type AdminLogin struct {
@@ -16,23 +22,36 @@ type AdminLogin struct {
 	Token    string
 }
 
+type AdminUpdate struct {
+	ID        string
+	Name      string
+	Username  string
+	Email     string
+	Password  string
+	UpdatedAt time.Time
+	Token     string
+}
+
 type AdminHandlerInterface interface {
-	Register(Admin) echo.HandlerFunc
-	Login(Admin) echo.HandlerFunc
-	Update(Admin) echo.HandlerFunc
-	Delete(Admin) echo.HandlerFunc
+	Login() echo.HandlerFunc
+	Update() echo.HandlerFunc
+	Delete() echo.HandlerFunc
+	GetAdminData() echo.HandlerFunc
 }
 
 type AdminServiceInterface interface {
-	Register(Admin) error
 	Login(Admin) (AdminLogin, error)
-	Update(Admin) (Admin, error)
+	Update(AdminUpdate) (AdminUpdate, error)
 	Delete(Admin) error
+
+	GetAdminData(Admin) (Admin, error)
 }
 
 type AdminDataInterface interface {
-	Register(Admin) error
-	Login(Admin) error
-	Update(Admin) (Admin, error)
+	Login(Admin) (Admin, error)
+	Update(AdminUpdate) (Admin, error)
 	Delete(Admin) error
+
+	GetAdminByID(id string) (Admin, error)
+	IsEmailExist(email string) bool
 }
