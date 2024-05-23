@@ -1,14 +1,16 @@
 package handler
 
 type UserInfoResponse struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Address  string `json:"address"`
-	Gender   string `json:"gender"`
-	Phone    string `json:"phone"`
-	Image    string `json:"image"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Address   string `json:"address"`
+	Gender    string `json:"gender"`
+	Phone     string `json:"phone"`
+	Coin      int    `json:"coin"`
+	Exp       int    `json:"exp"`
+	AvatarURL string `json:"avatar_url"`
 }
 
 type UserLoginResponse struct {
@@ -22,4 +24,3 @@ type UserUpdateResponse struct {
 	Gender   string `json:"gender"`
 	Phone    string `json:"phone"`
 }
-

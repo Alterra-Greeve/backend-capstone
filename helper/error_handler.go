@@ -41,6 +41,32 @@ func ConvertResponseCode(err error) int {
 		return http.StatusInternalServerError
 	case constant.ErrEmptyPhoneRegister:
 		return http.StatusBadRequest
+	case constant.ErrRegister:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateUser:
+		return http.StatusInternalServerError
+	case constant.ErrEmptyUpdate:
+		return http.StatusBadRequest
+	case constant.ErrEmailUsernameAlreadyExist:
+		return http.StatusConflict
+	case constant.ErrEmptyEmail:
+		return http.StatusBadRequest
+	case constant.ErrEmailNotFound:
+		return http.StatusNotFound
+	case constant.ErrForgotPassword:
+		return http.StatusInternalServerError
+	case constant.ErrOTPNotValid:
+		return http.StatusBadRequest
+	case constant.ErrOTPExpired:
+		return http.StatusBadRequest
+	case constant.ErrEmptyOTP:
+		return http.StatusBadRequest
+	case constant.ErrResetPassword:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteUser:
+		return http.StatusInternalServerError
+	case constant.ErrEmptyResetPassword:
+		return http.StatusBadRequest
 
 	// Default
 	default:
@@ -58,8 +84,11 @@ func HandleEchoError(err error) (int, string) {
 }
 
 func UnauthorizedError(c echo.Context) error {
-	return c.JSON(http.StatusUnauthorized, FormatResponse(false, constant.Unauthorized, []interface{}{}))
+	return c.JSON(http.StatusUnauthorized, FormatResponse(false, constant.Unauthorized, nil))
 }
 func InternalServerError(c echo.Context) error {
-	return c.JSON(http.StatusInternalServerError, FormatResponse(false, constant.InternalServerError, []interface{}{}))
+	return c.JSON(http.StatusInternalServerError, FormatResponse(false, constant.InternalServerError, nil))
+}
+func JWTErrorHandler(c echo.Context, err error) error {
+	return c.JSON(http.StatusUnauthorized, FormatResponse(false, constant.Unauthorized, nil))
 }

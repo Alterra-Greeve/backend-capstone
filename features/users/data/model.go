@@ -27,9 +27,10 @@ type User struct {
 
 type VerifyOTP struct {
 	*gorm.Model
-	Email     string        `gorm:"type:varchar(255);not null;column:email;unique"`
+	ID        string        `gorm:"primary_key;type:varchar(50);not null;column:id"`
+	Email     string        `gorm:"type:varchar(255);not null;column:email"`
 	OTP       string        `gorm:"type:varchar(255);not null;column:otp"`
-	ExpiredAt time.Time     `gorm:"type:varchar(255);not null;column:expired_at"`
+	ExpiredAt time.Time     `gorm:"not null;column:expired_at"`
 	CreatedAt time.Time     `gorm:"not null;column:created_at"`
 	UpdatedAt time.Time     `gorm:"column:updated_at"`
 	DeletedAt *sql.NullTime `gorm:"column:deleted_at"`

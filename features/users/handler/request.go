@@ -24,12 +24,14 @@ type UserVerifyOTPRequest struct {
 }
 
 type UserUpdateRequest struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Username string `json:"username"`
-	Address  string `json:"address"`
-	Gender   string `json:"gender"`
-	Phone    string `json:"phone"`
+	Name      string `json:"name"`
+	Email     string `json:"email"`
+	Username  string `json:"username"`
+	Address   string `json:"address"`
+	Gender    string `json:"gender"`
+	Phone     string `json:"phone"`
+	Password  string `json:"password"`
+	AvatarURL string `json:"avatar_url"`
 }
 
 type UserUpdateAvatarRequest struct {
