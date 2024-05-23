@@ -32,6 +32,11 @@ func (u *UserData) Register(newUser users.User) error {
 	if isUsernameExist {
 		return constant.ErrUsernameAlreadyExist
 	}
+
+	if newUser.AvatarURL == "" {
+		newUser.AvatarURL = "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png"
+	}
+
 	newUser.ID = uuid.New().String()
 	newUser.Coin = 0
 	newUser.Exp = 0

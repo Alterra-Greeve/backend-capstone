@@ -2,7 +2,7 @@ package constant
 
 import "errors"
 
-const Unauthorized = "Unauthorized"
+const Unauthorized = "missing or malformed jwt"
 const InternalServerError = "Internal Server Error"
 
 // Users Errors

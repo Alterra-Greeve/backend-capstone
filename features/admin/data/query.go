@@ -42,11 +42,11 @@ func (u *AdminData) Update(userAdmin admin.AdminUpdate) (admin.Admin, error) {
 		return admin.Admin{}, err
 	}
 
-	if userAdmin.Email != existingAdmin.Email {
+	if userAdmin.Email != existingAdmin.Email || userAdmin.Username != existingAdmin.Username {
 		var count int64
 		u.DB.Table("admins").Where("email = ?", userAdmin.Email).Count(&count)
 		if count > 0 {
-			return admin.Admin{}, err
+			return admin.Admin{}, constant.ErrEmailUsernameAlreadyExist
 		}
 	}
 	userAdmin.UpdatedAt = time.Now()
