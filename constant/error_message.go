@@ -30,6 +30,7 @@ var ErrEmptyOTP = errors.New("OTP cannot be empty")
 var ErrResetPassword = errors.New("Failed to reset password")
 var ErrDeleteUser = errors.New("Failed to delete user")
 var ErrEmptyResetPassword = errors.New("Email, password and confirmation password cannot be empty")
+var ErrPasswordNotMatch = errors.New("Password not match")
 
 var ErrGenerateJWT = errors.New("failed to generate jwt token")
 var ErrValidateJWT = errors.New("failed to validate jwt token")
