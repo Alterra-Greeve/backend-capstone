@@ -77,6 +77,10 @@ func ConvertResponseCode(err error) int {
 		return http.StatusNotFound
 	case constant.ErrEditAdmin:
 		return http.StatusBadRequest
+	case constant.ErrAdminEmailUsernameAlreadyExist:
+		return http.StatusConflict
+	case constant.ErrEmptyEmailandPasswordAdmin:
+		return http.StatusBadRequest
 	// Default
 	default:
 		return http.StatusInternalServerError

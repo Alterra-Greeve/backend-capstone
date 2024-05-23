@@ -2,7 +2,7 @@ package constant
 
 import "errors"
 
-const Unauthorized = "missing or malformed jwt"
+const Unauthorized = "Unauthorized"
 const InternalServerError = "Internal Server Error"
 
 // Users Errors
@@ -42,3 +42,4 @@ var ErrGetDataAdmin = errors.New("Failed to get data admin")
 var ErrEmptyEmailandPasswordAdmin = errors.New("Email and Password cannot be empty")
 var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
 var ErrEditAdmin = errors.New("Field Cannot be Empty")
+var ErrAdminEmailUsernameAlreadyExist = errors.New("Email or Username already taken by another admin")
