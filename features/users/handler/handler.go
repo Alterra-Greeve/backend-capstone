@@ -4,6 +4,7 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
+	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -77,53 +78,154 @@ func (h *UserHandler) Login() echo.HandlerFunc {
 
 func (h *UserHandler) Update() echo.HandlerFunc {
 	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+
 		var UserUpdateRequest UserUpdateRequest
-		err := c.Bind(&UserUpdateRequest)
+		err = c.Bind(&UserUpdateRequest)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			err, message := helper.HandleEchoError(err)
+			return c.JSON(err, helper.FormatResponse(false, message, nil))
 		}
-		user := users.User{
-			Name:     UserUpdateRequest.Name,
-			Email:    UserUpdateRequest.Email,
-			Username: UserUpdateRequest.Username,
-			Address:  UserUpdateRequest.Address,
-			Gender:   UserUpdateRequest.Gender,
-			Phone:    UserUpdateRequest.Phone,
+
+		user := users.UserUpdate{
+			ID:        userId.(string),
+			Name:      UserUpdateRequest.Name,
+			Email:     UserUpdateRequest.Email,
+			Username:  UserUpdateRequest.Username,
+			Password:  UserUpdateRequest.Password,
+			Address:   UserUpdateRequest.Address,
+			Gender:    UserUpdateRequest.Gender,
+			Phone:     UserUpdateRequest.Phone,
+			AvatarURL: UserUpdateRequest.AvatarURL,
 		}
-		_, err = h.s.Update(user)
+		log.Println("sini")
+		FromUserService, err := h.s.Update(user)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		var UserToken UserLoginResponse
+		UserToken.Token = FromUserService.Token
+		return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(true, constant.UserSuccessUpdate, UserToken))
+	}
+}
+
+func (h *UserHandler) GetUserData() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		var user users.User
+		user.ID = userId.(string)
+
+		user, err = h.s.GetUserData(user)
+
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		var response UserInfoResponse
+		response.ID = user.ID
+		response.Name = user.Name
+		response.Email = user.Email
+		response.Username = user.Username
+		response.Address = user.Address
+		response.Gender = user.Gender
+		response.Phone = user.Phone
+		response.AvatarURL = user.AvatarURL
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
+	}
+}
+
+func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		username := c.Param("username")
+
+		user, err := h.s.GetUserByUsername(username)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		var response UserInfoResponse
+		response.ID = user.ID
+		response.Name = user.Name
+		response.Email = user.Email
+		response.Username = user.Username
+		response.Address = user.Address
+		response.Gender = user.Gender
+		response.Phone = user.Phone
+		response.AvatarURL = user.AvatarURL
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
 }
 
 func (h *UserHandler) Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		user := c.Get("user").(users.User)
-		err := h.s.Delete(user)
-		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		var user users.User
+		user.ID = userId.(string)
+
+		err = h.s.Delete(user)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.UserSuccessDelete, nil))
 	}
 }
 
 func (h *UserHandler) ForgotPassword() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var UserForgotPasswordRequest UserForgotPasswordRequest
+
 		err := c.Bind(&UserForgotPasswordRequest)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			err, message := helper.HandleEchoError(err)
+			return c.JSON(err, helper.FormatResponse(false, message, nil))
 		}
+
 		user := users.User{
 			Email: UserForgotPasswordRequest.Email,
 		}
 		err = h.s.ForgotPassword(user)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.UserSuccessForgotPassword, nil))
 	}
 }
 
@@ -132,26 +234,32 @@ func (h *UserHandler) VerifyOTP() echo.HandlerFunc {
 		var UserVerifyOTPRequest UserVerifyOTPRequest
 		err := c.Bind(&UserVerifyOTPRequest)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 		user := users.VerifyOTP{
 			Email: UserVerifyOTPRequest.Email,
 			OTP:   UserVerifyOTPRequest.OTP,
 		}
+
 		err = h.s.VerifyOTP(user)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.UserSuccessOTPValidation, nil))
 	}
 }
 
 func (h *UserHandler) ResetPassword() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var UserResetPasswordRequest UserResetPasswordRequest
+
 		err := c.Bind(&UserResetPasswordRequest)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			err, message := helper.HandleEchoError(err)
+			return c.JSON(err, helper.FormatResponse(false, message, nil))
 		}
 		user := users.UserResetPassword{
 			Email:                UserResetPasswordRequest.Email,
@@ -160,9 +268,11 @@ func (h *UserHandler) ResetPassword() echo.HandlerFunc {
 			OTP:                  UserResetPasswordRequest.OTP,
 		}
 		err = h.s.ResetPassword(user)
+
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), []interface{}{}))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, "Success", []interface{}{}))
+
+		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, constant.UserSuccessResetPassword, nil))
 	}
 }
