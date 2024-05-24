@@ -188,21 +188,6 @@ paths:
                   status: false
                   message: Email and password cannot be empty
                   data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Invalid email or password
-                  data: null
   /user:
     get:
       tags:
@@ -322,6 +307,9 @@ paths:
                   data:
                     type: array
                 example:
+                  status: true
+                  message: Update User Success
+                  data:
                   - id: 422344
                     name: Kaze User
                     email: users@kzquandary.my.id
@@ -337,7 +325,9 @@ paths:
                   message:
                     type: string
                 example:
-                  message: missing or malformed jwt
+                  status: false
+                  message: Unauthorized
+                  data: null
         "409":
           description: Conflict
           content:
@@ -391,7 +381,24 @@ paths:
                   message:
                     type: string
                 example:
-                  message: missing or malformed jwt
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: boolean
+                    message:
+                      type: string
+                  example:
+                    status: false
+                    message: Id User not found
+                    data: null
   /user/{username}:
     get:
       tags:
@@ -441,7 +448,24 @@ paths:
                   message:
                     type: string
                 example:
-                  message: missing or malformed jwt
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id User not found
+                  data: null
   /user/forgot-password:
     post:
       tags:
@@ -874,7 +898,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or invalid jwt token
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -932,6 +957,38 @@ paths:
                 example:
                   status: true
                   message: Update Product in Cart Success
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: product id must not be empty
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
                   data: null
         "404":
           description: Not Found
@@ -1078,6 +1135,21 @@ paths:
                   status: true
                   message: Delete Product in Cart Success
                   data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1222,6 +1294,21 @@ paths:
                   status: false
                   message: Transaction not found
                   data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1365,6 +1452,21 @@ paths:
                 example:
                   status: false
                   message: Transaction not found
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
                   data: null
         "404":
           description: Not Found
@@ -1600,7 +1702,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt token
+                  message: Unauthorized
                   data: null
         "404":
           description: Not Found
@@ -1656,6 +1758,36 @@ paths:
                   status: true
                   message: Swipe Challenge Success
                   data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, user id not found
+                  data: null
   /challenges/user/participate:
     post:
       tags:
@@ -1700,7 +1832,7 @@ paths:
       tags:
         - challenges
       summary: Get Leaderboard
-      description: User mendapatkan leaderboard
+      description: User dapat melihat leaderboard
       operationId: getLeaderboard
       security:
         - bearerAuth: []
@@ -1740,13 +1872,27 @@ paths:
                       exp: 300
                       avatar_url: https://www.example.com/avatar-3.jpg
                       rank: 3
-
+        "404":
+          description: Not Found  
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, data not found
+                  data: null
   /forums:
     get:
       tags:
         - forum
       summary: Get Forum
-      description: User mendapatkan forum
+      description: User dapat melihat forum
       operationId: getForum
       security:
         - bearerAuth: []
@@ -1776,12 +1922,105 @@ paths:
                         username: user1
                         name: User 1
                         avatar_url: https://www.example.com/avatar-1.jpg
+          
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, data not found
+                  data: null
+    post:
+      tags:
+        - forum
+      summary: Create Forum
+      description: User dapat membuat forum, tapi role admin tidak
+      operationId: createForum
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              example:
+                title: Forum 1
+                description: Forum 1 description
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Create Forum Success
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Forum 1
+                    author:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+                    description: Forum 1 description
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot create forum
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
   /forums/{forum_id}:
     get:
       tags:
         - forum
       summary: Get Forum Detail
-      description: User mendapatkan detail forum
+      description: User dapat melihat detail forum
       operationId: getForumDetail
       security:
         - bearerAuth: []
@@ -1835,12 +2074,27 @@ paths:
                           name: User 2
                           avatar_url: https://www.example.com/avatar-2.jpg
                           created_at: 2021-01-01 00:00:00
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id forum not found
+                  data: null
   /forum/message:
     post:
       tags:
         - forum
       summary: Send Message
-      description: User mengirimkan pesan
+      description: User dapat mengirimkan pesan ke forum
       operationId: sendMessage
       security:
         - bearerAuth: []
@@ -1875,12 +2129,59 @@ paths:
                   status: true
                   message: Send Message Success
                   data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: cannot send message
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Forum not found
+                  data: null
   /forum/message/{message_id}:
     delete:
       tags:
         - forum
       summary: Delete Message
-      description: User menghapus pesan
+      description: User dapat menghapus pesan
       operationId: deleteMessage
       security:
         - bearerAuth: []
@@ -1908,6 +2209,36 @@ paths:
                 example:
                   status: true
                   message: Delete Message Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Message not found
                   data: null
 components:
   securitySchemes:
