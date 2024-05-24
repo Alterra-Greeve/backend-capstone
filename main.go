@@ -14,6 +14,10 @@ import (
 	AdminHandler "backendgreeve/features/admin/handler"
 	AdminService "backendgreeve/features/admin/service"
 
+	ImpactCategoryData "backendgreeve/features/impactcategory/data"
+	ImpactCategoryHandler "backendgreeve/features/impactcategory/handler"
+	ImpactCategoryService "backendgreeve/features/impactcategory/service"
+
 	"backendgreeve/helper"
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
@@ -53,9 +57,14 @@ func main() {
 	adminService := AdminService.New(adminData, jwt, mailer)
 	adminHandler := AdminHandler.New(adminService, jwt)
 
+	impactCategoryData := ImpactCategoryData.New(db)
+	impactCategoryService := ImpactCategoryService.New(impactCategoryData)
+	impactCategoryHandler := ImpactCategoryHandler.New(impactCategoryService, jwt)
+
 	routes.RouteUser(e, userHandler, *cfg)
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
+	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }

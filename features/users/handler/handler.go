@@ -4,7 +4,6 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -109,7 +108,6 @@ func (h *UserHandler) Update() echo.HandlerFunc {
 			Phone:     UserUpdateRequest.Phone,
 			AvatarURL: UserUpdateRequest.AvatarURL,
 		}
-		log.Println("sini")
 		FromUserService, err := h.s.Update(user)
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
@@ -200,7 +198,7 @@ func (h *UserHandler) Delete() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		
+
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.UserSuccessDelete, nil))
 	}
 }
