@@ -1525,6 +1525,164 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
+  /admin/impact/{impact_id}:
+    put:
+      tags:
+        - data impact
+      summary: Update Data Impact By Admin
+      description: Admin dapat mengupdate data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                impact_poin: 
+                  type: integer
+                icon_url: 
+                  type: string
+              example:
+                name: Name
+                impact_poin: 100
+                icon_url: https://example.com/images/item3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Data Impact Success
+                  data: 
+                    id: 001
+                    name: Name
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
+    delete:
+      tags: 
+        - data impact
+      summary: Delete Data Impact By Admin
+      description: Admin dapat menghapus data di impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Impact Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
   /admin/voucher:
     post:
       tags:

@@ -554,7 +554,7 @@ paths:
                   type: string
               example:
                 email: users@kzquandary.my.id
-                otp: 123456
+                otp: "123456"
       responses:
         "200":
           description: OK
@@ -1168,6 +1168,91 @@ paths:
                   message: Failed delete product, products id not found
                   data: null
   /transactions:
+    get:
+      tags:
+        - transactions
+      summary: Get Transactions
+      description: User melihat transaksi yang telah dilakukan oleh dirinya
+      operationId: getTransactions
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Transactions Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      user :
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user1
+                          email: user1@example.com
+                      voucher: 
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Voucher 1
+                          code: DISC10
+                          discount: 10000
+                      address: Jl. Raya Cikarus
+                      description: This is a transaction description
+                      status: Success
+                      total: 100000
+                      date: 2024-05-10
+                    - id: 1345647-e89b-12d3-a456-426614174000
+                      user :
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user1
+                          email: user1@example.com
+                      voucher: null
+                      address: Jl. Raya Cikarus
+                      description: This is a transaction description
+                      status: Success
+                      total: 150000
+                      date: 2024-05-15
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Transactions not found
+                  data: null
+
     post:
       tags:
         - transactions
@@ -1279,6 +1364,101 @@ paths:
                   status: true
                   message: Cancel Transaction Success
                   data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Transaction not found
+                  data: null
+  /transaction/{transaction_id}:
+    get:
+      tags:
+        - transactions
+      summary: Get Transaction by id
+      description: User melihat detail transaksi yang telah dilakuakn user tersebut
+      operationId: getTransactionid
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: transaction_id
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          required: true
+          description: ID of transaction
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Transaction Detail Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      user :
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user1
+                          email: user1@example.com
+                      voucher: 
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Voucher 1
+                          code: DISC10
+                          discount: 10000
+                      address: Jl. Raya Cikarus
+                      description: This is a transaction description
+                      status: Success
+                      total: 100000
+                      date: 2024-05-10
         "400":
           description: Bad Request
           content:
