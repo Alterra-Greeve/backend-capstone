@@ -4,6 +4,7 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/users"
 	MidtransWebhook "backendgreeve/features/webhook"
 	"backendgreeve/helper"
@@ -32,18 +33,6 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
-func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {
-	jwtConfig := echojwt.Config{
-		SigningKey:   []byte(cfg.JWT_Secret),
-		ErrorHandler: helper.JWTErrorHandler,
-	}
-
-	e.POST("/api/v1/media/upload", bh.UploadFileHandler(), echojwt.WithConfig(jwtConfig))
-}
-func PaymentNotification(e *echo.Echo, wh MidtransWebhook.MidtransNotificationHandler, cfg config.GreeveConfig) {
-	e.POST("/midtrans-notification", wh.HandleNotification())
-}
-
 func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
 		SigningKey:   []byte(cfg.JWT_Secret),
@@ -55,4 +44,29 @@ func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveC
 	e.GET(route.AdminPath, ah.GetAdminData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.AdminPath, ah.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.AdminPath, ah.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST(route.ImpactCategoryPath, ic.Create(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ImpactCategoryPath, ic.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ImpactCategoryByID, ic.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ImpactCategoryByID, ic.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ImpactCategoryByID, ic.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST("/api/v1/media/upload", bh.UploadFileHandler(), echojwt.WithConfig(jwtConfig))
+}
+func PaymentNotification(e *echo.Echo, wh MidtransWebhook.MidtransNotificationHandler, cfg config.GreeveConfig) {
+	e.POST("/midtrans-notification", wh.HandleNotification())
 }

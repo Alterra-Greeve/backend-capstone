@@ -14,3 +14,10 @@ const UserSuccessDelete = "Account has been deleted"
 const AdminSuccessLogin = "Successfull Login by role Admin"
 const AdminSuccessUpdate = "Successfull Edit data admin"
 const AdminSuccessDelete = "Successfull Delete data admin"
+
+
+// Impact Category Message
+const ImpactCategorySuccessCreate = "Successfull Create Impact Category"
+const ImpactCategorySuccessGet = "Successfull Get Impact Category"
+const ImpactCategorySuccessUpdate = "Successfull Update Impact Category"
+const ImpactCategorySuccessDelete = "Successfull Delete Impact Category"
