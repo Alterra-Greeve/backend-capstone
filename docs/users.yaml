@@ -404,7 +404,7 @@ paths:
       tags:
         - users 
       summary: Get User by Username
-      description: User mendapatkan user by username
+      description: User mendapatkan data user sesuai dengan usernamenya
       operationId: getUserByUsername
       parameters:
         - name: username
@@ -1252,7 +1252,6 @@ paths:
                   status: false
                   message: Transactions not found
                   data: null
-
     post:
       tags:
         - transactions
@@ -1803,7 +1802,147 @@ paths:
                   status: false
                   message: cannto get data, challenge id not found
                   data: null                  
-  /challenges/{user_id}/participate:
+  /challenges/participate:
+    post:
+      tags:
+        - challenges
+      summary: Create Challenge
+      description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
+      operationId: swipeChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenge_id:
+                  type: string
+                type:
+                  type: string
+              example:
+                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                type: decline
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Swipe Challenge Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, user id not found
+                  data: null
+    put:
+      tags:
+        - challenges
+      summary: Update Challenge
+      description: User dapat mengupdate ulang partisipasi, dengan mengirim bukti gambar(gambar bisa lebih dari satu)
+      operationId: swipeChallenge
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                challenge_id:
+                  type: string
+                type:
+                  type: string
+              example:
+                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                image:
+                  - url: https://www.example.com/challenge-1.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Swipe Challenge Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Challenge Already Accepted
+                  data: null
+  /challenges/user:
     get:
       tags:
         - challenges
@@ -1899,114 +2038,6 @@ paths:
                   status: false
                   message: cannot get data, user id not found
                   data: null
-    post:
-      tags:
-        - challenges
-      summary: Create Challenge
-      description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
-      operationId: swipeChallenge
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                challenge_id:
-                  type: string
-                type:
-                  type: string
-              example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
-                type: decline
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Swipe Challenge Success
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: cannot get data, user id not found
-                  data: null
-  /challenges/user/participate:
-    post:
-      tags:
-        - challenges
-      summary: User Konfirmasi Mengikuti Challenges
-      description: User mengkonfirmasi mengikuti challenge
-      operationId: userConfirmChallenge
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                challenge_id:
-                  type: string
-              example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
-                image: https://www.example.com/challenge-1.jpg
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: User Konfirmasi Mengikuti Challenges Success
-                  data: null
- 
   /leaderboard:
     get:
       tags:
@@ -2122,7 +2153,7 @@ paths:
       tags:
         - forum
       summary: Create Forum
-      description: User dapat membuat forum, tapi role admin tidak
+      description: User dapat membuat forum, pembuatan forum hanya dimiliki oleh role User
       operationId: createForum
       security:
         - bearerAuth: []
