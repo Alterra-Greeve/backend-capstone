@@ -1812,6 +1812,62 @@ paths:
                   status: false
                   message: Id Voucher Not Found
                   data: null
+  /media/upload:
+    post:
+      tags:
+        - utils
+      summary: Upload Image
+      description: User upload media
+      operationId: uploadMedia
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+              example:
+                file: image
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Success Upload Image
+                  data:
+                    image_url: "https://storage.googleapis.com/kzquandary/rubbuddy/90472c83-70a2-47b1-acb4-fb2014e87decsamurai-anime-girl-katana-sci-fi-4k-wallpaper-uhdpaper.com-221@3@a.jpg"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Upload Image Failed
+                  data: []
 components:
   securitySchemes:
     bearerAuth:

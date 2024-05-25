@@ -52,3 +52,18 @@ var ErrUpdateImpactCategory = errors.New("Failed to update impact category")
 var ErrDeleteImpactCategory = errors.New("Failed to delete impact category")
 var ErrImpactCategoryField = errors.New("Field cannot be empty")
 var ErrImpactCategoryFieldUpdate = errors.New("One or more fields for update cannot be empty")
+
+// Product Errors
+var ErrProductNotFound = errors.New("Product Not Found")
+var ErrCreateProduct = errors.New("Failed to create product")
+var ErrUpdateProduct = errors.New("Failed to update product")
+var ErrDeleteProduct = errors.New("Failed to delete product")
+var ErrProductField = errors.New("Field cannot be empty")
+var ErrProductFieldUpdate = errors.New("One or more fields for update cannot be empty")
+var ErrProductNameEmpty = errors.New("Name cannot be empty")
+var ErrProductDescriptionEmpty = errors.New("Description cannot be empty")
+var ErrProductCoinEmpty = errors.New("Coin cannot be empty")
+var ErrProductPriceEmpty = errors.New("Price cannot be empty")
+var ErrProductImagesEmpty = errors.New("Images cannot be empty")
+var ErrProductImpactCategoriesEmpty = errors.New("Impact Categories cannot be empty")
+
