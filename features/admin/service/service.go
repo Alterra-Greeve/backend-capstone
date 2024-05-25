@@ -22,7 +22,7 @@ func New(data admin.AdminDataInterface, jwt helper.JWTInterface, mailer helper.M
 
 func (s *AdminService) Login(userAdmin admin.Admin) (admin.AdminLogin, error) {
 	if userAdmin.Email == "" || userAdmin.Password == "" {
-		return admin.AdminLogin{}, constant.ErrEmptyLogin
+		return admin.AdminLogin{}, constant.ErrEmptyEmailandPasswordAdmin
 	}
 
 	adminData, err := s.d.Login(userAdmin)

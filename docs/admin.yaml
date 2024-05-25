@@ -94,21 +94,6 @@ paths:
                   status: false
                   message: Email and password cannot be empty
                   data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Invalid email or password
-                  data: null
   /admin:
     get:
       tags:
@@ -152,12 +137,14 @@ paths:
                   message:
                     type: string
                 example:
-                  message: missing or malformed jwt
+                  status: false
+                  message: Unauthorized
+                  data: null
     put:
       tags:
         - admin
       summary: Update Admin
-      description: Admin melakukan update profile admin, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin melakukan update profile admin kecuali email dan username yang sudah diambil admin lain, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -198,11 +185,44 @@ paths:
                   data:
                     type: array
                 example:
-                  id: 422344
-                  name: Kaze User
-                  email: users@kzquandary.my.id
-                  address: Cimahi
-                  gender: Laki-laki
+                  status: true
+                  message: Update Success
+                  data:   
+                      id: 422344
+                      name: Kaze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Email or Username already taken by another admin
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
 
   /admin/users:
     get: 
@@ -260,6 +280,13 @@ paths:
       operationId: getUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       requestBody:
         content:
           application/json:
@@ -322,7 +349,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Not Found
+                  message: id user Not Found
                   data: null
     put: 
       tags:
@@ -332,6 +359,13 @@ paths:
       operationId: updateUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       requestBody:
         content:
           application/json:
@@ -395,6 +429,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request data
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -408,7 +443,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -422,7 +458,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Not Found
+                  message: Id user Not Found
+                  data: null
     delete: 
       tags:
         - user
@@ -431,6 +468,13 @@ paths:
       operationId: deleteUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       responses:
         "200":
           description: OK
@@ -462,7 +506,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -477,7 +522,7 @@ paths:
                     nullable: true
                 example:
                   status: false
-                  message: User Id Not Found
+                  message: Id User Not Found
                   data: null
   /transactions:
     get: 
@@ -546,10 +591,17 @@ paths:
       tags:
         - transaction
       summary: Get Transaction Data By ID
-      description: Admin mendapatkan semua data transaction, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin mendapatkan data transaction sesuai id yang dicari, untuk menggunakan route ini harus menggunakan token admin
       operationId: getTransactionbyID
       security:
         - bearerAuth: []
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       responses:
         "200":
           description: OK
@@ -601,6 +653,13 @@ paths:
       operationId: updateTransaction
       security:
         - bearerAuth: []
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       requestBody:
         content:
           application/json:
@@ -653,6 +712,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -666,7 +726,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -680,7 +741,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Transaction Not Found
+                  message: Id Transaction Not Found
+                  data: null
   /product:
     get: 
       tags:
@@ -787,8 +849,7 @@ paths:
                 example:
                   status: true
                   message: Add Data Product Success
-                  data: null 
-                      
+                  data: null            
         "400":
           description: Bad Request
           content:
@@ -803,6 +864,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -816,7 +878,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
   /admin/product/{product_id}:
     put: 
       tags:
@@ -826,6 +889,13 @@ paths:
       operationId: updateProduct
       security:
         - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       requestBody:
         content:
           application/json:
@@ -876,6 +946,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -889,7 +960,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -903,7 +975,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Product Not Found
+                  message: Id Product Not Found
                   data: null
     delete:
       tags:
@@ -913,6 +985,13 @@ paths:
       operationId: deleteProduct
       security:
         - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
@@ -942,7 +1021,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -956,13 +1036,14 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Product Not Found
+                  message: Id Product Not Found
+                  data: null
   /admin/challenge:
     post:
       tags:
         - challenge
       summary: Add Challenge
-      description: Admin dapat menambahkan data challenge
+      description: Admin dapat menambahkan data challenge, untuk menggunakan route ini harus menggunakan token admin
       operationId: addChallenge
       security:
         - bearerAuth: []
@@ -1040,6 +1121,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1054,6 +1136,7 @@ paths:
                 example:
                   status: false
                   message: missing or malformed jwt
+                  data: null
     put:
       tags:
         - challenge
@@ -1110,6 +1193,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1123,7 +1207,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1137,16 +1222,24 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Challenge Not Found
+                  message: Id Challenge Not Found
+                  data: null
   /admin/challenge/{challenge_id}:
     put: 
       tags:
         - challenge
       summary: Update Confirmation Challenge By Admin
-      description: Admin dapat melakukan update status terhadap Confirmation status dari challenge, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin dapat melakukan update status terhadap Confirmation status oleh user dari challenge, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateConfirmationChallenge
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
       requestBody:
         content:
           application/json:
@@ -1189,6 +1282,51 @@ paths:
                       image_url: https://example.com/images/item3.jpg
                       date_upload: 2024-10-12
                       status: true
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Challenge Not Found
+                  data: null
     delete:
       tags:
         - challenge
@@ -1197,6 +1335,13 @@ paths:
       operationId: deleteChallenge
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
       responses:
         "200":
           description: OK
@@ -1226,7 +1371,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1240,7 +1386,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Challenge Not Found
+                  message: Id Challenge Not Found
                   data: null
   /admin/forum/{forum_id}:
     delete:
@@ -1251,6 +1397,13 @@ paths:
       operationId: deleteForum
       security:
         - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: d709b293-572c-40a6-b254-06ae4965f546
       responses:
         "200":
           description: OK
@@ -1280,7 +1433,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1294,7 +1448,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Forum Not Found
+                  message: Id Forum Not Found
                   data: null
   /admin/impact:
     post:
@@ -1341,6 +1495,21 @@ paths:
                     name: Name
                     impact_poin: 100
                     icon_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1354,13 +1523,172 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt                               
+                  message: Unauthorized
+                  data: null
+  /admin/impact/{impact_id}:
+    put:
+      tags:
+        - data impact
+      summary: Update Data Impact By Admin
+      description: Admin dapat mengupdate data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                impact_poin: 
+                  type: integer
+                icon_url: 
+                  type: string
+              example:
+                name: Name
+                impact_poin: 100
+                icon_url: https://example.com/images/item3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Data Impact Success
+                  data: 
+                    id: 001
+                    name: Name
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
+    delete:
+      tags: 
+        - data impact
+      summary: Delete Data Impact By Admin
+      description: Admin dapat menghapus data di impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Impact Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
   /admin/voucher:
     post:
       tags:
         - voucher
       summary: Add Data Voucher By Admin 
-      description: Admin dapat menambahkan data voucher, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
       operationId: addDataVoucher
       security:
         - bearerAuth: []
@@ -1420,7 +1748,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
   /admin/voucher/{id}:
     delete:
       tags:
@@ -1430,6 +1759,13 @@ paths:
       operationId: deleteDataVoucher
       security:
         - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
       responses:
         "200":
           description: OK
@@ -1459,7 +1795,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1473,7 +1810,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Voucher Not Found
+                  message: Id Voucher Not Found
                   data: null
 components:
   securitySchemes:

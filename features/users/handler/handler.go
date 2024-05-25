@@ -115,7 +115,7 @@ func (h *UserHandler) Update() echo.HandlerFunc {
 
 		var UserToken UserLoginResponse
 		UserToken.Token = FromUserService.Token
-		return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(true, constant.UserSuccessUpdate, UserToken))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessUpdate, UserToken))
 	}
 }
 
@@ -271,6 +271,6 @@ func (h *UserHandler) ResetPassword() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, constant.UserSuccessResetPassword, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.UserSuccessResetPassword, nil))
 	}
 }

@@ -42,6 +42,7 @@ var ErrGetDataAdmin = errors.New("Failed to get data admin")
 var ErrEmptyEmailandPasswordAdmin = errors.New("Email and Password cannot be empty")
 var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
 var ErrEditAdmin = errors.New("Field Cannot be Empty")
+var ErrAdminEmailUsernameAlreadyExist = errors.New("Email or Username already taken by another admin")
 
 
 // Impact Category Errors
@@ -51,4 +52,3 @@ var ErrUpdateImpactCategory = errors.New("Failed to update impact category")
 var ErrDeleteImpactCategory = errors.New("Failed to delete impact category")
 var ErrImpactCategoryField = errors.New("Field cannot be empty")
 var ErrImpactCategoryFieldUpdate = errors.New("One or more fields for update cannot be empty")
-
