@@ -80,6 +80,20 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrAdminEmailUsernameAlreadyExist:
 		return http.StatusConflict
 	case constant.ErrEmptyEmailandPasswordAdmin:
+
+
+	// Impact Category Error
+	case constant.ErrImpactCategoryNotFound:
+		return http.StatusNotFound
+	case constant.ErrCreateImpactCategory:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateImpactCategory:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteImpactCategory:
+		return http.StatusInternalServerError
+	case constant.ErrImpactCategoryField:
+		return http.StatusBadRequest
+	case constant.ErrImpactCategoryFieldUpdate:
 		return http.StatusBadRequest
 	// Default
 	default:

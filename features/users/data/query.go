@@ -4,7 +4,6 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
-	"log"
 
 	"time"
 
@@ -82,8 +81,6 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 
 	user.UpdatedAt = time.Now()
 	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(&user).Error; err != nil {
-		log.Printf("Error updating user with ID %s: %v", user.ID, err)
-		log.Println(err)
 		return users.User{}, constant.ErrUpdateUser
 	}
 
