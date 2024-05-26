@@ -37,13 +37,29 @@ var ErrValidateJWT = errors.New("failed to validate jwt token")
 
 var ErrHashPassword = errors.New("failed to hash password")
 
+// Forum
+var ErrCreateForum = errors.New("Failed to create forum")
+var ErrGetForum = errors.New("Failed to get forum")
+var ErrGetForumByID = errors.New("Failed to get forum by ID")
+var ErrEditForum = errors.New("Field Description Cannot be Empty")
+var ErrForumNotFound = errors.New("error, id Forum Not Found")
+
+var ErrGetMessage = errors.New("Failed to get Message")
+var ErrGetMessageByID = errors.New("Failed to get Message by ID")
+var ErrMessgaeNotFound = errors.New("error, id Message Not Found")
+var ErrEditMessage = errors.New("Field Message Cannot be Empty")
+var ErrCreateMessage = errors.New("Failed to create Message")
+var ErrDeleteForum = errors.New("Failed to delete forum")
+var ErrUpdateMessage = errors.New("Failed to update Message")
+var ErrDeleteMessage = errors.New("Failed to delete Message")
+var UnatuhorizeForumAndMessage = errors.New("you are not authorized to update this forum")
+
 // Admin Errors
 var ErrGetDataAdmin = errors.New("Failed to get data admin")
 var ErrEmptyEmailandPasswordAdmin = errors.New("Email and Password cannot be empty")
 var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
 var ErrEditAdmin = errors.New("Field Cannot be Empty")
 var ErrAdminEmailUsernameAlreadyExist = errors.New("Email or Username already taken by another admin")
-
 
 // Impact Category Errors
 var ErrImpactCategoryNotFound = errors.New("Impact Category Not Found")

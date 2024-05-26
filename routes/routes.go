@@ -4,6 +4,7 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
 	"backendgreeve/features/users"
@@ -84,4 +85,21 @@ func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfi
 }
 func PaymentNotification(e *echo.Echo, wh MidtransWebhook.MidtransNotificationHandler, cfg config.GreeveConfig) {
 	e.POST("/midtrans-notification", wh.HandleNotification())
+}
+
+func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.GET(route.ForumPath, fh.GetAllForum(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ForumByID, fh.GetForumByID(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.ForumPath, fh.PostForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumUpdate, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumDelete, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
+
+	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumMessageDelete, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumMessageUpdate, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
 }
