@@ -58,8 +58,8 @@ func (h *AdminHandler) Update() echo.HandlerFunc {
 			helper.UnauthorizedError(c)
 		}
 
-		userData := h.j.ExtractUserToken(token)
-		userId := userData[constant.JWT_ID]
+		adminData := h.j.ExtractAdminToken(token)
+		adminId := adminData[constant.JWT_ID]
 
 		var AdminUpdateRequest AdminUpdateRequest
 		err = c.Bind(&AdminUpdateRequest)
@@ -67,7 +67,7 @@ func (h *AdminHandler) Update() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 		admin := admin.AdminUpdate{
-			ID:       userId.(string),
+			ID:       adminId.(string),
 			Username: AdminUpdateRequest.Username,
 			Name:     AdminUpdateRequest.Name,
 			Email:    AdminUpdateRequest.Email,
@@ -87,7 +87,7 @@ func (h *AdminHandler) Delete() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(true, constant.AdminSuccessDelete, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.AdminSuccessDelete, nil))
 	}
 }
 

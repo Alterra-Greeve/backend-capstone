@@ -4,7 +4,6 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
-	"log"
 
 	"time"
 
@@ -32,6 +31,11 @@ func (u *UserData) Register(newUser users.User) error {
 	if isUsernameExist {
 		return constant.ErrUsernameAlreadyExist
 	}
+
+	if newUser.AvatarURL == "" {
+		newUser.AvatarURL = "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png"
+	}
+
 	newUser.ID = uuid.New().String()
 	newUser.Coin = 0
 	newUser.Exp = 0
@@ -77,8 +81,6 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 
 	user.UpdatedAt = time.Now()
 	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(&user).Error; err != nil {
-		log.Printf("Error updating user with ID %s: %v", user.ID, err)
-		log.Println(err)
 		return users.User{}, constant.ErrUpdateUser
 	}
 
