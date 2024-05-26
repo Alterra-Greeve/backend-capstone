@@ -18,6 +18,10 @@ import (
 	ImpactCategoryHandler "backendgreeve/features/impactcategory/handler"
 	ImpactCategoryService "backendgreeve/features/impactcategory/service"
 
+	ForumData "backendgreeve/features/forums/data"
+	ForumHandler "backendgreeve/features/forums/handler"
+	ForumService "backendgreeve/features/forums/service"
+
 	"backendgreeve/helper"
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
@@ -61,10 +65,15 @@ func main() {
 	impactCategoryService := ImpactCategoryService.New(impactCategoryData)
 	impactCategoryHandler := ImpactCategoryHandler.New(impactCategoryService, jwt)
 
+	forumData := ForumData.New(db)
+	forumService := ForumService.New(forumData)
+	forumHandler := ForumHandler.New(forumService, jwt)
+
 	routes.RouteUser(e, userHandler, *cfg)
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
+	routes.RouteForum(e, forumHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }

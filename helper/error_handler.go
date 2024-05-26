@@ -68,16 +68,45 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrEmptyResetPassword:
 		return http.StatusBadRequest
 
+	// Forum
+	case constant.ErrGetForum:
+		return http.StatusNotFound
+	case constant.ErrCreateForum:
+		return http.StatusBadRequest
+	case constant.ErrGetForumByID:
+		return http.StatusNotFound
+	case constant.ErrEditForum:
+		return http.StatusBadRequest
+	case constant.UnatuhorizeForumAndMessage:
+		return http.StatusUnauthorized
+	case constant.ErrGetMessage:
+		return http.StatusNotFound
+	case constant.ErrGetMessageByID:
+		return http.StatusBadRequest
+	case constant.ErrCreateMessage:
+		return http.StatusBadRequest
+	case constant.ErrUpdateMessage:
+		return http.StatusBadRequest
+	case constant.ErrDeleteMessage:
+		return http.StatusBadRequest
+	case constant.ErrEditMessage:
+		return http.StatusBadRequest
+	case constant.ErrMessgaeNotFound:
+		return http.StatusNotFound
+	case constant.ErrDeleteForum:
+		return http.StatusInternalServerError
+	case constant.ErrForumNotFound:
+		return http.StatusNotFound
+
 	// Admin Error
 	case constant.ErrGetDataAdmin:
-		return http.StatusInternalServerError
+		return http.StatusNotFound
 	case constant.ErrEmptyEmailandPasswordAdmin:
 		return http.StatusBadRequest
 	case constant.ErrNotFoundEmailAdmin:
 		return http.StatusNotFound
 	case constant.ErrEditAdmin:
 		return http.StatusBadRequest
-
 
 	// Impact Category Error
 	case constant.ErrImpactCategoryNotFound:
