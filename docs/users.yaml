@@ -942,12 +942,6 @@ paths:
           schema:
             type: string
           example: product
-        - name: page
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
       responses:
         "200":
           description: OK
@@ -1066,7 +1060,7 @@ paths:
         - products
       summary: Get Products by Name
       description: User mendapatkan produk berdasarkan nama
-      operationId: getProductsbyName
+      operationId: getProductsbyNamebyPage
       parameters:
         - name: name
           in: path
@@ -1279,6 +1273,99 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+  /products/category/{category_name}?page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Category
+      description: User mendapatkan products berdasarkan kategori
+      operationId: getProductsByCategoryPage
+      parameters:
+        - name: category_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: number
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
   /products/{product_id}:
     get:
       tags:
@@ -1286,6 +1373,13 @@ paths:
       summary: Get Products
       description: User mendapatkan semua products
       operationId: getProductbyId
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: c7af1356-bdd5-42b3-a8c9-1669b71d9447
       responses:
         "200":
           description: OK

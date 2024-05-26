@@ -50,8 +50,8 @@ type ProductServiceInterface interface {
 	Get() ([]Product, error)
 	GetById(id string) (Product, error)
 	GetByPage(page int) ([]Product, int, error)
-	GetByCategory(category string) ([]Product, error)
-	GetByName(name string) ([]Product, error)
+	GetByCategory(category string, page int) ([]Product, int, error)
+	GetByName(name string, page int) ([]Product, int, error)
 	Create(product Product) error
 	Update(product Product) error
 	Delete(productId string) error
@@ -61,8 +61,8 @@ type ProductDataInterface interface {
 	Get() ([]Product, error)
 	GetByPage(page int) ([]Product, int, error)
 	GetById(id string) (Product, error)
-	GetByCategory(category string) ([]Product, error)
-	GetByName(name string) ([]Product, error)
+	GetByCategory(category string, page int) ([]Product, int, error)
+	GetByName(name string, page int) ([]Product, int, error)
 	Create(product Product) error
 	Update(product Product) error
 	Delete(productId string) error

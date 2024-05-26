@@ -27,12 +27,12 @@ func (s *ProductService) GetById(id string) (product.Product, error) {
 	return s.d.GetById(id)
 }
 
-func (s *ProductService) GetByCategory(category string) ([]product.Product, error) {
-	return s.d.GetByCategory(category)
+func (s *ProductService) GetByCategory(category string, page int) ([]product.Product, int, error) {
+	return s.d.GetByCategory(category, page)
 }
 
-func (s *ProductService) GetByName(name string) ([]product.Product, error) {
-	return s.d.GetByName(name)
+func (s *ProductService) GetByName(name string, page int) ([]product.Product, int, error) {
+	return s.d.GetByName(name, page)
 }
 
 func (s *ProductService) Create(product product.Product) error {

@@ -19,7 +19,6 @@ func New(db *gorm.DB) product.ProductDataInterface {
 
 func (pd *ProductData) Get() ([]product.Product, error) {
 	var products []product.Product
-	// TODO GET SOFT DELETE
 	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Find(&products).Where("deleted_at IS NULL")
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -33,16 +32,16 @@ func (pd *ProductData) GetByPage(page int) ([]product.Product, int, error) {
 	var totalProducts int64
 	countTx := pd.DB.Model(&product.Product{}).Count(&totalProducts)
 	if countTx.Error != nil {
-		return nil, 0, countTx.Error
+		return nil, 0, constant.ErrProductEmpty
 	}
 
 	productsPerPage := 20
 	totalPages := int((totalProducts + int64(productsPerPage) - 1) / int64(productsPerPage))
 
-	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").
+	tx := pd.DB.Model(&Product{}).Preload("Images").Preload("ImpactCategories.ImpactCategory").
 		Offset((page - 1) * productsPerPage).Limit(productsPerPage).Find(&products)
 	if tx.Error != nil {
-		return nil, 0, tx.Error
+		return nil, 0, constant.ErrGetProduct
 	}
 	if tx.RowsAffected == 0 {
 		return nil, 0, constant.ErrProductNotFound
@@ -52,39 +51,68 @@ func (pd *ProductData) GetByPage(page int) ([]product.Product, int, error) {
 
 func (pd *ProductData) GetById(id string) (product.Product, error) {
 	var products product.Product
-	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Find(&products, "id = ?", id)
+
+	tx := pd.DB.Model(&Product{}).Preload("Images").Preload("ImpactCategories.ImpactCategory").
+		Find(&products, "id = ?", id)
 	if tx.Error != nil {
-		return products, tx.Error
+		return products, constant.ErrGetProduct
 	}
 	return products, nil
 }
 
-func (pd *ProductData) GetByCategory(categoryName string) ([]product.Product, error) {
+func (pd *ProductData) GetByCategory(categoryName string, page int) ([]product.Product, int, error) {
 	var products []product.Product
-	err := pd.DB.
+	var totalProducts int64
+
+	countTx := pd.DB.Model(&Product{}).
 		Joins("JOIN product_impact_categories ON product_impact_categories.product_id = products.id").
 		Joins("JOIN impact_categories ON impact_categories.id = product_impact_categories.impact_category_id").
 		Where("impact_categories.name = ?", categoryName).
-		Find(&products).Error
-	if err != nil {
-		return nil, err
+		Count(&totalProducts)
+	if countTx.Error != nil {
+		return nil, 0, constant.ErrProductEmpty
+	}
+
+	productsPerPage := 20
+	totalPages := int((totalProducts + int64(productsPerPage) - 1) / int64(productsPerPage))
+
+	tx := pd.DB.Model(&Product{}).
+		Joins("JOIN product_impact_categories ON product_impact_categories.product_id = products.id").
+		Joins("JOIN impact_categories ON impact_categories.id = product_impact_categories.impact_category_id").
+		Where("impact_categories.name = ?", categoryName).
+		Preload("Images").
+		Preload("ImpactCategories.ImpactCategory").
+		Offset((page - 1) * productsPerPage).Limit(productsPerPage).
+		Find(&products)
+	if tx.Error != nil {
+		return nil, 0, constant.ErrGetProduct
 	}
 	if len(products) == 0 {
-		return nil, constant.ErrProductNotFound
+		return nil, 0, constant.ErrProductNotFound
 	}
-	return products, nil
+	return products, totalPages, nil
 }
 
-func (pd *ProductData) GetByName(name string) ([]product.Product, error) {
+func (pd *ProductData) GetByName(name string, page int) ([]product.Product, int, error) {
 	var products []product.Product
-	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Where("name LIKE ?", "%"+name+"%").Find(&products)
+	var totalProducts int64
+
+	countTx := pd.DB.Model(&product.Product{}).Where("name LIKE ?", "%"+name+"%").Count(&totalProducts)
+	if countTx.Error != nil {
+		return nil, 0, constant.ErrProductEmpty
+	}
+
+	productsPerPage := 20
+	totalPages := int((totalProducts + int64(productsPerPage) - 1) / int64(productsPerPage))
+
+	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Where("name LIKE ?", "%"+name+"%").Offset((page - 1) * productsPerPage).Limit(productsPerPage).Find(&products)
 	if tx.Error != nil {
-		return nil, tx.Error
+		return nil, 0, constant.ErrGetProduct
 	}
 	if len(products) == 0 {
-		return nil, constant.ErrProductNotFound
+		return nil, 0, constant.ErrProductNotFound
 	}
-	return products, nil
+	return products, totalPages, nil
 }
 
 func (pd *ProductData) Create(product product.Product) error {
@@ -112,7 +140,10 @@ func (pd *ProductData) Create(product product.Product) error {
 		})
 	}
 	tx := pd.DB.Create(&productQuery)
-	return tx.Error
+	if tx.Error != nil {
+		return constant.ErrCreateProduct
+	}
+	return nil
 }
 
 func (pd *ProductData) Update(products product.Product) error {
@@ -151,7 +182,10 @@ func (pd *ProductData) Update(products product.Product) error {
 	}
 
 	tx = pd.DB.Model(&productQuery).Omit("CreatedAt").Where("id = ?", productQuery.ID).Save(&productQuery)
-	return tx.Error
+	if tx.Error != nil {
+		return constant.ErrUpdateProduct
+	}
+	return nil
 }
 
 func (pd *ProductData) Delete(productId string) error {

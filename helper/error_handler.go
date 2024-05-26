@@ -127,6 +127,10 @@ func ConvertResponseCode(err error) int {
 		return http.StatusBadRequest
 	case constant.ErrProductDelete:
 		return http.StatusInternalServerError
+	case constant.ErrGetProduct:
+		return http.StatusInternalServerError
+	case constant.ErrProductEmpty:
+		return http.StatusNotFound
 	// Default
 	default:
 		return http.StatusInternalServerError

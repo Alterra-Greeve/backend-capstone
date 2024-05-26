@@ -78,7 +78,7 @@ func (h *ProductHandler) Create() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusCreated, helper.FormatResponse(true, "Product created successfully", nil))
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessCreate, nil))
 	}
 }
 
@@ -140,7 +140,7 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 			})
 		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Product fetched successfully", []interface{}{response}))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
 	}
 }
 
@@ -158,8 +158,13 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			return nil
 		}
 
-		productID := c.Param("id")
-		product, err := h.s.GetById(productID)
+		paramId := c.Param("id")
+		productId, err := uuid.Parse(paramId)
+		if err != nil {
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
+		}
+		product, err := h.s.GetById(productId.String())
 		if err != nil {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
@@ -190,7 +195,7 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			Category:    categories,
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, "Product fetched successfully", response))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ProductSuccessGet, response))
 	}
 }
 func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
@@ -208,8 +213,14 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 		}
 
 		productCategory := c.Param("category_name")
+		pageStr := c.QueryParam("page")
+		page, err := strconv.Atoi(pageStr)
+		if err != nil {
+			page = 1
+		}
+		var totalPages int
 		var products []product.Product
-		products, err = h.s.GetByCategory(productCategory)
+		products, totalPages, err = h.s.GetByCategory(productCategory, page)
 		if err != nil {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
@@ -234,6 +245,8 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 
 			response = append(response, ProductResponse{
 				ID:          p.ID,
+				CurrentPage: page,
+				TotalPage:   totalPages,
 				Name:        p.Name,
 				Description: p.Description,
 				Price:       p.Price,
@@ -243,7 +256,7 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 			})
 		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Product fetched successfully", []interface{}{response}))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
 	}
 }
 func (h *ProductHandler) GetByName() echo.HandlerFunc {
@@ -261,8 +274,14 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 		}
 
 		productName := c.QueryParam("name")
+		pageStr := c.QueryParam("page")
+		page, err := strconv.Atoi(pageStr)
+		if err != nil {
+			page = 1
+		}
+		var totalPages int
 		var products []product.Product
-		products, err = h.s.GetByName(productName)
+		products, totalPages, err = h.s.GetByName(productName, page)
 		if err != nil {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
@@ -287,6 +306,8 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 
 			response = append(response, ProductResponse{
 				ID:          p.ID,
+				CurrentPage: page,
+				TotalPage:   totalPages,
 				Name:        p.Name,
 				Description: p.Description,
 				Price:       p.Price,
@@ -296,7 +317,7 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 			})
 		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Product fetched successfully", []interface{}{response}))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
 	}
 }
 func (h *ProductHandler) Update() echo.HandlerFunc {
@@ -355,7 +376,7 @@ func (h *ProductHandler) Update() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusCreated, helper.FormatResponse(true, "Product update successfully", nil))
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
 	}
 }
 
@@ -390,6 +411,6 @@ func (h *ProductHandler) Delete() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Product deleted successfully", nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessDelete, nil))
 	}
 }

@@ -55,6 +55,8 @@ var ErrImpactCategoryFieldUpdate = errors.New("One or more fields for update can
 
 // Product Errors
 var ErrProductNotFound = errors.New("Product Not Found")
+var ErrGetProduct = errors.New("Failed to get product")
+var ErrProductEmpty = errors.New("There is no product")
 var ErrCreateProduct = errors.New("Failed to create product")
 var ErrUpdateProduct = errors.New("Failed to update product")
 var ErrDeleteProduct = errors.New("Failed to delete product")
