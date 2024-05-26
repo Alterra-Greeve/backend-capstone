@@ -4,6 +4,9 @@ import "errors"
 
 const Unauthorized = "Unauthorized"
 const InternalServerError = "Internal Server Error"
+const BadInput = "Format data not valid"
+
+var BadRequest = errors.New("Format data not valid")
 
 // Users Errors
 var ErrEmptyLogin = errors.New("Email or Password cannot be empty")
