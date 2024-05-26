@@ -81,6 +81,13 @@ func (s *ForumService) UpdateMessageForum(message forums.EditMessage) error {
 	return s.d.UpdateMessageForum(message)
 }
 
+func (s *ForumService) GetForumByUserID(ID string) (forums.Forum, error) {
+	if ID == "" {
+		return forums.Forum{}, constant.ErrGetMessageByID
+	}
+	return s.d.GetForumByUserID(ID)
+}
+
 func (s *ForumService) GetMessagesByForumID(forumID string) ([]forums.MessageForum, error) {
 	return s.d.GetMessagesByForumID(forumID)
 }

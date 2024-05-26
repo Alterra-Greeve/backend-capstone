@@ -47,7 +47,7 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 				ID:          forum.ID,
 				Title:       forum.Title,
 				Description: forum.Description,
-				Author:      Author{ID: forum.Author.ID, Name: forum.Author.Name, Username: forum.Author.Username, Email: forum.Author.Email},
+				Author:      Author{ID: forum.User.ID, Name: forum.User.Name, Username: forum.User.Username, Email: forum.User.Email},
 			})
 		}
 
@@ -80,7 +80,7 @@ func (h *ForumHandler) PostForum() echo.HandlerFunc {
 			ID:          uuid.New().String(),
 			Title:       forum.Title,
 			Description: forum.Description,
-			AuthorID:    userId.(string),
+			UserID:      userId.(string),
 		}
 		err = h.s.PostForum(forumData)
 		if err != nil {
@@ -134,7 +134,7 @@ func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
 			ID:            forums.ID,
 			Title:         forums.Title,
 			Description:   forums.Description,
-			Author:        Author{ID: forums.Author.ID, Name: forums.Author.Name, Username: forums.Author.Username, Email: forums.Author.Email},
+			Author:        Author{ID: forums.User.ID, Name: forums.User.Name, Username: forums.User.Username, Email: forums.User.Email},
 			ForumMessages: messageResponses,
 		}
 
@@ -163,7 +163,7 @@ func (h *ForumHandler) UpdateForum() echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrForumNotFound.Error()), nil))
 		}
 
-		if existingForum.AuthorID != userId {
+		if existingForum.UserID != userId {
 			return c.JSON(http.StatusForbidden, helper.FormatResponse(false, string(constant.UnatuhorizeForumAndMessage.Error()), nil))
 		}
 		var forum EditForumRequest
@@ -209,6 +209,38 @@ func (h *ForumHandler) DeleteForum() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessDelete, nil))
+	}
+}
+
+func (h *ForumHandler) GetForumByUserID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		_, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		page, err := strconv.Atoi(c.QueryParam("page"))
+		if err != nil || page < 1 {
+			page = 1
+		}
+		pageSize, err := strconv.Atoi(c.QueryParam("pageSize"))
+		if err != nil || pageSize < 1 {
+			pageSize = 10
+		}
+
+		userid := c.Param("id")
+
+		forums, err := h.s.GetForumByUserID(userid)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessCreate, forums))
 	}
 }
 

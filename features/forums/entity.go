@@ -11,8 +11,8 @@ type Forum struct {
 	ID          string
 	Title       string
 	Description string
-	AuthorID    string
-	Author      users.User
+	UserID      string
+	User        users.User
 	CreatedAt   time.Time
 }
 
@@ -55,6 +55,7 @@ type ForumHandlerInterface interface {
 	DeleteMessageForum() echo.HandlerFunc
 	UpdateMessageForum() echo.HandlerFunc
 	GetMessageForumByID() echo.HandlerFunc
+	GetForumByUserID() echo.HandlerFunc
 }
 
 type ForumServiceInterface interface {
@@ -63,6 +64,7 @@ type ForumServiceInterface interface {
 	GetAllForum() ([]Forum, error)
 	GetForumByID(ID string) (Forum, error)
 	PostForum(Forum) error
+	GetForumByUserID(ID string) (Forum, error)
 
 	//
 	UpdateForum(EditForum) error //unsure
@@ -83,6 +85,7 @@ type ForumDataInterface interface {
 	GetAllForum() ([]Forum, error)
 	GetForumByID(ID string) (Forum, error)
 	PostForum(Forum) error
+	GetForumByUserID(ID string) (Forum, error)
 
 	//
 	UpdateForum(EditForum) error //unsure

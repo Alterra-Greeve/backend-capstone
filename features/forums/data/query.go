@@ -20,7 +20,7 @@ func New(db *gorm.DB) forums.ForumDataInterface {
 // Forum
 func (u *ForumData) GetAllForum() ([]forums.Forum, error) {
 	var forums []forums.Forum
-	if err := u.DB.Preload("Author").Find(&forums).Error; err != nil {
+	if err := u.DB.Preload("User").Find(&forums).Error; err != nil {
 		return nil, err
 	}
 	return forums, nil
@@ -28,7 +28,7 @@ func (u *ForumData) GetAllForum() ([]forums.Forum, error) {
 
 func (u *ForumData) GetForumByID(ID string) (forums.Forum, error) {
 	var forum forums.Forum
-	if err := u.DB.Preload("Author").Where("id = ?", ID).First(&forum).Error; err != nil {
+	if err := u.DB.Preload("User").Where("id = ?", ID).First(&forum).Error; err != nil {
 		return forums.Forum{}, err
 	}
 	return forum, nil
@@ -63,6 +63,14 @@ func (u *ForumData) DeleteForum(forum forums.Forum) error {
 		return constant.ErrForumNotFound
 	}
 	return nil
+}
+
+func (u *ForumData) GetForumByUserID(ID string) (forums.Forum, error) {
+	var forum forums.Forum
+	if err := u.DB.Where("user_id = ?", ID).First(&forum).Error; err != nil {
+		return forums.Forum{}, err
+	}
+	return forum, nil
 }
 
 // Message
