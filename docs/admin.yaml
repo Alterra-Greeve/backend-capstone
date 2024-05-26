@@ -2193,6 +2193,47 @@ paths:
                   message: Id Forum Not Found
                   data: null
   /admin/impact:
+    get:
+      tags:
+        - data impact
+      summary: Get All Data Impact By Admin
+      description: Admin dapat melihat semua data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getAllDataImpact
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        impact_poin:
+                          type: integer
+                        icon_url:
+                          type: string
+                example:
+                  status: true
+                  message: Get All Data Impact Success
+                  data: 
+                    - id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      name: Name
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
     post:
       tags:
         - data impact
@@ -2209,13 +2250,13 @@ paths:
               properties:
                 name: 
                   type: string
-                impact_poin: 
+                impact_point: 
                   type: integer
                 icon_url: 
                   type: string
               example:
-                name: Name
-                impact_poin: 100
+                name: Eco Friendly
+                impact_point: 100
                 icon_url: https://example.com/images/item3.jpg
       responses:
         "200":
@@ -2268,6 +2309,52 @@ paths:
                   message: Unauthorized
                   data: null
   /admin/impact/{impact_id}:
+    get:
+      tags:
+        - data impact
+      summary: Get Data Impact By Admin
+      description: Admin dapat melihat detail data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      impact_poin:
+                        type: integer
+                      icon_url:
+                        type: string
+                example:
+                  status: true
+                  message: Get Data Impact Success
+                  data: 
+                    id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                    name: Name
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
     put:
       tags:
         - data impact
@@ -2282,7 +2369,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 001
+          example: e965bc1d-9bfa-4512-8e28-64a101201d9d
       requestBody:
         content:
           application/json:
@@ -2296,8 +2383,8 @@ paths:
                 icon_url: 
                   type: string
               example:
-                name: Name
-                impact_poin: 100
+                name: Very Green
+                impact_point: 100
                 icon_url: https://example.com/images/item3.jpg
       responses:
         "200":
@@ -2378,7 +2465,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 001
+          example: e965bc1d-9bfa-4512-8e28-64a101201d9d
       responses:
         "200":
           description: OK

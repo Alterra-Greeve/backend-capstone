@@ -6,6 +6,7 @@ import (
 	"backendgreeve/helper"
 	"net/http"
 
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -114,8 +115,8 @@ func (h *ImpactCategoryHandler) Create() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
-
 		impact := impactcategory.ImpactCategory{
+			ID:          uuid.New().String(),
 			Name:        impactRequest.Name,
 			ImpactPoint: impactRequest.ImpactPoint,
 			IconURL:     impactRequest.IconURL,
