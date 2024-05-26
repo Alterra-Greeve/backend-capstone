@@ -21,3 +21,9 @@ const ImpactCategorySuccessCreate = "Successfull Create Impact Category"
 const ImpactCategorySuccessGet = "Successfull Get Impact Category"
 const ImpactCategorySuccessUpdate = "Successfull Update Impact Category"
 const ImpactCategorySuccessDelete = "Successfull Delete Impact Category"
+
+// Product Success Message
+const ProductSuccessCreate = "Successfull Create Product"
+const ProductSuccessGet = "Successfull Get Product"
+const ProductSuccessUpdate = "Successfull Update Product"
+const ProductSuccessDelete = "Successfull Delete Product"

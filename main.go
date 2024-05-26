@@ -14,6 +14,10 @@ import (
 	AdminHandler "backendgreeve/features/admin/handler"
 	AdminService "backendgreeve/features/admin/service"
 
+	ProductData "backendgreeve/features/product/data"
+	ProductHandler "backendgreeve/features/product/handler"
+	ProductService "backendgreeve/features/product/service"
+
 	ImpactCategoryData "backendgreeve/features/impactcategory/data"
 	ImpactCategoryHandler "backendgreeve/features/impactcategory/handler"
 	ImpactCategoryService "backendgreeve/features/impactcategory/service"
@@ -22,8 +26,10 @@ import (
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
 	"backendgreeve/utils/database"
+	"backendgreeve/utils/database/seeds"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/sirupsen/logrus"
 )
 
@@ -34,6 +40,13 @@ func main() {
 		logrus.Error("terjadi kesalahan pada database, error:", err.Error())
 	}
 	database.Migrate(db)
+
+	for _, seed := range seeds.Seeds() {
+		if err := seed.Run(db); err != nil {
+			logrus.Error("terjadi kesalahan pada seed "+seed.Name+", error:", err.Error())
+		}
+	}
+
 	mailer := helper.NewMailer(cfg.SMTP)
 	jwt := helper.NewJWT(cfg.JWT_Secret)
 	bucket, _ := bucket.New(cfg.PROJECT_ID, cfg.BUCKET_NAME)
@@ -44,6 +57,11 @@ func main() {
 	})
 	e.Static("/assets", "assets")
 	e.Static("/docs", "docs")
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
+	}))
 
 	userData := UserData.New(db)
 	userService := UserService.New(userData, jwt, mailer)
@@ -57,6 +75,10 @@ func main() {
 	adminService := AdminService.New(adminData, jwt, mailer)
 	adminHandler := AdminHandler.New(adminService, jwt)
 
+	productData := ProductData.New(db)
+	productService := ProductService.New(productData)
+	productHandler := ProductHandler.New(productService, jwt)
+
 	impactCategoryData := ImpactCategoryData.New(db)
 	impactCategoryService := ImpactCategoryService.New(impactCategoryData)
 	impactCategoryHandler := ImpactCategoryHandler.New(impactCategoryService, jwt)
@@ -65,6 +87,7 @@ func main() {
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
+	routes.RouteProduct(e, productHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }

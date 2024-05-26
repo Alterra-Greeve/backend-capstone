@@ -704,53 +704,89 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
                 example:
                   status: true
-                  message: Get Products Success
+                  message: Product fetched successfully
                   data: 
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      name: Product 1
-                      description: Product 1 description
-                      price: 10000
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
                       coin: 200
-                      image: 
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-3.jpg
-                      category:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 1
-                          impact_point: 100
-                          icon_url: https://www.example.com/category-1.png
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 2
-                          impact_point: 200
-                          icon_url: https://www.example.com/category-2.png
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      name: Product 1
-                      description: Product 1 description
-                      price: 10000
-                      stock: 100
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
                       coin: 200
-                      image: 
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-3.jpg
-                      category:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 1
-                          impact_point: 100
-                          icon_url: https://www.example.com/category-1.png
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 2
-                          impact_point: 200
-                          icon_url: https://www.example.com/category-2.png
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
         "404":
           description: Not Found
           content:
@@ -766,13 +802,20 @@ paths:
                   status: false
                   message: Products not found
                   data: null
-  /products/{product_id}:
+  /products?page={page}:
     get:
       tags:
         - products
-      summary: Get Products
-      description: User mendapatkan semua products
-      operationId: getProductbyId
+      summary: Get Products by Page
+      description: User mendapatkan semua products dengan pagination
+      operationId: getProductsByPage
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       responses:
         "200":
           description: OK
@@ -787,32 +830,632 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
                 example:
                   status: true
-                  message: Get Products Success
+                  message: Product fetched successfully
                   data: 
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      name: Product 1
-                      description: Product 1 description
-                      price: 10000
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
                       coin: 200
-                      image: 
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/product-3.jpg
-                      category:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 1
-                          impact_point: 100
-                          icon_url: https://www.example.com/category-1.png
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Category 2
-                          impact_point: 200
-                          icon_url: https://www.example.com/category-2.png
-
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/search?name={name}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Name
+      description: User mendapatkan produk berdasarkan nama
+      operationId: getProductsbyName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/search?name={name}&page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Name
+      description: User mendapatkan produk berdasarkan nama
+      operationId: getProductsbyNamebyPage
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/category/{category_name}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Category
+      description: User mendapatkan products berdasarkan kategori
+      operationId: getProductsByCategory
+      parameters:
+        - name: category_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+  /products/category/{category_name}?page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Category
+      description: User mendapatkan products berdasarkan kategori
+      operationId: getProductsByCategoryPage
+      parameters:
+        - name: category_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: number
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+  /products/{product_id}:
+    get:
+      tags:
+        - products
+      summary: Get Products
+      description: User mendapatkan semua products
+      operationId: getProductbyId
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
         "404":
           description: Not Found
           content:
@@ -2451,6 +3094,62 @@ paths:
                   status: false
                   message: Id Message not found
                   data: null
+  /media/upload:
+    post:
+      tags:
+        - utils
+      summary: Upload Image
+      description: User upload media
+      operationId: uploadMedia
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+              example:
+                file: image
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Success Upload Image
+                  data:
+                    image_url: "https://storage.googleapis.com/kzquandary/rubbuddy/90472c83-70a2-47b1-acb4-fb2014e87decsamurai-anime-girl-katana-sci-fi-4k-wallpaper-uhdpaper.com-221@3@a.jpg"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Upload Image Failed
+                  data: []
 components:
   securitySchemes:
     bearerAuth:

@@ -80,7 +80,7 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrAdminEmailUsernameAlreadyExist:
 		return http.StatusConflict
 	case constant.ErrEmptyEmailandPasswordAdmin:
-
+		return http.StatusBadRequest
 
 	// Impact Category Error
 	case constant.ErrImpactCategoryNotFound:
@@ -95,6 +95,42 @@ func ConvertResponseCode(err error) int {
 		return http.StatusBadRequest
 	case constant.ErrImpactCategoryFieldUpdate:
 		return http.StatusBadRequest
+
+	// Product Error
+	case constant.ErrProductNotFound:
+		return http.StatusNotFound
+	case constant.ErrCreateProduct:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateProduct:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteProduct:
+		return http.StatusInternalServerError
+	case constant.ErrProductField:
+		return http.StatusBadRequest
+	case constant.ErrProductFieldUpdate:
+		return http.StatusBadRequest
+	case constant.ErrProductNameEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductDescriptionEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductCoinEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductPriceEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductImagesEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductImpactCategoriesEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductIDEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductUpdateEmpty:
+		return http.StatusBadRequest
+	case constant.ErrProductDelete:
+		return http.StatusInternalServerError
+	case constant.ErrGetProduct:
+		return http.StatusInternalServerError
+	case constant.ErrProductEmpty:
+		return http.StatusNotFound
 	// Default
 	default:
 		return http.StatusInternalServerError
