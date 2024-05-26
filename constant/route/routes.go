@@ -33,3 +33,8 @@ const AdminDelete = AdminPath + "/delete"
 // Impact Category Path
 const ImpactCategoryPath = AdminPath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"
+
+// Product Path
+const ProductPath = BasePath + "/products"
+const ProductByID = ProductPath + "/:id"
+const ProductByName = ProductPath + "?name=:name"

@@ -20,7 +20,7 @@ tags:
     description: Operations about admin
   - name: transaction
     description: Operations about admin
-  - name: product
+  - name: products
     description: Operations about admin
   - name: challenge
     description: Operations about admin
@@ -53,8 +53,8 @@ paths:
                 password:
                   type: string
               example:
-                email: users@kzquandary.my.id
-                password: kzquandary
+                email: admin@greeve.store
+                password: admin
       responses:
         "200":
           description: OK
@@ -94,21 +94,6 @@ paths:
                   status: false
                   message: Email and password cannot be empty
                   data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Invalid email or password
-                  data: null
   /admin:
     get:
       tags:
@@ -136,12 +121,10 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                    - id: 422344
-                      name: Kaze User
-                      email: user@kzquandary.my.id
-                      address: Cimahi
-                      gender: Laki-laki
-                      balance: 50000
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      name: Admin Greeve
+                      email: admin@greeve.store
+                      username: admin
         "401":
           description: Unauthorized
           content:
@@ -152,12 +135,14 @@ paths:
                   message:
                     type: string
                 example:
-                  message: missing or malformed jwt
+                  status: false
+                  message: Unauthorized
+                  data: null
     put:
       tags:
         - admin
       summary: Update Admin
-      description: Admin melakukan update profile admin, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin melakukan update profile admin kecuali email dan username yang sudah diambil admin lain, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -198,12 +183,44 @@ paths:
                   data:
                     type: array
                 example:
-                  id: 422344
-                  name: Kaze User
-                  email: users@kzquandary.my.id
-                  address: Cimahi
-                  gender: Laki-laki
-
+                  status: true
+                  message: Update Success
+                  data:   
+                      id: 422344
+                      name: Kaze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Email or Username already taken by another admin
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
   /admin/users:
     get: 
       tags: 
@@ -260,6 +277,13 @@ paths:
       operationId: getUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       requestBody:
         content:
           application/json:
@@ -322,7 +346,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Not Found
+                  message: id user Not Found
                   data: null
     put: 
       tags:
@@ -332,6 +356,13 @@ paths:
       operationId: updateUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       requestBody:
         content:
           application/json:
@@ -395,6 +426,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request data
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -408,7 +440,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -422,7 +455,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Not Found
+                  message: Id user Not Found
+                  data: null
     delete: 
       tags:
         - user
@@ -431,6 +465,13 @@ paths:
       operationId: deleteUser
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
       responses:
         "200":
           description: OK
@@ -462,7 +503,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -477,7 +519,7 @@ paths:
                     nullable: true
                 example:
                   status: false
-                  message: User Id Not Found
+                  message: Id User Not Found
                   data: null
   /transactions:
     get: 
@@ -546,10 +588,17 @@ paths:
       tags:
         - transaction
       summary: Get Transaction Data By ID
-      description: Admin mendapatkan semua data transaction, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin mendapatkan data transaction sesuai id yang dicari, untuk menggunakan route ini harus menggunakan token admin
       operationId: getTransactionbyID
       security:
         - bearerAuth: []
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       responses:
         "200":
           description: OK
@@ -601,6 +650,13 @@ paths:
       operationId: updateTransaction
       security:
         - bearerAuth: []
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       requestBody:
         content:
           application/json:
@@ -653,6 +709,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -666,7 +723,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -680,11 +738,12 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Transaction Not Found
-  /product:
+                  message: Id Transaction Not Found
+                  data: null
+  /products:
     get: 
       tags:
-        - product
+        - products
       summary: Get All Product Data
       description: Users dan Admin mendapatkan semua data product
       operationId: getAllProduct
@@ -704,20 +763,89 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
                 example:
                   status: true
-                  message: Get Data Product Success
+                  message: Product fetched successfully
                   data: 
-                    - id: 011
-                      name: product 1
-                      price: 100000
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
                       description: product
-                      image_url: https://example.com/images/water-bottle.jpg
-                    - id: 012
-                      name: product 2
-                      price: 50000
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
                       description: product
-                      image_url: https://example.com/images/water-bottle2.jpg
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
         "404":
           description: Not Found
           content:
@@ -735,7 +863,7 @@ paths:
                   data: null
     post:
       tags:
-        - product
+        - products
       summary: Add Product Data
       description: Users dan Admin dapat menambahkan data product
       operationId: addProduct
@@ -767,7 +895,9 @@ paths:
                   category:
                     - e965bc1d-9bfa-4512-8e28-64a101201d9d
                     - e965bc1d-9bfa-4512-8e28-64a101201d9e
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9f
                   image_url: 
+                  - https://example.com/images/water-bottle3.jpg
                   - https://example.com/images/water-bottle3.jpg
                   - https://example.com/images/water-bottle3.jpg
       responses:
@@ -787,8 +917,7 @@ paths:
                 example:
                   status: true
                   message: Add Data Product Success
-                  data: null 
-                      
+                  data: null            
         "400":
           description: Bad Request
           content:
@@ -803,6 +932,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -816,29 +946,711 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
-  /admin/product/{product_id}:
+                  message: Unauthorized
+                  data: null
+  /products/{product_id}:
+    get: 
+      tags:
+        - products
+      summary: Get Product Data By ID
+      description: Users dan Admin mendapatkan data product sesuai id yang dicari
+      operationId: getProductbyID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+  /products?page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Page
+      description: User mendapatkan semua products dengan pagination
+      operationId: getProductsByPage
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/search?name={name}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Name
+      description: User mendapatkan produk berdasarkan nama
+      operationId: getProductsbyName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/search?name={name}&page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Name
+      description: User mendapatkan produk berdasarkan nama
+      operationId: getProductsbyNamebyPage
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/category/{category_name}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Category
+      description: User mendapatkan products berdasarkan kategori
+      operationId: getProductsByCategory
+      parameters:
+        - name: category_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+  /products/category/{category_name}?page={page}:
+    get:
+      tags:
+        - products
+      summary: Get Products by Category
+      description: User mendapatkan products berdasarkan kategori
+      operationId: getProductsByCategoryPage
+      parameters:
+        - name: category_name
+          in: path
+          required: true
+          schema:
+            type: string
+          example: product
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: number
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data: 
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category: 
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                      images: 
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+  /admin/products/{product_id}:
     put: 
       tags:
-        - product
+        - products
       summary: Update Data Product By Admin
-      description: Admin dapat melakukan update data product, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin dapat melakukan update data product, ini agak susah wkwkwk, konsep update nya sama kayak di create, karena di FE nya kan pasti gatau mana yang di update mana yang ngga, jadi nanti kirim lagi aja semua payload nya wkwkwk.
       operationId: updateProduct
       security:
         - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                status:
+                name:
                   type: string
+                price:
+                  type: number
+                description:
+                  type: string
+                stock:
+                  type: number
+                category:
+                  type: array
+                image_url:
+                  type: array
               example:
                   name: product 3
+                  description: product
+                  coin: 200
                   price: 30000
-                  description: product keren
-                  image_url: https://example.com/images/item3.jpg
+                  category:
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9d
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9e
+                    - e965bc1d-9bfa-4512-8e28-64a101201d9f
+                  image_url: 
+                  - https://example.com/images/water-bottle3.jpg
+                  - https://example.com/images/water-bottle3.jpg
+                  - https://example.com/images/water-bottle3.jpg
       responses:
         "200":
           description: OK
@@ -876,6 +1688,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -889,7 +1702,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -903,16 +1717,23 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Product Not Found
+                  message: Id Product Not Found
                   data: null
     delete:
       tags:
-        - product
+        - products
       summary: Delete Data Product By Admin
       description: Admin dapat menghapus data product, untuk menggunakan route ini harus menggunakan token admin
       operationId: deleteProduct
       security:
         - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
@@ -942,7 +1763,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -956,13 +1778,14 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Product Not Found
+                  message: Id Product Not Found
+                  data: null
   /admin/challenge:
     post:
       tags:
         - challenge
       summary: Add Challenge
-      description: Admin dapat menambahkan data challenge
+      description: Admin dapat menambahkan data challenge, untuk menggunakan route ini harus menggunakan token admin
       operationId: addChallenge
       security:
         - bearerAuth: []
@@ -1040,6 +1863,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1054,6 +1878,7 @@ paths:
                 example:
                   status: false
                   message: missing or malformed jwt
+                  data: null
     put:
       tags:
         - challenge
@@ -1110,6 +1935,7 @@ paths:
                 example:
                   status: false
                   message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1123,7 +1949,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1137,16 +1964,24 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Challenge Not Found
+                  message: Id Challenge Not Found
+                  data: null
   /admin/challenge/{challenge_id}:
     put: 
       tags:
         - challenge
       summary: Update Confirmation Challenge By Admin
-      description: Admin dapat melakukan update status terhadap Confirmation status dari challenge, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin dapat melakukan update status terhadap Confirmation status oleh user dari challenge, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateConfirmationChallenge
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
       requestBody:
         content:
           application/json:
@@ -1189,6 +2024,51 @@ paths:
                       image_url: https://example.com/images/item3.jpg
                       date_upload: 2024-10-12
                       status: true
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Challenge Not Found
+                  data: null
     delete:
       tags:
         - challenge
@@ -1197,6 +2077,13 @@ paths:
       operationId: deleteChallenge
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
       responses:
         "200":
           description: OK
@@ -1226,7 +2113,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1240,7 +2128,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Challenge Not Found
+                  message: Id Challenge Not Found
                   data: null
   /admin/forum/{forum_id}:
     delete:
@@ -1251,6 +2139,13 @@ paths:
       operationId: deleteForum
       security:
         - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: d709b293-572c-40a6-b254-06ae4965f546
       responses:
         "200":
           description: OK
@@ -1280,7 +2175,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1294,7 +2190,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Forum Not Found
+                  message: Id Forum Not Found
                   data: null
   /admin/impact:
     post:
@@ -1341,6 +2237,21 @@ paths:
                     name: Name
                     impact_poin: 100
                     icon_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1354,13 +2265,172 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt                               
+                  message: Unauthorized
+                  data: null
+  /admin/impact/{impact_id}:
+    put:
+      tags:
+        - data impact
+      summary: Update Data Impact By Admin
+      description: Admin dapat mengupdate data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                impact_poin: 
+                  type: integer
+                icon_url: 
+                  type: string
+              example:
+                name: Name
+                impact_poin: 100
+                icon_url: https://example.com/images/item3.jpg
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Data Impact Success
+                  data: 
+                    id: 001
+                    name: Name
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Invalid Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
+    delete:
+      tags: 
+        - data impact
+      summary: Delete Data Impact By Admin
+      description: Admin dapat menghapus data di impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 001
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Impact Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Impact Not Found
+                  data: null
   /admin/voucher:
     post:
       tags:
         - voucher
       summary: Add Data Voucher By Admin 
-      description: Admin dapat menambahkan data voucher, untuk menggunakan route ini harus menggunakan token admin
+      description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
       operationId: addDataVoucher
       security:
         - bearerAuth: []
@@ -1420,7 +2490,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
   /admin/voucher/{id}:
     delete:
       tags:
@@ -1430,6 +2501,13 @@ paths:
       operationId: deleteDataVoucher
       security:
         - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
       responses:
         "200":
           description: OK
@@ -1459,7 +2537,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: missing or malformed jwt
+                  message: Unauthorized
+                  data: null
         "404":  
           description: Not Found
           content:
@@ -1473,8 +2552,64 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: ID Voucher Not Found
+                  message: Id Voucher Not Found
                   data: null
+  /media/upload:
+    post:
+      tags:
+        - utils
+      summary: Upload Image
+      description: User upload media
+      operationId: uploadMedia
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+              example:
+                file: image
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Success Upload Image
+                  data:
+                    image_url: "https://storage.googleapis.com/kzquandary/rubbuddy/90472c83-70a2-47b1-acb4-fb2014e87decsamurai-anime-girl-katana-sci-fi-4k-wallpaper-uhdpaper.com-221@3@a.jpg"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Upload Image Failed
+                  data: []
 components:
   securitySchemes:
     bearerAuth:

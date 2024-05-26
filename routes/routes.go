@@ -6,6 +6,7 @@ import (
 	"backendgreeve/features/admin"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
+	"backendgreeve/features/product"
 	"backendgreeve/features/users"
 	MidtransWebhook "backendgreeve/features/webhook"
 	"backendgreeve/helper"
@@ -47,6 +48,20 @@ func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveC
 	e.DELETE(route.AdminPath, ah.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
+func RouteProduct(e *echo.Echo, ph product.ProductHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST("/api/v1/products", ph.Create())
+	e.GET("/api/v1/products", ph.Get(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/search", ph.GetByName(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/category/:category_name", ph.GetByCategory(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/:id", ph.GetById(), echojwt.WithConfig(jwtConfig))
+	e.PUT("/api/v1/admin/products/:id", ph.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE("/api/v1/admin/products/:id", ph.Delete(), echojwt.WithConfig(jwtConfig))
+}
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
 		SigningKey:   []byte(cfg.JWT_Secret),
