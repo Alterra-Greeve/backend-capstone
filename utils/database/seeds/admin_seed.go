@@ -12,11 +12,14 @@ func CreateAdminLogin(db *gorm.DB, id string, name string, password string, emai
 	if err != nil {
 		return err
 	}
-	return db.Save(&admin.Admin{
+
+	adminRecord := admin.Admin{
 		ID:       id,
 		Name:     name,
 		Password: hashedPassword,
 		Email:    email,
 		Username: username,
-	}).Error
+	}
+
+	return db.Where("id = ?", id).FirstOrCreate(&adminRecord).Error
 }
