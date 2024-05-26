@@ -1,8 +1,6 @@
 package impactcategory
 
 import (
-	"time"
-
 	"github.com/labstack/echo/v4"
 )
 
@@ -11,8 +9,6 @@ type ImpactCategory struct {
 	Name        string
 	ImpactPoint int
 	IconURL     string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
 }
 
 type ImpactCategoryUpdate struct {
@@ -20,7 +16,6 @@ type ImpactCategoryUpdate struct {
 	Name        string
 	ImpactPoint int
 	IconURL     string
-	UpdatedAt   time.Time
 }
 
 type ImpactCategoryHandlerInterface interface {

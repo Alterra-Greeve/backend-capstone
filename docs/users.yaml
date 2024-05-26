@@ -32,7 +32,7 @@ paths:
       tags:
         - users
       summary: Register User
-      description: User melakukan register menggunakan email dan username, dan mendapatkan response token
+      description: User register, setiap field harus terisi, kalo kosong response nya bad request
       operationId: register
       requestBody:
         content:
@@ -66,15 +66,15 @@ paths:
                 phone:
                   type: string
               example:
-                name: Kaze User
-                email: users@kzquandary.my.id
+                name: Kzquandary
+                email: kzquandary@gmail.com
                 username: kzquandary
                 password: kzquandary
-                address: jalan raya cimahi
+                address: Jl. Achmad Yani, Cimahi, Jawa Barat
                 gender: Laki-laki
                 phone: '089123456789'
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
@@ -105,10 +105,17 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Email and password cannot be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: <Field> cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "409":
           description: Conflict
           content:
@@ -120,18 +127,27 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  errorType:
+                    type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: User already exists
-                  data: null
+              examples:
+                Email Exist:
+                  value:
+                    status: false
+                    message: Email already exists
+                    data: null
+                Username Exist:
+                  value:
+                    status: false
+                    message: Username already exists
+                    data: null
   /user/login:
     post:
       tags:
         - users
       summary: Login User
-      description: User melakukan login menggunakan email dan username, dan mendapatkan response token
+      description: User melakukan login menggunakan email dan password, dan mendapatkan response token
       operationId: login
       requestBody:
         content:
@@ -147,7 +163,7 @@ paths:
                 password:
                   type: string
               example:
-                email: users@kzquandary.my.id
+                email: kzquandary@gmail.com
                 password: kzquandary
       responses:
         "200":
@@ -170,7 +186,7 @@ paths:
                 status: true
                 message: Login Success
                 data:
-                  - token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
         "400":
           description: Bad Request
           content:
@@ -184,9 +200,46 @@ paths:
                     type: string
                   data:
                     type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Email or Password cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Incorrect Password:
+                  value:
+                    status: false
+                    message: Incorrect password
+                    data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
                 example:
                   status: false
-                  message: Email and password cannot be empty
+                  message: User not found
                   data: null
   /user:
     get:
@@ -257,7 +310,8 @@ paths:
       tags:
         - users
       summary: Update User
-      description: User melakukan update profile user, untuk menggunakan route ini harus menggunakan token user
+      description: User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
+                   untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -287,10 +341,13 @@ paths:
                 avatar_url:
                   type: string
               example:
-                name: Kaze User
-                address: Cimahi
+                email: kzquandary@gmail.com
+                username: kzquandary
+                password: 'kzquandary'
+                name: Kzquandary Update
+                address: Cisurupan, Garut, Jawa Barat
                 gender: Laki-laki
-                phone: '0891111111'
+                phone: '089662966699'
                 avatar_url: https://www.example.com/avatar.jpg
       responses:
         "200":
@@ -308,13 +365,29 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Update User Success
+                  message: Update Account Success
                   data:
-                  - id: 422344
-                    name: Kaze User
-                    email: users@kzquandary.my.id
-                    address: Cimahi
-                    gender: Laki-laki
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: One or more fields for update cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -327,6 +400,21 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: User not found
                   data: null
         "409":
           description: Conflict
@@ -341,7 +429,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: User already exists
+                  message: Email or Username already exist
                   data: null
     delete:
       tags:
@@ -426,18 +514,42 @@ paths:
                   message:
                     type: string
                   data:
-                    type: array
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      address:
+                        type: string
+                      gender:
+                        type: string
+                      phone:
+                        type: string
+                      coin:
+                        type: integer
+                      exp:
+                        type: integer
+                      avatar_url:
+                        type: string
                 example:
                   status: true
-                  message: Get User by Username Success
+                  message: Get User Success
                   data:
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      username: kzquandary
-                      name: Kaze User
-                      email: user@kzquandary.my.id
-                      gender: Laki-laki
-                      exp: 50000
-                      avatar_url: https://www.example.com/avatar.jpg
+                      id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
+                      username: "kzquandary"
+                      name: "Kaze User"
+                      email: "users@kzquandary.my.id"
+                      address: "jalan raya cimahi"
+                      gender: "Laki-laki"
+                      phone: "089123456789"
+                      coin: 0
+                      exp: 0
+                      avatar_url: ""
         "401":
           description: Unauthorized
           content:
@@ -464,7 +576,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id User not found
+                  message: User not found
                   data: null
   /user/forgot-password:
     post:
@@ -484,10 +596,10 @@ paths:
                 email:
                   type: string
               example:
-                email: users@kzquandary.my.id
+                email: kzquandary@gmail.com
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -501,7 +613,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: OTP Sent to your email
+                  message: Code has been sent to your email
                   data: null
         "400":
           description: Bad Request
@@ -514,10 +626,17 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Email and password cannot be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Email cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "404":
           description: Not Found
           content:
@@ -553,7 +672,7 @@ paths:
                 otp:
                   type: string
               example:
-                email: users@kzquandary.my.id
+                email: kzquandary@gmail.com
                 otp: "123456"
       responses:
         "200":
@@ -584,10 +703,22 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: OTP is invalid
-                  data: null
+              examples:
+                Not Valid:
+                  value:
+                    status: false
+                    message: OTP not valid
+                    data: null
+                Expired:
+                  value:
+                    status: false
+                    message: OTP expired
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "404":
           description: Not Found
           content:
@@ -608,7 +739,7 @@ paths:
       tags:
         - users
       summary: Reset Password
-      description: User melakukan reset password, untuk menggunakan route ini harus menggunakan token user
+      description: Reset password perlu email + OTP buat verifkasi nya
       operationId: resetPassword
       requestBody:
         content:
@@ -619,7 +750,7 @@ paths:
                 - email
                 - otp
                 - password
-                - confirmPassword
+                - confirm_password
               properties:
                 email:
                   type: string
@@ -627,13 +758,13 @@ paths:
                   type: string
                 password:
                   type: string
-                confirmPassword:
+                confirm_password:
                   type: string
               example:
-                email: users@kzquandary.my.id
-                otp: 123456
+                email: kzquandary@gmail.com
+                otp: "123456"
                 password: kzquandary
-                confirmPassword: kzquandary
+                confirm_password: kzquandary
       responses:
         "200":
           description: OK
@@ -682,7 +813,6 @@ paths:
                   status: false
                   message: Email not found
                   data: null
-
   /products:
     get:
       tags:

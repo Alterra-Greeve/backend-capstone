@@ -9,6 +9,9 @@ import (
 
 func ConvertResponseCode(err error) int {
 	switch err {
+	// General Error
+	case constant.BadRequest:
+		return http.StatusBadRequest
 
 	// Users Error
 	case constant.UserNotFound:
@@ -166,14 +169,11 @@ func ConvertResponseCode(err error) int {
 		return http.StatusInternalServerError
 	}
 }
-
 func HandleEchoError(err error) (int, string) {
-	switch e := err.(type) {
-	case *echo.HTTPError:
-		return ConvertResponseCode(e), e.Message.(string)
-	default:
-		return ConvertResponseCode(err), err.Error()
+	if _, ok := err.(*echo.HTTPError); ok {
+		return http.StatusBadRequest, constant.BadInput
 	}
+	return http.StatusBadRequest, constant.BadInput
 }
 
 func UnauthorizedError(c echo.Context) error {

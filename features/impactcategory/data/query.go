@@ -3,9 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/impactcategory"
-	"time"
 
-	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -21,7 +19,7 @@ func New(db *gorm.DB) impactcategory.ImpactCategoryDataInterface {
 
 func (icd *ImpactCategoryData) GetAll() ([]impactcategory.ImpactCategory, error) {
 	var categories []impactcategory.ImpactCategory
-	err := icd.db.Find(&categories).Error
+	err := icd.db.Model(&ImpactCategory{}).Find(&categories).Error
 	if err != nil {
 		return nil, constant.ErrImpactCategoryNotFound
 	}
@@ -38,10 +36,13 @@ func (icd *ImpactCategoryData) GetByID(ID string) (impactcategory.ImpactCategory
 }
 
 func (icd *ImpactCategoryData) Create(category impactcategory.ImpactCategory) error {
-	category.ID = uuid.New().String()
-	category.CreatedAt = time.Now()
-	category.UpdatedAt = time.Now()
-	err := icd.db.Create(&category).Error
+	impactData := ImpactCategory{
+		ID:          category.ID,
+		Name:        category.Name,
+		ImpactPoint: category.ImpactPoint,
+		IconURL:     category.IconURL,
+	}
+	err := icd.db.Create(&impactData).Error
 	if err != nil {
 		return constant.ErrCreateImpactCategory
 	}
@@ -49,7 +50,7 @@ func (icd *ImpactCategoryData) Create(category impactcategory.ImpactCategory) er
 }
 
 func (icd *ImpactCategoryData) Update(category impactcategory.ImpactCategoryUpdate) error {
-	err := icd.db.Table("impact_categories").Where("id = ?", category.ID).Updates(category).Error
+	err := icd.db.Model(&ImpactCategory{}).Where("id = ?", category.ID).Updates(category).Error
 	if err != nil {
 		return constant.ErrUpdateImpactCategory
 	}
@@ -57,7 +58,7 @@ func (icd *ImpactCategoryData) Update(category impactcategory.ImpactCategoryUpda
 }
 
 func (icd *ImpactCategoryData) Delete(category impactcategory.ImpactCategory) error {
-	result := icd.db.Table("impact_categories").Delete(&category)
+	result := icd.db.Where("id = ?", category.ID).Delete(&ImpactCategory{})
 	if result.Error != nil {
 		return constant.ErrDeleteImpactCategory
 	}
