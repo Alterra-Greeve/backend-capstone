@@ -9,9 +9,9 @@ import (
 type Product struct {
 	*gorm.Model
 	ID               string                  `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	Name             string                  `gorm:"type:varchar(255);not null;column:name"`
+	Name             string                  `gorm:"type:varchar(255);not null;column:name;index:,class:FULLTEXT,option:WITH PARSER ngram VISIBLE"`
 	Description      string                  `gorm:"type:varchar(255);column:description"`
-	Price            float64                 `gorm:"type:int;not null;column:price"`
+	Price            float64                 `gorm:"type:float;not null;column:price"`
 	Coin             int                     `gorm:"type:int;not null;column:coin"`
 	Images           []ProductImage          `gorm:"foreignKey:ProductID"`
 	ImpactCategories []ProductImpactCategory `gorm:"foreignKey:ProductID"`

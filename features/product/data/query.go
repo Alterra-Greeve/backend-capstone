@@ -1,6 +1,7 @@
 package data
 
 import (
+	"backendgreeve/constant"
 	"backendgreeve/features/product"
 
 	"gorm.io/gorm"
@@ -18,51 +19,167 @@ func New(db *gorm.DB) product.ProductDataInterface {
 
 func (pd *ProductData) Get() ([]product.Product, error) {
 	var products []product.Product
-	tx := pd.DB.Preload("Images").Preload("ImpactCategories").Find(&products)
+	// TODO GET SOFT DELETE
+	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Find(&products).Where("deleted_at IS NULL")
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
 	return products, nil
 }
 
+func (pd *ProductData) GetByPage(page int) ([]product.Product, int, error) {
+	var products []product.Product
+
+	var totalProducts int64
+	countTx := pd.DB.Model(&product.Product{}).Count(&totalProducts)
+	if countTx.Error != nil {
+		return nil, 0, countTx.Error
+	}
+
+	productsPerPage := 20
+	totalPages := int((totalProducts + int64(productsPerPage) - 1) / int64(productsPerPage))
+
+	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").
+		Offset((page - 1) * productsPerPage).Limit(productsPerPage).Find(&products)
+	if tx.Error != nil {
+		return nil, 0, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return nil, 0, constant.ErrProductNotFound
+	}
+	return products, totalPages, nil
+}
+
 func (pd *ProductData) GetById(id string) (product.Product, error) {
 	var products product.Product
-	tx := pd.DB.Preload("Images").Preload("ImpactCategories").Find(&products, "id = ?", id)
+	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Find(&products, "id = ?", id)
 	if tx.Error != nil {
 		return products, tx.Error
 	}
 	return products, nil
 }
 
-func (pd *ProductData) GetByCategoryID(categoryID string) ([]product.Product, error) {
+func (pd *ProductData) GetByCategory(categoryName string) ([]product.Product, error) {
 	var products []product.Product
-	tx := pd.DB.Find(&products, "impact_category_id LIKE ?", "%"+categoryID+"%")
-	if tx.Error != nil {
-		return nil, tx.Error
+	err := pd.DB.
+		Joins("JOIN product_impact_categories ON product_impact_categories.product_id = products.id").
+		Joins("JOIN impact_categories ON impact_categories.id = product_impact_categories.impact_category_id").
+		Where("impact_categories.name = ?", categoryName).
+		Find(&products).Error
+	if err != nil {
+		return nil, err
+	}
+	if len(products) == 0 {
+		return nil, constant.ErrProductNotFound
 	}
 	return products, nil
 }
 
 func (pd *ProductData) GetByName(name string) ([]product.Product, error) {
 	var products []product.Product
-	tx := pd.DB.Find(&products, "name LIKE ?", "%"+name+"%")
+	tx := pd.DB.Preload("Images").Preload("ImpactCategories.ImpactCategory").Where("name LIKE ?", "%"+name+"%").Find(&products)
 	if tx.Error != nil {
 		return nil, tx.Error
+	}
+	if len(products) == 0 {
+		return nil, constant.ErrProductNotFound
 	}
 	return products, nil
 }
 
 func (pd *ProductData) Create(product product.Product) error {
-	tx := pd.DB.Create(product)
+	productQuery := Product{
+		ID:          product.ID,
+		Name:        product.Name,
+		Coin:        product.Coin,
+		Price:       product.Price,
+		Description: product.Description,
+	}
+	for _, image := range product.Images {
+		productQuery.Images = append(productQuery.Images, ProductImage{
+			ID:        image.ID,
+			ProductID: productQuery.ID,
+			ImageURL:  image.ImageURL,
+			Position:  image.Position,
+		})
+	}
+
+	for _, impactCategory := range product.ImpactCategories {
+		productQuery.ImpactCategories = append(productQuery.ImpactCategories, ProductImpactCategory{
+			ID:               impactCategory.ID,
+			ProductID:        productQuery.ID,
+			ImpactCategoryID: impactCategory.ImpactCategoryID,
+		})
+	}
+	tx := pd.DB.Create(&productQuery)
 	return tx.Error
 }
 
-func (pd *ProductData) Update(product product.Product) error {
-	tx := pd.DB.Model(product).Where("id = ?", product.ID).Updates(product)
+func (pd *ProductData) Update(products product.Product) error {
+	productQuery := Product{
+		ID:          products.ID,
+		Name:        products.Name,
+		Coin:        products.Coin,
+		Price:       products.Price,
+		Description: products.Description,
+	}
+
+	for _, image := range products.Images {
+		productQuery.Images = append(productQuery.Images, ProductImage{
+			ID:        image.ID,
+			ProductID: productQuery.ID,
+			ImageURL:  image.ImageURL,
+			Position:  image.Position,
+		})
+	}
+
+	for _, impactCategory := range products.ImpactCategories {
+		productQuery.ImpactCategories = append(productQuery.ImpactCategories, ProductImpactCategory{
+			ID:               impactCategory.ID,
+			ProductID:        productQuery.ID,
+			ImpactCategoryID: impactCategory.ImpactCategoryID,
+		})
+	}
+
+	tx := pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImage{})
+	if tx.Error != nil {
+		return tx.Error
+	}
+	tx = pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImpactCategory{})
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	tx = pd.DB.Model(&productQuery).Omit("CreatedAt").Where("id = ?", productQuery.ID).Save(&productQuery)
 	return tx.Error
 }
 
-func (pd *ProductData) Delete(product product.Product) error {
-	tx := pd.DB.Delete(product)
-	return tx.Error
+func (pd *ProductData) Delete(productId string) error {
+	tx := pd.DB.Begin()
+
+	if err := tx.Where("product_id = ?", productId).Delete(&ProductImage{}); err.Error != nil {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	} else if err.RowsAffected == 0 {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	}
+
+	if err := tx.Where("product_id = ?", productId).Delete(&ProductImpactCategory{}); err.Error != nil {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	} else if err.RowsAffected == 0 {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	}
+
+	if err := tx.Where("id = ?", productId).Delete(&Product{}); err.Error != nil {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	} else if err.RowsAffected == 0 {
+		tx.Rollback()
+		return constant.ErrProductNotFound
+	}
+
+	return tx.Commit().Error
 }

@@ -16,19 +16,23 @@ func New(d product.ProductDataInterface) product.ProductServiceInterface {
 }
 
 func (s *ProductService) Get() ([]product.Product, error) {
-    return s.d.Get()
+	return s.d.Get()
+}
+
+func (s *ProductService) GetByPage(page int) ([]product.Product, int, error) {
+	return s.d.GetByPage(page)
 }
 
 func (s *ProductService) GetById(id string) (product.Product, error) {
-    return s.d.GetById(id)
+	return s.d.GetById(id)
 }
 
-func (s *ProductService) GetByCategoryID(categoryID string) ([]product.Product, error) {
-    return s.d.GetByCategoryID(categoryID)
+func (s *ProductService) GetByCategory(category string) ([]product.Product, error) {
+	return s.d.GetByCategory(category)
 }
 
 func (s *ProductService) GetByName(name string) ([]product.Product, error) {
-    return s.d.GetByName(name)
+	return s.d.GetByName(name)
 }
 
 func (s *ProductService) Create(product product.Product) error {
@@ -44,14 +48,20 @@ func (s *ProductService) Create(product product.Product) error {
 	if product.ImpactCategories == nil {
 		return constant.ErrProductImpactCategoriesEmpty
 	}
-    return s.d.Create(product)
+	return s.d.Create(product)
 }
 
 func (s *ProductService) Update(product product.Product) error {
-    return s.d.Update(product)
+	if product.ID == "" {
+		return constant.ErrProductIDEmpty
+	}
+	if product.Name == "" && product.Price == 0 && product.Coin == 0 && product.Images == nil && product.ImpactCategories == nil {
+		return constant.ErrProductUpdateEmpty
+	}
+
+	return s.d.Update(product)
 }
 
-func (s *ProductService) Delete(product product.Product) error {
-    return s.d.Delete(product)
+func (s *ProductService) Delete(productId string) error {
+	return s.d.Delete(productId)
 }
-

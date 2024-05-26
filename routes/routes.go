@@ -55,9 +55,11 @@ func RouteProduct(e *echo.Echo, ph product.ProductHandlerInterface, cfg config.G
 
 	e.POST("/api/v1/products", ph.Create())
 	e.GET("/api/v1/products", ph.Get(), echojwt.WithConfig(jwtConfig))
-	e.GET("/api/v1/product/:id", ph.GetById(), echojwt.WithConfig(jwtConfig))
-	e.PUT("/api/v1/product/:id", ph.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE("/api/v1/product/:id", ph.Delete(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/search", ph.GetByName(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/category/:category_name", ph.GetByCategory(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/:id", ph.GetById(), echojwt.WithConfig(jwtConfig))
+	e.PUT("/api/v1/admin/products/:id", ph.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE("/api/v1/admin/products/:id", ph.Delete(), echojwt.WithConfig(jwtConfig))
 }
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{

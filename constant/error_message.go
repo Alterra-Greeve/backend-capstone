@@ -66,4 +66,6 @@ var ErrProductCoinEmpty = errors.New("Coin cannot be empty")
 var ErrProductPriceEmpty = errors.New("Price cannot be empty")
 var ErrProductImagesEmpty = errors.New("Images cannot be empty")
 var ErrProductImpactCategoriesEmpty = errors.New("Impact Categories cannot be empty")
-
+var ErrProductIDEmpty = errors.New("ID cannot be empty")
+var ErrProductUpdateEmpty = errors.New("One or more fields for update cannot be empty")
+var ErrProductDelete = errors.New("Failed to delete product")

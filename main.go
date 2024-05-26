@@ -28,6 +28,7 @@ import (
 	"backendgreeve/utils/database"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/sirupsen/logrus"
 )
 
@@ -48,6 +49,11 @@ func main() {
 	})
 	e.Static("/assets", "assets")
 	e.Static("/docs", "docs")
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
+	}))
 
 	userData := UserData.New(db)
 	userService := UserService.New(userData, jwt, mailer)
