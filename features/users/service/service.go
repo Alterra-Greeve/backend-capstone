@@ -28,14 +28,8 @@ func (s *UserService) Register(user users.User) error {
 		return constant.ErrEmptyEmailRegister
 	case user.Password == "":
 		return constant.ErrEmptyPasswordRegister
-	case user.Address == "":
-		return constant.ErrEmptyAddressRegister
 	case user.Name == "":
 		return constant.ErrEmptyNameRegister
-	case user.Gender == "":
-		return constant.ErrEmptyGenderRegister
-	case user.Phone == "":
-		return constant.ErrEmptyPhoneRegister
 	}
 
 	hashedPassword, err := helper.HashPassword(user.Password)

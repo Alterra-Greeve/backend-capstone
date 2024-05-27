@@ -42,37 +42,20 @@ paths:
               required:
                 - name
                 - email
-                - username
                 - password
-                - address
-                - gender
-                - phone
               properties:
                 name:
                   type: string
                 email:
                   type: string
-                username:
-                  type: string
                 password:
                   type: string
-                address:
-                  type: string
-                gender:
-                  type: string
-                  enum:
-                    - Laki-laki
-                    - Perempuan
                 phone:
                   type: string
               example:
                 name: Kzquandary
                 email: kzquandary@gmail.com
-                username: kzquandary
                 password: kzquandary
-                address: Jl. Achmad Yani, Cimahi, Jawa Barat
-                gender: Laki-laki
-                phone: '089123456789'
       responses:
         "201":
           description: OK

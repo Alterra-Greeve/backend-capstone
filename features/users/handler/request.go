@@ -3,11 +3,7 @@ package handler
 type UserRegisterRequest struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Username string `json:"username"`
 	Password string `json:"password"`
-	Address  string `json:"address"`
-	Gender   string `json:"gender"`
-	Phone    string `json:"phone"`
 }
 type UserLoginRequest struct {
 	Email    string `json:"email"`

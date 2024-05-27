@@ -9,14 +9,14 @@ import (
 type User struct {
 	*gorm.Model
 	ID        string `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	Name      string `gorm:"type:varchar(255);not null;column:name"`
+	Name      string `gorm:"type:varchar(255);column:name"`
 	Email     string `gorm:"type:varchar(255);not null;column:email;unique"`
-	Username  string `gorm:"type:varchar(255);not null;column:username;unique"`
+	Username  string `gorm:"type:varchar(255);column:username;unique"`
 	Password  string `gorm:"type:varchar(255);not null;column:password"`
-	Address   string `gorm:"type:varchar(255);not null;column:address"`
-	Gender    string `gorm:"type:varchar(255);not null;column:gender"`
-	Phone     string `gorm:"type:varchar(255);not null;column:phone"`
-	Coin      int    `gorm:"type:int;not null;column:coin"`
+	Address   string `gorm:"type:varchar(255);column:address"`
+	Gender    string `gorm:"type:varchar(255);column:gender"`
+	Phone     string `gorm:"type:varchar(255);column:phone"`
+	Coin      int    `gorm:"type:int;not nullcolumn:coin"`
 	Exp       int    `gorm:"type:int;not null;column:exp"`
 	AvatarURL string `gorm:"type:varchar(255);column:avatar_url"`
 }
