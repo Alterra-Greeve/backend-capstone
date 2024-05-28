@@ -2130,12 +2130,12 @@ paths:
                   status: false
                   message: Id Challenge Not Found
                   data: null
-  /admin/forum/{forum_id}:
-    delete:
+  /forums/{forum_id}:
+    delete: 
       tags:
         - forum
-      summary: Delete Data Forum By Admin
-      description: Admin dapat menghapus data forum, untuk menggunakan route ini harus menggunakan token admin
+      summary: Delete Forum
+      description: User dapat menghapus forum yang dibuatnya, alias user lain tidak bisa menghapus
       operationId: deleteForum
       security:
         - bearerAuth: []
@@ -2145,7 +2145,7 @@ paths:
           required: true
           schema:
             type: string
-          example: d709b293-572c-40a6-b254-06ae4965f546
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
@@ -2158,10 +2158,29 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: object
                 example:
                   status: true
-                  message: Delete Data Forum Success
-                  data: null
+                  message: Delete Forum Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot delete forum
+                  data: nil
         "401":
           description: Unauthorized
           content:
@@ -2176,22 +2195,7 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
-                  data: null
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Forum Not Found
-                  data: null
+                  data: nil
   /admin/impact:
     get:
       tags:

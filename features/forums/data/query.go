@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
+	"log"
 
 	"gorm.io/gorm"
 )
@@ -26,9 +27,31 @@ func (u *ForumData) GetAllForum() ([]forums.Forum, error) {
 	return forums, nil
 }
 
+func (u *ForumData) GetAllByPage(page int) ([]forums.Forum, int, error) {
+	var forum []forums.Forum
+
+	var total int64
+	count := u.DB.Model(&forums.Forum{}).Count(&total)
+	if count.Error != nil {
+		return nil, 0, constant.ErrProductEmpty
+	}
+
+	dataforumPerPage := 20
+	totalPages := int((total + int64(dataforumPerPage) - 1) / int64(dataforumPerPage))
+
+	tx := u.DB.Model(&Forum{}).Preload("User").Order("CASE WHEN created_at >= last_message_at THEN created_at ELSE last_message_at END DESC").Offset((page - 1) * dataforumPerPage).Limit(dataforumPerPage).Find(&forum)
+	if tx.Error != nil {
+		return nil, 0, constant.ErrGetForum
+	}
+	if tx.RowsAffected == 0 {
+		return nil, 0, constant.ErrForumNotFound
+	}
+	return forum, totalPages, nil
+}
+
 func (u *ForumData) GetForumByID(ID string) (forums.Forum, error) {
 	var forum forums.Forum
-	if err := u.DB.Preload("User").Where("id = ?", ID).First(&forum).Error; err != nil {
+	if err := u.DB.Model(&Forum{}).Preload("User").Where("id = ?", ID).First(&forum).Error; err != nil {
 		return forums.Forum{}, err
 	}
 	return forum, nil
@@ -53,44 +76,82 @@ func (u *ForumData) UpdateForum(forum forums.EditForum) error {
 	}
 	return nil
 }
-func (u *ForumData) DeleteForum(forum forums.Forum) error {
-	result := u.DB.Table("forums").Delete(&forum)
-	if result.Error != nil {
-		return constant.ErrDeleteForum
-	}
+func (u *ForumData) DeleteForum(forumID string) error {
+	res := u.DB.Begin()
 
-	if result.RowsAffected == 0 {
+	result := res.Where("forum_id = ?", forumID).Delete(&MessageForum{})
+	if result.Error != nil {
+		res.Rollback()
+		return constant.ErrMessgaeNotFound
+	}
+	if err := res.Where("id = ?", forumID).Delete(&Forum{}); err.Error != nil {
+		res.Rollback()
+		log.Print(err)
+		return constant.ErrForumNotFound
+	} else if err.RowsAffected == 0 {
+		res.Rollback()
 		return constant.ErrForumNotFound
 	}
-	return nil
+
+	return res.Commit().Error
 }
 
-func (u *ForumData) GetForumByUserID(ID string) (forums.Forum, error) {
-	var forum forums.Forum
-	if err := u.DB.Where("user_id = ?", ID).First(&forum).Error; err != nil {
-		return forums.Forum{}, err
+func (u *ForumData) GetForumByUserID(userID string, page int) ([]forums.Forum, int, error) {
+	var forums []forums.Forum
+	var total int64
+
+	dataforumPerPage := 20
+	countResult := u.DB.Model(&Forum{}).Where("user_id = ?", userID).Count(&total)
+	if countResult.Error != nil {
+		return nil, 0, constant.ErrForumNotFound
 	}
-	return forum, nil
+
+	if total == 0 {
+		return nil, 0, constant.ErrForumNotFound
+	}
+
+	totalPages := int((total + int64(dataforumPerPage) - 1) / int64(dataforumPerPage))
+	tx := u.DB.Model(&Forum{}).Preload("User").Order("created_at DESC, last_message_at DESC").Offset((page-1)*dataforumPerPage).Limit(dataforumPerPage).Where("user_id = ?", userID).Find(&forums)
+	if tx.Error != nil {
+		return nil, 0, constant.ErrGetProduct
+	}
+	if tx.RowsAffected == 0 {
+		return nil, 0, constant.ErrProductNotFound
+	}
+	return forums, totalPages, nil
 }
 
 // Message
 func (u *ForumData) PostMessageForum(messageForum forums.MessageForum) error {
-	if err := u.DB.Create(&messageForum).Error; err != nil {
+	res := u.DB.Begin()
+	if err := res.Create(&messageForum).Error; err != nil {
 		return err
 	}
-	return nil
+
+	if err := res.Model(&Forum{}).Where("id = ? AND deleted_at IS NULL", messageForum.ForumID).Update("last_message_at", messageForum.CreatedAt).Error; err != nil {
+		res.Rollback()
+		return err
+	}
+
+	var forum forums.Forum
+	if err := u.DB.Where("id = ? AND deleted_at IS NULL", messageForum.ForumID).First(&forum).Error; err != nil {
+		return constant.ErrForumNotFound
+	}
+	return res.Commit().Error
 }
 
-func (u *ForumData) DeleteMessageForum(messageForum forums.MessageForum) error {
-	result := u.DB.Table("message_forums").Delete(&messageForum)
-	if result.Error != nil {
-		return constant.ErrDeleteForum
-	}
+func (u *ForumData) DeleteMessageForum(messageID string) error {
+	res := u.DB.Begin()
 
-	if result.RowsAffected == 0 {
+	if err := res.Where("id = ?", messageID).Delete(&MessageForum{}); err.Error != nil {
+		res.Rollback()
+		return constant.ErrMessgaeNotFound
+	} else if err.RowsAffected == 0 {
+		res.Rollback()
 		return constant.ErrMessgaeNotFound
 	}
-	return nil
+
+	return res.Commit().Error
 }
 
 func (r *ForumData) GetMessageForumByID(ID string) (forums.MessageForum, error) {
@@ -103,10 +164,13 @@ func (r *ForumData) GetMessageForumByID(ID string) (forums.MessageForum, error) 
 
 func (r *ForumData) UpdateMessageForum(message forums.EditMessage) error {
 	var messageForum forums.MessageForum
-	if err := r.DB.Where("id = ?", message.ID).Find(&messageForum).Error; err != nil {
+	if err := r.DB.Where("id = ? AND deleted_at IS NULL", message.ID).First(&messageForum).Error; err != nil {
 		return err
 	}
-
+	var forum forums.Forum
+	if err := r.DB.Where("id = ? AND deleted_at IS NULL", messageForum.ForumID).First(&forum).Error; err != nil {
+		return constant.ErrForumNotFound
+	}
 	err := r.DB.Model(&messageForum).Updates(message).Error
 	if err != nil {
 		return err
@@ -117,7 +181,7 @@ func (r *ForumData) UpdateMessageForum(message forums.EditMessage) error {
 
 func (u *ForumData) GetMessagesByForumID(forumID string) ([]forums.MessageForum, error) {
 	var messages []forums.MessageForum
-	if err := u.DB.Where("forum_id = ?", forumID).Find(&messages).Error; err != nil {
+	if err := u.DB.Where("forum_id = ? AND deleted_at IS NULL", forumID).Find(&messages).Error; err != nil {
 		return nil, err
 	}
 	return messages, nil

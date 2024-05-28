@@ -95,11 +95,12 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 
 	e.GET(route.ForumPath, fh.GetAllForum(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ForumByID, fh.GetForumByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.GetForumByUserID, fh.GetForumByUserID(), echojwt.WithConfig(jwtConfig))
 	e.POST(route.ForumPath, fh.PostForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumUpdate, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumDelete, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumByID, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumByID, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
 
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumMessageDelete, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumMessageUpdate, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
 }
