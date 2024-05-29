@@ -38,7 +38,7 @@ func (s *UserService) Register(user users.User) error {
 	}
 
 	user.Password = hashedPassword
-	user.Username = helper.GenerateRandomString(8)
+	user.Username = "user_" + helper.GenerateRandomString(8)
 
 	err = s.d.Register(user)
 
