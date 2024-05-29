@@ -38,6 +38,7 @@ func (s *UserService) Register(user users.User) error {
 	}
 
 	user.Password = hashedPassword
+	user.Username = helper.GenerateRandomString(8)
 
 	err = s.d.Register(user)
 
@@ -176,7 +177,7 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 	if userResetPassword.Password != userResetPassword.ConfirmationPassword {
 		return constant.ErrPasswordNotMatch
 	}
-	
+
 	hashedPassword, err := helper.HashPassword(userResetPassword.Password)
 	if err != nil {
 		return err
