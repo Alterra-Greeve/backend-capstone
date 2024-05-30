@@ -4,6 +4,7 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/adminusers"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
@@ -48,6 +49,17 @@ func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveC
 	e.DELETE(route.AdminPath, ah.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
+func RouteAdminManageUser(e *echo.Echo, uh adminusers.UserHandlerbyAdminInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.GET(route.AdminManageUserPath, uh.GetAllUsers(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminManageUserByID, uh.GetUserByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.AdminManageUserByID, uh.UpdateUser(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.AdminManageUserByID, uh.DeleteUser(), echojwt.WithConfig(jwtConfig))
+}
 func RouteProduct(e *echo.Echo, ph product.ProductHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
 		SigningKey:   []byte(cfg.JWT_Secret),
