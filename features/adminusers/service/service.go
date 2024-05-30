@@ -7,6 +7,7 @@ import (
 	"backendgreeve/helper"
 )
 
+// V2
 type UsersbyAdminService struct {
 	d adminusers.UserDatabyAdminInterface
 }
