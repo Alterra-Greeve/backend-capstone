@@ -90,10 +90,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: Email and password cannot be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Email or Password cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
   /admin:
     get:
       tags:
@@ -253,6 +260,11 @@ paths:
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
+                    - id: 422322
+                      name: Kuze 
+                      email: users@kuze.my.id
+                      address: Cilacap
+                      gender: Laki-laki
         "404":
           description: Not Found
           content:
@@ -284,31 +296,6 @@ paths:
           schema:
             type: string
           example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                address:
-                  type: string
-                gender:
-                  type: string
-                  enum:
-                    - Laki-laki
-                    - Perempuan
-                phone:
-                  type: string
-              example:
-                name: Kaze User
-                email: users@kzquandary.my.id
-                address: Cimahi
-                gender: Laki-laki
-                phone: 62123456789
       responses:
         "200":
           description: OK
@@ -323,6 +310,22 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        gender:
+                          type: string
+                          enum:
+                            - Laki-laki
+                            - Perempuan
+                        phone:
+                          type: string
                 example:
                   status: true
                   message: Get Id User Success
@@ -332,7 +335,7 @@ paths:
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
-                      phone: 62123456789
+                      phone: '62123456789'
         "404":
           description: Not Found
           content:
@@ -384,7 +387,6 @@ paths:
                   type: string
               example:
                 name: Kuze User
-                email: users@kzquandary2.my.id
                 address: Cimahi2
                 gender: Laki-laki
                 phone: 62123456789
