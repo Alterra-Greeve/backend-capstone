@@ -14,10 +14,6 @@ import (
 	AdminHandler "backendgreeve/features/admin/handler"
 	AdminService "backendgreeve/features/admin/service"
 
-	UserDatabyAdmin "backendgreeve/features/adminusers/data"
-	usersAdminHandler "backendgreeve/features/adminusers/handler"
-	UsersbyAdminService "backendgreeve/features/adminusers/service"
-
 	ProductData "backendgreeve/features/product/data"
 	ProductHandler "backendgreeve/features/product/handler"
 	ProductService "backendgreeve/features/product/service"
@@ -83,10 +79,6 @@ func main() {
 	adminService := AdminService.New(adminData, jwt, mailer)
 	adminHandler := AdminHandler.New(adminService, jwt)
 
-	UserDatabyAdmin := UserDatabyAdmin.New(db)
-	UsersbyAdminService := UsersbyAdminService.New(UserDatabyAdmin, jwt, mailer)
-	UsersbyAdminHandler := usersAdminHandler.New(UsersbyAdminService, jwt)
-
 	productData := ProductData.New(db)
 	productService := ProductService.New(productData)
 	productHandler := ProductHandler.New(productService, jwt)
@@ -103,7 +95,6 @@ func main() {
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
-	routes.RouteAdminManageUser(e, UsersbyAdminHandler, *cfg)
 	routes.RouteProduct(e, productHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	routes.RouteForum(e, forumHandler, *cfg)
