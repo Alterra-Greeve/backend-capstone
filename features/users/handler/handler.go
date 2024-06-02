@@ -33,11 +33,7 @@ func (h *UserHandler) Register() echo.HandlerFunc {
 		user := users.User{
 			Name:     UserRegisterRequest.Name,
 			Email:    UserRegisterRequest.Email,
-			Username: UserRegisterRequest.Username,
 			Password: UserRegisterRequest.Password,
-			Address:  UserRegisterRequest.Address,
-			Gender:   UserRegisterRequest.Gender,
-			Phone:    UserRegisterRequest.Phone,
 		}
 		err = h.s.Register(user)
 

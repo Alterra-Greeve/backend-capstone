@@ -28,14 +28,8 @@ func (s *UserService) Register(user users.User) error {
 		return constant.ErrEmptyEmailRegister
 	case user.Password == "":
 		return constant.ErrEmptyPasswordRegister
-	case user.Address == "":
-		return constant.ErrEmptyAddressRegister
 	case user.Name == "":
 		return constant.ErrEmptyNameRegister
-	case user.Gender == "":
-		return constant.ErrEmptyGenderRegister
-	case user.Phone == "":
-		return constant.ErrEmptyPhoneRegister
 	}
 
 	hashedPassword, err := helper.HashPassword(user.Password)
@@ -44,6 +38,7 @@ func (s *UserService) Register(user users.User) error {
 	}
 
 	user.Password = hashedPassword
+	user.Username = "user_" + helper.GenerateRandomString(8)
 
 	err = s.d.Register(user)
 
@@ -182,7 +177,7 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 	if userResetPassword.Password != userResetPassword.ConfirmationPassword {
 		return constant.ErrPasswordNotMatch
 	}
-	
+
 	hashedPassword, err := helper.HashPassword(userResetPassword.Password)
 	if err != nil {
 		return err

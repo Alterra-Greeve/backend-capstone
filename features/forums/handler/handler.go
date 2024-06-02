@@ -4,6 +4,7 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
 	"backendgreeve/helper"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -35,23 +36,31 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 			helper.UnauthorizedError(c)
 		}
 
-		forums, err := h.s.GetAllForum()
+		pageStr := c.QueryParam("page")
+		page, err := strconv.Atoi(pageStr)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(false, err.Error(), nil))
+			page = 1
+		}
+		var totalPages int
+		var forums []forums.Forum
+		forums, totalPages, err = h.s.GetAllByPage(page)
+
+		if err != nil {
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		var forumsResponse []ForumGetAllResponse
-
-		for _, forum := range forums {
-			forumsResponse = append(forumsResponse, ForumGetAllResponse{
-				ID:          forum.ID,
-				Title:       forum.Title,
-				Description: forum.Description,
-				Author:      Author{ID: forum.User.ID, Name: forum.User.Name, Username: forum.User.Username, Email: forum.User.Email},
+		var response []ForumGetAllResponse
+		for _, f := range forums {
+			response = append(response, ForumGetAllResponse{
+				ID:          f.ID,
+				Title:       f.Title,
+				Description: f.Description,
+				Author:      Author{ID: f.User.ID, Name: f.User.Name, Username: f.User.Username, Email: f.User.Email, AvatarURL: f.User.AvatarURL},
+				Page:        totalPages,
 			})
 		}
-
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetAll, forumsResponse))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetAll, response))
 	}
 }
 
@@ -102,13 +111,9 @@ func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
 		}
 
 		forumid := c.Param("id")
-		page, err := strconv.Atoi(c.QueryParam("page"))
-		if err != nil || page < 1 {
-			page = 1
-		}
-		pageSize, err := strconv.Atoi(c.QueryParam("pageSize"))
-		if err != nil || pageSize < 1 {
-			pageSize = 10
+		if err != nil {
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
 		forums, err := h.s.GetForumByID(forumid)
@@ -134,7 +139,7 @@ func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
 			ID:            forums.ID,
 			Title:         forums.Title,
 			Description:   forums.Description,
-			Author:        Author{ID: forums.User.ID, Name: forums.User.Name, Username: forums.User.Username, Email: forums.User.Email},
+			Author:        Author{ID: forums.User.ID, Name: forums.User.Name, Username: forums.User.Username, Email: forums.User.Email, AvatarURL: forums.User.AvatarURL},
 			ForumMessages: messageResponses,
 		}
 
@@ -190,24 +195,26 @@ func (h *ForumHandler) DeleteForum() echo.HandlerFunc {
 		if tokenString == "" {
 			return helper.UnauthorizedError(c)
 		}
+
 		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			helper.UnauthorizedError(c)
+			return helper.UnauthorizedError(c)
 		}
 
-		adminData := h.j.ExtractUserToken(token)
+		adminData := h.j.ExtractAdminToken(token)
 		role := adminData[constant.JWT_ROLE]
+
 		if role != constant.RoleAdmin {
-			helper.UnauthorizedError(c)
+			return helper.UnauthorizedError(c)
 		}
 
-		forumid := c.Param("id")
-		var forums forums.Forum
-		forums.ID = forumid
-		err = h.s.DeleteForum(forums)
+		forumID := c.Param("id")
+
+		err = h.s.DeleteForum(forumID)
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
+
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessDelete, nil))
 	}
 }
@@ -219,28 +226,43 @@ func (h *ForumHandler) GetForumByUserID() echo.HandlerFunc {
 			helper.UnauthorizedError(c)
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			helper.UnauthorizedError(c)
+			return helper.UnauthorizedError(c)
 		}
 
-		page, err := strconv.Atoi(c.QueryParam("page"))
-		if err != nil || page < 1 {
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID].(string)
+
+		pageStr := c.QueryParam("page")
+		page, err := strconv.Atoi(pageStr)
+		if err != nil {
 			page = 1
 		}
-		pageSize, err := strconv.Atoi(c.QueryParam("pageSize"))
-		if err != nil || pageSize < 1 {
-			pageSize = 10
-		}
+		var totalPages int
 
-		userid := c.Param("id")
-
-		forums, err := h.s.GetForumByUserID(userid)
+		forums, totalPages, err := h.s.GetForumByUserID(userId, page)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			if errors.Is(err, constant.ErrForumNotFound) {
+				return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrForumDataNotFound.Error(), nil))
+			}
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessCreate, forums))
+		var forumsResponse []ForumGetAllResponse
+
+		for _, forum := range forums {
+			forumsResponse = append(forumsResponse, ForumGetAllResponse{
+				ID:          forum.ID,
+				Title:       forum.Title,
+				Description: forum.Description,
+				Author:      Author{ID: forum.User.ID, Name: forum.User.Name, Username: forum.User.Username, Email: forum.User.Email, AvatarURL: forum.User.AvatarURL},
+				Page:        totalPages,
+			})
+		}
+
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessCreate, forumsResponse))
 	}
 }
 
@@ -295,20 +317,23 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 
 		userData := h.j.ExtractUserToken(token)
 		userId := userData[constant.JWT_ID].(string)
+		if userId == "" {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, constant.Unauthorized, nil))
+		}
 
 		messageForumID := c.Param("id")
 		existingMessageForum, err := h.s.GetMessageForumByID(messageForumID)
 		if err != nil {
-			return helper.InternalServerError(c)
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetForumByID.Error()), nil))
 		}
 
 		if existingMessageForum.UserID != userId {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, constant.Unauthorized, nil))
+			return c.JSON(http.StatusForbidden, helper.FormatResponse(false, constant.Unauthorized, nil))
 		}
 
-		err = h.s.DeleteMessageForum(existingMessageForum)
+		err = h.s.DeleteMessageForum(messageForumID)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, constant.ErrDeleteMessage.Error(), nil))
 		}
 
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.MessageSuccessDelete, nil))
