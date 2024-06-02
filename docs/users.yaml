@@ -2889,7 +2889,21 @@ paths:
                         username: user1
                         name: User 1
                         avatar_url: https://www.example.com/avatar-1.jpg
-          
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -2904,6 +2918,21 @@ paths:
                 example:
                   status: false
                   message: cannot get data, data not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
                   data: null
     post:
       tags:
@@ -2982,6 +3011,36 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
   /forums/{forum_id}:
     get:
       tags:
@@ -3041,6 +3100,21 @@ paths:
                           name: User 2
                           avatar_url: https://www.example.com/avatar-2.jpg
                           created_at: 2021-01-01 00:00:00
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -3056,7 +3130,196 @@ paths:
                   status: false
                   message: cannot get data, id forum not found
                   data: null
-  /forum/message:
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+    put: 
+      tags:
+        - forum
+      summary: Update Forum
+      description: User dapat mengupdate forum yang dibuatnya, alias user lain tidak bisa mengupdate
+      operationId: updateForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              example:
+                title: Forum 1
+                description: Forum 1 description
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Update Forum Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot update forum
+                  data: nil
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id forum not found
+                  data: nil
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: nil
+  /forums/user:
+    get:
+      tags:
+        - forum
+      summary: Get Forum List
+      description: User dapat melihat list forum yang dibuat oleh dirinya
+      operationId: getForumList
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum List Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id user not found
+                  data: null
+  /forums/message:
     post:
       tags:
         - forum
@@ -3077,7 +3340,7 @@ paths:
                   type: string
               example:
                 forum_id: 123e4567-e89b-12d3-a456-426614174000
-                message: Hello, World!
+                messages: Hello, World!
       responses:
         "200":
           description: OK
@@ -3143,7 +3406,112 @@ paths:
                   status: false
                   message: Id Forum not found
                   data: null
-  /forum/message/{message_id}:
+  /forums/message/{message_id}:
+    put: 
+      tags:
+        - forum
+      summary: Update Message
+      description: User dapat mengubah pesan
+      operationId: updateMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+              example:
+                messages: Hello, World!
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Update Message Success
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: cannot update message
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: You are not authorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Message not found
+                  data: null
     delete:
       tags:
         - forum
@@ -3191,6 +3559,21 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
+                  data: null
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: You are not authorized
                   data: null
         "404":
           description: Not Found

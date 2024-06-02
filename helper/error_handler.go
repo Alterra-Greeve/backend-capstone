@@ -97,8 +97,10 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrMessgaeNotFound:
 		return http.StatusNotFound
 	case constant.ErrDeleteForum:
-		return http.StatusInternalServerError
+		return http.StatusBadRequest
 	case constant.ErrForumNotFound:
+		return http.StatusNotFound
+	case constant.ErrForumDataNotFound:
 		return http.StatusNotFound
 
 	// Admin Error
