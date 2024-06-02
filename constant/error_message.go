@@ -72,6 +72,14 @@ var ErrDeleteImpactCategory = errors.New("Failed to delete impact category")
 var ErrImpactCategoryField = errors.New("Field cannot be empty")
 var ErrImpactCategoryFieldUpdate = errors.New("One or more fields for update cannot be empty")
 
+// Voucher Errors
+var ErrVoucherNotFound = errors.New("Voucher Not Found")
+var ErrCreateVoucher = errors.New("Failed to create voucher")
+var ErrUpdateVoucher = errors.New("Failed to update voucher")
+var ErrDeleteVoucher = errors.New("Failed to delete voucher")
+var ErrVoucherField = errors.New("Field cannot be empty")
+var ErrGetVoucherById = errors.New("Failed to get voucher by ID")
+
 // Product Errors
 var ErrProductNotFound = errors.New("Product Not Found")
 var ErrGetProduct = errors.New("Failed to get product")

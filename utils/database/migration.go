@@ -6,6 +6,7 @@ import (
 	ImpactCategoryData "backendgreeve/features/impactcategory/data"
 	Product "backendgreeve/features/product/data"
 	DataUsers "backendgreeve/features/users/data"
+	Voucher "backendgreeve/features/voucher/data"
 	WebhookData "backendgreeve/features/webhook/data"
 
 	"gorm.io/gorm"
@@ -16,6 +17,7 @@ func Migrate(db *gorm.DB) error {
 	db.AutoMigrate(&DataUsers.VerifyOTP{})
 	db.AutoMigrate(&WebhookData.PaymentNotification{})
 	db.AutoMigrate(&DataAdmin.Admin{})
+	db.AutoMigrate(&Voucher.Voucher{})
 	db.AutoMigrate(&ImpactCategoryData.ImpactCategory{})
 	db.AutoMigrate(&Forums.Forum{})
 	db.AutoMigrate(&Forums.MessageForum{})

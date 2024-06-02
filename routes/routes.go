@@ -8,6 +8,7 @@ import (
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
 	"backendgreeve/features/users"
+	"backendgreeve/features/voucher"
 	MidtransWebhook "backendgreeve/features/webhook"
 	"backendgreeve/helper"
 	"backendgreeve/utils/bucket"
@@ -73,6 +74,19 @@ func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerIn
 	e.GET(route.ImpactCategoryByID, ic.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ImpactCategoryByID, ic.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ImpactCategoryByID, ic.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {

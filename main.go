@@ -26,6 +26,10 @@ import (
 	ForumHandler "backendgreeve/features/forums/handler"
 	ForumService "backendgreeve/features/forums/service"
 
+	VoucherData "backendgreeve/features/voucher/data"
+	VoucherHandler "backendgreeve/features/voucher/handler"
+	VoucherService "backendgreeve/features/voucher/service"
+
 	"backendgreeve/helper"
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
@@ -91,6 +95,10 @@ func main() {
 	forumService := ForumService.New(forumData)
 	forumHandler := ForumHandler.New(forumService, jwt)
 
+	voucherData := VoucherData.New(db)
+	voucherService := VoucherService.New(voucherData)
+	voucherHandler := VoucherHandler.New(voucherService, jwt)
+
 	routes.RouteUser(e, userHandler, *cfg)
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
@@ -98,5 +106,6 @@ func main() {
 	routes.RouteProduct(e, productHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	routes.RouteForum(e, forumHandler, *cfg)
+	routes.RouteVoucher(e, voucherHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }
