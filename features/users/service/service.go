@@ -6,6 +6,7 @@ import (
 	"backendgreeve/helper"
 	"fmt"
 	"math/rand"
+	"strings"
 )
 
 type UserService struct {
@@ -31,9 +32,14 @@ func (s *UserService) Register(user users.User) error {
 	case user.Name == "":
 		return constant.ErrEmptyNameRegister
 	}
-
+	user.Email = strings.ToLower(user.Email)
+	isEmailValid := helper.ValidateEmail(user.Email)
+	if !isEmailValid {
+		return constant.ErrInvalidEmail
+	}
 	hashedPassword, err := helper.HashPassword(user.Password)
 	if err != nil {
+
 		return err
 	}
 
@@ -53,7 +59,12 @@ func (s *UserService) Login(user users.User) (users.UserLogin, error) {
 	if user.Email == "" || user.Password == "" {
 		return users.UserLogin{}, constant.ErrEmptyLogin
 	}
-
+	isEmailValid := helper.ValidateEmail(user.Email)
+	if !isEmailValid {
+		return users.UserLogin{}, constant.ErrInvalidEmail
+	}
+	user.Email = strings.ToLower(user.Email)
+	
 	userData, err := s.d.Login(user)
 	if err != nil {
 		return users.UserLogin{}, err
@@ -87,6 +98,11 @@ func (s *UserService) Update(user users.UserUpdate) (users.UserUpdate, error) {
 	if user.ID == "" {
 		return users.UserUpdate{}, constant.ErrUpdateUser
 	}
+	isEmailValid := helper.ValidateEmail(user.Email)
+	if !isEmailValid {
+		return users.UserUpdate{}, constant.ErrInvalidEmail
+	}
+	user.Email = strings.ToLower(user.Email)
 	if user.Password != "" {
 		hashedPassword, err := helper.HashPassword(user.Password)
 		if err != nil {

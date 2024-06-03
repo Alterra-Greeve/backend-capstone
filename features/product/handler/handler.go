@@ -407,8 +407,7 @@ func (h *ProductHandler) Delete() echo.HandlerFunc {
 
 		err = h.s.Delete(productID)
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessDelete, nil))
