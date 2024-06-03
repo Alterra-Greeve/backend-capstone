@@ -128,6 +128,10 @@ func ConvertResponseCode(err error) int {
 		return http.StatusBadRequest
 	case constant.ErrGetVoucherById:
 		return http.StatusNotFound
+	case constant.ErrCodeVoucher:
+		return http.StatusBadRequest
+	case constant.ErrCodeVoucherExists:
+		return http.StatusBadRequest
 
 	// Impact Category Error
 	case constant.ErrImpactCategoryNotFound:

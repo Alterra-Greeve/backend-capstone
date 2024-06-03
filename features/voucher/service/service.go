@@ -28,8 +28,12 @@ func (s *VoucherService) GetByIdVoucher(id string) (voucher.Voucher, error) {
 }
 
 func (s *VoucherService) Create(voucher voucher.Voucher) error {
-	if voucher.Name == "" || voucher.Discount == "" || voucher.Code == "" || voucher.ExpiredAt == (time.Time{}) {
+	if voucher.Name == "" || voucher.Discount == "" || voucher.ExpiredAt == (time.Time{}) {
 		return constant.ErrCreateVoucher
+	}
+
+	if len(voucher.Code) != 9 {
+		return constant.ErrCodeVoucher
 	}
 	return s.d.Create(voucher)
 }
@@ -37,6 +41,10 @@ func (s *VoucherService) Create(voucher voucher.Voucher) error {
 func (s *VoucherService) Update(voucher voucher.VoucherEdit) error {
 	if voucher.ID == "" {
 		return constant.ErrGetVoucherById
+	}
+
+	if len(voucher.Code) != 9 {
+		return constant.ErrCodeVoucher
 	}
 	return s.d.Update(voucher)
 }

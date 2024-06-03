@@ -2633,6 +2633,35 @@ paths:
                     code: A10238013
                     discount: 10%
                     expired_at: 2024-10-30
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -2784,10 +2813,24 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Invalid Request
-                  data: null
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
         "401":
           description: Unauthorized
           content:

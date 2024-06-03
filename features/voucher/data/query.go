@@ -37,6 +37,11 @@ func (u *VoucherData) GetByIdVoucher(ID string) (voucher.Voucher, error) {
 }
 
 func (u *VoucherData) Create(voucherData voucher.Voucher) error {
+	var existingVoucher voucher.Voucher
+	if err := u.DB.Where("code = ?", voucherData.Code).First(&existingVoucher).Error; err == nil {
+		return constant.ErrCodeVoucherExists
+	}
+
 	if err := u.DB.Create(&voucherData).Error; err != nil {
 		return err
 	}
@@ -47,6 +52,10 @@ func (u *VoucherData) Update(voucherData voucher.VoucherEdit) error {
 	var existingVoucher voucher.Voucher
 	if err := u.DB.Where("id = ? AND deleted_at is null", voucherData.ID).First(&existingVoucher).Error; err != nil {
 		return err
+	}
+
+	if err := u.DB.Where("code = ?", voucherData.Code).First(&existingVoucher).Error; err == nil {
+		return constant.ErrCodeVoucherExists
 	}
 
 	err := u.DB.Model(&existingVoucher).Updates(voucherData).Error
