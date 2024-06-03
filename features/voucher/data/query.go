@@ -20,7 +20,7 @@ func New(db *gorm.DB) voucher.VoucherDataInterface {
 
 func (u *VoucherData) GetAll() ([]voucher.Voucher, error) {
 	var voucher []voucher.Voucher
-	err := u.DB.Where("deleted_at IS null").Find(&voucher).Error
+	err := u.DB.Where("deleted_at IS null AND expired_at > NOW()").Order("CAST(REPLACE(discount, '%', '') AS DECIMAL(10,2)) DESC, CAST(expired_at AS DATE) DESC").Find(&voucher).Error
 	if err != nil {
 		return nil, constant.ErrVoucherNotFound
 	}
@@ -30,7 +30,7 @@ func (u *VoucherData) GetAll() ([]voucher.Voucher, error) {
 func (u *VoucherData) GetByIdVoucher(ID string) (voucher.Voucher, error) {
 	var vouchers voucher.Voucher
 
-	if err := u.DB.Where("id = ? AND deleted_at IS null", ID).First(&vouchers).Error; err != nil {
+	if err := u.DB.Where("id = ? AND deleted_at IS null AND expired_at > NOW()", ID).First(&vouchers).Error; err != nil {
 		return voucher.Voucher{}, err
 	}
 	return vouchers, nil

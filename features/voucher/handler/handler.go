@@ -109,12 +109,6 @@ func (h *VoucherHandler) Create() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		if voucherRequest.Code == "" {
-			voucherRequest.Code, err = helper.GenerateVoucherCode(9)
-			if err != nil {
-				return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "Failed to generate voucher code", nil))
-			}
-		}
 		if len(voucherRequest.Code) != 9 {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCodeVoucher.Error(), nil))
 		}
@@ -122,15 +116,18 @@ func (h *VoucherHandler) Create() echo.HandlerFunc {
 		voucherData := voucher.Voucher{
 			ID:          uuid.New().String(),
 			Name:        voucherRequest.Name,
-			Code:        voucherRequest.Code,
 			Discount:    voucherRequest.Discount,
 			Description: voucherRequest.Description,
 			ExpiredAt:   voucherRequest.ExpiredAt,
+			Code:        voucherRequest.Code,
 		}
 		err = h.s.Create(voucherData)
 		if err != nil {
 			if err == constant.ErrCodeVoucherExists {
 				return c.JSON(helper.ConvertResponseCode(constant.ErrCodeVoucherExists), helper.FormatResponse(false, constant.ErrCodeVoucherExists.Error(), nil))
+			}
+			if err == constant.ErrVoucherField {
+				return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrVoucherField.Error(), nil))
 			}
 			return c.JSON(helper.ConvertResponseCode(constant.ErrCreateVoucher), helper.FormatResponse(false, constant.ErrCreateVoucher.Error(), nil))
 		}
@@ -167,18 +164,17 @@ func (h *VoucherHandler) Update() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
-
-		if len(voucherRequest.Code) != 9 {
+		if voucherRequest.Code != "" && len(voucherRequest.Code) != 9 {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCodeVoucher.Error(), nil))
 		}
 
 		voucherData := voucher.VoucherEdit{
 			ID:          existingVoucher.ID,
 			Name:        voucherRequest.Name,
-			Code:        voucherRequest.Code,
 			Discount:    voucherRequest.Discount,
 			Description: voucherRequest.Description,
 			ExpiredAt:   voucherRequest.ExpiredAt,
+			Code:        voucherRequest.Code,
 		}
 
 		err = h.s.Update(voucherData)

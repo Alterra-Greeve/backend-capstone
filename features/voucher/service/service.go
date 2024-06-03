@@ -28,8 +28,8 @@ func (s *VoucherService) GetByIdVoucher(id string) (voucher.Voucher, error) {
 }
 
 func (s *VoucherService) Create(voucher voucher.Voucher) error {
-	if voucher.Name == "" || voucher.Discount == "" || voucher.ExpiredAt == (time.Time{}) {
-		return constant.ErrCreateVoucher
+	if voucher.Name == "" || voucher.Discount == "" || voucher.Description == "" || voucher.Code == "" || voucher.ExpiredAt == (time.Time{}) {
+		return constant.ErrVoucherField
 	}
 
 	if len(voucher.Code) != 9 {
@@ -38,15 +38,18 @@ func (s *VoucherService) Create(voucher voucher.Voucher) error {
 	return s.d.Create(voucher)
 }
 
-func (s *VoucherService) Update(voucher voucher.VoucherEdit) error {
-	if voucher.ID == "" {
+func (s *VoucherService) Update(vouchers voucher.VoucherEdit) error {
+	if vouchers.ID == "" {
 		return constant.ErrGetVoucherById
 	}
 
-	if len(voucher.Code) != 9 {
-		return constant.ErrCodeVoucher
+	var existingVoucher voucher.Voucher
+	if vouchers.Code != existingVoucher.Code {
+		if len(vouchers.Code) != 9 {
+			return constant.ErrCodeVoucher
+		}
 	}
-	return s.d.Update(voucher)
+	return s.d.Update(vouchers)
 }
 
 func (s *VoucherService) Delete(voucherID string) error {
