@@ -70,6 +70,17 @@ func ConvertResponseCode(err error) int {
 		return http.StatusInternalServerError
 	case constant.ErrEmptyResetPassword:
 		return http.StatusBadRequest
+	// User Admin
+	case constant.ErrUserDataEmpty:
+		return http.StatusNotFound
+	case constant.ErrGetUser:
+		return http.StatusNotFound
+	case constant.ErrUserNotFound:
+		return http.StatusNotFound
+	case constant.ErrUserIDNotFound:
+		return http.StatusNotFound
+	case constant.ErrEditUserByAdmin:
+		return http.StatusBadRequest
 
 	// Forum
 	case constant.ErrGetForum:

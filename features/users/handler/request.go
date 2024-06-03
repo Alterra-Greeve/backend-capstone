@@ -44,3 +44,11 @@ type UserResetPasswordRequest struct {
 	ConfirmationPassword string `json:"confirmation_password"`
 	OTP                  string `json:"otp"`
 }
+
+// Admin
+type UserbyAdminRequest struct {
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Gender  string `json:"gender"`
+	Phone   string `json:"phone"`
+}

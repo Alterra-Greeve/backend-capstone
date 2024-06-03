@@ -27,6 +27,10 @@ const AdminLogin = AdminPath + "/login"
 const AdminEdit = AdminPath + "/edit/:id"
 const AdminDelete = AdminPath + "/delete"
 
+// Admin Manage User
+const AdminManageUserPath = AdminPath + "/users"
+const AdminManageUserByID = AdminManageUserPath + "/:id"
+
 // Impact Category Path
 const ImpactCategoryPath = AdminPath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"

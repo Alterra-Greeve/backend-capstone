@@ -33,6 +33,12 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.GET(route.UserPath, uh.GetUserData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
+
+	// Admin
+	e.GET(route.AdminManageUserPath, uh.GetAllUsersForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminManageUserByID, uh.GetUserByIDForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.AdminManageUserByID, uh.UpdateUserForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.AdminManageUserByID, uh.DeleteUserForAdmin(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveConfig) {

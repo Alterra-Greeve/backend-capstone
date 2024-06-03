@@ -65,6 +65,13 @@ var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
 var ErrEditAdmin = errors.New("Field Cannot be Empty")
 var ErrAdminEmailUsernameAlreadyExist = errors.New("Email or Username already taken by another admin")
 
+// Users By Admin
+var ErrUserDataEmpty = errors.New("User Data Empty")
+var ErrGetUser = errors.New("Failed to get user")
+var ErrUserNotFound = errors.New("User Not Found")
+var ErrUserIDNotFound = errors.New("User ID Not Found")
+var ErrEditUserByAdmin = errors.New("Error, Update at least one field")
+
 // Impact Category Errors
 var ErrImpactCategoryNotFound = errors.New("Impact Category Not Found")
 var ErrCreateImpactCategory = errors.New("Failed to create impact category")
