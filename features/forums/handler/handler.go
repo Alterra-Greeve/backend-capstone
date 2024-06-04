@@ -42,8 +42,13 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 			page = 1
 		}
 		var totalPages int
+
 		var forums []forums.Forum
 		forums, totalPages, err = h.s.GetAllByPage(page)
+		metadata := MetadataResponse{
+			CurrentPage: page,
+			TotalPage:   totalPages,
+		}
 
 		if err != nil {
 			code, message := helper.HandleEchoError(err)
@@ -57,10 +62,9 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 				Title:       f.Title,
 				Description: f.Description,
 				Author:      Author{ID: f.User.ID, Name: f.User.Name, Username: f.User.Username, Email: f.User.Email, AvatarURL: f.User.AvatarURL},
-				Page:        totalPages,
 			})
 		}
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetAll, response))
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ForumSuccessGetAll, metadata, response))
 	}
 }
 
@@ -240,7 +244,6 @@ func (h *ForumHandler) GetForumByUserID() echo.HandlerFunc {
 			page = 1
 		}
 		var totalPages int
-
 		forums, totalPages, err := h.s.GetForumByUserID(userId, page)
 		if err != nil {
 			if errors.Is(err, constant.ErrForumNotFound) {
@@ -248,6 +251,11 @@ func (h *ForumHandler) GetForumByUserID() echo.HandlerFunc {
 			}
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
+		}
+
+		metadata := MetadataResponse{
+			CurrentPage: page,
+			TotalPage:   totalPages,
 		}
 
 		var forumsResponse []ForumGetAllResponse
@@ -258,11 +266,10 @@ func (h *ForumHandler) GetForumByUserID() echo.HandlerFunc {
 				Title:       forum.Title,
 				Description: forum.Description,
 				Author:      Author{ID: forum.User.ID, Name: forum.User.Name, Username: forum.User.Username, Email: forum.User.Email, AvatarURL: forum.User.AvatarURL},
-				Page:        totalPages,
 			})
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessCreate, forumsResponse))
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ForumSuccessGetAll, metadata, forumsResponse))
 	}
 }
 

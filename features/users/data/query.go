@@ -207,7 +207,7 @@ func (u *UserData) GetAllByPageForAdmin(page int) ([]users.User, int, error) {
 	var forum []users.User
 
 	var total int64
-	count := u.DB.Model(&users.User{}).Count(&total)
+	count := u.DB.Model(&users.User{}).Where("deleted_at IS NULL").Count(&total)
 	if count.Error != nil {
 		return nil, 0, constant.ErrUserDataEmpty
 	}

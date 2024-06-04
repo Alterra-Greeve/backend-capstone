@@ -5,7 +5,6 @@ type ForumGetAllResponse struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Author      Author `json:"author"`
-	Page        int    `json:"page"`
 }
 
 type ForumGetDetailResponse struct {
@@ -35,4 +34,9 @@ type PaginatedResponse struct {
 	Page  int         `json:"page"`
 	Size  int         `json:"size"`
 	Total int         `json:"total"`
+}
+
+type MetadataResponse struct {
+	CurrentPage int `json:"current_page"`
+	TotalPage   int `json:"total_page"`
 }

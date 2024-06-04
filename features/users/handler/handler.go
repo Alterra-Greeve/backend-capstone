@@ -301,6 +301,11 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 		var user []users.User
 		user, totalPages, err = h.s.GetAllByPageForAdmin(page)
 
+		metadata := MetadataResponse{
+			CurrentPage: page,
+			TotalPage:   totalPages,
+		}
+
 		if err != nil {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
@@ -320,10 +325,9 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 				Coin:      user.Coin,
 				Exp:       user.Exp,
 				AvatarURL: user.AvatarURL,
-				Page:      totalPages,
 			})
 		}
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.AdminSuccessGetAllUser, response))
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.AdminSuccessGetAllUser, metadata, response))
 	}
 }
 
