@@ -35,6 +35,10 @@ const AdminManageUserByID = AdminManageUserPath + "/:id"
 const ImpactCategoryPath = AdminPath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"
 
+// Voucher
+const VoucherPath = AdminPath + "/voucher"
+const VoucherByID = VoucherPath + "/:id"
+
 // Product Path
 const ProductPath = BasePath + "/products"
 const ProductByID = ProductPath + "/:id"

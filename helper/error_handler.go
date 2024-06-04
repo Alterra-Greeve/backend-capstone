@@ -130,6 +130,24 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrEmptyEmailandPasswordAdmin:
 		return http.StatusBadRequest
 
+	// Voucher Error
+	case constant.ErrVoucherNotFound:
+		return http.StatusNotFound
+	case constant.ErrCreateVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrVoucherField:
+		return http.StatusBadRequest
+	case constant.ErrGetVoucherById:
+		return http.StatusNotFound
+	case constant.ErrCodeVoucher:
+		return http.StatusBadRequest
+	case constant.ErrCodeVoucherExists:
+		return http.StatusBadRequest
+
 	// Impact Category Error
 	case constant.ErrImpactCategoryNotFound:
 		return http.StatusNotFound
