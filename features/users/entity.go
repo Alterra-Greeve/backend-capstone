@@ -64,6 +64,14 @@ type UserUpdate struct {
 	Token     string
 	UpdatedAt time.Time
 }
+
+type UpdateUserByAdmin struct {
+	ID      string
+	Name    string
+	Address string
+	Gender  string
+	Phone   string
+}
 type UserHandlerInterface interface {
 	Register() echo.HandlerFunc
 	Login() echo.HandlerFunc
@@ -74,6 +82,12 @@ type UserHandlerInterface interface {
 	ForgotPassword() echo.HandlerFunc
 	VerifyOTP() echo.HandlerFunc
 	ResetPassword() echo.HandlerFunc
+
+	// Admin
+	GetAllUsersForAdmin() echo.HandlerFunc
+	GetUserByIDForAdmin() echo.HandlerFunc
+	UpdateUserForAdmin() echo.HandlerFunc
+	DeleteUserForAdmin() echo.HandlerFunc
 }
 
 type UserServiceInterface interface {
@@ -86,6 +100,13 @@ type UserServiceInterface interface {
 	ForgotPassword(User) error
 	VerifyOTP(VerifyOTP) error
 	ResetPassword(UserResetPassword) error
+
+	// Admin
+	GetAllUsersForAdmin() ([]User, error)
+	GetAllByPageForAdmin(page int) ([]User, int, error)
+	GetUserByIDForAdmin(id string) (User, error)
+	UpdateUserForAdmin(UpdateUserByAdmin) error
+	DeleteUserForAdmin(userID string) error
 }
 
 type UserDataInterface interface {
@@ -100,4 +121,11 @@ type UserDataInterface interface {
 	IsEmailExist(email string) bool
 	GetUserByID(id string) (User, error)
 	GetUserByUsername(username string) (User, error)
+
+	// Admin
+	GetAllUsersForAdmin() ([]User, error)
+	GetAllByPageForAdmin(page int) ([]User, int, error)
+	GetUserByIDForAdmin(id string) (User, error)
+	UpdateUserForAdmin(UpdateUserByAdmin) error
+	DeleteUserForAdmin(userID string) error
 }

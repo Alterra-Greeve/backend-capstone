@@ -4,6 +4,7 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/challenges"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
@@ -34,6 +35,12 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.GET(route.UserPath, uh.GetUserData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
+
+	// Admin
+	e.GET(route.AdminManageUserPath, uh.GetAllUsersForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminManageUserByID, uh.GetUserByIDForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.AdminManageUserByID, uh.UpdateUserForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.AdminManageUserByID, uh.DeleteUserForAdmin(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveConfig) {
@@ -77,16 +84,31 @@ func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerIn
 }
 
 func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.GreeveConfig) {
+  	jwtConfig := echojwt.Config{
+		  SigningKey:   []byte(cfg.JWT_Secret),
+		  ErrorHandler: helper.JWTErrorHandler,
+	  }
+  	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	  e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
+	  e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
+	  e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
+	  e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
 		SigningKey:   []byte(cfg.JWT_Secret),
 		ErrorHandler: helper.JWTErrorHandler,
 	}
 
-	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
-	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
-	e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.AdminChallengePath, ch.Create(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.ChallengeParticipate, ch.Swipe(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengePath, ch.GetAllForUser(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {
@@ -109,11 +131,12 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 
 	e.GET(route.ForumPath, fh.GetAllForum(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ForumByID, fh.GetForumByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.GetForumByUserID, fh.GetForumByUserID(), echojwt.WithConfig(jwtConfig))
 	e.POST(route.ForumPath, fh.PostForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumUpdate, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumDelete, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumByID, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumByID, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
 
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumMessageDelete, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumMessageUpdate, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
 }

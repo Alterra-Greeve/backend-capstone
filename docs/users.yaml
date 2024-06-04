@@ -42,20 +42,37 @@ paths:
               required:
                 - name
                 - email
+                - username
                 - password
+                - address
+                - gender
+                - phone
               properties:
                 name:
                   type: string
                 email:
                   type: string
+                username:
+                  type: string
                 password:
                   type: string
+                address:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Laki-laki
+                    - Perempuan
                 phone:
                   type: string
               example:
                 name: Kzquandary
                 email: kzquandary@gmail.com
+                username: kzquandary
                 password: kzquandary
+                address: Jl. Achmad Yani, Cimahi, Jawa Barat
+                gender: Laki-laki
+                phone: '089123456789'
       responses:
         "201":
           description: OK
@@ -293,8 +310,9 @@ paths:
       tags:
         - users
       summary: Update User
-      description: User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
-                   untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
+      description:
+        User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
+        untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -326,11 +344,11 @@ paths:
               example:
                 email: kzquandary@gmail.com
                 username: kzquandary
-                password: 'kzquandary'
+                password: "kzquandary"
                 name: Kzquandary Update
                 address: Cisurupan, Garut, Jawa Barat
                 gender: Laki-laki
-                phone: '089662966699'
+                phone: "089662966699"
                 avatar_url: https://www.example.com/avatar.jpg
       responses:
         "200":
@@ -456,24 +474,24 @@ paths:
                   message: Unauthorized
                   data: null
         "404":
-            description: Not Found
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status:
-                      type: boolean
-                    message:
-                      type: string
-                  example:
-                    status: false
-                    message: Id User not found
-                    data: null
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id User not found
+                  data: null
   /user/{username}:
     get:
       tags:
-        - users 
+        - users
       summary: Get User by Username
       description: User mendapatkan data user sesuai dengan usernamenya
       operationId: getUserByUsername
@@ -523,16 +541,16 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                      id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
-                      username: "kzquandary"
-                      name: "Kaze User"
-                      email: "users@kzquandary.my.id"
-                      address: "jalan raya cimahi"
-                      gender: "Laki-laki"
-                      phone: "089123456789"
-                      coin: 0
-                      exp: 0
-                      avatar_url: ""
+                    id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
+                    username: "kzquandary"
+                    name: "Kaze User"
+                    email: "users@kzquandary.my.id"
+                    address: "jalan raya cimahi"
+                    gender: "Laki-laki"
+                    phone: "089123456789"
+                    coin: 0
+                    exp: 0
+                    avatar_url: ""
         "401":
           description: Unauthorized
           content:
@@ -857,20 +875,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -884,14 +902,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -983,20 +1001,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1010,14 +1028,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1054,7 +1072,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
       responses:
         "200":
           description: OK
@@ -1109,20 +1127,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1136,14 +1154,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1241,20 +1259,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1268,14 +1286,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1312,7 +1330,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
       responses:
         "200":
           description: OK
@@ -1367,17 +1385,17 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1399,7 +1417,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
         - name: page
           in: path
           required: true
@@ -1460,17 +1478,17 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1547,20 +1565,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1637,17 +1655,10 @@ paths:
                     type: string
                   data:
                     type: array
-              examples:
-                Empty Field:
-                  value:
-                    status: false
-                    message: product id must not be empty
-                    data: null
-                Bad Input:
-                  value:
-                    status: false
-                    message: Format data not valid
-                    data: null
+                example:
+                  status: false
+                  message: product id must not be empty
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1735,17 +1746,9 @@ paths:
                   data:
                     type: array
                 example:
-                  examples:
-                    Empty Field:
-                      value:
-                        status: false
-                        message: product id must not be empty
-                        data: null
-                    Bad Input:
-                      value:
-                        status: false
-                        message: Format data not valid
-                        data: null
+                  status: false
+                  message: product id must not be empty
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -1803,56 +1806,56 @@ paths:
                 example:
                   status: true
                   message: Get Cart Success
-                  data: 
+                  data:
                     - cart_id: 123e4567-e89b-12d3-a456-426614174000
-                      user: 
+                      user:
                         id: 123e4567-e89b-12d3-a456-426614174000
                         name: User 1
-                      product: 
-                      - id: 123e4567-e89b-12d3-a456-426614174000
-                        name: Product 1
-                        description: Product 1 description
-                        price: 10000
-                        coin: 200
-                        qty: 1
-                        image: 
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-1.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-2.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-3.jpg
-                        category:
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 1
-                            impact_point: 100
-                            icon_url: https://www.example.com/category-1.png
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 2
-                            impact_point: 200
-                            icon_url: https://www.example.com/category-2.png
-                      - id: 123e4567-e89b-12d3-a456-426614174000
-                        name: Product 2
-                        description: Product 2 description
-                        price: 20000
-                        coin: 2000
-                        qty: 2
-                        image: 
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-1.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-2.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-3.jpg
-                        category:
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 1
-                            impact_point: 100
-                            icon_url: https://www.example.com/category-1.png
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 2
-                            impact_point: 200
-                            icon_url: https://www.example.com/category-2.png
+                      product:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Product 1
+                          description: Product 1 description
+                          price: 10000
+                          coin: 200
+                          qty: 1
+                          image:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-1.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-2.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-3.jpg
+                          category:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 1
+                              impact_point: 100
+                              icon_url: https://www.example.com/category-1.png
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 2
+                              impact_point: 200
+                              icon_url: https://www.example.com/category-2.png
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Product 2
+                          description: Product 2 description
+                          price: 20000
+                          coin: 2000
+                          qty: 2
+                          image:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-1.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-2.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-3.jpg
+                          category:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 1
+                              impact_point: 100
+                              icon_url: https://www.example.com/category-1.png
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 2
+                              impact_point: 200
+                              icon_url: https://www.example.com/category-2.png
         "404":
           description: Not Found
           content:
@@ -1964,13 +1967,13 @@ paths:
                 example:
                   status: true
                   message: Get Transactions Success
-                  data: 
+                  data:
                     - id: 123e4567-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
-                      voucher: 
+                      voucher:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Voucher 1
                           code: DISC10
@@ -1981,7 +1984,7 @@ paths:
                       total: 100000
                       date: 2024-05-10
                     - id: 1345647-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
@@ -2047,7 +2050,7 @@ paths:
                 voucher_code: "DISC10"
                 address: "Jl. Raya Cikarus"
                 description: "This is a transaction description"
-                products: 
+                products:
                   - 123e4567-e89b-12d3-a456-426614174000
                   - 123e4567-e89b-12d3-a456-426614174000
       responses:
@@ -2079,18 +2082,10 @@ paths:
                     type: boolean
                   message:
                     type: string
-              examples:
-                Not Found Voucher:
-                  value:
-                    status: false
-                    message: Voucher code is invalid
-                    data: null
-                Empty Field:
-                  value:
-                    status: false
-                    message: Field cannot be empty
-                    data: null
-                  
+                example:
+                  status: false
+                  message: Voucher code is invalid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -2221,13 +2216,13 @@ paths:
                 example:
                   status: true
                   message: Get Transaction Detail Success
-                  data: 
+                  data:
                     - id: 123e4567-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
-                      voucher: 
+                      voucher:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Voucher 1
                           code: DISC10
@@ -2315,12 +2310,12 @@ paths:
                 example:
                   status: true
                   message: Validate Voucher Success
-                  data: 
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      name: Diskon Hari Raya
-                      discount: "10000"
-                      code: "DISC10"
-                      description: Diskon 10%
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    name: Diskon Hari Raya
+                    discount: "10000"
+                    code: "DISC10"
+                    description: Diskon 10%
         "400":
           description: Bad Request
           content:
@@ -2387,12 +2382,12 @@ paths:
                 example:
                   status: true
                   message: Create Payment Success
-                  data: 
+                  data:
                     payment_id: 123e4567-e89b-12d3-a456-426614174000
-                    transaction: 
+                    transaction:
                       id: 123e4567-e89b-12d3-a456-426614174000
                       total: 10000
-                    user: 
+                    user:
                       id: 123e4567-e89b-12d3-a456-426614174000
                       name: User 1
                     snap_url: https://app.sandbox.midtrans.com/snap/v1/transactions/123e4567-e89b-12d3-a456-426614174000
@@ -2535,7 +2530,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
       responses:
         "200":
           description: OK
@@ -2554,18 +2549,18 @@ paths:
                   status: true
                   message: Get Challenge Detail Success
                   data:
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Challenge 1
-                      description: Challenge 1 description
-                      point: 100
-                      exp: 100
-                      image:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-3.jpg
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Challenge 1
+                    description: Challenge 1 description
+                    point: 100
+                    exp: 100
+                    image:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-1.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-2.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-3.jpg
         "404":
           description: Not Found
           content:
@@ -2580,12 +2575,38 @@ paths:
                 example:
                   status: false
                   message: cannto get data, challenge id not found
-                  data: null                  
+                  data: null
   /challenges/participate:
+    get:
+      tags:
+        - challenges
+      summary: Get User Challenges (WIP)
+      description: User mendapatkan semua challenge yang sudah diambil
+      operationId: getUserChallenges
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Challenges Success
+                  data: null
     post:
       tags:
         - challenges
-      summary: Create Challenge
+      summary: Participate Challenge
       description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
       operationId: swipeChallenge
       security:
@@ -2601,7 +2622,7 @@ paths:
                 type:
                   type: string
               example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                challenge_id: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
                 type: decline
       responses:
         "200":
@@ -2654,9 +2675,9 @@ paths:
     put:
       tags:
         - challenges
-      summary: Update Challenge
+      summary: Update Challenge (WIP)
       description: User dapat mengupdate ulang partisipasi, dengan mengirim bukti gambar(gambar bisa lebih dari satu)
-      operationId: swipeChallenge
+      operationId: swipeChallengeUpdate
       security:
         - bearerAuth: []
       requestBody:
@@ -2725,7 +2746,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get User Challenges
+      summary: Get User Challenges (WIP)
       description: User mendapatkan semua challenge yang sudah diambil
       operationId: getUserChallenges
       security:
@@ -2821,7 +2842,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get Leaderboard
+      summary: Get Leaderboard (WIP)
       description: User dapat melihat leaderboard
       operationId: getLeaderboard
       security:
@@ -2863,7 +2884,7 @@ paths:
                       avatar_url: https://www.example.com/avatar-3.jpg
                       rank: 3
         "404":
-          description: Not Found  
+          description: Not Found
           content:
             application/json:
               schema:
@@ -2912,7 +2933,21 @@ paths:
                         username: user1
                         name: User 1
                         avatar_url: https://www.example.com/avatar-1.jpg
-          
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -2927,6 +2962,21 @@ paths:
                 example:
                   status: false
                   message: cannot get data, data not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
                   data: null
     post:
       tags:
@@ -2986,17 +3036,10 @@ paths:
                     type: boolean
                   message:
                     type: string
-              examples:
-                Empty Field:
-                  value:
-                    status: false
-                    message: field title & description cannot be empty
-                    data: null
-                Bad Input:
-                  value:
-                    status: false
-                    message: Format data not valid
-                    data: null
+                example:
+                  status: false
+                  message: cannot create forum
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -3011,6 +3054,123 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+  /forums?page={page}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, data not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
                   data: null
   /forums/{forum_id}:
     get:
@@ -3071,6 +3231,21 @@ paths:
                           name: User 2
                           avatar_url: https://www.example.com/avatar-2.jpg
                           created_at: 2021-01-01 00:00:00
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -3086,7 +3261,269 @@ paths:
                   status: false
                   message: cannot get data, id forum not found
                   data: null
-  /forum/message:
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+    put: 
+      tags:
+        - forum
+      summary: Update Forum
+      description: User dapat mengupdate forum yang dibuatnya, alias user lain tidak bisa mengupdate
+      operationId: updateForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              example:
+                title: Forum 1
+                description: Forum 1 description
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Update Forum Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot update forum
+                  data: nil
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id forum not found
+                  data: nil
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: nil
+  /forums/user:
+    get:
+      tags:
+        - forum
+      summary: Get Forum List
+      description: User dapat melihat list forum yang dibuat oleh dirinya
+      operationId: getForumList
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum List Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id user not found
+                  data: null
+  
+  /forums/user?page={page}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum List
+      description: User dapat melihat list forum yang dibuat oleh dirinya
+      operationId: getForumList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum List Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id user not found
+                  data: null
+  /forums/message:
     post:
       tags:
         - forum
@@ -3107,7 +3544,7 @@ paths:
                   type: string
               example:
                 forum_id: 123e4567-e89b-12d3-a456-426614174000
-                message: Hello, World!
+                messages: Hello, World!
       responses:
         "200":
           description: OK
@@ -3139,12 +3576,10 @@ paths:
                     type: string
                   data:
                     type: array
-              examples:
-                Empty Field:
-                  value:
-                    status: false
-                    message: field message cannot be empty
-                    data: null
+                example:
+                  status: false
+                  message: cannot send message
+                  data: null
         "401":
           description: Unauthorized
           content:
@@ -3175,7 +3610,112 @@ paths:
                   status: false
                   message: Id Forum not found
                   data: null
-  /forum/message/{message_id}:
+  /forums/message/{message_id}:
+    put: 
+      tags:
+        - forum
+      summary: Update Message
+      description: User dapat mengubah pesan
+      operationId: updateMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+              example:
+                messages: Hello, World!
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Update Message Success
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: cannot update message
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: You are not authorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Message not found
+                  data: null
     delete:
       tags:
         - forum
@@ -3223,6 +3763,21 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
+                  data: null
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: You are not authorized
                   data: null
         "404":
           description: Not Found
