@@ -1,6 +1,7 @@
 package challenges
 
 import (
+	"backendgreeve/features/impactcategory"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -13,50 +14,55 @@ type Challenge struct {
 	Description      string
 	Exp              int
 	Coin             int
+	ImageURL         string
 	DateStart        time.Time
 	DateEnd          time.Time
-	Images           []ChallengeImage
 	ImpactCategories []ChallengeImpactCategory
-}
-
-type ChallengeImage struct {
-	ID          string
-	ChallengeID string
-	ImageURL    string
-	Position    int
 }
 
 type ChallengeImpactCategory struct {
 	ID               string
 	ChallengeID      string
 	ImpactCategoryID string
+	ImpactCategory   impactcategory.ImpactCategory
+}
+
+type ImpactCategory struct {
+	ID          string
+	Name        string
+	ImpactPoint int
 }
 
 type ChallengeHandlerInterface interface {
-	GetAllChallengeForUser() echo.HandlerFunc
-	GetUserChallenge() echo.HandlerFunc
-	GetChallengeByID() echo.HandlerFunc
-	SwipeChallenge() echo.HandlerFunc
+	GetAllForUser() echo.HandlerFunc
+	GetByID() echo.HandlerFunc
+	Swipe() echo.HandlerFunc
 
-	GetAllChallengeForAdmin() echo.HandlerFunc
-	CreateChallenge() echo.HandlerFunc
-	UpdateChallenge() echo.HandlerFunc
-	DeleteChallenge() echo.HandlerFunc
+	GetAllForAdmin() echo.HandlerFunc
+	Create() echo.HandlerFunc
+	Update() echo.HandlerFunc
+	Delete() echo.HandlerFunc
 }
 
 type ChallengeServiceInterface interface {
-	GetAllChallengeForUser() ([]Challenge, int, error)
-	GetUserChallenge(userId string) ([]Challenge, int, error)
-	GetChallengeByID(challengeId string) (Challenge, error)
-	SwipeChallenge(userId string, challengeId string) (Challenge, error)
+	GetAllForUser(userId string) ([]Challenge, error)
+	GetByID(challengeId string) (Challenge, error)
+	Swipe(userId string, challengeId string, challengeType string) error
 
-	CreateChallenge(challenge Challenge) error
-	UpdateChallenge(challenge Challenge) error
-	DeleteChallenge(challengeId string) error
+	GetAllForAdmin(page int) ([]Challenge, int, error)
+	Create(challenge Challenge) error
+	Update(challenge Challenge) error
+	Delete(challengeId string) error
 }
 
 type ChallengeDataInterface interface {
-	CreateChallenge(Challenge) (Challenge, error)
-	UpdateChallenge(Challenge) (Challenge, error)
-	DeleteChallenge(string) error
+	GetAllForAdmin(page int) ([]Challenge, int, error)
+	GetAllForUser(userId string) ([]Challenge, error)
+	GetByID(challengeId string) (Challenge, error)
+	Swipe(userId string, challengeId string, challengeType string) error
+	AddToLogs(userId string, challengeId string, status string) error
+	IsUserParticipate(userId string, challengeId string) bool
+	Create(Challenge) error
+	Update(Challenge) error
+	Delete(string) error
 }

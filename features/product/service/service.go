@@ -20,7 +20,17 @@ func (s *ProductService) Get() ([]product.Product, error) {
 }
 
 func (s *ProductService) GetByPage(page int) ([]product.Product, int, error) {
-	return s.d.GetByPage(page)
+	if page <= 0 {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	products, total, err := s.d.GetByPage(page)
+	if err != nil {
+		return nil, 0, err
+	}
+	if page > total {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	return products, total, nil
 }
 
 func (s *ProductService) GetById(id string) (product.Product, error) {
@@ -28,11 +38,31 @@ func (s *ProductService) GetById(id string) (product.Product, error) {
 }
 
 func (s *ProductService) GetByCategory(category string, page int) ([]product.Product, int, error) {
-	return s.d.GetByCategory(category, page)
+	if page <= 0 {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	products, total, err := s.d.GetByCategory(category, page)
+	if err != nil {
+		return nil, 0, err
+	}
+	if page > total {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	return products, total, nil
 }
 
 func (s *ProductService) GetByName(name string, page int) ([]product.Product, int, error) {
-	return s.d.GetByName(name, page)
+	if page <= 0 {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	products, total, err := s.d.GetByName(name, page)
+	if err != nil {
+		return nil, 0, err
+	}
+	if page > total {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	return products, total, nil
 }
 
 func (s *ProductService) Create(product product.Product) error {

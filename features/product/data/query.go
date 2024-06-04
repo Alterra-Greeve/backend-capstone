@@ -30,7 +30,7 @@ func (pd *ProductData) GetByPage(page int) ([]product.Product, int, error) {
 	var products []product.Product
 
 	var totalProducts int64
-	countTx := pd.DB.Model(&product.Product{}).Count(&totalProducts)
+	countTx := pd.DB.Model(&Product{}).Count(&totalProducts)
 	if countTx.Error != nil {
 		return nil, 0, constant.ErrProductEmpty
 	}

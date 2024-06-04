@@ -293,8 +293,9 @@ paths:
       tags:
         - users
       summary: Update User
-      description: User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
-                   untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
+      description:
+        User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
+        untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -326,11 +327,11 @@ paths:
               example:
                 email: kzquandary@gmail.com
                 username: kzquandary
-                password: 'kzquandary'
+                password: "kzquandary"
                 name: Kzquandary Update
                 address: Cisurupan, Garut, Jawa Barat
                 gender: Laki-laki
-                phone: '089662966699'
+                phone: "089662966699"
                 avatar_url: https://www.example.com/avatar.jpg
       responses:
         "200":
@@ -456,24 +457,24 @@ paths:
                   message: Unauthorized
                   data: null
         "404":
-            description: Not Found
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status:
-                      type: boolean
-                    message:
-                      type: string
-                  example:
-                    status: false
-                    message: Id User not found
-                    data: null
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id User not found
+                  data: null
   /user/{username}:
     get:
       tags:
-        - users 
+        - users
       summary: Get User by Username
       description: User mendapatkan data user sesuai dengan usernamenya
       operationId: getUserByUsername
@@ -523,16 +524,16 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                      id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
-                      username: "kzquandary"
-                      name: "Kaze User"
-                      email: "users@kzquandary.my.id"
-                      address: "jalan raya cimahi"
-                      gender: "Laki-laki"
-                      phone: "089123456789"
-                      coin: 0
-                      exp: 0
-                      avatar_url: ""
+                    id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
+                    username: "kzquandary"
+                    name: "Kaze User"
+                    email: "users@kzquandary.my.id"
+                    address: "jalan raya cimahi"
+                    gender: "Laki-laki"
+                    phone: "089123456789"
+                    coin: 0
+                    exp: 0
+                    avatar_url: ""
         "401":
           description: Unauthorized
           content:
@@ -857,20 +858,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -884,14 +885,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -983,20 +984,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1010,14 +1011,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1054,7 +1055,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
       responses:
         "200":
           description: OK
@@ -1109,20 +1110,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1136,14 +1137,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1241,20 +1242,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1268,14 +1269,14 @@ paths:
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1312,7 +1313,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
       responses:
         "200":
           description: OK
@@ -1367,17 +1368,17 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1399,7 +1400,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Energy Efficient
         - name: page
           in: path
           required: true
@@ -1460,17 +1461,17 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1547,20 +1548,20 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
-                  data: 
+                  data:
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
-                      category: 
+                      category:
                         - id: 67617191-bc11-4367-9590-d088429c163f
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
                         - id: deb66563-0946-4aac-a863-21c452d2da16
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
+                      images:
                         - id: 6883e579-9595-4e17-99c8-e22e67c94b77
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
@@ -1788,56 +1789,56 @@ paths:
                 example:
                   status: true
                   message: Get Cart Success
-                  data: 
+                  data:
                     - cart_id: 123e4567-e89b-12d3-a456-426614174000
-                      user: 
+                      user:
                         id: 123e4567-e89b-12d3-a456-426614174000
                         name: User 1
-                      product: 
-                      - id: 123e4567-e89b-12d3-a456-426614174000
-                        name: Product 1
-                        description: Product 1 description
-                        price: 10000
-                        coin: 200
-                        qty: 1
-                        image: 
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-1.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-2.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-3.jpg
-                        category:
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 1
-                            impact_point: 100
-                            icon_url: https://www.example.com/category-1.png
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 2
-                            impact_point: 200
-                            icon_url: https://www.example.com/category-2.png
-                      - id: 123e4567-e89b-12d3-a456-426614174000
-                        name: Product 2
-                        description: Product 2 description
-                        price: 20000
-                        coin: 2000
-                        qty: 2
-                        image: 
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-1.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-2.jpg
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            url: https://www.example.com/product-3.jpg
-                        category:
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 1
-                            impact_point: 100
-                            icon_url: https://www.example.com/category-1.png
-                          - id: 123e4567-e89b-12d3-a456-426614174000
-                            name: Category 2
-                            impact_point: 200
-                            icon_url: https://www.example.com/category-2.png
+                      product:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Product 1
+                          description: Product 1 description
+                          price: 10000
+                          coin: 200
+                          qty: 1
+                          image:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-1.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-2.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-3.jpg
+                          category:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 1
+                              impact_point: 100
+                              icon_url: https://www.example.com/category-1.png
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 2
+                              impact_point: 200
+                              icon_url: https://www.example.com/category-2.png
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          name: Product 2
+                          description: Product 2 description
+                          price: 20000
+                          coin: 2000
+                          qty: 2
+                          image:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-1.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-2.jpg
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              url: https://www.example.com/product-3.jpg
+                          category:
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 1
+                              impact_point: 100
+                              icon_url: https://www.example.com/category-1.png
+                            - id: 123e4567-e89b-12d3-a456-426614174000
+                              name: Category 2
+                              impact_point: 200
+                              icon_url: https://www.example.com/category-2.png
         "404":
           description: Not Found
           content:
@@ -1949,13 +1950,13 @@ paths:
                 example:
                   status: true
                   message: Get Transactions Success
-                  data: 
+                  data:
                     - id: 123e4567-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
-                      voucher: 
+                      voucher:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Voucher 1
                           code: DISC10
@@ -1966,7 +1967,7 @@ paths:
                       total: 100000
                       date: 2024-05-10
                     - id: 1345647-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
@@ -2032,7 +2033,7 @@ paths:
                 voucher_code: "DISC10"
                 address: "Jl. Raya Cikarus"
                 description: "This is a transaction description"
-                products: 
+                products:
                   - 123e4567-e89b-12d3-a456-426614174000
                   - 123e4567-e89b-12d3-a456-426614174000
       responses:
@@ -2198,13 +2199,13 @@ paths:
                 example:
                   status: true
                   message: Get Transaction Detail Success
-                  data: 
+                  data:
                     - id: 123e4567-e89b-12d3-a456-426614174000
-                      user :
+                      user:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           username: user1
                           email: user1@example.com
-                      voucher: 
+                      voucher:
                         - id: 123e4567-e89b-12d3-a456-426614174000
                           name: Voucher 1
                           code: DISC10
@@ -2292,12 +2293,12 @@ paths:
                 example:
                   status: true
                   message: Validate Voucher Success
-                  data: 
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      name: Diskon Hari Raya
-                      discount: "10000"
-                      code: "DISC10"
-                      description: Diskon 10%
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    name: Diskon Hari Raya
+                    discount: "10000"
+                    code: "DISC10"
+                    description: Diskon 10%
         "400":
           description: Bad Request
           content:
@@ -2364,12 +2365,12 @@ paths:
                 example:
                   status: true
                   message: Create Payment Success
-                  data: 
+                  data:
                     payment_id: 123e4567-e89b-12d3-a456-426614174000
-                    transaction: 
+                    transaction:
                       id: 123e4567-e89b-12d3-a456-426614174000
                       total: 10000
-                    user: 
+                    user:
                       id: 123e4567-e89b-12d3-a456-426614174000
                       name: User 1
                     snap_url: https://app.sandbox.midtrans.com/snap/v1/transactions/123e4567-e89b-12d3-a456-426614174000
@@ -2512,7 +2513,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
       responses:
         "200":
           description: OK
@@ -2531,18 +2532,18 @@ paths:
                   status: true
                   message: Get Challenge Detail Success
                   data:
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Challenge 1
-                      description: Challenge 1 description
-                      point: 100
-                      exp: 100
-                      image:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-3.jpg
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Challenge 1
+                    description: Challenge 1 description
+                    point: 100
+                    exp: 100
+                    image:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-1.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-2.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-3.jpg
         "404":
           description: Not Found
           content:
@@ -2557,12 +2558,38 @@ paths:
                 example:
                   status: false
                   message: cannto get data, challenge id not found
-                  data: null                  
+                  data: null
   /challenges/participate:
+    get:
+      tags:
+        - challenges
+      summary: Get User Challenges (WIP)
+      description: User mendapatkan semua challenge yang sudah diambil
+      operationId: getUserChallenges
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Challenges Success
+                  data: null
     post:
       tags:
         - challenges
-      summary: Create Challenge
+      summary: Participate Challenge
       description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
       operationId: swipeChallenge
       security:
@@ -2578,7 +2605,7 @@ paths:
                 type:
                   type: string
               example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                challenge_id: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
                 type: decline
       responses:
         "200":
@@ -2631,9 +2658,9 @@ paths:
     put:
       tags:
         - challenges
-      summary: Update Challenge
+      summary: Update Challenge (WIP)
       description: User dapat mengupdate ulang partisipasi, dengan mengirim bukti gambar(gambar bisa lebih dari satu)
-      operationId: swipeChallenge
+      operationId: swipeChallengeUpdate
       security:
         - bearerAuth: []
       requestBody:
@@ -2702,7 +2729,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get User Challenges
+      summary: Get User Challenges (WIP)
       description: User mendapatkan semua challenge yang sudah diambil
       operationId: getUserChallenges
       security:
@@ -2798,7 +2825,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get Leaderboard
+      summary: Get Leaderboard (WIP)
       description: User dapat melihat leaderboard
       operationId: getLeaderboard
       security:
@@ -2840,7 +2867,7 @@ paths:
                       avatar_url: https://www.example.com/avatar-3.jpg
                       rank: 3
         "404":
-          description: Not Found  
+          description: Not Found
           content:
             application/json:
               schema:
@@ -2889,7 +2916,7 @@ paths:
                         username: user1
                         name: User 1
                         avatar_url: https://www.example.com/avatar-1.jpg
-          
+
         "404":
           description: Not Found
           content:

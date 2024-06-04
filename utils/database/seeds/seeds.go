@@ -1,8 +1,10 @@
 package seeds
 
 import (
+	challenge "backendgreeve/features/challenges/data"
 	product "backendgreeve/features/product/data"
 	"backendgreeve/utils/database/seed"
+	"time"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -506,7 +508,7 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct12",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          uuid.New().String(),
+					ID:          "e5da3310-6ec6-4b43-81c2-a6eb5a0538c8",
 					Name:        "Low Carbon Sneakers",
 					Description: "Sneakers with a low carbon footprint.",
 					Price:       25,
@@ -542,7 +544,7 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct13",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          uuid.New().String(),
+					ID:          "a10882e9-ef38-4796-bc25-f56ca2374fed",
 					Name:        "Non-Toxic Paint",
 					Description: "Paint made from non-toxic and natural ingredients.",
 					Price:       18,
@@ -577,7 +579,7 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct14",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          uuid.New().String(),
+					ID:          "0e1c5843-a637-4a92-bfa0-7c7342f51846",
 					Name:        "Recycled Paper",
 					Description: "Paper made from 100% recycled materials.",
 					Price:       12000,
@@ -612,7 +614,7 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct15",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          uuid.New().String(),
+					ID:          "de45d430-da60-4701-a51a-ffda02ba69c5",
 					Name:        "Reusable Grocery Bags",
 					Description: "Strong and durable grocery bags made from recycled materials.",
 					Price:       24000,
@@ -643,6 +645,159 @@ func Seeds() []seed.Seed {
 				return CreateProduct(db, products)
 			},
 		},
+		// Product Ends
+		// Challenge Starts
+		{
+			Name: "CreateChallenge1",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "5fe8f4f6-43ee-4420-8969-bf1a0e19260c",
+					Title:        "Plant a Tree",
+					Difficulty:  "Medium",
+					Description: "Plant a tree in your backyard or a community park",
+					Exp:         100,
+					Coin:        50,
+					DateStart:   time.Date(2024, 6, 10, 9, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 6, 17, 9, 0, 0, 0, time.UTC),
+					ImageURL:     "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "30fc3682-a674-42e1-b420-e16fcd0c85a5",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge2",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "ba2621ac-6f99-43cb-ab8a-7db626b7c4e4",
+					Title:       "Zero Waste Week",
+					Difficulty:  "Hard",
+					Description: "Produce no waste for a week and recycle everything possible",
+					Exp:         200,
+					Coin:        100,
+					DateStart:   time.Date(2024, 7, 1, 8, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 7, 8, 8, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "078817ea-4fcf-4eeb-96b2-f10961826469",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge3",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4",
+					Title:       "Community Clean-Up",
+					Difficulty:  "Easy",
+					Description: "Join a local community clean-up event",
+					Exp:         50,
+					Coin:        25,
+					DateStart:   time.Date(2024, 8, 15, 10, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 8, 22, 10, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "1350c308-05e7-4d49-a5ad-3e92b00ecba9",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "078817ea-4fcf-4eeb-96b2-f10961826469",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge4",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "aa013dc7-4fb3-4cf1-9cc0-e1a0ad60414d",
+					Title:       "Bicycle to Work",
+					Difficulty:  "Medium",
+					Description: "Commute to work by bicycle for a week",
+					Exp:         150,
+					Coin:        75,
+					DateStart:   time.Date(2024, 9, 5, 7, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 9, 12, 7, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge5",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "5550e03b-15c6-43c9-997c-4086adc8b573",
+					Title:       "Energy Saving Month",
+					Difficulty:  "Hard",
+					Description: "Reduce your household energy consumption by 20% for a month",
+					Exp:         300,
+					Coin:        150,
+					DateStart:   time.Date(2024, 10, 1, 0, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "19ecd259-58f0-4b3c-ba6b-e16f03317048",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		// Challenge Ends
 	}
 	return seeds
 }
