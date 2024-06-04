@@ -265,6 +265,19 @@ paths:
                       email: users@kuze.my.id
                       address: Cilacap
                       gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -330,12 +343,25 @@ paths:
                   status: true
                   message: Get Id User Success
                   data: 
-                    - id: 422344
+                      id: 422344
                       name: Kaze User
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
                       phone: '62123456789'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -389,7 +415,7 @@ paths:
                 name: Kuze User
                 address: Cimahi2
                 gender: Laki-laki
-                phone: 62123456789
+                phone: "62123456789"
       responses:
         "200":
           description: OK
@@ -427,7 +453,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request data
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -457,7 +483,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id user Not Found
+                  message: User ID Not Found
                   data: null
     delete: 
       tags:
@@ -490,7 +516,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Delete User Success
+                  message: Successfull Delete User
                   data: null
         "401":
           description: Unauthorized
@@ -521,7 +547,7 @@ paths:
                     nullable: true
                 example:
                   status: false
-                  message: Id User Not Found
+                  message: User ID Not Found
                   data: null
   /transactions:
     get: 
@@ -559,7 +585,6 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
                     - id: 02
                       user_id: 422344
                       address: Cimahi
@@ -569,7 +594,21 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -619,7 +658,7 @@ paths:
                   status: true
                   message: Get Data by ID Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -628,7 +667,7 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        
         "404":
           description: Not Found
           content:
@@ -687,7 +726,7 @@ paths:
                   status: true
                   message: Update Data Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -848,6 +887,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -933,7 +987,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -1153,6 +1207,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1279,6 +1348,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1411,6 +1495,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1513,6 +1612,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Category not found
+                  data: null
   /products/category/{category_name}?page={page}:
     get:
       tags:
@@ -1606,6 +1735,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
   /admin/products/{product_id}:
     put: 
       tags:
@@ -2197,6 +2356,21 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: error, id Forum Not Found
                   data: nil
   /admin/impact:
     get:
