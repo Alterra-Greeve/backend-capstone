@@ -134,6 +134,7 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
+				Stock:       999,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
@@ -196,6 +197,7 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			Coin:        product.Coin,
 			Images:      images,
 			Category:    categories,
+			Stock:       999,
 			CreatedAt:   product.CreatedAt.Format("02/01/2006"),
 			UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
 		}
@@ -256,6 +258,7 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
+				Stock:       999,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
@@ -319,6 +322,7 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
+				Stock:       999,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})

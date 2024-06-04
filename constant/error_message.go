@@ -93,3 +93,20 @@ var ErrProductImpactCategoriesEmpty = errors.New("Impact Categories cannot be em
 var ErrProductIDEmpty = errors.New("ID cannot be empty")
 var ErrProductUpdateEmpty = errors.New("One or more fields for update cannot be empty")
 var ErrProductDelete = errors.New("Failed to delete product")
+
+// Challenges Errors
+var ErrUserAlreadyParticipate = errors.New("User already participate")
+var ErrUserNotParticipate = errors.New("User not participate")
+var ErrCreateChallenge = errors.New("Failed to create challenge")
+var ErrGetChallenge = errors.New("Failed to get challenge")
+var ErrGetChallengeByID = errors.New("Failed to get challenge by ID")
+var ErrEditChallenge = errors.New("Field Description Cannot be Empty")
+var ErrChallengeNotFound = errors.New("error, id Challenge Not Found")
+var ErrUpdateChallenge = errors.New("Failed to update challenge")
+var ErrDeleteChallenge = errors.New("Failed to delete challenge")
+var ErrChallengeField = errors.New("Field cannot be empty")
+var ErrChallengeFieldUpdate = errors.New("One or more fields for update cannot be empty")
+var ErrChallengeFieldSwipe = errors.New("Field cannot be empty")
+var ErrChallengeType = errors.New("Challenge type must be accept or decline")
+var ErrChallengeFieldCreate = errors.New("Field cannot be empty")
+

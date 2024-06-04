@@ -6,6 +6,7 @@ type ProductResponse struct {
 	Description string                  `json:"description"`
 	Price       float64                 `json:"price"`
 	Coin        int                     `json:"coin"`
+	Stock       int                     `json:"stock"`
 	CreatedAt   string                  `json:"created_at"`
 	UpdatedAt   string                  `json:"updated_at"`
 	Category    []ProductImpactCategory `json:"category"`

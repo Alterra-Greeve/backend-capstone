@@ -1,13 +1,13 @@
 package handler
 
 type ChallengeResponse struct {
-	ID               string                      `json:"id"`
-	Title            string                      `json:"title"`
-	Description      string                      `json:"description"`
-	ImageURL         string                      `json:"image_url"`
-	DateStart        string                      `json:"date_start"`
-	DateEnd          string                      `json:"date_end"`
-	ImpactCategories []ChallengeImpactCategories `json:"impact_categories"`
+	ID          string                      `json:"id"`
+	Title       string                      `json:"title"`
+	Description string                      `json:"description"`
+	ImageURL    string                      `json:"image_url"`
+	DateStart   string                      `json:"date_start"`
+	DateEnd     string                      `json:"date_end"`
+	Categories  []ChallengeImpactCategories `json:"categories"`
 }
 
 type ChallengeImpactCategories struct {

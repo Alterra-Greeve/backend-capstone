@@ -45,9 +45,9 @@ type ChallengeHandlerInterface interface {
 }
 
 type ChallengeServiceInterface interface {
-	GetAllForUser() ([]Challenge, int, error)
+	GetAllForUser(userId string) ([]Challenge, error)
 	GetByID(challengeId string) (Challenge, error)
-	SwipeChallenge(userId string, challengeId string) (Challenge, error)
+	Swipe(userId string, challengeId string, challengeType string) error
 
 	GetAllForAdmin(page int) ([]Challenge, int, error)
 	Create(challenge Challenge) error
@@ -57,10 +57,11 @@ type ChallengeServiceInterface interface {
 
 type ChallengeDataInterface interface {
 	GetAllForAdmin(page int) ([]Challenge, int, error)
-	GetAllForUser() ([]Challenge, int, error)
+	GetAllForUser(userId string) ([]Challenge, error)
 	GetByID(challengeId string) (Challenge, error)
-	Swipe(userId string, challengeId string) error
+	Swipe(userId string, challengeId string, challengeType string) error
 	AddToLogs(userId string, challengeId string, status string) error
+	IsUserParticipate(userId string, challengeId string) bool
 	Create(Challenge) error
 	Update(Challenge) error
 	Delete(string) error

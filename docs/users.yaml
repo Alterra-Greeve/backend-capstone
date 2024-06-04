@@ -2513,7 +2513,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
       responses:
         "200":
           description: OK
@@ -2560,10 +2560,36 @@ paths:
                   message: cannto get data, challenge id not found
                   data: null
   /challenges/participate:
+    get:
+      tags:
+        - challenges
+      summary: Get User Challenges (WIP)
+      description: User mendapatkan semua challenge yang sudah diambil
+      operationId: getUserChallenges
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Challenges Success
+                  data: null
     post:
       tags:
         - challenges
-      summary: Create Challenge
+      summary: Participate Challenge
       description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
       operationId: swipeChallenge
       security:
@@ -2579,7 +2605,7 @@ paths:
                 type:
                   type: string
               example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
+                challenge_id: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
                 type: decline
       responses:
         "200":
@@ -2632,9 +2658,9 @@ paths:
     put:
       tags:
         - challenges
-      summary: Update Challenge
+      summary: Update Challenge (WIP)
       description: User dapat mengupdate ulang partisipasi, dengan mengirim bukti gambar(gambar bisa lebih dari satu)
-      operationId: swipeChallenge
+      operationId: swipeChallengeUpdate
       security:
         - bearerAuth: []
       requestBody:
@@ -2703,7 +2729,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get User Challenges
+      summary: Get User Challenges (WIP)
       description: User mendapatkan semua challenge yang sudah diambil
       operationId: getUserChallenges
       security:
@@ -2799,7 +2825,7 @@ paths:
     get:
       tags:
         - challenges
-      summary: Get Leaderboard
+      summary: Get Leaderboard (WIP)
       description: User dapat melihat leaderboard
       operationId: getLeaderboard
       security:

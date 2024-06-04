@@ -82,9 +82,12 @@ func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg c
 		ErrorHandler: helper.JWTErrorHandler,
 	}
 
-	e.POST(route.ChallengePath, ch.Create(), echojwt.WithConfig(jwtConfig))
-	e.GET(route.ChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.AdminChallengePath, ch.Create(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.ChallengeParticipate, ch.Swipe(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengePath, ch.GetAllForUser(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
