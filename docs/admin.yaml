@@ -90,10 +90,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: Email and password cannot be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Email or Password cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
   /admin:
     get:
       tags:
@@ -253,6 +260,113 @@ paths:
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
+                    - id: 422322
+                      name: Kuze 
+                      email: users@kuze.my.id
+                      address: Cilacap
+                      gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found  
+                  data: null
+  /admin/users?page={page}:
+    get: 
+      tags: 
+        - user
+      summary: Get All Users
+      description: Admin mendapatkan semua user, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getAllUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Success
+                  data:
+                    - id: 422344
+                      name: Kaze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+                    - id: 422322
+                      name: Kuze 
+                      email: users@kuze.my.id
+                      address: Cilacap
+                      gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -284,31 +398,6 @@ paths:
           schema:
             type: string
           example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                address:
-                  type: string
-                gender:
-                  type: string
-                  enum:
-                    - Laki-laki
-                    - Perempuan
-                phone:
-                  type: string
-              example:
-                name: Kaze User
-                email: users@kzquandary.my.id
-                address: Cimahi
-                gender: Laki-laki
-                phone: 62123456789
       responses:
         "200":
           description: OK
@@ -323,16 +412,45 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        gender:
+                          type: string
+                          enum:
+                            - Laki-laki
+                            - Perempuan
+                        phone:
+                          type: string
                 example:
                   status: true
                   message: Get Id User Success
                   data: 
-                    - id: 422344
+                      id: 422344
                       name: Kaze User
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
-                      phone: 62123456789
+                      phone: '62123456789'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -384,10 +502,9 @@ paths:
                   type: string
               example:
                 name: Kuze User
-                email: users@kzquandary2.my.id
                 address: Cimahi2
                 gender: Laki-laki
-                phone: 62123456789
+                phone: "62123456789"
       responses:
         "200":
           description: OK
@@ -425,7 +542,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request data
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -455,7 +572,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id user Not Found
+                  message: User ID Not Found
                   data: null
     delete: 
       tags:
@@ -488,7 +605,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Delete User Success
+                  message: Successfull Delete User
                   data: null
         "401":
           description: Unauthorized
@@ -519,7 +636,7 @@ paths:
                     nullable: true
                 example:
                   status: false
-                  message: Id User Not Found
+                  message: User ID Not Found
                   data: null
   /transactions:
     get: 
@@ -557,7 +674,6 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
                     - id: 02
                       user_id: 422344
                       address: Cimahi
@@ -567,7 +683,21 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -617,7 +747,7 @@ paths:
                   status: true
                   message: Get Data by ID Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -626,7 +756,7 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        
         "404":
           description: Not Found
           content:
@@ -685,7 +815,7 @@ paths:
                   status: true
                   message: Update Data Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -846,6 +976,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -931,7 +1076,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -1151,6 +1296,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1277,6 +1437,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1409,6 +1584,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1511,6 +1701,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Category not found
+                  data: null
   /products/category/{category_name}?page={page}:
     get:
       tags:
@@ -1604,6 +1824,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
   /admin/products/{product_id}:
     put: 
       tags:
@@ -1780,7 +2030,147 @@ paths:
                   status: false
                   message: Id Product Not Found
                   data: null
-  /admin/challenge:
+  /admin/challenges:
+    get:
+      tags:
+        - challenge
+      summary: Get All Challenges
+      description: User mendapatkan semua challenge yang belum diambil atau ditolak
+      operationId: getChallenges
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  metadata:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                      total_page:
+                        type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        description:
+                          type: string
+                        image_url:
+                          type: string
+                        date_start:
+                          type: string
+                        date_end:
+                          type: string
+                        categories:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              impact_category:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  impact_point:
+                                    type: integer
+                example:
+                  status: true
+                  message: Get Challenges Success
+                  metadata:
+                    current_page: 1
+                    total_page: 1
+                  data:
+                    - id: "5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4"
+                      title: "Community Clean-Up"
+                      description: "Join a local community clean-up event"
+                      image_url: "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg"
+                      date_start: "2024-08-15"
+                      date_end: "2024-08-22"
+                      categories:
+                        - impact_category:
+                            name: "Recyclable"
+                            impact_point: 30
+                        - impact_category:
+                            name: "Eco-Friendly"
+                            impact_point: 40
+                    - id: "5550e03b-15c6-43c9-997c-4086adc8b573"
+                      title: "Energy Saving Month"
+                      description: "Reduce your household energy consumption by 20% for a month"
+                      image_url: "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg"
+                      date_start: "2024-10-01"
+                      date_end: "2024-11-01"
+                      categories:
+                        - impact_category:
+                            name: "Water Saving"
+                            impact_point: 50
+                        - impact_category:
+                            name: "Energy Efficient"
+                            impact_point: 55
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 1
+                      description: Challenge 1 description
+                      point: 100
+                      exp: 100
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 2
+                      description: Challenge 2 description
+                      point: 200
+                      exp: 200
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 3
+                      description: Challenge 3 description
+                      point: 300
+                      exp: 300
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Challenges not found
+                  data: null
     post:
       tags:
         - challenge
@@ -1807,22 +2197,32 @@ paths:
                   type: integer
                 date_start:
                   type: string
+                  format: date-time
                 date_end:
                   type: string
+                  format: date-time
                 difficulty:
                   type: string
+                coin:
+                  type: integer
+                image_url:
+                  type: string
+                category:
+                  type: array
+                  items:
+                    type: string
               example:
                 title: Relaxation Week Challenge
-                dificulty: Easy
+                difficulty: Easy
                 description: Mungut sampah sejauh 10km JALAN KAKI
                 exp: 10000
                 coin: 100
-                category: 
-                  - e965bc1d-9bfa-4512-8e28-64a101201d9d
-                  - e965bc1d-9bfa-4512-8e28-64a101201d9e
                 image_url: https://example.com/images/item3.jpg
-                date_start: 2024-10-10
-                date_end: 2024-10-11
+                date_start: 2024-10-10T00:00:00Z
+                date_end: 2024-10-11T00:00:00Z
+                category: 
+                  - 078817ea-4fcf-4eeb-96b2-f10961826469
+                  - 1350c308-05e7-4d49-a5ad-3e92b00ecba9
       responses:
         "200":
           description: OK
@@ -1840,15 +2240,7 @@ paths:
                 example:
                   status: true
                   message: Add Challenge Success
-                  data: 
-                      id: 01
-                      author: John Doe
-                      title: Relaxation Week Challenge
-                      description: Mungut sampah sejauh 10km JALAN KAKI
-                      experience: 10000
-                      point: 100
-                      date_start: 2024-10-10
-                      date_end: 2024-10-11
+                  data: null
         "400":
           description: Bad Request
           content:
@@ -1879,24 +2271,249 @@ paths:
                   status: false
                   message: missing or malformed jwt
                   data: null
+  /admin/challenges?page={page}:
+    get:
+      tags:
+        - challenge
+      summary: Get All Challenges
+      description: User mendapatkan semua challenge yang belum diambil atau ditolak
+      operationId: getChallengesPage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  metadata:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                      total_page:
+                        type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        description:
+                          type: string
+                        image_url:
+                          type: string
+                        date_start:
+                          type: string
+                        date_end:
+                          type: string
+                        categories:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              impact_category:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  impact_point:
+                                    type: integer
+                example:
+                  status: true
+                  message: Get Challenges Success
+                  metadata:
+                    current_page: 1
+                    total_page: 1
+                  data:
+                    - id: "5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4"
+                      title: "Community Clean-Up"
+                      description: "Join a local community clean-up event"
+                      image_url: "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg"
+                      date_start: "2024-08-15"
+                      date_end: "2024-08-22"
+                      categories:
+                        - impact_category:
+                            name: "Recyclable"
+                            impact_point: 30
+                        - impact_category:
+                            name: "Eco-Friendly"
+                            impact_point: 40
+                    - id: "5550e03b-15c6-43c9-997c-4086adc8b573"
+                      title: "Energy Saving Month"
+                      description: "Reduce your household energy consumption by 20% for a month"
+                      image_url: "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg"
+                      date_start: "2024-10-01"
+                      date_end: "2024-11-01"
+                      categories:
+                        - impact_category:
+                            name: "Water Saving"
+                            impact_point: 50
+                        - impact_category:
+                            name: "Energy Efficient"
+                            impact_point: 55
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 1
+                      description: Challenge 1 description
+                      point: 100
+                      exp: 100
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 2
+                      description: Challenge 2 description
+                      point: 200
+                      exp: 200
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Challenge 3
+                      description: Challenge 3 description
+                      point: 300
+                      exp: 300
+                      image:
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-1.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-2.jpg
+                        - id: 123e4567-e89b-12d3-a456-426614174000
+                          url: https://www.example.com/challenge-3.jpg
+  /admin/challenges/{challenge_id}:
+    get:
+      tags:
+        - challenge
+      summary: Get Challenge Detail
+      description: User mendapatkan detail challenge
+      operationId: getChallengeDetail
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Challenge Detail Success
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Challenge 1
+                    description: Challenge 1 description
+                    point: 100
+                    exp: 100
+                    image:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-1.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-2.jpg
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        url: https://www.example.com/challenge-3.jpg
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannto get data, challenge id not found
+                  data: null
     put:
       tags:
         - challenge
-      summary: Update Challenge
+      summary: Update Challenge (WIP)
       description: Admin dapat melakukan update data challenge, untuk menggunakan route ini harus menggunakan token admin
       operationId: updateChallenge
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                  date_end:
-                    type: string
+                title:
+                  type: string
+                difficulty:
+                  type: string
+                description:
+                  type: string
+                exp:
+                  type: integer
+                coin:
+                  type: integer
+                image_url:
+                  type: string
+                date_start:
+                  type: string
+                date_end:
+                  type: string
               example:
-                date_end: 2024-10-15
+                title: Relaxation Week Challenge
+                difficulty: Easy
+                description: Mungut sampah sejauh 10km JALAN KAKI
+                exp: 10000
+                coin: 100
+                image_url: https://example.com/images/item3.jpg
+                date_start: 2024-10-10T00:00:00Z
+                date_end: 2024-10-11T00:00:00Z
+                category: 
+                  - 078817ea-4fcf-4eeb-96b2-f10961826469
+                  - 1350c308-05e7-4d49-a5ad-3e92b00ecba9
       responses:
         "200":
           description: OK
@@ -1966,13 +2583,12 @@ paths:
                   status: false
                   message: Id Challenge Not Found
                   data: null
-  /admin/challenge/{challenge_id}:
-    put: 
+    delete:
       tags:
         - challenge
-      summary: Update Confirmation Challenge By Admin
-      description: Admin dapat melakukan update status terhadap Confirmation status oleh user dari challenge, untuk menggunakan route ini harus menggunakan token admin
-      operationId: updateConfirmationChallenge
+      summary: Delete Challenge By Admin (WIP)
+      description: Admin dapat menghapus challenge, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteChallenge
       security:
         - bearerAuth: []
       parameters:
@@ -1981,17 +2597,7 @@ paths:
           required: true
           schema:
             type: string
-          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                  status:
-                    type: boolean
-              example:
-                status: Accept
+          example: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
       responses:
         "200":
           description: OK
@@ -2006,26 +2612,20 @@ paths:
                     type: string
                 example:
                   status: true
-                  message: Update Confirmation Challenge Success
-                  data:
-                      id: 001
-                      challenge_data:
-                        - challenge_id: 01
-                          title: Relaxation Week Challenge
-                          coin: 100
-                          exp: 10000
-                          date_start: 2024-10-10
-                          date_end: 2024-10-15
-                      user_data: 
-                        - user_id: 01
-                          name: Kaze User
-                          email: users@kzquandary.my.id
-                      description: Mungut sampah sejauh 10km JALAN KAKI
-                      image_url: https://example.com/images/item3.jpg
-                      date_upload: 2024-10-12
-                      status: true
-        "400":
-          description: Bad Request
+                  message: Delete Challenge Success
+                  data: null
+  /forums:
+    get:
+      tags:
+        - forum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -2035,10 +2635,20 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: array
                 example:
-                  status: false
-                  message: Invalid Request
-                  data: null
+                  status: true
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
         "401":
           description: Unauthorized
           content:
@@ -2067,23 +2677,39 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id Challenge Not Found
+                  message: cannot get data, data not found
                   data: null
-    delete:
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+  /forums?page={page}:
+    get:
       tags:
-        - challenge
-      summary: Delete Data Challenge By Admin
-      description: Admin dapat menghapus data challenge, untuk menggunakan route ini harus menggunakan token admin
-      operationId: deleteChallenge
+        - forum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
       security:
         - bearerAuth: []
       parameters:
-        - name: challenge_id
+        - name: page
           in: path
           required: true
           schema:
             type: string
-          example: f9d86eb1-f8e8-4f61-abba-a3c5763ef816
+          example: 1
       responses:
         "200":
           description: OK
@@ -2096,10 +2722,20 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: array
                 example:
                   status: true
-                  message: Delete Data Challenge Success
-                  data: null
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
         "401":
           description: Unauthorized
           content:
@@ -2115,7 +2751,7 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
-        "404":  
+        "404":
           description: Not Found
           content:
             application/json:
@@ -2128,14 +2764,29 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id Challenge Not Found
+                  message: cannot get data, data not found
                   data: null
-  /admin/forum/{forum_id}:
-    delete:
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+  /forums/{forum_id}:
+    delete: 
       tags:
         - forum
-      summary: Delete Data Forum By Admin
-      description: Admin dapat menghapus data forum, untuk menggunakan route ini harus menggunakan token admin
+      summary: Delete Forum
+      description: User dapat menghapus forum yang dibuatnya, alias user lain tidak bisa menghapus
       operationId: deleteForum
       security:
         - bearerAuth: []
@@ -2145,7 +2796,7 @@ paths:
           required: true
           schema:
             type: string
-          example: d709b293-572c-40a6-b254-06ae4965f546
+          example: 123e4567-e89b-12d3-a456-426614174000
       responses:
         "200":
           description: OK
@@ -2158,10 +2809,29 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: object
                 example:
                   status: true
-                  message: Delete Data Forum Success
-                  data: null
+                  message: Delete Forum Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot delete forum
+                  data: nil
         "401":
           description: Unauthorized
           content:
@@ -2176,8 +2846,8 @@ paths:
                 example:
                   status: false
                   message: Unauthorized
-                  data: null
-        "404":  
+                  data: nil
+        "404":
           description: Not Found
           content:
             application/json:
@@ -2190,8 +2860,8 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id Forum Not Found
-                  data: null
+                  message: error, id Forum Not Found
+                  data: nil
   /admin/impact:
     get:
       tags:
@@ -2323,7 +2993,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 001
+          example: 078817ea-4fcf-4eeb-96b2-f10961826469
       responses:
         "200":
           description: OK
@@ -2369,7 +3039,7 @@ paths:
           required: true
           schema:
             type: string
-          example: e965bc1d-9bfa-4512-8e28-64a101201d9d
+          example: 078817ea-4fcf-4eeb-96b2-f10961826469
       requestBody:
         content:
           application/json:
@@ -2465,7 +3135,7 @@ paths:
           required: true
           schema:
             type: string
-          example: e965bc1d-9bfa-4512-8e28-64a101201d9d
+          example: 078817ea-4fcf-4eeb-96b2-f10961826469
       responses:
         "200":
           description: OK
@@ -2513,6 +3183,73 @@ paths:
                   message: Id Impact Not Found
                   data: null
   /admin/voucher:
+    get:
+      tags:
+        - voucher
+      summary: Get Data Voucher By Admin
+      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataVoucher
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Data Voucher Success
+                  data: 
+                    - id: eb628b30-9305-475f-9a54-85229936650a
+                      name: Voucher Lebaran
+                      code: A10238013
+                      discount: 10%
+                      description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                      expired_at: 2024-07-30
+                    - id: eb628b30-9305-475f-9a54-852314936650a
+                      name: Surprise Voucher
+                      code: A10238013
+                      discount: 20%
+                      description: Discount Dadakan WOW!!!
+                      expired_at: 2024-08-01
+                    
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
     post:
       tags:
         - voucher
@@ -2542,7 +3279,7 @@ paths:
                 code: A10238013
                 discount: 10%
                 description: Discount Hari Raya voucher terbatas hingga 5 Hari
-                expired_at: 2024-10-30
+                expired_at : "2024-10-30T00:00:00Z"
       responses:
         "200":
           description: OK
@@ -2564,6 +3301,35 @@ paths:
                     code: A10238013
                     discount: 10%
                     expired_at: 2024-10-30
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -2579,7 +3345,190 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
-  /admin/voucher/{id}:
+  /admin/voucher/{voucher_id}:
+    get:
+      tags:
+        - voucher
+      summary: Get Voucher Data By Admin
+      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataVoucher
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
+    put:
+      tags:
+        - voucher
+      summary: Update Voucher Data By Admin
+      description: Admin dapat melakukan perintah update data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateDataVoucher
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string            
+                discount:
+                  type: string
+                description:
+                  type: string
+                expired_at:
+                  type: string
+              example: 
+                name: Discount Hari Raya
+                code: A10238013
+                discount: 10%
+                description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                expired_at : "2024-10-30T00:00:00Z"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
     delete:
       tags:
         - voucher
