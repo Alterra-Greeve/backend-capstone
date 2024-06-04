@@ -42,20 +42,37 @@ paths:
               required:
                 - name
                 - email
+                - username
                 - password
+                - address
+                - gender
+                - phone
               properties:
                 name:
                   type: string
                 email:
                   type: string
+                username:
+                  type: string
                 password:
                   type: string
+                address:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Laki-laki
+                    - Perempuan
                 phone:
                   type: string
               example:
                 name: Kzquandary
                 email: kzquandary@gmail.com
+                username: kzquandary
                 password: kzquandary
+                address: Jl. Achmad Yani, Cimahi, Jawa Barat
+                gender: Laki-laki
+                phone: '089123456789'
       responses:
         "201":
           description: OK
@@ -3041,6 +3058,93 @@ paths:
                   status: false
                   message: Internal Server Error
                   data: null
+  /forums?page={page}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, data not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
   /forums/{forum_id}:
     get:
       tags:
@@ -3263,6 +3367,79 @@ paths:
       operationId: getForumList
       security:
         - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum List Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id user not found
+                  data: null
+  
+  /forums/user?page={page}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum List
+      description: User dapat melihat list forum yang dibuat oleh dirinya
+      operationId: getForumList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
       responses:
         "200":
           description: OK

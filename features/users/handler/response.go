@@ -38,7 +38,6 @@ type UserbyAdminandPageResponse struct {
 	Coin      int    `json:"coin"`
 	Exp       int    `json:"exp"`
 	AvatarURL string `json:"avatar_url"`
-	Page      int    `json:"page"`
 }
 
 type UserbyAdminResponse struct {
@@ -53,4 +52,9 @@ type UserbyAdminResponse struct {
 	Coin      int    `json:"coin"`
 	Exp       int    `json:"exp"`
 	AvatarURL string `json:"avatar_url"`
+}
+
+type MetadataResponse struct {
+	CurrentPage int `json:"current_page"`
+	TotalPage   int `json:"total_page"`
 }
