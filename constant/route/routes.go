@@ -13,14 +13,11 @@ const UserResetPassword = UserPath + "/reset-password"
 // Forum
 const ForumPath = BasePath + "/forums"
 const ForumByID = ForumPath + "/:id"
-const ForumUpdate = ForumPath + "/update/:id"
-const ForumDelete = ForumPath + "/delete/:id"
+const GetForumByUserID = ForumPath + "/user"
 
 // Forum Message
 const ForumMessage = ForumPath + "/message"
 const ForumMessageByID = ForumMessage + "/:id"
-const ForumMessageUpdate = ForumMessage + "/update/:id"
-const ForumMessageDelete = ForumMessage + "/delete/:id"
 
 // Admin
 const AdminPath = BasePath + "/admin"
@@ -29,6 +26,10 @@ const AdminLogin = AdminPath + "/login"
 // const AdminGetData = AdminPath + "/data"
 const AdminEdit = AdminPath + "/edit/:id"
 const AdminDelete = AdminPath + "/delete"
+
+// Admin Manage User
+const AdminManageUserPath = AdminPath + "/users"
+const AdminManageUserByID = AdminManageUserPath + "/:id"
 
 // Impact Category Path
 const ImpactCategoryPath = AdminPath + "/impact"

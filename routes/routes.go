@@ -34,6 +34,12 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.GET(route.UserPath, uh.GetUserData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
+
+	// Admin
+	e.GET(route.AdminManageUserPath, uh.GetAllUsersForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.AdminManageUserByID, uh.GetUserByIDForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.AdminManageUserByID, uh.UpdateUserForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.AdminManageUserByID, uh.DeleteUserForAdmin(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteAdmin(e *echo.Echo, ah admin.AdminHandlerInterface, cfg config.GreeveConfig) {
@@ -112,11 +118,12 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 
 	e.GET(route.ForumPath, fh.GetAllForum(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ForumByID, fh.GetForumByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.GetForumByUserID, fh.GetForumByUserID(), echojwt.WithConfig(jwtConfig))
 	e.POST(route.ForumPath, fh.PostForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumUpdate, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumDelete, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumByID, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumByID, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
 
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ForumMessageDelete, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ForumMessageUpdate, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
 }

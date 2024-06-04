@@ -49,6 +49,7 @@ var ErrGetForum = errors.New("Failed to get forum")
 var ErrGetForumByID = errors.New("Failed to get forum by ID")
 var ErrEditForum = errors.New("Field Description Cannot be Empty")
 var ErrForumNotFound = errors.New("error, id Forum Not Found")
+var ErrForumDataNotFound = errors.New("Forum data not found")
 
 var ErrGetMessage = errors.New("Failed to get Message")
 var ErrGetMessageByID = errors.New("Failed to get Message by ID")
@@ -66,6 +67,13 @@ var ErrEmptyEmailandPasswordAdmin = errors.New("Email and Password cannot be emp
 var ErrNotFoundEmailAdmin = errors.New("Email is incorrect")
 var ErrEditAdmin = errors.New("Field Cannot be Empty")
 var ErrAdminEmailUsernameAlreadyExist = errors.New("Email or Username already taken by another admin")
+
+// Users By Admin
+var ErrUserDataEmpty = errors.New("User Data Empty")
+var ErrGetUser = errors.New("Failed to get user")
+var ErrUserNotFound = errors.New("User Not Found")
+var ErrUserIDNotFound = errors.New("User ID Not Found")
+var ErrEditUserByAdmin = errors.New("Error, Update at least one field")
 
 // Impact Category Errors
 var ErrImpactCategoryNotFound = errors.New("Impact Category Not Found")

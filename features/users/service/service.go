@@ -202,3 +202,32 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 
 	return s.d.ResetPassword(userResetPassword)
 }
+
+// Admin
+func (s *UserService) GetAllUsersForAdmin() ([]users.User, error) {
+	return s.d.GetAllUsersForAdmin()
+}
+
+func (s *UserService) GetAllByPageForAdmin(page int) ([]users.User, int, error) {
+	return s.d.GetAllByPageForAdmin(page)
+}
+func (s *UserService) GetUserByIDForAdmin(id string) (users.User, error) {
+	if id == "" {
+		return users.User{}, constant.ErrUserIDNotFound
+	}
+	return s.d.GetUserByIDForAdmin(id)
+}
+
+func (s *UserService) UpdateUserForAdmin(user users.UpdateUserByAdmin) error {
+	if user.ID == "" {
+		return constant.ErrUserIDNotFound
+	}
+	if user.Address == "" || user.Name == "" || user.Gender == "" || user.Phone == "" {
+		return constant.ErrEditUserByAdmin
+	}
+	return s.d.UpdateUserForAdmin(user)
+}
+
+func (s *UserService) DeleteUserForAdmin(userID string) error {
+	return s.d.DeleteUserForAdmin(userID)
+}

@@ -90,10 +90,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: Email and password cannot be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Email or Password cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
   /admin:
     get:
       tags:
@@ -253,6 +260,113 @@ paths:
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
+                    - id: 422322
+                      name: Kuze 
+                      email: users@kuze.my.id
+                      address: Cilacap
+                      gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Not Found  
+                  data: null
+  /admin/users?page={page}:
+    get: 
+      tags: 
+        - user
+      summary: Get All Users
+      description: Admin mendapatkan semua user, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getAllUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Success
+                  data:
+                    - id: 422344
+                      name: Kaze User
+                      email: users@kzquandary.my.id
+                      address: Cimahi
+                      gender: Laki-laki
+                    - id: 422322
+                      name: Kuze 
+                      email: users@kuze.my.id
+                      address: Cilacap
+                      gender: Laki-laki
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -284,31 +398,6 @@ paths:
           schema:
             type: string
           example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                address:
-                  type: string
-                gender:
-                  type: string
-                  enum:
-                    - Laki-laki
-                    - Perempuan
-                phone:
-                  type: string
-              example:
-                name: Kaze User
-                email: users@kzquandary.my.id
-                address: Cimahi
-                gender: Laki-laki
-                phone: 62123456789
       responses:
         "200":
           description: OK
@@ -323,16 +412,45 @@ paths:
                     type: string
                   data:
                     type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        gender:
+                          type: string
+                          enum:
+                            - Laki-laki
+                            - Perempuan
+                        phone:
+                          type: string
                 example:
                   status: true
                   message: Get Id User Success
                   data: 
-                    - id: 422344
+                      id: 422344
                       name: Kaze User
                       email: users@kzquandary.my.id
                       address: Cimahi
                       gender: Laki-laki
-                      phone: 62123456789
+                      phone: '62123456789'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -384,10 +502,9 @@ paths:
                   type: string
               example:
                 name: Kuze User
-                email: users@kzquandary2.my.id
                 address: Cimahi2
                 gender: Laki-laki
-                phone: 62123456789
+                phone: "62123456789"
       responses:
         "200":
           description: OK
@@ -425,7 +542,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request data
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -455,7 +572,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id user Not Found
+                  message: User ID Not Found
                   data: null
     delete: 
       tags:
@@ -488,7 +605,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Delete User Success
+                  message: Successfull Delete User
                   data: null
         "401":
           description: Unauthorized
@@ -519,7 +636,7 @@ paths:
                     nullable: true
                 example:
                   status: false
-                  message: Id User Not Found
+                  message: User ID Not Found
                   data: null
   /transactions:
     get: 
@@ -557,7 +674,6 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
                     - id: 02
                       user_id: 422344
                       address: Cimahi
@@ -567,7 +683,21 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
         "404":
           description: Not Found
           content:
@@ -617,7 +747,7 @@ paths:
                   status: true
                   message: Get Data by ID Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -626,7 +756,7 @@ paths:
                       date: 2022-10-10
                       payment:
                         payment_method: cash
-                      created_at: 2022-10-10
+        
         "404":
           description: Not Found
           content:
@@ -685,7 +815,7 @@ paths:
                   status: true
                   message: Update Data Transaction Success
                   data: 
-                    - id: 01
+                      id: 01
                       user_id: 422344
                       address: Cimahi
                       description: pembayaran
@@ -846,6 +976,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -931,7 +1076,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -1151,6 +1296,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1277,6 +1437,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1409,6 +1584,21 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
         "404":
           description: Not Found
           content:
@@ -1511,6 +1701,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Category not found
+                  data: null
   /products/category/{category_name}?page={page}:
     get:
       tags:
@@ -1604,6 +1824,36 @@ paths:
                           product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                           image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Format data not valid
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
   /admin/products/{product_id}:
     put: 
       tags:
@@ -2364,22 +2614,15 @@ paths:
                   status: true
                   message: Delete Challenge Success
                   data: null
-  /admin/forum/{forum_id}:
-    delete:
+  /forums:
+    get:
       tags:
         - forum
-      summary: Delete Data Forum By Admin
-      description: Admin dapat menghapus data forum, untuk menggunakan route ini harus menggunakan token admin
-      operationId: deleteForum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
       security:
         - bearerAuth: []
-      parameters:
-        - name: forum_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: d709b293-572c-40a6-b254-06ae4965f546
       responses:
         "200":
           description: OK
@@ -2392,10 +2635,20 @@ paths:
                     type: boolean
                   message:
                     type: string
+                  data:
+                    type: array
                 example:
                   status: true
-                  message: Delete Data Forum Success
-                  data: null
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
         "401":
           description: Unauthorized
           content:
@@ -2411,7 +2664,7 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
-        "404":  
+        "404":
           description: Not Found
           content:
             application/json:
@@ -2424,8 +2677,191 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id Forum Not Found
+                  message: cannot get data, data not found
                   data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+  /forums?page={page}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum
+      description: User dapat melihat forum
+      operationId: getForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get Forum Success
+                  data:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title: Forum 1
+                      description: Forum 1 description
+                      author:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        username: user1
+                        name: User 1
+                        avatar_url: https://www.example.com/avatar-1.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, data not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
+  /forums/{forum_id}:
+    delete: 
+      tags:
+        - forum
+      summary: Delete Forum
+      description: User dapat menghapus forum yang dibuatnya, alias user lain tidak bisa menghapus
+      operationId: deleteForum
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Delete Forum Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot delete forum
+                  data: nil
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: error, id Forum Not Found
+                  data: nil
   /admin/impact:
     get:
       tags:

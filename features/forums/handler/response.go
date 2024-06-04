@@ -16,14 +16,27 @@ type ForumGetDetailResponse struct {
 }
 
 type Author struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	AvatarURL string `json:"avatar_url"`
 }
 
 type MessageResponse struct {
 	ID      string `json:"id"`
 	UserID  string `json:"user_id"`
 	Message string `json:"message"`
+}
+
+type PaginatedResponse struct {
+	Data  interface{} `json:"data"`
+	Page  int         `json:"page"`
+	Size  int         `json:"size"`
+	Total int         `json:"total"`
+}
+
+type MetadataResponse struct {
+	CurrentPage int `json:"current_page"`
+	TotalPage   int `json:"total_page"`
 }

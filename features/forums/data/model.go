@@ -2,17 +2,20 @@ package data
 
 import (
 	user "backendgreeve/features/users/data"
+	"time"
 
 	"gorm.io/gorm"
 )
 
 type Forum struct {
 	*gorm.Model
-	ID          string    `gorm:"primary_key;type:varchar(50);not null;column:id;"`
-	Title       string    `gorm:"type:varchar(255);not null;column:title"`
-	UserID      string    `gorm:"type:varchar(50);not null;column:user_id"`
-	User        user.User `gorm:"foreignKey:UserID;references:ID"`
-	Description string    `gorm:"type:varchar(255);not null;column:description"`
+	ID            string    `gorm:"primary_key;type:varchar(50);not null;column:id;"`
+	Title         string    `gorm:"type:varchar(255);not null;column:title"`
+	UserID        string    `gorm:"type:varchar(50);not null;column:user_id"`
+	User          user.User `gorm:"foreignKey:UserID;references:ID"`
+	Description   string    `gorm:"type:varchar(255);not null;column:description"`
+	LastMessageAt time.Time `gorm:"column:last_message_at"`
+	CreatedAt     time.Time `gorm:"column:created_at"`
 }
 
 type MessageForum struct {
