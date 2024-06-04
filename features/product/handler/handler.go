@@ -106,8 +106,7 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 		products, totalPages, err = h.s.GetByPage(page)
 
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
 		var response []ProductResponse
@@ -133,14 +132,18 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 				Description: p.Description,
 				Price:       p.Price,
 				Coin:        p.Coin,
-				CurrentPage: page,
-				TotalPage:   totalPages,
 				Images:      images,
 				Category:    categories,
+				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
+				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
 		}
+		metadata := MetadataResponse{
+			TotalPage: totalPages,
+			Page:      page,
+		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ProductSuccessGet, metadata, response))
 	}
 }
 
@@ -193,6 +196,8 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			Coin:        product.Coin,
 			Images:      images,
 			Category:    categories,
+			CreatedAt:   product.CreatedAt.Format("02/01/2006"),
+			UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ProductSuccessGet, response))
@@ -245,18 +250,21 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 
 			response = append(response, ProductResponse{
 				ID:          p.ID,
-				CurrentPage: page,
-				TotalPage:   totalPages,
 				Name:        p.Name,
 				Description: p.Description,
 				Price:       p.Price,
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
+				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
+				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
 		}
-
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
+		metadata := MetadataResponse{
+			TotalPage: totalPages,
+			Page:      page,
+		}
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ProductSuccessGet, metadata, response))
 	}
 }
 func (h *ProductHandler) GetByName() echo.HandlerFunc {
@@ -283,8 +291,7 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 		var products []product.Product
 		products, totalPages, err = h.s.GetByName(productName, page)
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
 		var response []ProductResponse
@@ -306,18 +313,21 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 
 			response = append(response, ProductResponse{
 				ID:          p.ID,
-				CurrentPage: page,
-				TotalPage:   totalPages,
 				Name:        p.Name,
 				Description: p.Description,
 				Price:       p.Price,
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
+				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
+				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
 		}
-
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, []interface{}{response}))
+		metadata := MetadataResponse{
+			TotalPage: totalPages,
+			Page:      page,
+		}
+		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ProductSuccessGet, metadata, response))
 	}
 }
 func (h *ProductHandler) Update() echo.HandlerFunc {

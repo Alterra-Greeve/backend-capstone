@@ -6,8 +6,8 @@ type ProductResponse struct {
 	Description string                  `json:"description"`
 	Price       float64                 `json:"price"`
 	Coin        int                     `json:"coin"`
-	CurrentPage int                     `json:"current_page"`
-	TotalPage   int                     `json:"total_page"`
+	CreatedAt   string                  `json:"created_at"`
+	UpdatedAt   string                  `json:"updated_at"`
 	Category    []ProductImpactCategory `json:"category"`
 	Images      []ProductImage          `json:"images"`
 }
@@ -24,4 +24,9 @@ type ProductImage struct {
 type ImpactCategory struct {
 	Name        string `json:"name"`
 	ImpactPoint int    `json:"impact_point"`
+}
+
+type MetadataResponse struct {
+	TotalPage int `json:"total_page"`
+	Page      int `json:"current_page"`
 }

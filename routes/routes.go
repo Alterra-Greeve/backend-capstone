@@ -4,6 +4,7 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/challenges"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
@@ -73,6 +74,19 @@ func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerIn
 	e.GET(route.ImpactCategoryByID, ic.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ImpactCategoryByID, ic.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ImpactCategoryByID, ic.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+
+	e.POST(route.ChallengePath, ch.Create(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {

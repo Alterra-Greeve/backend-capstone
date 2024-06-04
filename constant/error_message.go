@@ -7,6 +7,7 @@ const InternalServerError = "Internal Server Error"
 const BadInput = "Format data not valid"
 
 var BadRequest = errors.New("Format data not valid")
+var ErrPageInvalid = errors.New("Page is invalid")
 
 // Users Errors
 var ErrEmptyLogin = errors.New("Email or Password cannot be empty")
