@@ -42,37 +42,20 @@ paths:
               required:
                 - name
                 - email
-                - username
                 - password
-                - address
-                - gender
-                - phone
               properties:
                 name:
                   type: string
                 email:
                   type: string
-                username:
-                  type: string
                 password:
                   type: string
-                address:
-                  type: string
-                gender:
-                  type: string
-                  enum:
-                    - Laki-laki
-                    - Perempuan
                 phone:
                   type: string
               example:
                 name: Kzquandary
                 email: kzquandary@gmail.com
-                username: kzquandary
                 password: kzquandary
-                address: Jl. Achmad Yani, Cimahi, Jawa Barat
-                gender: Laki-laki
-                phone: '089123456789'
       responses:
         "201":
           description: OK
@@ -310,9 +293,8 @@ paths:
       tags:
         - users
       summary: Update User
-      description:
-        User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
-        untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
+      description: User bisa update, bebas pilih salah satu form dibawah yang mau di update apa, yang penting kalo mau update harus ada salah satu yang ada di field nya, kalo kosong semua jadi bad request,
+                   untuk username sama email gapapa submit data lama, tapi kalo user submit email/username orang lain, nanti error conflict
       operationId: updateUser
       security:
         - bearerAuth: []
@@ -344,11 +326,11 @@ paths:
               example:
                 email: kzquandary@gmail.com
                 username: kzquandary
-                password: "kzquandary"
+                password: 'kzquandary'
                 name: Kzquandary Update
                 address: Cisurupan, Garut, Jawa Barat
                 gender: Laki-laki
-                phone: "089662966699"
+                phone: '089662966699'
                 avatar_url: https://www.example.com/avatar.jpg
       responses:
         "200":
@@ -474,24 +456,24 @@ paths:
                   message: Unauthorized
                   data: null
         "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id User not found
-                  data: null
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: boolean
+                    message:
+                      type: string
+                  example:
+                    status: false
+                    message: Id User not found
+                    data: null
   /user/{username}:
     get:
       tags:
-        - users
+        - users 
       summary: Get User by Username
       description: User mendapatkan data user sesuai dengan usernamenya
       operationId: getUserByUsername
@@ -541,16 +523,16 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                    id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
-                    username: "kzquandary"
-                    name: "Kaze User"
-                    email: "users@kzquandary.my.id"
-                    address: "jalan raya cimahi"
-                    gender: "Laki-laki"
-                    phone: "089123456789"
-                    coin: 0
-                    exp: 0
-                    avatar_url: ""
+                      id: "9094929d-2e51-4095-81b1-3e9554e2bc8a"
+                      username: "kzquandary"
+                      name: "Kaze User"
+                      email: "users@kzquandary.my.id"
+                      address: "jalan raya cimahi"
+                      gender: "Laki-laki"
+                      phone: "089123456789"
+                      coin: 0
+                      exp: 0
+                      avatar_url: ""
         "401":
           description: Unauthorized
           content:
