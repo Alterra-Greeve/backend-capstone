@@ -1637,10 +1637,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: product id must not be empty
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: product id must not be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -1728,9 +1735,17 @@ paths:
                   data:
                     type: array
                 example:
-                  status: false
-                  message: product id must not be empty
-                  data: null
+                  examples:
+                    Empty Field:
+                      value:
+                        status: false
+                        message: product id must not be empty
+                        data: null
+                    Bad Input:
+                      value:
+                        status: false
+                        message: Format data not valid
+                        data: null
         "401":
           description: Unauthorized
           content:
@@ -2064,10 +2079,18 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Voucher code is invalid
-                  data: null
+              examples:
+                Not Found Voucher:
+                  value:
+                    status: false
+                    message: Voucher code is invalid
+                    data: null
+                Empty Field:
+                  value:
+                    status: false
+                    message: Field cannot be empty
+                    data: null
+                  
         "404":
           description: Not Found
           content:
@@ -2992,10 +3015,17 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: cannot create forum
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: field title & description cannot be empty
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -3372,10 +3402,12 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: cannot send message
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: field message cannot be empty
+                    data: null
         "401":
           description: Unauthorized
           content:
