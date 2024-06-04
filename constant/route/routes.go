@@ -39,3 +39,10 @@ const ImpactCategoryByID = ImpactCategoryPath + "/:id"
 const ProductPath = BasePath + "/products"
 const ProductByID = ProductPath + "/:id"
 const ProductByName = ProductPath + "?name=:name"
+
+// Challenge Path
+const ChallengePath = BasePath + "/challenges"
+const AdminChallengePath = AdminPath + "/challenges"
+const AdminChallengeByID = AdminChallengePath + "/:id"
+const ChallengeParticipate = ChallengePath + "/participate"
+const ChallengeByID = ChallengePath + "/:id"

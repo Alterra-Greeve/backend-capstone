@@ -71,7 +71,7 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		return users.User{}, err
 	}
 
-	if user.Email != existingUser.Email || user.Username != existingUser.Username {
+	if user.Email != existingUser.Email && user.Username != existingUser.Username {
 		var count int64
 		u.DB.Table("users").Where("email = ? OR username = ?", user.Email, user.Username).Count(&count)
 		if count > 0 {

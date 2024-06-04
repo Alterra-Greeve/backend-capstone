@@ -15,19 +15,10 @@ type Challenge struct {
 	Description               string                    `gorm:"type:varchar(255);not null;column:description"`
 	Exp                       int                       `gorm:"type:int;not null;column:exp"`
 	Coin                      int                       `gorm:"type:int;not null;column:coin"`
+	ImageURL                  string                    `gorm:"type:varchar(255);not null;column:image_url"`
 	DateStart                 time.Time                 `gorm:"type:datetime;not null;column:date_start"`
 	DateEnd                   time.Time                 `gorm:"type:datetime;not null;column:date_end"`
-	ChallengeImages           []ChallengeImage          `gorm:"foreignKey:ChallengeID"`
 	ChallengeImpactCategories []ChallengeImpactCategory `gorm:"foreignKey:ChallengeID"`
-}
-
-type ChallengeImage struct {
-	*gorm.Model
-	ID          string    `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	ChallengeID string    `gorm:"type:varchar(50);not null;column:challenge_id"`
-	ImageURL    string    `gorm:"type:varchar(255);not null;column:image_url"`
-	Position    int       `gorm:"type:int;not null;column:position"`
-	Challenge   Challenge `gorm:"foreignKey:ChallengeID;references:ID"`
 }
 
 type ChallengeImpactCategory struct {
@@ -49,9 +40,6 @@ type ChallengeLog struct {
 
 func (*Challenge) TableName() string {
 	return "challenges"
-}
-func (*ChallengeImage) TableName() string {
-	return "challenge_images"
 }
 func (*ChallengeImpactCategory) TableName() string {
 	return "challenge_impact_categories"
