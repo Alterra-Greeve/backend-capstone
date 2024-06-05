@@ -46,10 +46,10 @@ func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 				Code:        vouchers.Code,
 				Discount:    vouchers.Discount,
 				Description: vouchers.Description,
-				ExpiredAt:   vouchers.ExpiredAt,
+				ExpiredAt:   vouchers.ExpiredAt.Format("2006-01-02 15:04:05"),
 			})
 		}
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetAll, response))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetAll, response))
 	}
 }
 
@@ -77,10 +77,10 @@ func (h *VoucherHandler) GetByIdVoucher() echo.HandlerFunc {
 			Code:        voucher.Code,
 			Discount:    voucher.Discount,
 			Description: voucher.Description,
-			ExpiredAt:   voucher.ExpiredAt,
+			ExpiredAt:   voucher.ExpiredAt.Format("2006-01-02 15:04:05"),
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, response))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetByID, response))
 	}
 }
 
@@ -131,7 +131,7 @@ func (h *VoucherHandler) Create() echo.HandlerFunc {
 			}
 			return c.JSON(helper.ConvertResponseCode(constant.ErrCreateVoucher), helper.FormatResponse(false, constant.ErrCreateVoucher.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessCreate, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.VoucherSuccessCreate, nil))
 	}
 }
 
@@ -184,7 +184,7 @@ func (h *VoucherHandler) Update() echo.HandlerFunc {
 			}
 			return c.JSON(helper.ConvertResponseCode(constant.ErrUpdateVoucher), helper.FormatResponse(false, constant.ErrUpdateVoucher.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessUpdate, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.VoucherSuccessUpdate, nil))
 	}
 }
 
@@ -211,6 +211,6 @@ func (h *VoucherHandler) Delete() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(constant.ErrDeleteVoucher), helper.FormatResponse(false, constant.ErrDeleteVoucher.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessDelete, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.VoucherSuccessDelete, nil))
 	}
 }
