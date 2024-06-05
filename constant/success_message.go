@@ -24,6 +24,13 @@ const MessageSuccessGetByID = "Successfull Get Message by ID"
 const MessageSuccessUpdate = "Successfull Update Message"
 const MessageSuccessDelete = "Successfull Delete Message"
 
+// Voucher
+const VoucherSuccessCreate = "Successfull Create Voucher"
+const VoucherSuccessGetAll = "Successfull Get Voucher"
+const VoucherSuccessGetByID = "Successfull Get Voucher by ID"
+const VoucherSuccessUpdate = "Successfull Update Voucher"
+const VoucherSuccessDelete = "Successfull Delete Voucher"
+
 // Admin Success Message
 const AdminSuccessLogin = "Successfull Login by role Admin"
 const AdminSuccessUpdate = "Successfull Edit data admin"
