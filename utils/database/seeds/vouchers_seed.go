@@ -14,6 +14,7 @@ func CreateVoucher(db *gorm.DB, id, name, code, discount, description string, ex
 		Code:        code,
 		Discount:    discount,
 		Description: description,
+		ExpiredAt:   expiryDate,
 	}
 
 	return db.Where("id = ?", id).FirstOrCreate(&voucherRecord).Error

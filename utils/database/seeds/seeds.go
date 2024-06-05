@@ -1281,6 +1281,7 @@ func Seeds() []seed.Seed {
 				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Pancasila Day Savings", "FAIRTPAN", "15%", "Savings on fair trade certified products for Pancasila Day", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
+		// End Voucher
 	}
 	return seeds
 }
