@@ -19,6 +19,10 @@ func (s *ForumService) GetAllForum() ([]forums.Forum, error) {
 	return s.d.GetAllForum()
 }
 
+func (s *ForumService) GetAllByPage(page int) ([]forums.Forum, int, error) {
+	return s.d.GetAllByPage(page)
+}
+
 func (s *ForumService) GetForumByID(ID string) (forums.Forum, error) {
 	if ID == "" {
 		return forums.Forum{}, constant.ErrGetMessageByID
@@ -43,11 +47,8 @@ func (s *ForumService) UpdateForum(forum forums.EditForum) error {
 	return s.d.UpdateForum(forum)
 }
 
-func (s *ForumService) DeleteForum(forumData forums.Forum) error {
-	if forumData.ID == "" {
-		return constant.ErrDeleteMessage
-	}
-	return s.d.DeleteForum(forumData)
+func (s *ForumService) DeleteForum(forumID string) error {
+	return s.d.DeleteForum(forumID)
 }
 
 func (s *ForumService) PostMessageForum(messageForum forums.MessageForum) error {
@@ -57,11 +58,8 @@ func (s *ForumService) PostMessageForum(messageForum forums.MessageForum) error 
 	return s.d.PostMessageForum(messageForum)
 }
 
-func (s *ForumService) DeleteMessageForum(messageForum forums.MessageForum) error {
-	if messageForum.ID == "" {
-		return constant.ErrDeleteMessage
-	}
-	return s.d.DeleteMessageForum(messageForum)
+func (s *ForumService) DeleteMessageForum(productId string) error {
+	return s.d.DeleteMessageForum(productId)
 }
 
 func (s *ForumService) GetMessageForumByID(ID string) (forums.MessageForum, error) {
@@ -76,16 +74,13 @@ func (s *ForumService) UpdateMessageForum(message forums.EditMessage) error {
 		return constant.ErrGetMessageByID
 	}
 	if message.Message == "" {
-		return constant.ErrEditForum
+		return constant.ErrEditMessage
 	}
 	return s.d.UpdateMessageForum(message)
 }
 
-func (s *ForumService) GetForumByUserID(ID string) (forums.Forum, error) {
-	if ID == "" {
-		return forums.Forum{}, constant.ErrGetMessageByID
-	}
-	return s.d.GetForumByUserID(ID)
+func (s *ForumService) GetForumByUserID(ID string, page int) ([]forums.Forum, int, error) {
+	return s.d.GetForumByUserID(ID, page)
 }
 
 func (s *ForumService) GetMessagesByForumID(forumID string) ([]forums.MessageForum, error) {

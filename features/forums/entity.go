@@ -45,9 +45,7 @@ type ForumHandlerInterface interface {
 	GetAllForum() echo.HandlerFunc
 	GetForumByID() echo.HandlerFunc
 	PostForum() echo.HandlerFunc
-
-	//
-	UpdateForum() echo.HandlerFunc // Unsure
+	UpdateForum() echo.HandlerFunc
 	DeleteForum() echo.HandlerFunc
 
 	// # Message Forum
@@ -62,17 +60,16 @@ type ForumServiceInterface interface {
 	// User
 	// # Forum
 	GetAllForum() ([]Forum, error)
+	GetAllByPage(page int) ([]Forum, int, error)
 	GetForumByID(ID string) (Forum, error)
 	PostForum(Forum) error
-	GetForumByUserID(ID string) (Forum, error)
-
-	//
+	GetForumByUserID(ID string, page int) ([]Forum, int, error)
 	UpdateForum(EditForum) error //unsure
-	DeleteForum(Forum) error
+	DeleteForum(forumID string) error
 
 	// # Message Forum
 	PostMessageForum(MessageForum) error
-	DeleteMessageForum(MessageForum) error
+	DeleteMessageForum(messageID string) error
 	GetMessageForumByID(ID string) (MessageForum, error)
 	UpdateMessageForum(EditMessage) error
 	GetMessagesByForumID(forumID string) ([]MessageForum, error)
@@ -83,17 +80,18 @@ type ForumDataInterface interface {
 	// User
 	// # Forum
 	GetAllForum() ([]Forum, error)
+	GetAllByPage(page int) ([]Forum, int, error)
 	GetForumByID(ID string) (Forum, error)
 	PostForum(Forum) error
-	GetForumByUserID(ID string) (Forum, error)
+	GetForumByUserID(ID string, page int) ([]Forum, int, error)
 
 	//
 	UpdateForum(EditForum) error //unsure
-	DeleteForum(Forum) error
+	DeleteForum(forumID string) error
 
 	// # Message Forum
 	PostMessageForum(MessageForum) error
-	DeleteMessageForum(MessageForum) error
+	DeleteMessageForum(messageID string) error
 	GetMessageForumByID(ID string) (MessageForum, error)
 	UpdateMessageForum(EditMessage) error
 	GetMessagesByForumID(forumID string) ([]MessageForum, error)

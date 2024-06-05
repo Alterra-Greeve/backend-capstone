@@ -36,6 +36,12 @@ const AdminSuccessLogin = "Successfull Login by role Admin"
 const AdminSuccessUpdate = "Successfull Edit data admin"
 const AdminSuccessDelete = "Successfull Delete data admin"
 
+// Admin Success User
+const AdminSuccessGetUser = "Successfull Get User"
+const AdminSuccessGetAllUser = "Successfull Get All User"
+const AdminSuccessUpdateUser = "Successfull Update User"
+const AdminSuccessDeleteUser = "Successfull Delete User"
+
 // Impact Category Message
 const ImpactCategorySuccessCreate = "Successfull Create Impact Category"
 const ImpactCategorySuccessGet = "Successfull Get Impact Category"

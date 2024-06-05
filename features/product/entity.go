@@ -2,6 +2,7 @@ package product
 
 import (
 	"backendgreeve/features/impactcategory"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -12,6 +13,8 @@ type Product struct {
 	Description      string
 	Price            float64
 	Coin             int
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 	Images           []ProductImage
 	ImpactCategories []ProductImpactCategory
 }
