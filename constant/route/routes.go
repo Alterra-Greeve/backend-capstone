@@ -38,7 +38,18 @@ const AdminManageUserByID = AdminManageUserPath + "/:id"
 const ImpactCategoryPath = AdminPath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"
 
+// Voucher
+const VoucherPath = AdminPath + "/voucher"
+const VoucherByID = VoucherPath + "/:id"
+
 // Product Path
 const ProductPath = BasePath + "/products"
 const ProductByID = ProductPath + "/:id"
 const ProductByName = ProductPath + "?name=:name"
+
+// Challenge Path
+const ChallengePath = BasePath + "/challenges"
+const AdminChallengePath = AdminPath + "/challenges"
+const AdminChallengeByID = AdminChallengePath + "/:id"
+const ChallengeParticipate = ChallengePath + "/participate"
+const ChallengeByID = ChallengePath + "/:id"

@@ -18,6 +18,10 @@ import (
 	ProductHandler "backendgreeve/features/product/handler"
 	ProductService "backendgreeve/features/product/service"
 
+	ChallengeData "backendgreeve/features/challenges/data"
+	ChallengeHandler "backendgreeve/features/challenges/handler"
+	ChallengeService "backendgreeve/features/challenges/service"
+
 	ImpactCategoryData "backendgreeve/features/impactcategory/data"
 	ImpactCategoryHandler "backendgreeve/features/impactcategory/handler"
 	ImpactCategoryService "backendgreeve/features/impactcategory/service"
@@ -25,6 +29,10 @@ import (
 	ForumData "backendgreeve/features/forums/data"
 	ForumHandler "backendgreeve/features/forums/handler"
 	ForumService "backendgreeve/features/forums/service"
+
+	VoucherData "backendgreeve/features/voucher/data"
+	VoucherHandler "backendgreeve/features/voucher/handler"
+	VoucherService "backendgreeve/features/voucher/service"
 
 	"backendgreeve/helper"
 	"backendgreeve/routes"
@@ -83,6 +91,10 @@ func main() {
 	productService := ProductService.New(productData)
 	productHandler := ProductHandler.New(productService, jwt)
 
+	challengeData := ChallengeData.New(db)
+	challengeService := ChallengeService.New(challengeData)
+	challengeHandler := ChallengeHandler.New(challengeService, jwt)
+
 	impactCategoryData := ImpactCategoryData.New(db)
 	impactCategoryService := ImpactCategoryService.New(impactCategoryData)
 	impactCategoryHandler := ImpactCategoryHandler.New(impactCategoryService, jwt)
@@ -91,12 +103,18 @@ func main() {
 	forumService := ForumService.New(forumData)
 	forumHandler := ForumHandler.New(forumService, jwt)
 
+	voucherData := VoucherData.New(db)
+	voucherService := VoucherService.New(voucherData)
+	voucherHandler := VoucherHandler.New(voucherService, jwt)
+
 	routes.RouteUser(e, userHandler, *cfg)
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
 	routes.RouteProduct(e, productHandler, *cfg)
+	routes.RouteChallenge(e, challengeHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	routes.RouteForum(e, forumHandler, *cfg)
+	routes.RouteVoucher(e, voucherHandler, *cfg)
 	e.Logger.Fatal(e.Start(":8080"))
 }

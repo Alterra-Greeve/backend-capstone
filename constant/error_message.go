@@ -7,6 +7,7 @@ const InternalServerError = "Internal Server Error"
 const BadInput = "Format data not valid"
 
 var BadRequest = errors.New("Format data not valid")
+var ErrPageInvalid = errors.New("Page is invalid")
 
 // Users Errors
 var ErrEmptyLogin = errors.New("Email or Password cannot be empty")
@@ -34,8 +35,10 @@ var ErrResetPassword = errors.New("Failed to reset password")
 var ErrDeleteUser = errors.New("Failed to delete user")
 var ErrEmptyResetPassword = errors.New("Email, password and confirmation password cannot be empty")
 var ErrPasswordNotMatch = errors.New("Password not match")
+var ErrInvalidEmail = errors.New("Email is not valid")
 
 var ErrGenerateJWT = errors.New("failed to generate jwt token")
+
 var ErrValidateJWT = errors.New("failed to validate jwt token")
 
 var ErrHashPassword = errors.New("failed to hash password")
@@ -80,6 +83,16 @@ var ErrDeleteImpactCategory = errors.New("Failed to delete impact category")
 var ErrImpactCategoryField = errors.New("Field cannot be empty")
 var ErrImpactCategoryFieldUpdate = errors.New("One or more fields for update cannot be empty")
 
+// Voucher Errors
+var ErrVoucherNotFound = errors.New("Voucher Not Found")
+var ErrCreateVoucher = errors.New("Failed to create voucher")
+var ErrUpdateVoucher = errors.New("Failed to update voucher")
+var ErrDeleteVoucher = errors.New("Failed to delete voucher")
+var ErrVoucherField = errors.New("Field cannot be empty")
+var ErrGetVoucherById = errors.New("Failed to get voucher by ID")
+var ErrCodeVoucher = errors.New("Error when generate code voucher, at least 9 characters")
+var ErrCodeVoucherExists = errors.New("Voucher code already existed")
+
 // Product Errors
 var ErrProductNotFound = errors.New("Product Not Found")
 var ErrGetProduct = errors.New("Failed to get product")
@@ -98,3 +111,20 @@ var ErrProductImpactCategoriesEmpty = errors.New("Impact Categories cannot be em
 var ErrProductIDEmpty = errors.New("ID cannot be empty")
 var ErrProductUpdateEmpty = errors.New("One or more fields for update cannot be empty")
 var ErrProductDelete = errors.New("Failed to delete product")
+
+// Challenges Errors
+var ErrUserAlreadyParticipate = errors.New("User already participate")
+var ErrUserNotParticipate = errors.New("User not participate")
+var ErrCreateChallenge = errors.New("Failed to create challenge")
+var ErrGetChallenge = errors.New("Failed to get challenge")
+var ErrGetChallengeByID = errors.New("Failed to get challenge by ID")
+var ErrEditChallenge = errors.New("Field Description Cannot be Empty")
+var ErrChallengeNotFound = errors.New("error, id Challenge Not Found")
+var ErrUpdateChallenge = errors.New("Failed to update challenge")
+var ErrDeleteChallenge = errors.New("Failed to delete challenge")
+var ErrChallengeField = errors.New("Field cannot be empty")
+var ErrChallengeFieldUpdate = errors.New("One or more fields for update cannot be empty")
+var ErrChallengeFieldSwipe = errors.New("Field cannot be empty")
+var ErrChallengeType = errors.New("Challenge type must be accept or decline")
+var ErrChallengeFieldCreate = errors.New("Field cannot be empty")
+

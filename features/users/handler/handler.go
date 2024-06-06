@@ -154,6 +154,16 @@ func (h *UserHandler) GetUserData() echo.HandlerFunc {
 
 func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
 	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		_, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
 		username := c.Param("username")
 
 		user, err := h.s.GetUserByUsername(username)

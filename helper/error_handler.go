@@ -70,6 +70,8 @@ func ConvertResponseCode(err error) int {
 		return http.StatusInternalServerError
 	case constant.ErrEmptyResetPassword:
 		return http.StatusBadRequest
+	case constant.ErrInvalidEmail:
+    return http.StatusBadRequest
 	// User Admin
 	case constant.ErrUserDataEmpty:
 		return http.StatusNotFound
@@ -126,6 +128,24 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrAdminEmailUsernameAlreadyExist:
 		return http.StatusConflict
 	case constant.ErrEmptyEmailandPasswordAdmin:
+		return http.StatusBadRequest
+
+	// Voucher Error
+	case constant.ErrVoucherNotFound:
+		return http.StatusNotFound
+	case constant.ErrCreateVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteVoucher:
+		return http.StatusInternalServerError
+	case constant.ErrVoucherField:
+		return http.StatusBadRequest
+	case constant.ErrGetVoucherById:
+		return http.StatusNotFound
+	case constant.ErrCodeVoucher:
+		return http.StatusBadRequest
+	case constant.ErrCodeVoucherExists:
 		return http.StatusBadRequest
 
 	// Impact Category Error
