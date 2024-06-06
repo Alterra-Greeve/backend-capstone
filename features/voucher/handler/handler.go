@@ -22,6 +22,7 @@ func New(s voucher.VoucherServiceInterface, j helper.JWTInterface) voucher.Vouch
 	}
 }
 
+// Voucher
 func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
