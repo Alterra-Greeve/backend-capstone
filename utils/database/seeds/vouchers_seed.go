@@ -1,14 +1,14 @@
 package seeds
 
 import (
-	voucher "backendgreeve/features/Voucher/data"
+	vouchers "backendgreeve/features/voucher/data"
 	"time"
 
 	"gorm.io/gorm"
 )
 
 func CreateVoucher(db *gorm.DB, id, name, code, discount, description string, expiryDate time.Time) error {
-	voucherRecord := voucher.Voucher{
+	voucherRecord := vouchers.Voucher{
 		ID:          id,
 		Name:        name,
 		Code:        code,
