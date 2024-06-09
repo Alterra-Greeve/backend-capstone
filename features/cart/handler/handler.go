@@ -5,7 +5,6 @@ import (
 	"backendgreeve/features/cart"
 	product "backendgreeve/features/product/handler"
 	"backendgreeve/helper"
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -77,6 +76,8 @@ func (h *CartHandler) Update() echo.HandlerFunc {
 		newCart := cart.UpdateCart{
 			ProductID: cartRequest.ProductID,
 			UserID:    userId.(string),
+			Type:      cartRequest.Type,
+			Quantity:  cartRequest.Quantity,
 		}
 		if cartRequest.Quantity != 0 {
 			newCart.Type = "qty"
@@ -86,7 +87,6 @@ func (h *CartHandler) Update() echo.HandlerFunc {
 			newCart.Type = cartRequest.Type
 		}
 
-		log.Println("newCart", newCart)
 		err = h.s.Update(newCart)
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))

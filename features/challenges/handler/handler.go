@@ -4,7 +4,6 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
 	"backendgreeve/helper"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -102,6 +101,9 @@ func (h *ChallengeHandler) GetByID() echo.HandlerFunc {
 			Title:       challenge.Title,
 			Description: challenge.Description,
 			ImageURL:    challenge.ImageURL,
+			Difficulty:  challenge.Difficulty,
+			Exp:         challenge.Exp,
+			Coin:        challenge.Coin,
 			DateStart:   challenge.DateStart.Format("2006-01-02"),
 			DateEnd:     challenge.DateEnd.Format("2006-01-02"),
 			Categories:  category,
@@ -206,7 +208,6 @@ func (h *ChallengeHandler) Create() echo.HandlerFunc {
 
 		var challengeRequest ChallengeCreateRequest
 		if err := c.Bind(&challengeRequest); err != nil {
-			log.Println(err)
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
@@ -261,7 +262,10 @@ func (h *ChallengeHandler) GetUserParticipate() echo.HandlerFunc {
 			challengeResponse := ChallengeResponse{
 				ID:          challenge.ID,
 				Title:       challenge.Title,
+				Difficulty:  challenge.Difficulty,
 				Description: challenge.Description,
+				Exp:         challenge.Exp,
+				Coin:        challenge.Coin,
 				ImageURL:    challenge.ImageURL,
 				DateStart:   challenge.DateStart.Format("2006-01-02"),
 				DateEnd:     challenge.DateEnd.Format("2006-01-02"),

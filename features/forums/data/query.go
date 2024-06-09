@@ -3,7 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
-	"log"
 
 	"gorm.io/gorm"
 )
@@ -86,7 +85,6 @@ func (u *ForumData) DeleteForum(forumID string) error {
 	}
 	if err := res.Where("id = ?", forumID).Delete(&Forum{}); err.Error != nil {
 		res.Rollback()
-		log.Print(err)
 		return constant.ErrForumNotFound
 	} else if err.RowsAffected == 0 {
 		res.Rollback()

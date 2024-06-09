@@ -3,7 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
-	"log"
 	"math"
 	"time"
 
@@ -68,7 +67,6 @@ func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, erro
 	if tx.Error != nil {
 		return challenges.Challenge{}, tx.Error
 	}
-	log.Println(challenge)
 	return challenge, nil
 }
 
@@ -80,6 +78,7 @@ func (cd *ChallengeData) GetUserParticipate(userId string, status string) ([]cha
 		Preload("Challenge").
 		Preload("Challenge.ChallengeImpactCategories").
 		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").
+		Where("user_id = ? AND status = ?", userId, status).
 		Find(&challengeConfirmations)
 	if tx.Error != nil {
 		return nil, tx.Error
