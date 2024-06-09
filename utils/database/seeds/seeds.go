@@ -13,105 +13,197 @@ import (
 func Seeds() []seed.Seed {
 	var seeds []seed.Seed = []seed.Seed{
 		{
-			Name: "CreateAdmin1",
+			Name: "CreateAdmin01",
 			Run: func(db *gorm.DB) error {
 				return CreateAdminLogin(db, "16930c07-bdb5-49d2-8a81-32591833241b", "admin", "admin", "admin@greeve.store", "admin")
 			},
 		},
 		{
-			Name: "CreateAdmin2",
+			Name: "CreateAdmin02",
 			Run: func(db *gorm.DB) error {
 				return CreateAdminLogin(db, "14adafd7-de6c-4586-a35e-3cf17ef3d351", "admin2", "admin2", "admin2@greeve.store", "admin2")
 			},
 		},
 		{
-			Name: "CreateImpactCategorySustainable",
+			Name: "CreateAdmin1",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2", "Sustainable", 50, "https://www.example.com")
+				return CreateAdminLogin(db, "b1e7fdc4-6465-4f06-8914-85b36255368e", "susantowijaya", "Susanto Wijaya", "susantowijaya@example.com", "password123")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryEcoFriendly",
+			Name: "CreateAdmin2",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "1350c308-05e7-4d49-a5ad-3e92b00ecba9", "Eco-Friendly", 40, "https://www.example.com")
+				return CreateAdminLogin(db, "cf98c726-fb72-4687-9c88-e8ce671c32d6", "indrianisetiawati", "Indrianie Setiawati", "indrianisetiawati@example.com", "secret456")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryRecyclable",
+			Name: "CreateAdmin3",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "078817ea-4fcf-4eeb-96b2-f10961826469", "Recyclable", 30, "https://www.example.com")
+				return CreateAdminLogin(db, "06db6d61-e7c8-4126-ab0f-f2b6bc1458d1", "ahmadrizkiputra", "Ahmad Rizki Putra", "ahmadrizkiputra@example.com", "qwerty789")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryRenewable",
+			Name: "CreateAdmin4",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc", "Renewable", 45, "https://www.example.com")
+				return CreateAdminLogin(db, "6a53c2db-2fa5-47df-8462-baea4308d48f", "sucimutiara", "Suci Mutiara", "sucimutiara@example.com", "12345abcd")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryBiodegradable",
+			Name: "CreateAdmin5",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "30fc3682-a674-42e1-b420-e16fcd0c85a5", "Biodegradable", 35, "https://www.example.com")
+				return CreateAdminLogin(db, "90aae29b-bf80-44bd-ab59-e7388e84e27f", "ariefulhaq", "Arie Ul Haq", "ariefulhaq@example.com", "mypassword")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryEnergyEfficient",
+			Name: "CreateAdmin6",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f", "Energy Efficient", 55, "https://www.example.com")
+				return CreateAdminLogin(db, "6112389a-2e44-4c78-ae64-849a5af60678", "dewianinditya", "Dewi Aninditya", "dewianinditya@example.com", "superstrong")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryLowCarbon",
+			Name: "CreateAdmin7",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3655727a-e807-4fc1-bfad-6b7516c89b13", "Low Carbon", 60, "https://www.example.com")
+				return CreateAdminLogin(db, "9e66633a-cc3b-4887-8c44-dc8e4bf3530a", "rahmandarmawan", "Rahman Darmawan", "rahmandarmawan@example.com", "password!@#")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryWaterSaving",
+			Name: "CreateAdmin8",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "19ecd259-58f0-4b3c-ba6b-e16f03317048", "Water Saving", 50, "https://www.example.com")
+				return CreateAdminLogin(db, "b0835feb-2404-4a28-846a-52fafc8e6902", "natasyanurhaliza", "Natasya Nurhaliza", "natasyanurhaliza@example.com", "123456789")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryZeroWaste",
+			Name: "CreateAdmin9",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b", "Zero Waste", 70, "https://www.example.com")
+				return CreateAdminLogin(db, "6562a858-84e7-412b-9e03-542f951fe0a2", "ilhamfauzan", "Ilham Fauzan", "ilhamfauzan@example.com", "password1")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryOrganic",
+			Name: "CreateAdmin10",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "2d9c8fd2-8104-470f-a8d3-4ff34993fabd", "Organic", 40, "https://www.example.com")
+				return CreateAdminLogin(db, "46a36705-f7d0-48a4-bb69-8cd5826b0da5", "tiaraputri", "Tiara Putri", "tiaraputri@example.com", "mypassword1")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryNonToxic",
+			Name: "CreateAdmin11",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "4b1e1acd-570d-47d6-8d6a-ea2a277882cb", "Non-Toxic", 50, "https://www.example.com")
+				return CreateAdminLogin(db, "d1e93661-00b0-41a4-ab51-f2afaef8f86f", "gilangpratama", "Gilang Pratama", "gilangpratama@example.com", "secretpass")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryCompostable",
+			Name: "CreateAdmin12",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "1cd52acc-f272-4aa8-8abd-e64fb288f64c", "Compostable", 45, "https://www.example.com")
+				return CreateAdminLogin(db, "bb2c878b-2f05-4964-9307-a46d6bbccd31", "rianasafitri", "Riana Safitri", "rianasafitri@example.com", "strongpassword")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryReusable",
+			Name: "CreateAdmin13",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3ecbf571-79b6-452b-8626-c45e1a2ab671", "Reusable", 60, "https://www.example.com")
+				return CreateAdminLogin(db, "7b8df5e7-c440-44f0-898a-d2714f762842", "yudhistirapratama", "Yudhistira Pratama", "yudhistirapratama@example.com", "password123!")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryUpcycled",
+			Name: "CreateAdmin14",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "14eb3066-5f5c-459b-a84a-c99cbbd114f9", "Upcycled", 35, "https://www.example.com")
+				return CreateAdminLogin(db, "98f9e9d2-9b19-4e14-b148-c1bb84104d07", "aisyahnuraini", "Aisyah Nuraini", "aisyahnuraini@example.com", "12345678")
 			},
 		},
 		{
-			Name: "CreateImpactCategoryFairTrade",
+			Name: "CreateAdmin15",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977", "Fair Trade", 50, "https://www.example.com")
+				return CreateAdminLogin(db, "cea38442-5ede-409c-930f-d5f7dd772d5e", "rizkiadnan", "Rizki Adnan", "rizkiadnan@example.com", "mypassword2")
+			},
+		},
+		// End Admin
+		// Impact Categories
+		{
+			Name: "CreateImpactCategory1",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd", "Hemat Uang", 40, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory2",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "7d34a5fa-e2cf-466d-9f01-d731f6967082", "Mengurangi Limbah", 50, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory3",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "e8e714bd-c34e-4278-980c-39bd1f55b5fb", "Perluas Wawasan", 45, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory4",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "b5d07366-3b31-4011-95e3-34735b0b61f8", "Mengurangi Pemanasan Global", 35, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory5",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "30fc3682-a674-42e1-b420-e16fcd0c85a5", "Biodegradable", 35, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory6",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f", "Energy Efficient", 55, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory7",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "3655727a-e807-4fc1-bfad-6b7516c89b13", "Low Carbon", 60, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory8",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "19ecd259-58f0-4b3c-ba6b-e16f03317048", "Water Saving", 50, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory9",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b", "Zero Waste", 70, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory10",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "2d9c8fd2-8104-470f-a8d3-4ff34993fabd", "Organic", 40, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory11",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "4b1e1acd-570d-47d6-8d6a-ea2a277882cb", "Non-Toxic", 50, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory12",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "1cd52acc-f272-4aa8-8abd-e64fb288f64c", "Compostable", 45, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory13",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "3ecbf571-79b6-452b-8626-c45e1a2ab671", "Reusable", 60, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory14",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "14eb3066-5f5c-459b-a84a-c99cbbd114f9", "Upcycled", 35, "https://www.example.com", "https://www.example.com", "desc")
+			},
+		},
+		{
+			Name: "CreateImpactCategory15",
+			Run: func(db *gorm.DB) error {
+				return CreateImpactCategory(db, "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977", "Fair Trade", 50, "https://www.example.com", "https://www.example.com", "desc")
 			},
 		},
 		//Product Seeds Start
@@ -645,6 +737,368 @@ func Seeds() []seed.Seed {
 				return CreateProduct(db, products)
 			},
 		},
+		{
+			Name: "CreateProduct16",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-16",
+					Name:        "Organic Skincare",
+					Description: "Produk perawatan kulit yang terbuat dari bahan organik",
+					Price:       445000,
+					Coin:        10,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2290ad20-df4c-4bfd-8bb7-94283bf7f920regenerating-cleanser-main.webp",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "4b1e1acd-570d-47d6-8d6a-ea2a277882cb",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct17",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-17",
+					Name:        "Reusable Coffee Cup",
+					Description: "Cangkir kopi yang dapat digunakan kembali, terbuat dari bahan ramah lingkungan.",
+					Price:       20000,
+					Coin:        12,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2d11719e-b9b6-434f-b4a1-783b79ffd799no-brand_no-brand_full01.webp",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "3ecbf571-79b6-452b-8626-c45e1a2ab671",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct18",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-18",
+					Name:        "Fair Trade Chocolate Bar",
+					Description: "Cokelat batangan yang terbuat dari kakao fair trade",
+					Price:       25000,
+					Coin:        15,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/561cd4c0-3fbb-4578-87a0-b127b5a40220images (4).jpeg",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct19",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-19",
+					Name:        "Biodegradable Phone Case",
+					Description: "Casing ponsel yang sepenuhnya dapat terurai secara hayati",
+					Price:       65000,
+					Coin:        9,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/7101ef8d-d9c1-4ed3-a8ea-f46f5cec3d08images (5).jpeg",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "30fc3682-a674-42e1-b420-e16fcd0c85a5",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct20",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-20",
+					Name:        "Eco-Friendly Yoga Mat",
+					Description: "Matras yoga yang terbuat dari bahan ramah lingkungan dan tidak beracun",
+					Price:       72000,
+					Coin:        14,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8f317cad-8d3e-4341-a253-6d60a8334cb0REECH.jpeg",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "1350c308-05e7-4d49-a5ad-3e92b00ecba9",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "4b1e1acd-570d-47d6-8d6a-ea2a277882cb",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct21",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-21",
+					Name:        "Reusable Food Wraps",
+					Description: "Pembungkus yang terbuat dari lilin lebah dan katun organik",
+					Price:       15000,
+					Coin:        6,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b95275d1-d50c-4365-a804-a0d86168bd3fHoneycombRoll1_1200x.webp",
+						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a9e852d0-b485-4675-b45f-80a7078cf2b6BW.comPDPLifestyleImages_1000x1000px_19_1200x.webp",
+						Position:  2,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a4a917b4-20e4-4150-a7a0-8437ef94c9853_29941402-9cba-4802-9f45-edbaaf64e64b_1200x.webp",
+						Position:  3,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "3ecbf571-79b6-452b-8626-c45e1a2ab671",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct22",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-22",
+					Name:        "Solar Garden Lights",
+					Description: "Lampu taman yang bertenaga surya.",
+					Price:       230000,
+					Coin:        20,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp",
+						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg",
+						Position:  2,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg",
+						Position:  3,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct23",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-23",
+					Name:        "Compostable Cutlery",
+					Description: "Alat makan sekali pakai yang dapat terkompos.",
+					Price:       20000,
+					Coin:        8,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/24e88d99-d3ec-4f1e-a08a-433ec28542d741J7+D28yIL._SX342_SY445_.jpg",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "1cd52acc-f272-4aa8-8abd-e64fb288f64c",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct24",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-24",
+					Name:        "Upcycled Wallet",
+					Description: "Dompet yang terbuat dari bahan daur ulang",
+					Price:       115000,
+					Coin:        10,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c5e5cfd7-accc-4a33-a1e4-2173c1b1a3fcil_1588xN.1925528247_3zpq.webp",
+						Position:  1,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "14eb3066-5f5c-459b-a84a-c99cbbd114f9",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+		{
+			Name: "CreateProduct25",
+			Run: func(db *gorm.DB) error {
+				products := product.Product{
+					ID:          "new-unique-id-25",
+					Name:        "Low Carbon Backpack",
+					Description: "Ransel dengan jejak karbon rendah,",
+					Price:       800000,
+					Coin:        25,
+				}
+				images := []product.ProductImage{
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/db2ab4ba-4865-4a11-bd99-86c15c057da0814-173-38113.jpg",
+						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/732499c3-ccba-49b0-8f64-0220ce13e8f6814-173-38113_1.jpg",
+						Position:  2,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: products.ID,
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8f3f23bd-55f9-46f3-b46d-8ebeed584f6a814-173-38113_2.webp",
+						Position:  3,
+					},
+				}
+				categories := []product.ProductImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ProductID:        products.ID,
+						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+					},
+				}
+				products.Images = images
+				products.ImpactCategories = categories
+				return CreateProduct(db, products)
+			},
+		},
+
 		// Product Ends
 		// Challenge Starts
 		{
@@ -652,14 +1106,14 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "5fe8f4f6-43ee-4420-8969-bf1a0e19260c",
-					Title:        "Plant a Tree",
+					Title:       "Plant a Tree",
 					Difficulty:  "Medium",
 					Description: "Plant a tree in your backyard or a community park",
 					Exp:         100,
 					Coin:        50,
 					DateStart:   time.Date(2024, 6, 10, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 6, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:     "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -797,7 +1251,496 @@ func Seeds() []seed.Seed {
 				return CreateChallenge(db, challenges)
 			},
 		},
+		{
+			Name: "CreateChallenge6",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "9b21b3e5-46ff-42a1-92cc-4969c078ff83",
+					Title:       "DIY Eco-friendly Products",
+					Difficulty:  "Medium",
+					Description: "Create and use three DIY eco-friendly household products",
+					Exp:         120,
+					Coin:        60,
+					DateStart:   time.Date(2024, 11, 10, 0, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 11, 17, 9, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "4b1e1acd-570d-47d6-8d6a-ea2a277882cb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "14eb3066-5f5c-459b-a84a-c99cbbd114f9",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge7",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "85dd4189-9d2a-42f9-8b26-b03daa7e5869",
+					Title:       "Green Commute Challenge",
+					Difficulty:  "Hard",
+					Description: "Use only public transport or walk for all your commutes for two weeks",
+					Exp:         250,
+					Coin:        125,
+					DateStart:   time.Date(2024, 12, 01, 0, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 12, 15, 8, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge8",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "4cc8b34f-9e3e-4f05-a73a-035395ff546d",
+					Title:       "Organic Gardening",
+					Difficulty:  "Easy",
+					Description: "Start and maintain an organic garden",
+					Exp:         80,
+					Coin:        40,
+					DateStart:   time.Date(2024, 12, 20, 10, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2024, 12, 27, 10, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "19ecd259-58f0-4b3c-ba6b-e16f03317048",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge9",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "1e0f4c4f-5b54-4421-b8c1-46a2d382f8b2",
+					Title:       "Upcycle Project",
+					Difficulty:  "Medium",
+					Description: "Complete an upcycling project with materials you already have",
+					Exp:         110,
+					Coin:        55,
+					DateStart:   time.Date(2025, 01, 05, 9, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 01, 12, 9, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "14eb3066-5f5c-459b-a84a-c99cbbd114f9",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "3ecbf571-79b6-452b-8626-c45e1a2ab671",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge10",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "c0aa381d-4c14-4eba-9811-c6356176ab67",
+					Title:       "Eco-friendly Shopping",
+					Difficulty:  "Easy",
+					Description: "Buy only eco-friendly products for a week",
+					Exp:         90,
+					Coin:        45,
+					DateStart:   time.Date(2025, 02, 20, 8, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 03, 01, 0, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "1350c308-05e7-4d49-a5ad-3e92b00ecba9",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge11",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "1f6774a8-a173-4161-ad3e-e58400e007b2",
+					Title:       "Water Conservation Challenge",
+					Difficulty:  "Hard",
+					Description: "Reduce your water usage by 30% for a month",
+					Exp:         280,
+					Coin:        140,
+					DateStart:   time.Date(2025, 03, 01, 8, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 03, 23, 59, 59, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "19ecd259-58f0-4b3c-ba6b-e16f03317048",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge12",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "b0ac9f1c-4e13-4848-977a-02dd540369a7",
+					Title:       "Participate in Earth Hour",
+					Difficulty:  "Easy",
+					Description: "Turn off all lights and electrical appliances for one hour",
+					Exp:         40,
+					Coin:        20,
+					DateStart:   time.Date(2025, 03, 29, 20, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 03, 29, 21, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge13",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "2e80a9cf-5007-4eac-9cc8-9a603d954d6a",
+					Title:       "Meatless Monday",
+					Difficulty:  "Medium",
+					Description: "Go meatless every Monday for a month",
+					Exp:         130,
+					Coin:        65,
+					DateStart:   time.Date(2025, 04, 01, 0, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 04, 30, 59, 59, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge14",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "0d1233b8-d6e0-40df-8c6f-2ae1f8f2bfb7",
+					Title:       "Create a Compost Bin",
+					Difficulty:  "Easy",
+					Description: "Create and maintain a compost bin at home",
+					Exp:         70,
+					Coin:        35,
+					DateStart:   time.Date(2025, 05, 01, 9, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 05, 05, 7, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "1cd52acc-f272-4aa8-8abd-e64fb288f64c",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "078817ea-4fcf-4eeb-96b2-f10961826469",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
+		{
+			Name: "CreateChallenge15",
+			Run: func(db *gorm.DB) error {
+				challenges := challenge.Challenge{
+					ID:          "ce6bf160-34ba-4685-80d7-10df1bd04fd1",
+					Title:       "Participate in Car-Free Day",
+					Difficulty:  "Medium",
+					Description: "Avoid using cars for a whole day",
+					Exp:         100,
+					Coin:        50,
+					DateStart:   time.Date(2025, 06, 05, 9, 0, 0, 0, time.UTC),
+					DateEnd:     time.Date(2025, 06, 06, 7, 0, 0, 0, time.UTC),
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+				}
+				challengeCategories := []challenge.ChallengeImpactCategory{
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc",
+					},
+				}
+				challenges.ChallengeImpactCategories = challengeCategories
+				return CreateChallenge(db, challenges)
+			},
+		},
 		// Challenge Ends
+		// Users Starts
+		{
+			Name: "CreateUsers1",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "5dcdb121-85df-487c-8d4a-b4fd5033c9c0", "oscar.simanjuntak", "secret123", "Oscar Simanjuntak", "oscar.simanjuntak@example.com", "Jl. Kamboja No. 15, Jayapura", "Laki-laki", "081234567804", 350, 140, "")
+			},
+		},
+		{
+			Name: "CreateUsers2",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "5b9a23e5-e562-4fae-b11c-787e655a67d7", "ahmad.fauzi", "password123", "Ahmad Fauzi", "ahmad.fauzi@example.com", "Jl. Merdeka No. 1, Jakarta", "Laki-laki", "'081234567890", 200, 129, "")
+			},
+		},
+		{
+			Name: "CreateUsers3",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "d4a59d1b-38fa-4736-88d7-00cdc02ef5be", "budi.santoso", "passw0rd", "Budi Santoso", "budi.santoso@example.com", "Jl. Pahlawan No. 2, Surabaya", "Laki-laki", "081234567891", 50, 124, "")
+			},
+		},
+		{
+			Name: "CreateUsers4",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "6932e20c-3c55-4d95-91c5-ce316cc5843f", "citra.lestari", "mypassword", "Citra Lestari", "citra.lestari@example.com", "Jl. Melati No. 3, Bandung", "Perempuan", "081234567892", 0, 0, "")
+			},
+		},
+		{
+			Name: "CreateUsers5",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "8f25169f-5084-45c3-a99f-40daf59485d4", "dewi.ayu", "securepass", "Dewi Ayu", "dewi.ayu@example.com", "Jl. Mawar No. 4, Yogyakarta", "Perempuan", "'081234567893", 0, 24, "")
+			},
+		},
+		{
+			Name: "CreateUsers6",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "b7352ca3-fae1-4f3c-85b9-095de368b706", "eko.prasetyo", "password321", "Eko Prasetyo", "eko.prasetyo@example.com", "Jl. Kenanga No. 5, Semarang", "Laki-laki", "'081234567894", 200, 100, "")
+			},
+		},
+		{
+			Name: "CreateUsers7",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "29a1ee6d-05bd-4f11-b42a-a6769fd6a509", "fani.nugraha", "pass1234", "Fani Nugraha", "fani.nugraha@example.com", "Jl. Teratai No. 6, Medan", "Perempuan", "081234567895", 250, 125, "")
+			},
+		},
+		{
+			Name: "CreateUsers8",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c", "gilang.permana", "qwerty123", "Gilang Permana", "gilang.permana@example.com", "Jl. Anggrek No. 7, Bali", "Laki-laki", "081234567896", 80, 64, "")
+			},
+		},
+		{
+			Name: "CreateUsers9",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "4fe8e112-e3d7-4468-bfd0-24058790bb6e", "hana.putri", "letmein", "Hana Putri", "hana.putri@example.com", "Jl. Dahlia No. 8, Makassar", "Perempuan", "081234567897", 110, 55, "")
+			},
+		},
+		{
+			Name: "CreateUsers10",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "56a85666-b5aa-4b39-8823-99c7f789ac7b", "indra.maulana", "welcome1", "Indra Maulana", "indra.maulana@example.com", "Jl. Flamboyan No. 9, Malang", "Laki-laki", "081234567898", 90, 45, "")
+			},
+		},
+		{
+			Name: "CreateUsers11",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "c0045c29-d1fa-4524-85fd-3e9341f99c6a", "surya.rahmat", "trustno1", "Surya Rahmat", "suryarahmat@example.com", "Jl. Cempaka No. 10, Solo", "Laki-laki", "081234567899", 0, 0, "")
+			},
+		},
+		{
+			Name: "CreateUsers12",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "6220c455-f14e-42d3-a73d-2f4573f4cf52", "kiki.amalia", "password456", "Kiki Amalia", "kiki.amalia@example.com", "Jl. Kamboja No. 11, Pekanbaru", "Perempuan", "081234567800", 40, 20, "")
+			},
+		},
+		{
+			Name: "CreateUsers13",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "35e243e9-d0b1-40b7-b216-5bc6cc15e243", "lina.marlina", "mypassword2", "Lina Marlina", "lina.marlina@example.com", "Jl. Bougenville No. 12, Palembang", "Tidak Terdefinisi", "081234567801", 0, 0, "")
+			},
+		},
+		{
+			Name: "CreateUsers14",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "8f14519b-ea61-457b-bf96-90504221de90", "mulyadi.saputra", "pass2022", "Mulyadi Saputra", "mulyadi.saputra@example.com", "Jl. Tulip No. 13, Balikpapan", "Tidak Terdefinisi", "081234567802", 0, 0, "")
+			},
+		},
+		{
+			Name: "CreateUsers15",
+			Run: func(db *gorm.DB) error {
+				return CreateUsers(db, "3fb1eb90-805f-4727-9f7d-a6fefc6115f9", "nina.agustina", "password789", "Nina Agustina", "nina.agustina@example.com", "Jl. Sakura No. 14, Pontianak", "Tidak Terdefinisi", "081234567803", 100, 50, "")
+			},
+		},
+		// End of Users
+		// Start of Vouchers
+		{
+			Name: "CreateVoucher1",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Christmas Sale", "SUSTXMAS", "20000", "Special discounts on sustainable products", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher2",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Lebaran Bundle", "ECOLEBARAN", "15%", "Bundle deals on eco-friendly items for Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher3",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Independence Day Sale", "RECYID", "15000", "Discounts on recyclable products for 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher4",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "New Year Offer", "RENEWNY", "30%", "Special offers on renewable resources for New Year", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher5",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Earth Day Deals", "BIODEED", "10000", "Discounts on biodegradable goods for Earth Day", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher6",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Halloween Sale", "ENERHALLOW", "25%", "Savings on energy-efficient products for Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher7",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Kartini Day Discount", "LOWCKARTINI", "30000", "Discounts on low carbon footprint items for Kartini Day", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher8",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Eid al-Adha Special", "WATEID", "20%", "Special offers for water-saving products for Eid al-Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher9",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "National Batik Day", "ZEROBATIK", "35%", "Big discounts for zero waste products for National Batik Day", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher10",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Lunar New Year Delights", "ORGLUNAR", "25%", "Discounts on organic and natural products for Lunar New Year", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher11",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Valentine's Day Sale", "NONTOXVAL", "12000", "Savings on non-toxic household items for Valentine's Day", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher12",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Earth Hour Offers", "COMPSEARTH", "15000", "Offers on compostable products for Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher13",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "National Education Day Sale", "REUSEDU", "20%", "Discounts on reusable items for National Education Day", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher14",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "National Health Day Special", "UPCYHEALTH", "30000", "Special deals on upcycled products for National Health Day", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		{
+			Name: "CreateVoucher15",
+			Run: func(db *gorm.DB) error {
+				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Pancasila Day Savings", "FAIRTPAN", "15%", "Savings on fair trade certified products for Pancasila Day", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
+			},
+		},
+		// End Voucher
+		// Start Challenge log
+		// End Challenge
+
+		// Start Challenge Confirmation
+		// End Challenge Confirmation
 	}
 	return seeds
 }
