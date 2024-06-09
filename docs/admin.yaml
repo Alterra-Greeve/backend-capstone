@@ -2782,6 +2782,109 @@ paths:
                   message: Internal Server Error
                   data: null
   /forums/{forum_id}:
+    get:
+      tags:
+        - forum
+      summary: Get Forum Detail
+      description: Admin dapat melihat detail forum, seperti title, description, author, dan message dengan memasukkan parameter forum_id
+      operationId: getForumDetail
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: forum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Get Forum Detail Success
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    title: Forum 1
+                    description: Forum 1 description
+                    author:
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user1
+                      name: User 1
+                      avatar_url: https://www.example.com/avatar-1.jpg
+                    message:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        content: Hello, World!
+                        user:
+                          id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user1
+                          name: User 1
+                          avatar_url: https://www.example.com/avatar-1.jpg
+                          created_at: 2021-01-01 00:00:00
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        content: Hello, World!
+                        user:
+                          id: 123e4567-e89b-12d3-a456-426614174000
+                          username: user2
+                          name: User 2
+                          avatar_url: https://www.example.com/avatar-2.jpg
+                          created_at: 2021-01-01 00:00:00
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, id forum not found
+                  data: null
+        "500": 
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Internal Server Error
+                  data: null
     delete: 
       tags:
         - forum
