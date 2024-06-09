@@ -22,6 +22,7 @@ func New(s voucher.VoucherServiceInterface, j helper.JWTInterface) voucher.Vouch
 	}
 }
 
+// Voucher
 func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
@@ -46,7 +47,7 @@ func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 				Code:        vouchers.Code,
 				Discount:    vouchers.Discount,
 				Description: vouchers.Description,
-				ExpiredAt:   vouchers.ExpiredAt.Format("2006-01-02 15:04:05"),
+				ExpiredAt:   vouchers.ExpiredAt.Format("02/01/2006 15:04"),
 			})
 		}
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetAll, response))
@@ -77,7 +78,7 @@ func (h *VoucherHandler) GetByIdVoucher() echo.HandlerFunc {
 			Code:        voucher.Code,
 			Discount:    voucher.Discount,
 			Description: voucher.Description,
-			ExpiredAt:   voucher.ExpiredAt.Format("2006-01-02 15:04:05"),
+			ExpiredAt:   voucher.ExpiredAt.Format("02/01/2006 15:04"),
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetByID, response))

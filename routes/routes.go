@@ -36,6 +36,9 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.UserPath, uh.Delete(), echojwt.WithConfig(jwtConfig))
 
+	// Leaderboard
+	e.GET(route.Leaderboard, uh.GetLeaderboard(), echojwt.WithConfig(jwtConfig))
+
 	// Admin
 	e.GET(route.AdminManageUserPath, uh.GetAllUsersForAdmin(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.AdminManageUserByID, uh.GetUserByIDForAdmin(), echojwt.WithConfig(jwtConfig))

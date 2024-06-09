@@ -10,6 +10,9 @@ const UserSuccessOTPValidation = "OTP Validation Success"
 const UserSuccessResetPassword = "Password has been changed"
 const UserSuccessDelete = "Account has been deleted"
 
+// Leaderboard
+const SuccessGetLeaderboard = "Get Leaderboard Success"
+
 // Forum Success Message
 const ForumSuccessCreate = "Successfull Create Forum"
 const ForumSuccessGetAll = "Successfull Get Forum"
