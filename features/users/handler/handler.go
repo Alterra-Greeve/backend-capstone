@@ -288,6 +288,46 @@ func (h *UserHandler) ResetPassword() echo.HandlerFunc {
 	}
 }
 
+// Leaderboard
+func (h *UserHandler) GetLeaderboard() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			return helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		users := h.j.ExtractUserToken(token)
+		role := users[constant.JWT_ROLE]
+
+		if role != constant.RoleUser {
+			return helper.UnauthorizedError(c)
+		}
+
+		voucher, err := h.s.GetLeaderboard()
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		var response []UserLeaderboardResponse
+		for i, vouchers := range voucher {
+			response = append(response, UserLeaderboardResponse{
+				ID:        vouchers.ID,
+				Name:      vouchers.Name,
+				Username:  vouchers.Username,
+				Exp:       vouchers.Exp,
+				AvatarURL: vouchers.AvatarURL,
+				Rank:      i + 1,
+			})
+		}
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.SuccessGetLeaderboard, response))
+	}
+}
+
 // Admin
 func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 	return func(c echo.Context) error {
@@ -301,7 +341,7 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 			helper.UnauthorizedError(c)
 		}
 
-		adminData := h.j.ExtractUserToken(token)
+		adminData := h.j.ExtractAdminToken(token)
 		role := adminData[constant.JWT_ROLE]
 
 		if role != constant.RoleAdmin {

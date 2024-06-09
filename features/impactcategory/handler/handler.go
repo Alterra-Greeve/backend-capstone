@@ -52,6 +52,8 @@ func (h *ImpactCategoryHandler) GetAll() echo.HandlerFunc {
 				Name:        impactCategory.Name,
 				ImpactPoint: impactCategory.ImpactPoint,
 				IconURL:     impactCategory.IconURL,
+				ImageURL:    impactCategory.ImageURL,
+				Description: impactCategory.Description,
 			})
 		}
 
@@ -87,6 +89,8 @@ func (h *ImpactCategoryHandler) GetByID() echo.HandlerFunc {
 			Name:        impactCategory.Name,
 			ImpactPoint: impactCategory.ImpactPoint,
 			IconURL:     impactCategory.IconURL,
+			ImageURL:    impactCategory.ImageURL,
+			Description: impactCategory.Description,
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ImpactCategorySuccessGet, impactCategoryResponse))

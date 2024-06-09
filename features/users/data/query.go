@@ -197,6 +197,16 @@ func (u *UserData) GetUserByUsername(username string) (users.User, error) {
 	return user, nil
 }
 
+func (u *UserData) GetLeaderboard() ([]users.Leaderboard, error) {
+	var usersLeaderboard []users.Leaderboard
+	res := u.DB.Table("users").Where("deleted_at IS NULL").Order("exp DESC").Limit(20).Scan(&usersLeaderboard)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return usersLeaderboard, nil
+}
+
 // Admin
 func (u *UserData) GetAllUsersForAdmin() ([]users.User, error) {
 	var users []users.User

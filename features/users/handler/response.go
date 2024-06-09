@@ -59,3 +59,12 @@ type MetadataResponse struct {
 	CurrentPage int `json:"current_page"`
 	TotalPage   int `json:"total_page"`
 }
+
+type UserLeaderboardResponse struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Exp       int    `json:"exp"`
+	AvatarURL string `json:"avatar_url"`
+	Rank      int    `json:"rank"`
+}

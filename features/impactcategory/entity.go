@@ -9,6 +9,8 @@ type ImpactCategory struct {
 	Name        string
 	ImpactPoint int
 	IconURL     string
+	ImageURL    string
+	Description string
 }
 
 type ImpactCategoryUpdate struct {

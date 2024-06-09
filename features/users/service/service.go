@@ -203,6 +203,11 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 	return s.d.ResetPassword(userResetPassword)
 }
 
+// Leaderboard
+func (s *UserService) GetLeaderboard() ([]users.Leaderboard, error) {
+	return s.d.GetLeaderboard()
+}
+
 // Admin
 func (s *UserService) GetAllUsersForAdmin() ([]users.User, error) {
 	return s.d.GetAllUsersForAdmin()

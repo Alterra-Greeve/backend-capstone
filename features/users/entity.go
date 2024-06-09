@@ -73,6 +73,15 @@ type UpdateUserByAdmin struct {
 	Gender  string
 	Phone   string
 }
+
+type Leaderboard struct {
+	ID        string
+	Name      string
+	Username  string
+	Coin      int
+	Exp       int
+	AvatarURL string
+}
 type UserHandlerInterface interface {
 	Register() echo.HandlerFunc
 	Login() echo.HandlerFunc
@@ -83,6 +92,7 @@ type UserHandlerInterface interface {
 	ForgotPassword() echo.HandlerFunc
 	VerifyOTP() echo.HandlerFunc
 	ResetPassword() echo.HandlerFunc
+	GetLeaderboard() echo.HandlerFunc
 
 	// Admin
 	GetAllUsersForAdmin() echo.HandlerFunc
@@ -101,6 +111,7 @@ type UserServiceInterface interface {
 	ForgotPassword(User) error
 	VerifyOTP(VerifyOTP) error
 	ResetPassword(UserResetPassword) error
+	GetLeaderboard() ([]Leaderboard, error)
 
 	// Admin
 	GetAllUsersForAdmin() ([]User, error)
@@ -122,6 +133,7 @@ type UserDataInterface interface {
 	IsEmailExist(email string) bool
 	GetUserByID(id string) (User, error)
 	GetUserByUsername(username string) (User, error)
+	GetLeaderboard() ([]Leaderboard, error)
 
 	// Admin
 	GetAllUsersForAdmin() ([]User, error)

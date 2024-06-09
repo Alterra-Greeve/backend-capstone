@@ -10,6 +10,9 @@ const UserForgotPassword = UserPath + "/forgot-password"
 const UserVerifyOTP = UserPath + "/verify-otp"
 const UserResetPassword = UserPath + "/reset-password"
 
+// Leaderboard
+const Leaderboard = BasePath + "/leaderboard"
+
 // Forum
 const ForumPath = BasePath + "/forums"
 const ForumByID = ForumPath + "/:id"

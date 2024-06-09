@@ -9,8 +9,8 @@ type ImpactCategory struct {
 	ID          string `gorm:"primary_key;type:varchar(50);not null;column:id"`
 	Name        string `gorm:"type:varchar(255);not null;column:name"`
 	ImpactPoint int    `gorm:"type:int;not null;column:impact_point"`
-	Description string `gorm:"type:varchar(255);not null;column:description"`
-	ImageURL    string `gorm:"type:varchar(255);not null;column:image_url"`
+	ImageURL    string `gorm:"type:varchar(255);column:image_url"`
+	Description string `gorm:"type:TEXT;column:description"`
 	IconURL     string `gorm:"type:varchar(255);not null;column:icon_url"`
 }
 
