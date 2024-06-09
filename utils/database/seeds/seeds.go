@@ -26,7 +26,7 @@ func Seeds() []seed.Seed {
 		},
 		// End Admin
 		// Impact Categories
-    {
+		{
 			Name: "HematUang",
 			Run: func(db *gorm.DB) error {
 				description := "<div><p><strong>Save Money</strong> atau <strong>Hemat Uang</strong> adalah konsep yang mendorong individu untuk mengelola keuangan mereka dengan bijak. Ini melibatkan praktik-praktik seperti mengurangi pengeluaran yang tidak perlu, mencari cara untuk mendapatkan nilai lebih dari setiap pembelian, dan memaksimalkan efisiensi dalam penggunaan sumber daya. Dengan menghemat uang, individu dapat mencapai stabilitas finansial dan lebih mampu menghadapi situasi darurat atau merencanakan masa depan dengan lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Mengurangi emisi gas rumah kaca dari produksi dan transportasi barang</li><li>Menghemat sumber daya alam seperti air, kayu, dan energi</li><li>Mengurangi polusi udara dan air dari limbah industri dan rumah tangga</li></ul></div>"
@@ -60,8 +60,9 @@ func Seeds() []seed.Seed {
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg"
 				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/eb285b2b-19b2-447e-894e-81a12fbfb517icon1.svg"
 				return CreateImpactCategory(db, "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc", "Renewable", 45, description, imageUrl, iconUrl)
+			},
 		},
-    // Impact Categoreis End
+		// Impact Categoreis End
 		//Product Seeds Start
 		{
 			Name: "CreateProduct1",
