@@ -3,7 +3,6 @@ package service
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/impactcategory"
-	"log"
 )
 
 type ImpactCategoryService struct {
@@ -28,7 +27,6 @@ func (ics *ImpactCategoryService) GetByID(ID string) (impactcategory.ImpactCateg
 }
 
 func (ics *ImpactCategoryService) Create(category impactcategory.ImpactCategory) error {
-	log.Print(category)
 	if category.Name == "" || category.ImpactPoint == 0 || category.IconURL == "" {
 		return constant.ErrImpactCategoryField
 	}

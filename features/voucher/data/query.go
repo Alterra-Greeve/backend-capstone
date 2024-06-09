@@ -3,7 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/voucher"
-	"log"
 	"time"
 
 	"gorm.io/gorm"
@@ -71,7 +70,6 @@ func (u *VoucherData) Delete(voucher string) error {
 
 	if err := res.Where("id = ?", voucher).Delete(&Voucher{}); err.Error != nil {
 		res.Rollback()
-		log.Print(err)
 		return constant.ErrVoucherNotFound
 	} else if err.RowsAffected == 0 {
 		res.Rollback()

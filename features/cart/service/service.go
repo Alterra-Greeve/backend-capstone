@@ -3,7 +3,6 @@ package service
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/cart"
-	"log"
 )
 
 type CartService struct {
@@ -31,11 +30,11 @@ func (cs *CartService) Create(cart cart.NewCart) error {
 
 func (cs *CartService) Update(cart cart.UpdateCart) error {
 	if cart.Type != "increment" && cart.Type != "decrement" && cart.Type != "qty" {
-		return nil
+		return constant.ErrFieldType
 	}
-	if cart.Type == "increment" || cart.Type == "decrement" && cart.Quantity != 0 {
-		return constant.ErrFieldChoiceOneType
-	}
+	// if cart.Type == "increment" || cart.Type == "decrement" && cart.Quantity != 0 {
+	// 	return constant.ErrFieldChoiceOneType
+	// }
 
 	cartQty, err := cs.d.GetCartQty(cart.UserID, cart.ProductID)
 	if err != nil {
@@ -46,7 +45,6 @@ func (cs *CartService) Update(cart cart.UpdateCart) error {
 		return cs.d.Delete(cart.UserID, cart.ProductID)
 	}
 
-	log.Println("cart", cart)
 	if cart.Type == "increment" {
 		return cs.d.InsertIncrement(cart.UserID, cart.ProductID)
 	} else if cart.Type == "decrement" {

@@ -2563,7 +2563,7 @@ paths:
       tags:
         - challenges
       summary: Get User Challenges (WIP)
-      description: User mendapatkan semua challenge yang sudah diambil
+      description: User mendapatkan semua challenge yang sudah diambil<br>status :Diterima, Ditolak, Pending
       operationId: getUserChallengesByStatus
       security:
         - bearerAuth: []
@@ -2592,13 +2592,12 @@ paths:
                   status: true
                   message: Get User Challenges Success
                   data: null
-
   /challenges/participate:
     post:
       tags:
         - challenges
       summary: Participate Challenge
-      description: User bisa swipe kiri untuk tolak, dan swipe kanan untuk diterima, disini menggunakan payload type (Ditolak/Diterima)
+      description: User bisa swipe kiri untuk tolak, dan swipe kanan untuk diterima<br>type :Ditolak/Diterima
       operationId: swipeChallenge
       security:
         - bearerAuth: []
@@ -2614,7 +2613,7 @@ paths:
                   type: string
               example:
                 challenge_id: 5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4
-                type: decline
+                type: Diterima
       responses:
         "200":
           description: OK

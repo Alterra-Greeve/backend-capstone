@@ -5,7 +5,6 @@ import (
 	"backendgreeve/features/cart"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
-	"log"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -47,6 +46,9 @@ func (c *CartData) Delete(userId string, productId string) error {
 	rowAffected := c.DB.Where("user_id = ? AND product_id = ?", userId, productId).Delete(&Cart{}).RowsAffected
 	if rowAffected == 0 {
 		return constant.ErrCartNotFound
+	} else if rowAffected > 0 {
+		c.DB.Model(&Cart{}).Where("user_id = ? AND product_id = ?", userId, productId).Update("quantity", 0)
+		return nil
 	}
 	return nil
 
@@ -126,7 +128,6 @@ func (c *CartData) Get(userId string) (cart.Cart, error) {
 		})
 	}
 	cartData.Items = cartItems
-	log.Println("cartData:", cartData)
 	return cartData, nil
 }
 
@@ -160,6 +161,5 @@ func (c *CartData) InsertDecrement(userId string, productId string) error {
 }
 
 func (c *CartData) InsertByQuantity(userId string, productId string, quantity int) error {
-	log.Println("quantity", quantity)
 	return c.DB.Model(&Cart{}).Where("user_id = ? AND product_id = ?", userId, productId).Update("quantity", quantity).Error
 }
