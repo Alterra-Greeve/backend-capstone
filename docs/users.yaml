@@ -1678,7 +1678,7 @@ paths:
       tags:
         - shopping cart
       summary: Update Product in Cart
-      description: User mengupdate product di cart, untuk type dan qty opsional, salah satunya harus terisi, dan untuk value qty tidak boleh 0
+      description: Helper[type:'increment' atau 'decrement' kalau langsung mau pakai qty maka type nya tidak usah diisi]<br>type :increment/decrement<br>qty :number integer <br>User mengupdate product di cart, untuk type dan qty opsional, salah satunya harus terisi, dan untuk value qty tidak boleh 0
       operationId: updateProductInCart
       security:
         - bearerAuth: []
@@ -2558,15 +2558,22 @@ paths:
                   status: false
                   message: cannto get data, challenge id not found
                   data: null
-  /challenges/participate:
+  /challenges/participate?status={status}:
     get:
       tags:
         - challenges
       summary: Get User Challenges (WIP)
       description: User mendapatkan semua challenge yang sudah diambil
-      operationId: getUserChallenges
+      operationId: getUserChallengesByStatus
       security:
         - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+          example: Diterima
       responses:
         "200":
           description: OK
@@ -2585,11 +2592,13 @@ paths:
                   status: true
                   message: Get User Challenges Success
                   data: null
+
+  /challenges/participate:
     post:
       tags:
         - challenges
       summary: Participate Challenge
-      description: User bisa swipe kiri untuk decline, dan swipe kanan untuk accept, disini menggunakan payload type (decline/accept)
+      description: User bisa swipe kiri untuk tolak, dan swipe kanan untuk diterima, disini menggunakan payload type (Ditolak/Diterima)
       operationId: swipeChallenge
       security:
         - bearerAuth: []

@@ -48,7 +48,10 @@ func (h *ChallengeHandler) GetAllForUser() echo.HandlerFunc {
 			challengeResponse := ChallengeResponse{
 				ID:          challenge.ID,
 				Title:       challenge.Title,
+				Difficulty:  challenge.Difficulty,
 				Description: challenge.Description,
+				Exp:         challenge.Exp,
+				Coin:        challenge.Coin,
 				ImageURL:    challenge.ImageURL,
 				DateStart:   challenge.DateStart.Format("2006-01-02"),
 				DateEnd:     challenge.DateEnd.Format("2006-01-02"),
@@ -57,13 +60,21 @@ func (h *ChallengeHandler) GetAllForUser() echo.HandlerFunc {
 			var categories []ChallengeImpactCategories
 			for _, cat := range challenge.ImpactCategories {
 				categories = append(categories, ChallengeImpactCategories{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+					ImpactCategory: ImpactCategory{
+						Name:        cat.ImpactCategory.Name,
+						ImpactPoint: cat.ImpactCategory.ImpactPoint,
+						IconURL:     cat.ImpactCategory.IconURL,
+					},
 				})
 			}
 			challengeResponse.Categories = categories
+			participant, err := h.s.GetChallengeParticipant(challenge.ID)
+			if err != nil {
+				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			}
+			challengeResponse.Participant = participant
 			response = append(response, challengeResponse)
 		}
-
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, "Success", response))
 	}
 }
@@ -223,8 +234,64 @@ func (h *ChallengeHandler) Create() echo.HandlerFunc {
 	}
 }
 
+func (h *ChallengeHandler) GetUserParticipate() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			return helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID].(string)
+		status := c.QueryParam("status")
+
+		challenges, err := h.s.GetUserParticipate(userId, status)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		var response []UserChallengeConfirmationResponse
+		for _, confirmation := range challenges {
+			challenge := confirmation.Challenge
+			challengeResponse := ChallengeResponse{
+				ID:          challenge.ID,
+				Title:       challenge.Title,
+				Description: challenge.Description,
+				ImageURL:    challenge.ImageURL,
+				DateStart:   challenge.DateStart.Format("2006-01-02"),
+				DateEnd:     challenge.DateEnd.Format("2006-01-02"),
+			}
+
+			for _, category := range challenge.ImpactCategories {
+				challengeResponse.Categories = append(challengeResponse.Categories, ChallengeImpactCategories{
+					ImpactCategory: ImpactCategory{
+						Name:        category.ImpactCategory.Name,
+						ImpactPoint: category.ImpactCategory.ImpactPoint,
+						IconURL:     category.ImpactCategory.IconURL,
+					},
+				})
+			}
+
+			response = append(response, UserChallengeConfirmationResponse{
+				ID:        confirmation.ID,
+				UserID:    confirmation.UserID,
+				Status:    confirmation.Status,
+				Challenge: challengeResponse,
+			})
+		}
+
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", response))
+	}
+}
+
 func (h *ChallengeHandler) Update() echo.HandlerFunc {
 	return func(c echo.Context) error {
+
 		// Your code here
 		return nil
 	}

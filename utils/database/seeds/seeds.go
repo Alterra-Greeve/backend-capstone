@@ -24,188 +24,44 @@ func Seeds() []seed.Seed {
 				return CreateAdminLogin(db, "14adafd7-de6c-4586-a35e-3cf17ef3d351", "admin2", "admin2", "admin2@greeve.store", "admin2")
 			},
 		},
-		{
-			Name: "CreateAdmin1",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b1e7fdc4-6465-4f06-8914-85b36255368e", "susantowijaya", "Susanto Wijaya", "susantowijaya@example.com", "password123")
-			},
-		},
-		{
-			Name: "CreateAdmin2",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cf98c726-fb72-4687-9c88-e8ce671c32d6", "indrianisetiawati", "Indrianie Setiawati", "indrianisetiawati@example.com", "secret456")
-			},
-		},
-		{
-			Name: "CreateAdmin3",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "06db6d61-e7c8-4126-ab0f-f2b6bc1458d1", "ahmadrizkiputra", "Ahmad Rizki Putra", "ahmadrizkiputra@example.com", "qwerty789")
-			},
-		},
-		{
-			Name: "CreateAdmin4",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6a53c2db-2fa5-47df-8462-baea4308d48f", "sucimutiara", "Suci Mutiara", "sucimutiara@example.com", "12345abcd")
-			},
-		},
-		{
-			Name: "CreateAdmin5",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "90aae29b-bf80-44bd-ab59-e7388e84e27f", "ariefulhaq", "Arie Ul Haq", "ariefulhaq@example.com", "mypassword")
-			},
-		},
-		{
-			Name: "CreateAdmin6",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6112389a-2e44-4c78-ae64-849a5af60678", "dewianinditya", "Dewi Aninditya", "dewianinditya@example.com", "superstrong")
-			},
-		},
-		{
-			Name: "CreateAdmin7",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "9e66633a-cc3b-4887-8c44-dc8e4bf3530a", "rahmandarmawan", "Rahman Darmawan", "rahmandarmawan@example.com", "password!@#")
-			},
-		},
-		{
-			Name: "CreateAdmin8",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b0835feb-2404-4a28-846a-52fafc8e6902", "natasyanurhaliza", "Natasya Nurhaliza", "natasyanurhaliza@example.com", "123456789")
-			},
-		},
-		{
-			Name: "CreateAdmin9",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6562a858-84e7-412b-9e03-542f951fe0a2", "ilhamfauzan", "Ilham Fauzan", "ilhamfauzan@example.com", "password1")
-			},
-		},
-		{
-			Name: "CreateAdmin10",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "46a36705-f7d0-48a4-bb69-8cd5826b0da5", "tiaraputri", "Tiara Putri", "tiaraputri@example.com", "mypassword1")
-			},
-		},
-		{
-			Name: "CreateAdmin11",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "d1e93661-00b0-41a4-ab51-f2afaef8f86f", "gilangpratama", "Gilang Pratama", "gilangpratama@example.com", "secretpass")
-			},
-		},
-		{
-			Name: "CreateAdmin12",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "bb2c878b-2f05-4964-9307-a46d6bbccd31", "rianasafitri", "Riana Safitri", "rianasafitri@example.com", "strongpassword")
-			},
-		},
-		{
-			Name: "CreateAdmin13",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "7b8df5e7-c440-44f0-898a-d2714f762842", "yudhistirapratama", "Yudhistira Pratama", "yudhistirapratama@example.com", "password123!")
-			},
-		},
-		{
-			Name: "CreateAdmin14",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "98f9e9d2-9b19-4e14-b148-c1bb84104d07", "aisyahnuraini", "Aisyah Nuraini", "aisyahnuraini@example.com", "12345678")
-			},
-		},
-		{
-			Name: "CreateAdmin15",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cea38442-5ede-409c-930f-d5f7dd772d5e", "rizkiadnan", "Rizki Adnan", "rizkiadnan@example.com", "mypassword2")
-			},
-		},
 		// End Admin
 		// Impact Categories
-		{
-			Name: "CreateImpactCategory1",
+    {
+			Name: "HematUang",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd", "Hemat Uang", 40, "https://www.example.com", "https://www.example.com", "desc")
+				description := "<div><p><strong>Save Money</strong> atau <strong>Hemat Uang</strong> adalah konsep yang mendorong individu untuk mengelola keuangan mereka dengan bijak. Ini melibatkan praktik-praktik seperti mengurangi pengeluaran yang tidak perlu, mencari cara untuk mendapatkan nilai lebih dari setiap pembelian, dan memaksimalkan efisiensi dalam penggunaan sumber daya. Dengan menghemat uang, individu dapat mencapai stabilitas finansial dan lebih mampu menghadapi situasi darurat atau merencanakan masa depan dengan lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Mengurangi emisi gas rumah kaca dari produksi dan transportasi barang</li><li>Menghemat sumber daya alam seperti air, kayu, dan energi</li><li>Mengurangi polusi udara dan air dari limbah industri dan rumah tangga</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/9e01061a-e622-414a-a3f1-27263620c0cbicon2.svg"
+				return CreateImpactCategory(db, "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2", "Sustainable", 50, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategory2",
+			Name: "MengurangiLimbah",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "7d34a5fa-e2cf-466d-9f01-d731f6967082", "Mengurangi Limbah", 50, "https://www.example.com", "https://www.example.com", "desc")
+				description := "<div><p><strong>Less Waste</strong> atau <strong>Mengurangi Limbah</strong> adalah pendekatan yang menekankan pada pengurangan jumlah limbah yang dihasilkan, baik oleh individu, komunitas, maupun perusahaan. Tujuannya adalah untuk meminimalisir dampak negatif terhadap lingkungan dengan cara mengelola sumber daya secara lebih efisien dan bertanggung jawab. Strategi ini mencakup berbagai tindakan seperti daur ulang, pengomposan, penggunaan ulang barang, dan pengurangan penggunaan bahan sekali pakai.</p><p>Contoh Dampak Positif Less Waste pada Lingkungan:</p><ul><li>Pengurangan Polusi Tanah dan Air</li><li>Penurunan Emisi Gas Rumah Kaca</li><li>Konservasi Sumber Daya Alam</li><li>Mengurangi Energi yang Dibutuhkan untuk Produksi</li><li>Mengurangi Beban Tempat Pembuangan Akhir</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/91d948ca-3576-49e5-b435-0c3c7eccff7963ca36bac45556620e0ff4ba7ec5790d.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/25e1e158-3fb0-42ff-97f7-d728167f2a7eicon4.svg"
+				return CreateImpactCategory(db, "1350c308-05e7-4d49-a5ad-3e92b00ecba9", "Eco-Friendly", 40, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategory3",
+			Name: "PerluasWawasan",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "e8e714bd-c34e-4278-980c-39bd1f55b5fb", "Perluas Wawasan", 45, "https://www.example.com", "https://www.example.com", "desc")
+				description := "<div><p><strong>Expand Your Mind</strong> atau <strong>Perluas Wawasan Anda</strong> adalah konsep yang mendorong individu untuk terbuka terhadap pengetahuan, ide, dan pengalaman baru. Ini melibatkan pembelajaran berkelanjutan, eksplorasi topik yang beragam, dan berpikir kritis. Dengan memperluas wawasan, kita tidak hanya meningkatkan pemahaman kita tentang dunia, tetapi juga mengembangkan empati, kreativitas, dan kemampuan untuk membuat keputusan yang lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Kesadaran Lingkungan yang Lebih Tinggi</li><li>Inovasi dalam Solusi Ramah Lingkungan</li><li>Dukungan untuk Kebijakan Lingkungan yang Lebih Baik</li><li>Pengembangan Komunitas Berkelanjutan</li><li>Konsumsi yang Lebih Bertanggung Jawab</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/fd98dcdc-4cea-428a-a008-e1ca6f972ca72f0376e551eec4f1af915d5983a621c1.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/1f3dbf92-1d5a-4eb1-9e1f-385c6ea89220icon3.svg"
+				return CreateImpactCategory(db, "078817ea-4fcf-4eeb-96b2-f10961826469", "Recyclable", 30, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategory4",
+			Name: "MengurangiPemanasanGlobal",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "b5d07366-3b31-4011-95e3-34735b0b61f8", "Mengurangi Pemanasan Global", 35, "https://www.example.com", "https://www.example.com", "desc")
-			},
+				description := "<div><p><strong>Less Global Warming</strong> atau <strong>Mengurangi Pemanasan Global</strong> adalah upaya untuk menurunkan peningkatan suhu rata-rata bumi yang disebabkan oleh aktivitas manusia, terutama melalui emisi gas rumah kaca seperti karbon dioksida (CO<sub>2</sub>) dan metana (CH<sub>4</sub>). Upaya ini mencakup berbagai tindakan, seperti meningkatkan efisiensi energi, menggunakan energi terbarukan, mengurangi deforestasi, dan mempromosikan praktik pertanian berkelanjutan. Tujuannya adalah untuk memperlambat perubahan iklim, melindungi ekosistem, dan menjaga keseimbangan alami bumi.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Pengurangan Fenomena Cuaca Ekstrem</li><li>Perlindungan Keanekaragaman Hayati</li><li>Stabilisasi Tingkat Permukaan Laut</li><li>Kualitas Udara yang Lebih Baik</li><li>Konservasi Sumber Daya Air</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/eb285b2b-19b2-447e-894e-81a12fbfb517icon1.svg"
+				return CreateImpactCategory(db, "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc", "Renewable", 45, description, imageUrl, iconUrl)
 		},
-		{
-			Name: "CreateImpactCategory5",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "30fc3682-a674-42e1-b420-e16fcd0c85a5", "Biodegradable", 35, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory6",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f", "Energy Efficient", 55, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory7",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3655727a-e807-4fc1-bfad-6b7516c89b13", "Low Carbon", 60, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory8",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "19ecd259-58f0-4b3c-ba6b-e16f03317048", "Water Saving", 50, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory9",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b", "Zero Waste", 70, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory10",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "2d9c8fd2-8104-470f-a8d3-4ff34993fabd", "Organic", 40, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory11",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "4b1e1acd-570d-47d6-8d6a-ea2a277882cb", "Non-Toxic", 50, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory12",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "1cd52acc-f272-4aa8-8abd-e64fb288f64c", "Compostable", 45, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory13",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3ecbf571-79b6-452b-8626-c45e1a2ab671", "Reusable", 60, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory14",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "14eb3066-5f5c-459b-a84a-c99cbbd114f9", "Upcycled", 35, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
-		{
-			Name: "CreateImpactCategory15",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977", "Fair Trade", 50, "https://www.example.com", "https://www.example.com", "desc")
-			},
-		},
+    // Impact Categoreis End
 		//Product Seeds Start
 		{
 			Name: "CreateProduct1",

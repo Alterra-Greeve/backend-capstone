@@ -25,6 +25,7 @@ type ProductImage struct {
 type ImpactCategory struct {
 	Name        string `json:"name"`
 	ImpactPoint int    `json:"impact_point"`
+	IconURL     string `json:"icon_url"`
 }
 
 type MetadataResponse struct {

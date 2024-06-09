@@ -17,7 +17,6 @@ func New(c challenges.ChallengeDataInterface) challenges.ChallengeServiceInterfa
 }
 
 func (cs *ChallengeService) GetAllForUser(userId string) ([]challenges.Challenge, error) {
-	// Kode Anda di sini
 	challenges, err := cs.c.GetAllForUser(userId)
 	if err != nil {
 		return nil, err
@@ -28,8 +27,14 @@ func (cs *ChallengeService) GetAllForUser(userId string) ([]challenges.Challenge
 	return challenges, nil
 }
 
+func (cs *ChallengeService) GetChallengeParticipant(challengeId string) (int, error) {
+	challenge, err := cs.c.GetChallengeParticipant(challengeId)
+	if err != nil {
+		return 0, err
+	}
+	return challenge, nil
+}
 func (cs *ChallengeService) GetByID(challengeId string) (challenges.Challenge, error) {
-	// Kode Anda di sini
 	challenge, err := cs.c.GetByID(challengeId)
 	if err != nil {
 		return challenges.Challenge{}, err
@@ -42,7 +47,7 @@ func (cs *ChallengeService) Swipe(userId string, challengeId string, challengeTy
 	if userId == "" || challengeId == "" || challengeType == "" {
 		return constant.ErrChallengeFieldSwipe
 	}
-	if challengeType != "accept" && challengeType != "decline" {
+	if challengeType != "Diterima" && challengeType != "Ditolak" {
 		return constant.ErrChallengeType
 	}
 	err := cs.c.Swipe(userId, challengeId, challengeType)
@@ -53,7 +58,6 @@ func (cs *ChallengeService) Swipe(userId string, challengeId string, challengeTy
 }
 
 func (cs *ChallengeService) GetAllForAdmin(page int) ([]challenges.Challenge, int, error) {
-	// Kode Anda di sini
 	if page <= 0 {
 		return nil, 0, constant.ErrPageInvalid
 	}
@@ -68,7 +72,6 @@ func (cs *ChallengeService) GetAllForAdmin(page int) ([]challenges.Challenge, in
 }
 
 func (cs *ChallengeService) Create(challenge challenges.Challenge) error {
-	// Kode Anda di sini
 	if challenge.Title == "" || challenge.Description == "" || challenge.Exp == 0 || challenge.Coin == 0 || challenge.DateStart.IsZero() || challenge.DateEnd.IsZero() || challenge.Difficulty == "" || challenge.ImpactCategories == nil {
 		return constant.ErrChallengeFieldCreate
 	}
@@ -80,6 +83,13 @@ func (cs *ChallengeService) Create(challenge challenges.Challenge) error {
 	return nil
 }
 
+func (cs *ChallengeService) GetUserParticipate(userId string, status string) ([]challenges.ChallengeConfirmation, error) {
+	challenges, err := cs.c.GetUserParticipate(userId, status)
+	if err != nil {
+		return nil, err
+	}
+	return challenges, nil
+}
 func (cs *ChallengeService) Update(challenge challenges.Challenge) error {
 	// Kode Anda di sini
 	return nil

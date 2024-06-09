@@ -111,10 +111,10 @@ var ErrProductImpactCategoriesEmpty = errors.New("Impact Categories cannot be em
 var ErrProductIDEmpty = errors.New("ID cannot be empty")
 var ErrProductUpdateEmpty = errors.New("One or more fields for update cannot be empty")
 var ErrProductDelete = errors.New("Failed to delete product")
+var ErrProductStockEmpty = errors.New("Stock cannot be empty")
 
 // Challenges Errors
 var ErrUserAlreadyParticipate = errors.New("User already participate")
-var ErrUserNotParticipate = errors.New("User not participate")
 var ErrCreateChallenge = errors.New("Failed to create challenge")
 var ErrGetChallenge = errors.New("Failed to get challenge")
 var ErrGetChallengeByID = errors.New("Failed to get challenge by ID")
@@ -127,4 +127,19 @@ var ErrChallengeFieldUpdate = errors.New("One or more fields for update cannot b
 var ErrChallengeFieldSwipe = errors.New("Field cannot be empty")
 var ErrChallengeType = errors.New("Challenge type must be accept or decline")
 var ErrChallengeFieldCreate = errors.New("Field cannot be empty")
+var ErrInsertChallengeLog = errors.New("Failed to insert challenge log")
+var ErrChallengeLogType = errors.New("Challenge log type must be accept or decline")
+var ErrParticipateChallenge = errors.New("Failed to participate challenge")
 
+// Cart Errors
+var ErrCreateCart = errors.New("Failed to create cart")
+var ErrUpdateCart = errors.New("Failed to update cart")
+var ErrDeleteCart = errors.New("Failed to delete cart")
+var ErrGetCart = errors.New("Failed to get cart")
+var ErrGetCartQty = errors.New("Failed to get cart quantity")
+var ErrFieldChoiceOneType = errors.New("Type and Quantity cannot be filled at the same time")
+var ErrCartNotFound = errors.New("Cart not found")
+var ErrFieldType = errors.New("Field type cannot be empty")
+
+// Transaction Errors
+var ErrAddressEmpty = errors.New("Address cannot be empty")

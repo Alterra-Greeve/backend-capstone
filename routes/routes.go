@@ -4,10 +4,12 @@ import (
 	"backendgreeve/config"
 	"backendgreeve/constant/route"
 	"backendgreeve/features/admin"
+	"backendgreeve/features/cart"
 	"backendgreeve/features/challenges"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
+	"backendgreeve/features/transaction"
 	"backendgreeve/features/users"
 	"backendgreeve/features/voucher"
 	MidtransWebhook "backendgreeve/features/webhook"
@@ -73,6 +75,25 @@ func RouteProduct(e *echo.Echo, ph product.ProductHandlerInterface, cfg config.G
 	e.PUT("/api/v1/admin/products/:id", ph.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE("/api/v1/admin/products/:id", ph.Delete(), echojwt.WithConfig(jwtConfig))
 }
+
+func RouteCart(e *echo.Echo, ch cart.CartHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.POST("/api/v1/cart", ch.Create(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/cart", ch.Get(), echojwt.WithConfig(jwtConfig))
+	e.PUT("/api/v1/cart", ch.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE("/api/v1/cart", ch.Delete(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.POST("/api/v1/transactions", th.CreateTransaction(), echojwt.WithConfig(jwtConfig))
+}
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
 		SigningKey:   []byte(cfg.JWT_Secret),
@@ -87,15 +108,15 @@ func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerIn
 }
 
 func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.GreeveConfig) {
-  	jwtConfig := echojwt.Config{
-		  SigningKey:   []byte(cfg.JWT_Secret),
-		  ErrorHandler: helper.JWTErrorHandler,
-	  }
-  	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
-	  e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
-	  e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
-	  e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
-	  e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
+	e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg config.GreeveConfig) {
@@ -109,6 +130,7 @@ func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg c
 	e.GET(route.ChallengePath, ch.GetAllForUser(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.AdminChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
+	e.GET(route.ChallengeParticipate, ch.GetUserParticipate(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.AdminChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))

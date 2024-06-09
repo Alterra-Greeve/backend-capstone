@@ -2,6 +2,8 @@ package data
 
 import (
 	impactcategory "backendgreeve/features/impactcategory/data"
+	user "backendgreeve/features/users/data"
+	"database/sql"
 	"time"
 
 	"gorm.io/gorm"
@@ -9,7 +11,7 @@ import (
 
 type Challenge struct {
 	*gorm.Model
-	ID                        string                    `gorm:"primary_key;type:varchar(50);not null;column:id"`
+	ID                        string                    `gorm:"primaryKey;type:varchar(50);not null;column:id"`
 	Title                     string                    `gorm:"type:varchar(255);not null;column:title"`
 	Difficulty                string                    `gorm:"type:varchar(255);not null;column:difficulty"`
 	Description               string                    `gorm:"type:varchar(255);not null;column:description"`
@@ -23,27 +25,63 @@ type Challenge struct {
 
 type ChallengeImpactCategory struct {
 	*gorm.Model
-	ID               string                        `gorm:"primary_key;type:varchar(50);not null;column:id"`
+	ID               string                        `gorm:"primaryKey;type:varchar(50);not null;column:id"`
 	ChallengeID      string                        `gorm:"type:varchar(50);not null;column:challenge_id"`
 	ImpactCategoryID string                        `gorm:"type:varchar(50);not null;column:impact_category_id"`
 	Challenge        Challenge                     `gorm:"foreignKey:ChallengeID;references:ID"`
 	ImpactCategory   impactcategory.ImpactCategory `gorm:"foreignKey:ImpactCategoryID;references:ID"`
 }
 
+type ChallengeConfirmation struct {
+	*gorm.Model
+	ID                          string                       `gorm:"primaryKey;type:varchar(50);not null;column:id"`
+	ChallengeID                 string                       `gorm:"type:varchar(50);not null;column:challenge_id"`
+	UserID                      string                       `gorm:"type:varchar(50);not null;column:user_id"`
+	Description                 string                       `gorm:"type:varchar(255);column:description"`
+	DateUpload                  sql.NullTime                 `gorm:"type:datetime;column:date_upload"`
+	Status                      string                       `gorm:"type:varchar(50);not null;column:status"`
+	Challenge                   Challenge                    `gorm:"foreignKey:ChallengeID;references:ID;association_foreignkey:ID"`
+	User                        user.User                    `gorm:"foreignKey:UserID;references:ID"`
+	ChallengeImpactCategories   []ChallengeImpactCategory    `gorm:"foreignKey:ChallengeID;references:ID;association_foreignkey:ID"`
+	ChallengeConfirmationImages []ChallengeConfirmationImage `gorm:"foreignKey:ChallengeConfirmationID"`
+}
+
+type ChallengeConfirmationImage struct {
+	*gorm.Model
+	ID                      string                `gorm:"primaryKey;type:varchar(50);not null;column:id"`
+	ChallengeConfirmationID string                `gorm:"type:varchar(50);not null;column:challenge_confirmation_id"`
+	UserID                  string                `gorm:"type:varchar(50);not null;column:user_id"`
+	ImageURL                string                `gorm:"type:varchar(255);not null;column:image_url"`
+	ChallengeConfirmation   ChallengeConfirmation `gorm:"foreignKey:ChallengeConfirmationID;references:ID"`
+	User                    user.User             `gorm:"foreignKey:UserID;references:ID"`
+}
+
 type ChallengeLog struct {
 	*gorm.Model
-	ID          string `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	UserID      string `gorm:"type:varchar(50);not null;column:user_id"`
-	ChallengeID string `gorm:"type:varchar(50);not null;column:challenge_id"`
-	Status      string `gorm:"type:varchar(50);not null;column:status"`
+	ID          string    `gorm:"primaryKey;type:varchar(50);not null;column:id"`
+	UserID      string    `gorm:"type:varchar(50);not null;column:user_id"`
+	ChallengeID string    `gorm:"type:varchar(50);not null;column:challenge_id"`
+	Status      string    `gorm:"type:varchar(50);not null;column:status"`
+	User        user.User `gorm:"foreignKey:UserID;references:ID"`
+	Challenge   Challenge `gorm:"foreignKey:ChallengeID;references:ID"`
 }
 
 func (*Challenge) TableName() string {
 	return "challenges"
 }
+
 func (*ChallengeImpactCategory) TableName() string {
 	return "challenge_impact_categories"
 }
+
+func (*ChallengeConfirmation) TableName() string {
+	return "challenge_confirmations"
+}
+
+func (*ChallengeConfirmationImage) TableName() string {
+	return "challenge_confirmation_image"
+}
+
 func (*ChallengeLog) TableName() string {
 	return "challenge_logs"
 }

@@ -18,6 +18,14 @@ import (
 	ProductHandler "backendgreeve/features/product/handler"
 	ProductService "backendgreeve/features/product/service"
 
+	CartData "backendgreeve/features/cart/data"
+	CartHandler "backendgreeve/features/cart/handler"
+	CartService "backendgreeve/features/cart/service"
+
+	TransactionData "backendgreeve/features/transaction/data"
+	TransactionHandler "backendgreeve/features/transaction/handler"
+	TransactionService "backendgreeve/features/transaction/service"
+
 	ChallengeData "backendgreeve/features/challenges/data"
 	ChallengeHandler "backendgreeve/features/challenges/handler"
 	ChallengeService "backendgreeve/features/challenges/service"
@@ -91,6 +99,14 @@ func main() {
 	productService := ProductService.New(productData)
 	productHandler := ProductHandler.New(productService, jwt)
 
+	cartData := CartData.New(db)
+	cartService := CartService.New(cartData)
+	cartHandler := CartHandler.New(cartService, jwt)
+
+	transactionData := TransactionData.New(db)
+	transactionService := TransactionService.New(transactionData, cfg.Midtrans)
+	transactionHandler := TransactionHandler.New(transactionService, jwt)
+
 	challengeData := ChallengeData.New(db)
 	challengeService := ChallengeService.New(challengeData)
 	challengeHandler := ChallengeHandler.New(challengeService, jwt)
@@ -112,6 +128,8 @@ func main() {
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
 	routes.RouteProduct(e, productHandler, *cfg)
+	routes.RouteCart(e, cartHandler, *cfg)
+	routes.RouteTransaction(e, transactionHandler, *cfg)
 	routes.RouteChallenge(e, challengeHandler, *cfg)
 	routes.RouteImpactCategory(e, impactCategoryHandler, *cfg)
 	routes.RouteForum(e, forumHandler, *cfg)

@@ -1,7 +1,6 @@
 package challenges
 
 import (
-	"backendgreeve/features/impactcategory"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -24,20 +23,28 @@ type ChallengeImpactCategory struct {
 	ID               string
 	ChallengeID      string
 	ImpactCategoryID string
-	ImpactCategory   impactcategory.ImpactCategory
+	ImpactCategory   ImpactCategory
 }
 
 type ImpactCategory struct {
 	ID          string
 	Name        string
 	ImpactPoint int
+	IconURL     string
+}
+
+type ChallengeConfirmation struct {
+	ID        string
+	UserID    string
+	Status    string
+	Challenge Challenge
 }
 
 type ChallengeHandlerInterface interface {
 	GetAllForUser() echo.HandlerFunc
 	GetByID() echo.HandlerFunc
 	Swipe() echo.HandlerFunc
-
+	GetUserParticipate() echo.HandlerFunc
 	GetAllForAdmin() echo.HandlerFunc
 	Create() echo.HandlerFunc
 	Update() echo.HandlerFunc
@@ -48,6 +55,8 @@ type ChallengeServiceInterface interface {
 	GetAllForUser(userId string) ([]Challenge, error)
 	GetByID(challengeId string) (Challenge, error)
 	Swipe(userId string, challengeId string, challengeType string) error
+	GetUserParticipate(userId string, status string) ([]ChallengeConfirmation, error)
+	GetChallengeParticipant(challengeId string) (int, error)
 
 	GetAllForAdmin(page int) ([]Challenge, int, error)
 	Create(challenge Challenge) error
@@ -58,10 +67,12 @@ type ChallengeServiceInterface interface {
 type ChallengeDataInterface interface {
 	GetAllForAdmin(page int) ([]Challenge, int, error)
 	GetAllForUser(userId string) ([]Challenge, error)
+	GetChallengeParticipant(challengeId string) (int, error)
 	GetByID(challengeId string) (Challenge, error)
 	Swipe(userId string, challengeId string, challengeType string) error
 	AddToLogs(userId string, challengeId string, status string) error
-	IsUserParticipate(userId string, challengeId string) bool
+	IsUserParticipate(userId string, challengeId string) (error, bool)
+	GetUserParticipate(userId string, status string) ([]ChallengeConfirmation, error)
 	Create(Challenge) error
 	Update(Challenge) error
 	Delete(string) error

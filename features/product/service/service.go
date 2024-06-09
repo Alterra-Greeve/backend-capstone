@@ -37,6 +37,10 @@ func (s *ProductService) GetById(id string) (product.Product, error) {
 	return s.d.GetById(id)
 }
 
+func (s *ProductService) GetByIdUser(id string, userId string) (product.Product, error) {
+	return s.d.GetByIdUser(id, userId)
+}
+
 func (s *ProductService) GetByCategory(category string, page int) ([]product.Product, int, error) {
 	if page <= 0 {
 		return nil, 0, constant.ErrPageInvalid
@@ -78,6 +82,9 @@ func (s *ProductService) Create(product product.Product) error {
 	if product.ImpactCategories == nil {
 		return constant.ErrProductImpactCategoriesEmpty
 	}
+	if product.Stock == 0 {
+		return constant.ErrProductStockEmpty
+	}
 	return s.d.Create(product)
 }
 
@@ -85,7 +92,7 @@ func (s *ProductService) Update(product product.Product) error {
 	if product.ID == "" {
 		return constant.ErrProductIDEmpty
 	}
-	if product.Name == "" && product.Price == 0 && product.Coin == 0 && product.Images == nil && product.ImpactCategories == nil {
+	if product.Name == "" && product.Price == 0 && product.Coin == 0 && product.Images == nil && product.ImpactCategories == nil && product.Stock == 0 {
 		return constant.ErrProductUpdateEmpty
 	}
 
