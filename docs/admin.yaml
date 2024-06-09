@@ -2904,6 +2904,36 @@ paths:
                       name: Name
                       impact_poin: 100
                       icon_url: https://example.com/images/item3.jpg
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: data impact not found
+                  data: null
     post:
       tags:
         - data impact

@@ -53,6 +53,7 @@ func (h *ProductHandler) Create() echo.HandlerFunc {
 			Description: productInput.Description,
 			Price:       productInput.Price,
 			Coin:        productInput.Coin,
+			Stock:       productInput.Stock,
 		}
 
 		for _, categoryID := range productInput.Category {
@@ -122,7 +123,11 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 			categories := make([]ProductImpactCategory, len(p.ImpactCategories))
 			for i, cat := range p.ImpactCategories {
 				categories[i] = ProductImpactCategory{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+					ImpactCategory: ImpactCategory{
+						Name:        cat.ImpactCategory.Name,
+						ImpactPoint: cat.ImpactCategory.ImpactPoint,
+						IconURL:     cat.ImpactCategory.IconURL,
+					},
 				}
 			}
 
@@ -134,7 +139,7 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
-				Stock:       999,
+				Stock:       p.Stock,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
@@ -156,11 +161,15 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			return nil
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 			return nil
 		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		userRole := userData[constant.JWT_ROLE]
 
 		paramId := c.Param("id")
 		productId, err := uuid.Parse(paramId)
@@ -168,10 +177,17 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
-		product, err := h.s.GetById(productId.String())
-		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+		var product product.Product
+		if userRole == constant.RoleAdmin {
+			product, err = h.s.GetById(productId.String())
+			if err != nil {
+				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			}
+		} else {
+			product, err = h.s.GetByIdUser(productId.String(), userId.(string))
+			if err != nil {
+				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			}
 		}
 
 		images := make([]ProductImage, len(product.Images))
@@ -185,7 +201,11 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 		categories := make([]ProductImpactCategory, len(product.ImpactCategories))
 		for i, cat := range product.ImpactCategories {
 			categories[i] = ProductImpactCategory{
-				ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+				ImpactCategory: ImpactCategory{
+					Name:        cat.ImpactCategory.Name,
+					ImpactPoint: cat.ImpactCategory.ImpactPoint,
+					IconURL:     cat.ImpactCategory.IconURL,
+				},
 			}
 		}
 
@@ -197,7 +217,7 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			Coin:        product.Coin,
 			Images:      images,
 			Category:    categories,
-			Stock:       999,
+			Stock:       product.Stock,
 			CreatedAt:   product.CreatedAt.Format("02/01/2006"),
 			UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
 		}
@@ -246,7 +266,11 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 			categories := make([]ProductImpactCategory, len(p.ImpactCategories))
 			for i, cat := range p.ImpactCategories {
 				categories[i] = ProductImpactCategory{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+					ImpactCategory: ImpactCategory{
+						Name:        cat.ImpactCategory.Name,
+						ImpactPoint: cat.ImpactCategory.ImpactPoint,
+						IconURL:     cat.ImpactCategory.IconURL,
+					},
 				}
 			}
 
@@ -258,7 +282,7 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
-				Stock:       999,
+				Stock:       p.Stock,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
@@ -310,7 +334,11 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 			categories := make([]ProductImpactCategory, len(p.ImpactCategories))
 			for i, cat := range p.ImpactCategories {
 				categories[i] = ProductImpactCategory{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+					ImpactCategory: ImpactCategory{
+						Name:        cat.ImpactCategory.Name,
+						ImpactPoint: cat.ImpactCategory.ImpactPoint,
+						IconURL:     cat.ImpactCategory.IconURL,
+					},
 				}
 			}
 
@@ -322,7 +350,7 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 				Coin:        p.Coin,
 				Images:      images,
 				Category:    categories,
-				Stock:       999,
+				Stock:       p.Stock,
 				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
 				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
 			})
@@ -365,6 +393,7 @@ func (h *ProductHandler) Update() echo.HandlerFunc {
 			Description: productInput.Description,
 			Price:       productInput.Price,
 			Coin:        productInput.Coin,
+			Stock:       productInput.Stock,
 		}
 
 		for _, categoryID := range productInput.Category {
@@ -393,7 +422,6 @@ func (h *ProductHandler) Update() echo.HandlerFunc {
 		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
 	}
 }
-
 func (h *ProductHandler) Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)

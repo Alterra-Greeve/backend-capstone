@@ -10,6 +10,9 @@ const UserSuccessOTPValidation = "OTP Validation Success"
 const UserSuccessResetPassword = "Password has been changed"
 const UserSuccessDelete = "Account has been deleted"
 
+// Leaderboard
+const SuccessGetLeaderboard = "Get Leaderboard Success"
+
 // Forum Success Message
 const ForumSuccessCreate = "Successfull Create Forum"
 const ForumSuccessGetAll = "Successfull Get Forum"
@@ -23,6 +26,13 @@ const MessageSuccessGetAll = "Successfull Get Message"
 const MessageSuccessGetByID = "Successfull Get Message by ID"
 const MessageSuccessUpdate = "Successfull Update Message"
 const MessageSuccessDelete = "Successfull Delete Message"
+
+// Voucher
+const VoucherSuccessCreate = "Successfull Create Voucher"
+const VoucherSuccessGetAll = "Successfull Get Voucher"
+const VoucherSuccessGetByID = "Successfull Get Voucher by ID"
+const VoucherSuccessUpdate = "Successfull Update Voucher"
+const VoucherSuccessDelete = "Successfull Delete Voucher"
 
 // Admin Success Message
 const AdminSuccessLogin = "Successfull Login by role Admin"
