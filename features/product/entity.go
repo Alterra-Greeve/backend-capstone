@@ -13,6 +13,7 @@ type Product struct {
 	Description      string
 	Price            float64
 	Coin             int
+	Stock            int
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	Images           []ProductImage
@@ -37,6 +38,7 @@ type ImpactCategory struct {
 	ID          string
 	Name        string
 	ImpactPoint int
+	IconURL     string
 }
 
 type ProductHandlerInterface interface {
@@ -52,6 +54,7 @@ type ProductHandlerInterface interface {
 type ProductServiceInterface interface {
 	Get() ([]Product, error)
 	GetById(id string) (Product, error)
+	GetByIdUser(id string, userId string) (Product, error)
 	GetByPage(page int) ([]Product, int, error)
 	GetByCategory(category string, page int) ([]Product, int, error)
 	GetByName(name string, page int) ([]Product, int, error)
@@ -64,6 +67,8 @@ type ProductDataInterface interface {
 	Get() ([]Product, error)
 	GetByPage(page int) ([]Product, int, error)
 	GetById(id string) (Product, error)
+	GetByIdUser(id string, userId string) (Product, error)
+	InsertToProductLog(id string, userId string) error
 	GetByCategory(category string, page int) ([]Product, int, error)
 	GetByName(name string, page int) ([]Product, int, error)
 	Create(product Product) error

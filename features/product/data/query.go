@@ -4,6 +4,7 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/product"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -60,6 +61,33 @@ func (pd *ProductData) GetById(id string) (product.Product, error) {
 	return products, nil
 }
 
+func (pd *ProductData) GetByIdUser(id string, userId string) (product.Product, error) {
+	var products product.Product
+
+	tx := pd.DB.Model(&Product{}).Preload("Images").Preload("ImpactCategories.ImpactCategory").
+		Find(&products, "id = ?", id)
+	if tx.Error != nil {
+		return products, constant.ErrGetProduct
+	}
+	err := pd.InsertToProductLog(userId, id)
+	if err != nil {
+		return products, err
+	}
+	return products, nil
+}
+
+func (pd *ProductData) InsertToProductLog(userId string, productId string) error {
+	productLogs := ProductLog{
+		ID:        uuid.New().String(),
+		UserID:    userId,
+		ProductID: productId,
+	}
+	tx := pd.DB.Create(&productLogs)
+	if tx.Error != nil {
+		return tx.Error
+	}
+	return nil
+}
 func (pd *ProductData) GetByCategory(categoryName string, page int) ([]product.Product, int, error) {
 	var products []product.Product
 	var totalProducts int64

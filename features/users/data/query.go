@@ -31,17 +31,17 @@ func (u *UserData) Register(newUser users.User) error {
 	if isUsernameExist {
 		return constant.ErrUsernameAlreadyExist
 	}
-
-	if newUser.AvatarURL == "" {
-		newUser.AvatarURL = "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png"
+	newUsers := User{
+		ID:        uuid.New().String(),
+		Name:      newUser.Name,
+		Email:     newUser.Email,
+		Username:  newUser.Username,
+		Password:  newUser.Password,
+		Coin:      0,
+		Exp:       0,
+		AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 	}
-
-	newUser.ID = uuid.New().String()
-	newUser.Coin = 0
-	newUser.Exp = 0
-	newUser.CreatedAt = time.Now()
-	newUser.UpdatedAt = time.Now()
-	if err := u.DB.Create(&newUser).Error; err != nil {
+	if err := u.DB.Create(&newUsers).Error; err != nil {
 		return constant.ErrRegister
 	}
 	return nil
@@ -179,6 +179,11 @@ func (u *UserData) GetUserByID(id string) (users.User, error) {
 	if err := u.DB.Where("id = ?", id).First(&user).Error; err != nil {
 		return users.User{}, constant.UserNotFound
 	}
+	impactPoint, err := u.GetUserImpactPoint(user.ID)
+	if err != nil {
+		return users.User{}, err
+	}
+	user.ImpactPoint = impactPoint
 	return user, nil
 }
 
@@ -259,4 +264,34 @@ func (u *UserData) DeleteUserForAdmin(userID string) error {
 	}
 
 	return res.Commit().Error
+}
+
+func (u *UserData) GetUserImpactPoint(userId string) (int, error) {
+	// Hitung total impact point dari pembelian produk
+	var totalProductImpactPoint int
+	u.DB.Table("transactions").
+		Joins("JOIN transaction_items ON transactions.id = transaction_items.transaction_id").
+		Joins("JOIN product ON transaction_items.product_id = product.id").
+		Joins("JOIN product_impact_categories ON product.id = product_impact_categories.product_id").
+		Joins("JOIN impact_categories ON product_impact_categories.impact_categories_id = impact_categories.id").
+		Where("transactions.user_id = ?", userId).
+		Where("transaction_items.status = 'capture' OR transaction_items.status = 'accept' OR transaction_items.status = 'settlement'").
+		Select("SUM(impact_categories.impact_point)").
+		Scan(&totalProductImpactPoint)
+
+	// Hitung total impact point dari challenge yang diikuti
+	var totalChallengeImpactPoint int
+	u.DB.Table("challenges").
+		Joins("JOIN challenge_confirmation ON challenges.id = challenge_confirmation.challenge_id").
+		Joins("JOIN challenge_impact_categories ON challenges.id = challenge_impact_categories.challenge_id").
+		Joins("JOIN impact_categories ON challenge_impact_categories.impact_category_id = impact_categories.id").
+		Where("challenge_confirmation.status = 'Diterima' AND challenge_confirmation.user_id = ?", userId).
+		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalImpactPoints").
+		Scan(&totalChallengeImpactPoint)
+
+	impactPoint := totalProductImpactPoint + totalChallengeImpactPoint
+	if impactPoint == 0 {
+		return 0, nil
+	}
+	return impactPoint, nil
 }

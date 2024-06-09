@@ -13,7 +13,7 @@ type MetadataResponse struct {
 	Data     interface{} `json:"data"`
 }
 
-func FormatResponse(status bool, message string, data []interface{}) Response {
+func FormatResponse(status bool, message string, data interface{}) Response {
 	response := Response{
 		Status:  status,
 		Message: message,

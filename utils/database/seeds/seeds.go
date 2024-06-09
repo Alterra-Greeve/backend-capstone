@@ -25,93 +25,39 @@ func Seeds() []seed.Seed {
 			},
 		},
 		{
-			Name: "CreateImpactCategorySustainable",
+			Name: "HematUang",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2", "Sustainable", 50, "https://www.example.com")
+				description := "<div><p><strong>Save Money</strong> atau <strong>Hemat Uang</strong> adalah konsep yang mendorong individu untuk mengelola keuangan mereka dengan bijak. Ini melibatkan praktik-praktik seperti mengurangi pengeluaran yang tidak perlu, mencari cara untuk mendapatkan nilai lebih dari setiap pembelian, dan memaksimalkan efisiensi dalam penggunaan sumber daya. Dengan menghemat uang, individu dapat mencapai stabilitas finansial dan lebih mampu menghadapi situasi darurat atau merencanakan masa depan dengan lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Mengurangi emisi gas rumah kaca dari produksi dan transportasi barang</li><li>Menghemat sumber daya alam seperti air, kayu, dan energi</li><li>Mengurangi polusi udara dan air dari limbah industri dan rumah tangga</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/9e01061a-e622-414a-a3f1-27263620c0cbicon2.svg"
+				return CreateImpactCategory(db, "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2", "Sustainable", 50, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategoryEcoFriendly",
+			Name: "MengurangiLimbah",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "1350c308-05e7-4d49-a5ad-3e92b00ecba9", "Eco-Friendly", 40, "https://www.example.com")
+				description := "<div><p><strong>Less Waste</strong> atau <strong>Mengurangi Limbah</strong> adalah pendekatan yang menekankan pada pengurangan jumlah limbah yang dihasilkan, baik oleh individu, komunitas, maupun perusahaan. Tujuannya adalah untuk meminimalisir dampak negatif terhadap lingkungan dengan cara mengelola sumber daya secara lebih efisien dan bertanggung jawab. Strategi ini mencakup berbagai tindakan seperti daur ulang, pengomposan, penggunaan ulang barang, dan pengurangan penggunaan bahan sekali pakai.</p><p>Contoh Dampak Positif Less Waste pada Lingkungan:</p><ul><li>Pengurangan Polusi Tanah dan Air</li><li>Penurunan Emisi Gas Rumah Kaca</li><li>Konservasi Sumber Daya Alam</li><li>Mengurangi Energi yang Dibutuhkan untuk Produksi</li><li>Mengurangi Beban Tempat Pembuangan Akhir</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/91d948ca-3576-49e5-b435-0c3c7eccff7963ca36bac45556620e0ff4ba7ec5790d.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/25e1e158-3fb0-42ff-97f7-d728167f2a7eicon4.svg"
+				return CreateImpactCategory(db, "1350c308-05e7-4d49-a5ad-3e92b00ecba9", "Eco-Friendly", 40, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategoryRecyclable",
+			Name: "PerluasWawasan",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "078817ea-4fcf-4eeb-96b2-f10961826469", "Recyclable", 30, "https://www.example.com")
+				description := "<div><p><strong>Expand Your Mind</strong> atau <strong>Perluas Wawasan Anda</strong> adalah konsep yang mendorong individu untuk terbuka terhadap pengetahuan, ide, dan pengalaman baru. Ini melibatkan pembelajaran berkelanjutan, eksplorasi topik yang beragam, dan berpikir kritis. Dengan memperluas wawasan, kita tidak hanya meningkatkan pemahaman kita tentang dunia, tetapi juga mengembangkan empati, kreativitas, dan kemampuan untuk membuat keputusan yang lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Kesadaran Lingkungan yang Lebih Tinggi</li><li>Inovasi dalam Solusi Ramah Lingkungan</li><li>Dukungan untuk Kebijakan Lingkungan yang Lebih Baik</li><li>Pengembangan Komunitas Berkelanjutan</li><li>Konsumsi yang Lebih Bertanggung Jawab</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/fd98dcdc-4cea-428a-a008-e1ca6f972ca72f0376e551eec4f1af915d5983a621c1.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/1f3dbf92-1d5a-4eb1-9e1f-385c6ea89220icon3.svg"
+				return CreateImpactCategory(db, "078817ea-4fcf-4eeb-96b2-f10961826469", "Recyclable", 30, description, imageUrl, iconUrl)
 			},
 		},
 		{
-			Name: "CreateImpactCategoryRenewable",
+			Name: "MengurangiPemanasanGlobal",
 			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc", "Renewable", 45, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryBiodegradable",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "30fc3682-a674-42e1-b420-e16fcd0c85a5", "Biodegradable", 35, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryEnergyEfficient",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f", "Energy Efficient", 55, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryLowCarbon",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3655727a-e807-4fc1-bfad-6b7516c89b13", "Low Carbon", 60, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryWaterSaving",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "19ecd259-58f0-4b3c-ba6b-e16f03317048", "Water Saving", 50, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryZeroWaste",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b", "Zero Waste", 70, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryOrganic",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "2d9c8fd2-8104-470f-a8d3-4ff34993fabd", "Organic", 40, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryNonToxic",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "4b1e1acd-570d-47d6-8d6a-ea2a277882cb", "Non-Toxic", 50, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryCompostable",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "1cd52acc-f272-4aa8-8abd-e64fb288f64c", "Compostable", 45, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryReusable",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "3ecbf571-79b6-452b-8626-c45e1a2ab671", "Reusable", 60, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryUpcycled",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "14eb3066-5f5c-459b-a84a-c99cbbd114f9", "Upcycled", 35, "https://www.example.com")
-			},
-		},
-		{
-			Name: "CreateImpactCategoryFairTrade",
-			Run: func(db *gorm.DB) error {
-				return CreateImpactCategory(db, "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977", "Fair Trade", 50, "https://www.example.com")
+				description := "<div><p><strong>Less Global Warming</strong> atau <strong>Mengurangi Pemanasan Global</strong> adalah upaya untuk menurunkan peningkatan suhu rata-rata bumi yang disebabkan oleh aktivitas manusia, terutama melalui emisi gas rumah kaca seperti karbon dioksida (CO<sub>2</sub>) dan metana (CH<sub>4</sub>). Upaya ini mencakup berbagai tindakan, seperti meningkatkan efisiensi energi, menggunakan energi terbarukan, mengurangi deforestasi, dan mempromosikan praktik pertanian berkelanjutan. Tujuannya adalah untuk memperlambat perubahan iklim, melindungi ekosistem, dan menjaga keseimbangan alami bumi.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Pengurangan Fenomena Cuaca Ekstrem</li><li>Perlindungan Keanekaragaman Hayati</li><li>Stabilisasi Tingkat Permukaan Laut</li><li>Kualitas Udara yang Lebih Baik</li><li>Konservasi Sumber Daya Air</li></ul></div>"
+				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/eb285b2b-19b2-447e-894e-81a12fbfb517icon1.svg"
+				return CreateImpactCategory(db, "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc", "Renewable", 45, description, imageUrl, iconUrl)
 			},
 		},
 		//Product Seeds Start
@@ -652,14 +598,14 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "5fe8f4f6-43ee-4420-8969-bf1a0e19260c",
-					Title:        "Plant a Tree",
+					Title:       "Plant a Tree",
 					Difficulty:  "Medium",
 					Description: "Plant a tree in your backyard or a community park",
 					Exp:         100,
 					Coin:        50,
 					DateStart:   time.Date(2024, 6, 10, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 6, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:     "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{

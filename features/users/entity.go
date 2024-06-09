@@ -7,19 +7,20 @@ import (
 )
 
 type User struct {
-	ID        string
-	Name      string
-	Email     string
-	Username  string
-	Password  string
-	Address   string
-	Gender    string
-	Phone     string
-	Coin      int
-	Exp       int
-	AvatarURL string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID          string
+	Name        string
+	Email       string
+	Username    string
+	Password    string
+	Address     string
+	Gender      string
+	Phone       string
+	Coin        int
+	Exp         int
+	AvatarURL   string
+	ImpactPoint int
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }
 
 type ForgotPassword struct {

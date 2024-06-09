@@ -147,6 +147,9 @@ func (h *UserHandler) GetUserData() echo.HandlerFunc {
 		response.Address = user.Address
 		response.Gender = user.Gender
 		response.Phone = user.Phone
+		response.Coin = user.Coin
+		response.Exp = user.Exp
+		response.ImpactPoint = user.ImpactPoint
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
@@ -179,6 +182,9 @@ func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
 		response.Address = user.Address
 		response.Gender = user.Gender
 		response.Phone = user.Phone
+		response.Coin = user.Coin
+		response.Exp = user.Exp
+		response.ImpactPoint = user.ImpactPoint
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
