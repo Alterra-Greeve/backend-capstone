@@ -2049,9 +2049,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "85dd4189-9d2a-42f9-8b26-b03daa7e5869",
-					Title:       "Green Commute Challenge",
-					Difficulty:  "Hard",
-					Description: "Use only public transport or walk for all your commutes for two weeks",
+					Title:       "Gunakan Sistem Transportasi Hijau",
+					Difficulty:  "Sulit",
+					Description: "Gunakan hanya transportasi umum atau jalan kaki untuk semua perjalanan selama dua minggu",
 					Exp:         250,
 					Coin:        125,
 					DateStart:   time.Date(2024, 12, 01, 0, 0, 0, 0, time.UTC),
@@ -2062,12 +2062,17 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2079,9 +2084,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "4cc8b34f-9e3e-4f05-a73a-035395ff546d",
-					Title:       "Organic Gardening",
-					Difficulty:  "Easy",
-					Description: "Start and maintain an organic garden",
+					Title:       "Berkebun Organik",
+					Difficulty:  "Mudah",
+					Description: "Mulai dan pelihara kebun organik",
 					Exp:         80,
 					Coin:        40,
 					DateStart:   time.Date(2024, 12, 20, 10, 0, 0, 0, time.UTC),
@@ -2092,12 +2097,12 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "19ecd259-58f0-4b3c-ba6b-e16f03317048",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2109,9 +2114,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "1e0f4c4f-5b54-4421-b8c1-46a2d382f8b2",
-					Title:       "Upcycle Project",
-					Difficulty:  "Medium",
-					Description: "Complete an upcycling project with materials you already have",
+					Title:       "Proyek Daur Ulang",
+					Difficulty:  "Sedang",
+					Description: "Selesaikan proyek daur ulang dengan bahan yang sudah Anda miliki",
 					Exp:         110,
 					Coin:        55,
 					DateStart:   time.Date(2025, 01, 05, 9, 0, 0, 0, time.UTC),
@@ -2122,12 +2127,12 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "14eb3066-5f5c-459b-a84a-c99cbbd114f9",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "3ecbf571-79b6-452b-8626-c45e1a2ab671",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2139,9 +2144,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "c0aa381d-4c14-4eba-9811-c6356176ab67",
-					Title:       "Eco-friendly Shopping",
-					Difficulty:  "Easy",
-					Description: "Buy only eco-friendly products for a week",
+					Title:       "Belanja Barang Ramah Lingkungan",
+					Difficulty:  "Mudah",
+					Description: "Beli hanya produk ramah lingkungan selama seminggu",
 					Exp:         90,
 					Coin:        45,
 					DateStart:   time.Date(2025, 02, 20, 8, 0, 0, 0, time.UTC),
@@ -2152,12 +2157,12 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "1350c308-05e7-4d49-a5ad-3e92b00ecba9",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "e7f1ae18-bc65-4f29-a8c7-dd0c30ab3977",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2169,9 +2174,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "1f6774a8-a173-4161-ad3e-e58400e007b2",
-					Title:       "Water Conservation Challenge",
-					Difficulty:  "Hard",
-					Description: "Reduce your water usage by 30% for a month",
+					Title:       "Penghematan Air",
+					Difficulty:  "Sulit",
+					Description: "Kurangi penggunaan air Anda sebesar 30% selama sebulan",
 					Exp:         280,
 					Coin:        140,
 					DateStart:   time.Date(2025, 03, 01, 8, 0, 0, 0, time.UTC),
@@ -2182,12 +2187,17 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "19ecd259-58f0-4b3c-ba6b-e16f03317048",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2199,9 +2209,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "b0ac9f1c-4e13-4848-977a-02dd540369a7",
-					Title:       "Participate in Earth Hour",
-					Difficulty:  "Easy",
-					Description: "Turn off all lights and electrical appliances for one hour",
+					Title:       "Ikut Serta dalam Earth Hour",
+					Difficulty:  "Mudah",
+					Description: "Matikan semua lampu dan peralatan listrik selama satu jam",
 					Exp:         40,
 					Coin:        20,
 					DateStart:   time.Date(2025, 03, 29, 20, 0, 0, 0, time.UTC),
@@ -2212,12 +2222,17 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "0c30941d-a7fc-438f-8ab7-5bba4f1cf57f",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "a8089bc1-de1c-4eaf-a1fd-a2a6bc3028e2",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2229,9 +2244,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "2e80a9cf-5007-4eac-9cc8-9a603d954d6a",
-					Title:       "Meatless Monday",
-					Difficulty:  "Medium",
-					Description: "Go meatless every Monday for a month",
+					Title:       "Senin Tanpa Daging",
+					Difficulty:  "Sedang",
+					Description: "Tidak makan daging setiap hari Senin selama sebulan",
 					Exp:         130,
 					Coin:        65,
 					DateStart:   time.Date(2025, 04, 01, 0, 0, 0, 0, time.UTC),
@@ -2242,12 +2257,12 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "2d9c8fd2-8104-470f-a8d3-4ff34993fabd",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "8559dcee-ffcf-4aa0-b77d-98dd82f4e96b",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2259,9 +2274,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "0d1233b8-d6e0-40df-8c6f-2ae1f8f2bfb7",
-					Title:       "Create a Compost Bin",
-					Difficulty:  "Easy",
-					Description: "Create and maintain a compost bin at home",
+					Title:       "Membuat Kompos Rumahan Sederhana",
+					Difficulty:  "Mudah",
+					Description: "Buat dan pelihara tempat kompos untuk sampah rumah tangga",
 					Exp:         70,
 					Coin:        35,
 					DateStart:   time.Date(2025, 05, 01, 9, 0, 0, 0, time.UTC),
@@ -2272,12 +2287,17 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "1cd52acc-f272-4aa8-8abd-e64fb288f64c",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "078817ea-4fcf-4eeb-96b2-f10961826469",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
@@ -2289,9 +2309,9 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				challenges := challenge.Challenge{
 					ID:          "ce6bf160-34ba-4685-80d7-10df1bd04fd1",
-					Title:       "Participate in Car-Free Day",
-					Difficulty:  "Medium",
-					Description: "Avoid using cars for a whole day",
+					Title:       "Ikut Serta dalam Hari Bebas Mobil",
+					Difficulty:  "Sedang",
+					Description: "Hindari menggunakan mobil dan kendaraan bermotor selama sehari",
 					Exp:         100,
 					Coin:        50,
 					DateStart:   time.Date(2025, 06, 05, 9, 0, 0, 0, time.UTC),
@@ -2302,12 +2322,17 @@ func Seeds() []seed.Seed {
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "3655727a-e807-4fc1-bfad-6b7516c89b13",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
 						ID:               uuid.New().String(),
 						ChallengeID:      challenges.ID,
-						ImpactCategoryID: "c0c85c1d-9bb3-4e4d-a2d4-13fd458f15bc",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
+					},
+					{
+						ID:               uuid.New().String(),
+						ChallengeID:      challenges.ID,
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				challenges.ChallengeImpactCategories = challengeCategories
