@@ -3,8 +3,8 @@ package seeds
 import (
 	challenge "backendgreeve/features/challenges/data"
 	product "backendgreeve/features/product/data"
-	user "backendgreeve/features/users/data"
 	transaction "backendgreeve/features/transaction/data"
+	user "backendgreeve/features/users/data"
 	"backendgreeve/utils/database/seed"
 	"time"
 
@@ -2736,14 +2736,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction1",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "7af9d694-63bf-42cd-9afc-8b00716a0083",
-					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
-					Address:     "Jl. Sudirman No. 123, Jakarta",
-					Description: "deskripsi 1",
-					Status:      "Berhasil",
-					Total:       105000,
-					Coin:        0,
+					ID:        "7af9d694-63bf-42cd-9afc-8b00716a0083",
+					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID: "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:   "Jl. Sudirman No. 123, Jakarta",
+					Status:    "Berhasil",
+					Total:     105000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2752,14 +2751,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction2",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "3b7e3cde-a4ff-4be5-a583-f76bcc3fdf77",
-					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
-					Address:     "Jl. Gajah Mada No. 456, Surabaya",
-					Description: "deskripsi 2",
-					Status:      "Berhasil",
-					Total:       70000,
-					Coin:        0,
+					ID:        "3b7e3cde-a4ff-4be5-a583-f76bcc3fdf77",
+					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID: "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:   "Jl. Gajah Mada No. 456, Surabaya",
+					Status:    "Berhasil",
+					Total:     70000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2768,14 +2766,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction3",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "9f180211-bd78-483b-b824-0125376ba593",
-					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
-					Description: "deskripsi 3",
-					Status:      "Gagal",
-					Total:       70000,
-					Coin:        0,
+					ID:        "9f180211-bd78-483b-b824-0125376ba593",
+					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
+					Status:    "Gagal",
+					Total:     70000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2784,14 +2781,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction4",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "1c16e3ac-9a15-4203-8ff2-09f448a86228",
-					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
-					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:     "Jl. Diponegoro No. 321, Bandung",
-					Description: "deskripsi 4",
-					Status:      "Berhasil",
-					Total:       1600000,
-					Coin:        0,
+					ID:        "1c16e3ac-9a15-4203-8ff2-09f448a86228",
+					UserID:    "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:   "Jl. Diponegoro No. 321, Bandung",
+					Status:    "Berhasil",
+					Total:     1600000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2800,14 +2796,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction5",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "f129e567-fc84-437e-a0fd-2b4b94dd90f9",
-					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
-					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:     "Jl. Brawijaya No. 654, Malang",
-					Description: "deskripsi 5",
-					Status:      "Berhasil",
-					Total:       20000,
-					Coin:        0,
+					ID:        "f129e567-fc84-437e-a0fd-2b4b94dd90f9",
+					UserID:    "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:   "Jl. Brawijaya No. 654, Malang",
+					Status:    "Berhasil",
+					Total:     20000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2816,14 +2811,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction6",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "7671e308-40e3-4c0c-b64a-982d4bb1c7e1",
-					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
-					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:     "Jl. Thamrin No. 987, Makassar",
-					Description: "deskripsi 6",
-					Status:      "Berhasil",
-					Total:       70000,
-					Coin:        0,
+					ID:        "7671e308-40e3-4c0c-b64a-982d4bb1c7e1",
+					UserID:    "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:   "Jl. Thamrin No. 987, Makassar",
+					Status:    "Berhasil",
+					Total:     70000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2832,14 +2826,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction7",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "41895902-5859-4f51-8023-5a4473978e08",
-					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:     "Jl. Sudirman No. 123, Jakarta",
-					Description: "deskripsi 7",
-					Status:      "Berhasil",
-					Total:       17000,
-					Coin:        75,
+					ID:        "41895902-5859-4f51-8023-5a4473978e08",
+					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:   "Jl. Sudirman No. 123, Jakarta",
+					Status:    "Berhasil",
+					Total:     17000,
+					Coin:      75,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2848,14 +2841,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction8",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "1e166b59-fdd2-4bce-93b6-d81d35723e41",
-					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
-					Address:     "Jl. Gajah Mada No. 456, Surabaya",
-					Description: "deskripsi 8",
-					Status:      "Gagal",
-					Total:       174000,
-					Coin:        0,
+					ID:        "1e166b59-fdd2-4bce-93b6-d81d35723e41",
+					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID: "880d707a-744b-41b9-991f-65c306074c03",
+					Address:   "Jl. Gajah Mada No. 456, Surabaya",
+					Status:    "Gagal",
+					Total:     174000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2864,14 +2856,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction9",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "489b813b-ecdc-4fd6-90ea-3c692528a344",
-					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
-					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
-					Description: "deskripsi 9",
-					Status:      "Berhasil",
-					Total:       900000,
-					Coin:        25,
+					ID:        "489b813b-ecdc-4fd6-90ea-3c692528a344",
+					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID: "880d707a-744b-41b9-991f-65c306074c03",
+					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
+					Status:    "Berhasil",
+					Total:     900000,
+					Coin:      25,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2880,14 +2871,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction10",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "e137483a-3426-4316-801e-4e992a6451c4",
-					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
-					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:     "Jl. Diponegoro No. 321, Bandung",
-					Description: "deskripsi 10",
-					Status:      "Berhasil",
-					Total:       1500000,
-					Coin:        165,
+					ID:        "e137483a-3426-4316-801e-4e992a6451c4",
+					UserID:    "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:   "Jl. Diponegoro No. 321, Bandung",
+					Status:    "Berhasil",
+					Total:     1500000,
+					Coin:      165,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2896,14 +2886,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction11",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "0970df7d-7d7d-4d1c-b435-8536a35efb81",
-					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
-					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:     "Jl. Brawijaya No. 654, Malang",
-					Description: "deskripsi 11",
-					Status:      "Berhasil",
-					Total:       80000,
-					Coin:        0,
+					ID:        "0970df7d-7d7d-4d1c-b435-8536a35efb81",
+					UserID:    "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:   "Jl. Brawijaya No. 654, Malang",
+					Status:    "Berhasil",
+					Total:     80000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2912,14 +2901,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction12",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "b063bb48-baa7-4ac9-9a1a-db57214dd3fd",
-					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
-					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:     "Jl. Thamrin No. 987, Makassar",
-					Description: "deskripsi 12",
-					Status:      "Gagal",
-					Total:       245000,
-					Coin:        0,
+					ID:        "b063bb48-baa7-4ac9-9a1a-db57214dd3fd",
+					UserID:    "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:   "Jl. Thamrin No. 987, Makassar",
+					Status:    "Gagal",
+					Total:     245000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2928,14 +2916,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction13",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "44c09473-4b70-4849-90a7-8c5db2430e1f",
-					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID:   "83c4db38-d196-49c8-9cb7-b53423e1658f",
-					Address:     "Jl. Sudirman No. 123, Jakarta",
-					Description: "deskripsi 13",
-					Status:      "Berhasil",
-					Total:       24000,
-					Coin:        0,
+					ID:        "44c09473-4b70-4849-90a7-8c5db2430e1f",
+					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID: "83c4db38-d196-49c8-9cb7-b53423e1658f",
+					Address:   "Jl. Sudirman No. 123, Jakarta",
+					Status:    "Berhasil",
+					Total:     24000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2944,14 +2931,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction14",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "3cef7e44-efd9-4518-8f11-440f2db92b54",
-					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
-					Address:     "Jl. Gajah Mada No. 456, Surabaya",
-					Description: "deskripsi 14",
-					Status:      "Menunggu Pembayaran",
-					Total:       1405000,
-					Coin:        0,
+					ID:        "3cef7e44-efd9-4518-8f11-440f2db92b54",
+					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID: "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:   "Jl. Gajah Mada No. 456, Surabaya",
+					Status:    "Menunggu Pembayaran",
+					Total:     1405000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
@@ -2960,14 +2946,13 @@ func Seeds() []seed.Seed {
 			Name: "CreateTransaction15",
 			Run: func(db *gorm.DB) error {
 				transaction := transaction.Transaction{
-					ID:          "59a80fc1-c324-4d65-8cf2-fc3e17793412",
-					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
-					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
-					Description: "deskripsi 15",
-					Status:      "Berhasil",
-					Total:       955000,
-					Coin:        0,
+					ID:        "59a80fc1-c324-4d65-8cf2-fc3e17793412",
+					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID: "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
+					Status:    "Berhasil",
+					Total:     955000,
+					Coin:      0,
 				}
 				return CreateTransaction(db, transaction)
 			},
