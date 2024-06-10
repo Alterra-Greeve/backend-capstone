@@ -331,6 +331,7 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 		if userId == "" {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, constant.Unauthorized, nil))
 		}
+		isAdmin := userData[constant.JWT_ROLE] == constant.RoleAdmin
 
 		messageForumID := c.Param("id")
 		existingMessageForum, err := h.s.GetMessageForumByID(messageForumID)
@@ -338,7 +339,7 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetMessageByID.Error()), nil))
 		}
 
-		if existingMessageForum.UserID != userId {
+		if existingMessageForum.UserID != userId && !isAdmin {
 			return c.JSON(http.StatusForbidden, helper.FormatResponse(false, constant.Unauthorized, nil))
 		}
 
@@ -415,6 +416,7 @@ func (h *ForumHandler) GetMessageForumByID() echo.HandlerFunc {
 		forumsResponse := MessageResponse{
 			ID:      message.ID,
 			Message: message.Message,
+			UserID:  message.UserID,
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.MessageSuccessGetByID, forumsResponse))

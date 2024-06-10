@@ -175,6 +175,11 @@ paths:
                 email: users@kzquandary.my.id
                 address: Cimahi
                 gender: Laki-laki
+                category:
+                  - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                  - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                  - e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                  - b5d07366-3b31-4011-95e3-34735b0b61f8
       responses:
         "200":
           description: OK
@@ -940,42 +945,31 @@ paths:
                       price: 30000
                       coin: 200
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
+                        
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+                        - image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8                  
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+                        - image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
         "400":
           description: Bad Request
           content:
@@ -1170,21 +1164,45 @@ paths:
                       price: 30000
                       coin: 200
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8           
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+                        - image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Product not found
+                  data: null
   /products?page={page}:
     get:
       tags:
@@ -1260,42 +1278,30 @@ paths:
                       price: 30000
                       coin: 200
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+                        - image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
                     - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://example.com/images/water-bottle3.jpg
                           position: 1
+                        - image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
         "400":
           description: Bad Request
           content:
@@ -2965,6 +2971,174 @@ paths:
                   status: false
                   message: error, id Forum Not Found
                   data: nil
+  /forums/message/{message_id}:
+    get:
+      tags:
+        - forum
+      summary: Get Message
+      description: Admin dapat melihat message dari forum, untuk menggunakan route ini harus menggunakan token admin dan masukkan message id yang dapat dilihat diforum detail
+      operationId: getMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Get Message Success
+                  data:
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                    content: Hello, World!
+                    user:
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      username: user1
+                      name: User 1
+                      avatar_url: https://www.example.com/avatar-1.jpg
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot get message
+                  data: nil
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object  
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Cannot get message
+                  data: nil
+    delete:
+      tags:
+        - forum
+      summary: Delete Message
+      description: Admin dapat menghapus message dari forum, untuk menggunakan route ini harus menggunakan token admin dan masukkan message id yang dapat dilihat diforum detail
+      operationId: deleteMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Delete Message Success
+                  data: nil
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: false
+                  message: Cannot delete message
+                  data: nil
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: nil
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: error, id Message Not Found
+                  data: nil
   /admin/impact:
     get:
       tags:
@@ -3003,10 +3177,18 @@ paths:
                   status: true
                   message: Get All Data Impact Success
                   data: 
-                    - id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                      name: Name
+                    - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                      name: Mengurangi Limbah
                       impact_poin: 100
                       icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Mengurangi Limbah
+                    - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                      name: Hemat Uang
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Hemat Uang
         "401":
           description: Unauthorized
           content:
@@ -3126,7 +3308,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 078817ea-4fcf-4eeb-96b2-f10961826469
+          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
       responses:
         "200":
           description: OK
@@ -3154,10 +3336,12 @@ paths:
                   status: true
                   message: Get Data Impact Success
                   data: 
-                    id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                    name: Name
+                    id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                    name: Mengurangi Limbah
                     impact_poin: 100
                     icon_url: https://example.com/images/item3.jpg
+                    image_url: https://example.com/images/item3.jpg
+                    description : Mengurangi Limbah
     put:
       tags:
         - data impact
@@ -3172,7 +3356,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 078817ea-4fcf-4eeb-96b2-f10961826469
+          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
       requestBody:
         content:
           application/json:
@@ -3268,7 +3452,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 078817ea-4fcf-4eeb-96b2-f10961826469
+          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
       responses:
         "200":
           description: OK

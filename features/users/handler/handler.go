@@ -4,7 +4,6 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/users"
 	"backendgreeve/helper"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -91,7 +90,7 @@ func (h *UserHandler) Update() echo.HandlerFunc {
 		var UserUpdateRequest UserUpdateRequest
 		err = c.Bind(&UserUpdateRequest)
 		if err != nil {
-			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Gga", nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrUpdateUser.Error(), nil))
 		}
 
 		currentUser, err := h.s.GetUserByIDForAdmin(userId.(string))
@@ -101,11 +100,12 @@ func (h *UserHandler) Update() echo.HandlerFunc {
 
 		if UserUpdateRequest.Email == "" || UserUpdateRequest.Email == currentUser.Email {
 			UserUpdateRequest.Email = currentUser.Email
-			log.Println(UserUpdateRequest.Email)
 		}
 		if UserUpdateRequest.Username == "" || UserUpdateRequest.Username == currentUser.Username {
 			UserUpdateRequest.Username = currentUser.Username
-			log.Println("username:", UserUpdateRequest.Username)
+		}
+		if UserUpdateRequest.AvatarURL == "" || UserUpdateRequest.AvatarURL == currentUser.AvatarURL {
+			UserUpdateRequest.AvatarURL = currentUser.AvatarURL
 		}
 
 		user := users.UserUpdate{

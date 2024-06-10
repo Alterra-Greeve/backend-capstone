@@ -91,32 +91,6 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		}
 	}
 
-	// updateData := map[string]interface{}{}
-	// if user.Email != "" {
-	// 	updateData["email"] = user.Email
-	// }
-	// if user.Username != "" {
-	// 	updateData["username"] = user.Username
-	// }
-	// if user.Password != "" {
-	// 	updateData["password"] = user.Password
-	// }
-	// if user.Address != "" {
-	// 	updateData["address"] = user.Address
-	// }
-	// if user.Name != "" {
-	// 	updateData["name"] = user.Name
-	// }
-	// if user.Gender != "" {
-	// 	updateData["gender"] = user.Gender
-	// }
-	// if user.Phone != "" {
-	// 	updateData["phone"] = user.Phone
-	// }
-	// if user.AvatarURL != "" {
-	// 	updateData["avatar_url"] = user.AvatarURL
-	// }
-
 	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(user).Error; err != nil {
 		return users.User{}, constant.ErrUpdateUser
 	}

@@ -19,6 +19,7 @@ const ForumByID = ForumPath + "/:id"
 const GetForumByUserID = ForumPath + "/user"
 
 // Forum Message
+const ForumMessagePath = BasePath + "/message" + "/:id"
 const ForumMessage = ForumPath + "/message"
 const ForumMessageByID = ForumMessage + "/:id"
 

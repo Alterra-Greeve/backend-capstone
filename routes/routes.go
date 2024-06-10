@@ -162,6 +162,7 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 	e.PUT(route.ForumByID, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumByID, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
 
+	e.GET(route.ForumMessageByID, fh.GetMessageForumByID(), echojwt.WithConfig(jwtConfig))
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))

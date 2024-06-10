@@ -91,18 +91,22 @@ func (s *UserService) Login(user users.User) (users.UserLogin, error) {
 }
 
 func (s *UserService) Update(user users.UserUpdate) (users.UserUpdate, error) {
-	if user.Password == "" && user.Address == "" && user.Name == "" && user.Gender == "" && user.Phone == "" && user.AvatarURL == "" {
+	if user.Email == "" && user.Username == "" && user.Password == "" && user.Address == "" && user.Name == "" && user.Gender == "" && user.Phone == "" && user.AvatarURL == "" {
 		return users.UserUpdate{}, constant.ErrEmptyUpdate
 	}
 
 	if user.ID == "" {
 		return users.UserUpdate{}, constant.ErrUpdateUser
 	}
-	isEmailValid := helper.ValidateEmail(user.Email)
-	if !isEmailValid {
-		return users.UserUpdate{}, constant.ErrInvalidEmail
+
+	if user.Email != "" {
+		isEmailValid := helper.ValidateEmail(user.Email)
+		if !isEmailValid {
+			return users.UserUpdate{}, constant.ErrInvalidEmail
+		}
+		user.Email = strings.ToLower(user.Email)
 	}
-	user.Email = strings.ToLower(user.Email)
+
 	if user.Password != "" {
 		hashedPassword, err := helper.HashPassword(user.Password)
 		if err != nil {
@@ -110,6 +114,7 @@ func (s *UserService) Update(user users.UserUpdate) (users.UserUpdate, error) {
 		}
 		user.Password = hashedPassword
 	}
+
 	userData, err := s.d.Update(user)
 	if err != nil {
 		return users.UserUpdate{}, err
