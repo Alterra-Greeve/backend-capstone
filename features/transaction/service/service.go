@@ -2,7 +2,6 @@ package service
 
 import (
 	"backendgreeve/config"
-	"backendgreeve/constant"
 	"backendgreeve/features/transaction"
 
 	"github.com/google/uuid"
@@ -21,56 +20,95 @@ func New(d transaction.TransactionDataInterface, config config.MidtransConfig) t
 		config: config,
 	}
 }
-func (s *TransactionService) GetUserTransaction(userId string) ([]transaction.Transaction, error) {
+func (s *TransactionService) GetUserTransaction(userId string) ([]transaction.TransactionData, error) {
 	// Implement logic here
 	transaction, err := s.d.GetUserTransaction(userId)
 	if err != nil {
 		return nil, err
 	}
+
 	return transaction, nil
 }
 
-func (s *TransactionService) GetTransactionByID(transactionId string) (transaction.Transaction, error) {
+func (s *TransactionService) GetTransactionByID(transactionId string) (transaction.TransactionData, error) {
 	// Implement logic here
 	transactions, err := s.d.GetTransactionByID(transactionId)
 	if err != nil {
-		return transaction.Transaction{}, err
+		return transaction.TransactionData{}, err
 	}
 	return transactions, nil
 }
 
-func (s *TransactionService) CreateTransaction(Transaction transaction.CreateTransaction) error {
-	// Implement logic here
+func (s *TransactionService) CreateTransaction(Transaction transaction.CreateTransaction) (transaction.Transaction, error) {
 	var transactionData transaction.Transaction
-	if transactionData.Address == "" {
-		return constant.ErrAddressEmpty
-	}
-	
-	transactionData.Address = Transaction.Address
+
 	transactionData.ID = uuid.New().String()
 	transactionData.UserID = Transaction.UserID
-	transactionData.Status = "pending"
-	transactionData.VoucherID = "asd123"
-	transactionData.Total = 100000
+	transactionData.Status = "Pending"
+	address, err := s.d.GetUserAddress(Transaction.UserID)
+	if err != nil {
+		return transaction.Transaction{}, err
+	}
+	// if address == "" {
+	// 	return transaction.Transaction{}, constant.ErrAddressEmpty
+	// }
+
+	transactionData.Address = address
+
+	total, err := s.d.GetTotalPrice(Transaction.UserID)
+	if err != nil {
+		return transaction.Transaction{}, err
+	}
+
+	transactionData.Total = total
+	if Transaction.VoucherCode != "" {
+		voucher, err := s.d.GetVoucherID(Transaction.VoucherCode)
+		if err != nil {
+			return transaction.Transaction{}, err
+		}
+		transactionData.VoucherID = voucher
+	} else {
+		transactionData.VoucherID = ""
+	}
+
 	req := &snap.Request{
 		TransactionDetails: midtrans.TransactionDetails{
 			OrderID:  transactionData.ID,
 			GrossAmt: int64(transactionData.Total),
 		},
 	}
+
+	if Transaction.UsingCoin {
+		coin, err := s.d.GetUserCoin(Transaction.UserID)
+		if err != nil {
+			return transaction.Transaction{}, err
+		}
+		newTotal, usedCoin, err := s.d.DecreaseUserCoin(Transaction.UserID, coin, transactionData.Total)
+		if err != nil {
+			return transaction.Transaction{}, err
+		}
+		transactionData.Coin = usedCoin
+		transactionData.Total = newTotal
+	}
+
 	var client snap.Client
 	client.New(s.config.ServerKey, midtrans.Sandbox)
 	snapResponse, err := client.CreateTransaction(req)
-	if err != nil {
-		return err
+	if snapResponse == nil {
+		return transaction.Transaction{}, err
 	}
+
 	transactionData.SnapURL = snapResponse.RedirectURL
 
 	error := s.d.CreateTransactions(transactionData)
 	if error != nil {
-		return error
+		return transaction.Transaction{}, error
 	}
-	return nil
+	err = s.d.AddTransactionItems(Transaction.UserID, transactionData.ID)
+	if err != nil {
+		return transaction.Transaction{}, err
+	}
+	return transactionData, nil
 }
 
 func (s *TransactionService) UpdateTransaction(transaction transaction.UpdateTransaction) error {

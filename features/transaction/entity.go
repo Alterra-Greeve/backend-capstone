@@ -1,7 +1,8 @@
 package transaction
 
 import (
-	"backendgreeve/features/cart"
+	"backendgreeve/features/product"
+	"backendgreeve/features/users"
 
 	"github.com/labstack/echo/v4"
 )
@@ -11,7 +12,6 @@ type Transaction struct {
 	UserID        string
 	VoucherID     string
 	Address       string
-	Description   string
 	Status        string
 	Total         float64
 	Coin          int
@@ -21,15 +21,14 @@ type Transaction struct {
 
 type CreateTransaction struct {
 	UserID      string
+	UsingCoin   bool
 	VoucherCode string
-	Address     string
-	Description string
-	SnapURL     string
 }
 
 type UpdateTransaction struct {
-	ID     string
-	Status string
+	ID            string
+	Status        string
+	PaymentMethod string
 }
 
 type TransactionItems struct {
@@ -37,6 +36,18 @@ type TransactionItems struct {
 	TransactionID string
 	ProductID     string
 	Qty           int
+	Product       product.Product
+}
+
+type TransactionData struct {
+	ID               string
+	VoucherID        string
+	Status           string
+	Total            float64
+	Coin             int
+	SnapURL          string
+	User             users.User
+	TransactionItems []TransactionItems
 }
 
 type TransactionHandlerInterface interface {
@@ -47,22 +58,24 @@ type TransactionHandlerInterface interface {
 }
 
 type TransactionServiceInterface interface {
-	GetUserTransaction(userId string) ([]Transaction, error)
-	GetTransactionByID(transactionId string) (Transaction, error)
-	CreateTransaction(transaction CreateTransaction) error
+	GetUserTransaction(userId string) ([]TransactionData, error)
+	GetTransactionByID(transactionId string) (TransactionData, error)
+	CreateTransaction(transaction CreateTransaction) (Transaction, error)
 	UpdateTransaction(transaction UpdateTransaction) error
 	DeleteTransaction(transactionId string) error
 }
 
 type TransactionDataInterface interface {
-	GetUserTransaction(userId string) ([]Transaction, error)
-	GetTransactionByID(transactionId string) (Transaction, error)
+	GetUserTransaction(userId string) ([]TransactionData, error)
+	GetTransactionByID(transactionId string) (TransactionData, error)
 	CreateTransactions(transaction Transaction) error
 	UpdateTransaction(transaction Transaction) error
 	DeleteTransaction(transactionId string) error
+	GetUserAddress(userId string) (string, error)
+	GetUserCoin(userId string) (int, error)
+	DecreaseUserCoin(userId string, coin int, total float64) (float64, int, error)
 	GetVoucherID(voucherCode string) (string, error)
-	GetShoppingCartItems(userId string) ([]cart.Cart, error)
-	AddTransactionItems(transactionItems []TransactionItems) error
+	AddTransactionItems(userId string, transactionId string) error
 	GetTotalPrice(userId string) (float64, error)
 	GetTotalPriceWithDiscount(userId string, voucherId string) (float64, error)
 	GetTotalPriceWithCoin(userId string) (float64, error)

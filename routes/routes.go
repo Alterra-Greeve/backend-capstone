@@ -92,6 +92,7 @@ func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, 
 		SigningKey:   []byte(cfg.JWT_Secret),
 		ErrorHandler: helper.JWTErrorHandler,
 	}
+	e.GET("/api/v1/transactions", th.GetUserTransaction(), echojwt.WithConfig(jwtConfig))
 	e.POST("/api/v1/transactions", th.CreateTransaction(), echojwt.WithConfig(jwtConfig))
 }
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {

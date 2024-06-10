@@ -3,6 +3,7 @@ package seeds
 import (
 	challenge "backendgreeve/features/challenges/data"
 	product "backendgreeve/features/product/data"
+	user "backendgreeve/features/users/data"
 	"backendgreeve/utils/database/seed"
 	"time"
 
@@ -2344,91 +2345,286 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers1",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "5dcdb121-85df-487c-8d4a-b4fd5033c9c0", "oscar.simanjuntak", "secret123", "Oscar Simanjuntak", "oscar.simanjuntak@example.com", "Jl. Kamboja No. 15, Jayapura", "Laki-laki", "081234567804", 350, 140, "")
+				user := user.User{
+					ID:        "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					Name:      "Oscar Simanjuntak",
+					Password:  "secret123",
+					Email:     "oscar.simanjuntak@example.com",
+					Username:  "oscar.simanjuntak",
+					Address:   "Jl. Kamboja No. 15, Jayapura",
+					Gender:    "Laki-laki",
+					Phone:     "081234567804",
+					Coin:      350,
+					Exp:       140,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers2",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "5b9a23e5-e562-4fae-b11c-787e655a67d7", "ahmad.fauzi", "password123", "Ahmad Fauzi", "ahmad.fauzi@example.com", "Jl. Merdeka No. 1, Jakarta", "Laki-laki", "'081234567890", 200, 129, "")
+				user := user.User{
+					ID:        "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					Name:      "Ahmad Fauzi",
+					Password:  "password123",
+					Email:     "ahmad.fauzi@example.com",
+					Username:  "ahmad.fauzi",
+					Address:   "Jl. Merdeka No. 1, Jakarta",
+					Gender:    "Laki-laki",
+					Phone:     "081234567890",
+					Coin:      200,
+					Exp:       129,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers3",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "d4a59d1b-38fa-4736-88d7-00cdc02ef5be", "budi.santoso", "passw0rd", "Budi Santoso", "budi.santoso@example.com", "Jl. Pahlawan No. 2, Surabaya", "Laki-laki", "081234567891", 50, 124, "")
+				user := user.User{
+					ID:        "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					Name:      "Budi Santoso",
+					Password:  "passw0rd",
+					Email:     "budi.santoso@example.com",
+					Username:  "budi.santoso",
+					Address:   "Jl. Pahlawan No. 2, Surabaya",
+					Gender:    "Laki-laki",
+					Phone:     "081234567891",
+					Coin:      50,
+					Exp:       124,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers4",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "6932e20c-3c55-4d95-91c5-ce316cc5843f", "citra.lestari", "mypassword", "Citra Lestari", "citra.lestari@example.com", "Jl. Melati No. 3, Bandung", "Perempuan", "081234567892", 0, 0, "")
+				user := user.User{
+					ID:        "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					Name:      "Citra Lestari",
+					Password:  "mypassword",
+					Email:     "citra.lestari@example.com",
+					Username:  "citra.lestari",
+					Address:   "Jl. Melati No. 3, Bandung",
+					Gender:    "Perempuan",
+					Phone:     "081234567892",
+					Coin:      0,
+					Exp:       0,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers5",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "8f25169f-5084-45c3-a99f-40daf59485d4", "dewi.ayu", "securepass", "Dewi Ayu", "dewi.ayu@example.com", "Jl. Mawar No. 4, Yogyakarta", "Perempuan", "'081234567893", 0, 24, "")
+				user := user.User{
+					ID:        "8f25169f-5084-45c3-a99f-40daf59485d4",
+					Name:      "Dewi Ayu",
+					Password:  "securepass",
+					Email:     "dewi.ayu@example.com",
+					Username:  "dewi.ayu",
+					Address:   "Jl. Mawar No. 4, Yogyakarta",
+					Gender:    "Perempuan",
+					Phone:     "081234567893",
+					Coin:      0,
+					Exp:       24,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers6",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "b7352ca3-fae1-4f3c-85b9-095de368b706", "eko.prasetyo", "password321", "Eko Prasetyo", "eko.prasetyo@example.com", "Jl. Kenanga No. 5, Semarang", "Laki-laki", "'081234567894", 200, 100, "")
+				user := user.User{
+					ID:        "b7352ca3-fae1-4f3c-85b9-095de368b706",
+					Name:      "Eko Prasetyo",
+					Password:  "password321",
+					Email:     "eko.prasetyo@example.com",
+					Username:  "eko.prasetyo",
+					Address:   "Jl. Kenanga No. 5, Semarang",
+					Gender:    "Laki-laki",
+					Phone:     "081234567894",
+					Coin:      200,
+					Exp:       100,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers7",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "29a1ee6d-05bd-4f11-b42a-a6769fd6a509", "fani.nugraha", "pass1234", "Fani Nugraha", "fani.nugraha@example.com", "Jl. Teratai No. 6, Medan", "Perempuan", "081234567895", 250, 125, "")
+				user := user.User{
+					ID:        "29a1ee6d-05bd-4f11-b42a-a6769fd6a509",
+					Name:      "Fani Nugraha",
+					Password:  "pass1234",
+					Email:     "fani.nugraha@example.com",
+					Username:  "fani.nugraha",
+					Address:   "Jl. Teratai No. 6, Medan",
+					Gender:    "Perempuan",
+					Phone:     "081234567895",
+					Coin:      250,
+					Exp:       125,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers8",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c", "gilang.permana", "qwerty123", "Gilang Permana", "gilang.permana@example.com", "Jl. Anggrek No. 7, Bali", "Laki-laki", "081234567896", 80, 64, "")
+				user := user.User{
+					ID:        "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					Name:      "Gilang Permana",
+					Password:  "qwerty123",
+					Email:     "gilang.permana@example.com",
+					Username:  "gilang.permana",
+					Address:   "Jl. Anggrek No. 7, Bali",
+					Gender:    "Laki-laki",
+					Phone:     "081234567896",
+					Coin:      80,
+					Exp:       64,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers9",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "4fe8e112-e3d7-4468-bfd0-24058790bb6e", "hana.putri", "letmein", "Hana Putri", "hana.putri@example.com", "Jl. Dahlia No. 8, Makassar", "Perempuan", "081234567897", 110, 55, "")
+				user := user.User{
+					ID:        "4fe8e112-e3d7-4468-bfd0-24058790bb6e",
+					Name:      "Hana Putri",
+					Password:  "letmein",
+					Email:     "hana.putri@example.com",
+					Username:  "hana.putri",
+					Address:   "Jl. Dahlia No. 8, Makassar",
+					Gender:    "Perempuan",
+					Phone:     "081234567897",
+					Coin:      110,
+					Exp:       55,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers10",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "56a85666-b5aa-4b39-8823-99c7f789ac7b", "indra.maulana", "welcome1", "Indra Maulana", "indra.maulana@example.com", "Jl. Flamboyan No. 9, Malang", "Laki-laki", "081234567898", 90, 45, "")
+				user := user.User{
+					ID:        "56a85666-b5aa-4b39-8823-99c7f789ac7b",
+					Name:      "Indra Maulana",
+					Password:  "welcome1",
+					Email:     "indra.maulana@example.com",
+					Username:  "indra.maulana",
+					Address:   "Jl. Flamboyan No. 9, Malang",
+					Gender:    "Laki-laki",
+					Phone:     "081234567898",
+					Coin:      90,
+					Exp:       45,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers11",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "c0045c29-d1fa-4524-85fd-3e9341f99c6a", "surya.rahmat", "trustno1", "Surya Rahmat", "suryarahmat@example.com", "Jl. Cempaka No. 10, Solo", "Laki-laki", "081234567899", 0, 0, "")
+				user := user.User{
+					ID:        "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
+					Name:      "Surya Rahmat",
+					Password:  "trustno1",
+					Email:     "suryarahmat@example.com",
+					Username:  "surya.rahmat",
+					Address:   "Jl. Cempaka No. 10, Solo",
+					Gender:    "Laki-laki",
+					Phone:     "081234567899",
+					Coin:      0,
+					Exp:       0,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers12",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "6220c455-f14e-42d3-a73d-2f4573f4cf52", "kiki.amalia", "password456", "Kiki Amalia", "kiki.amalia@example.com", "Jl. Kamboja No. 11, Pekanbaru", "Perempuan", "081234567800", 40, 20, "")
+				user := user.User{
+					ID:        "6220c455-f14e-42d3-a73d-2f4573f4cf52",
+					Name:      "Kiki Amalia",
+					Password:  "password456",
+					Email:     "kiki.amalia@example.com",
+					Username:  "kiki.amalia",
+					Address:   "Jl. Kamboja No. 11, Pekanbaru",
+					Gender:    "Perempuan",
+					Phone:     "081234567800",
+					Coin:      40,
+					Exp:       20,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers13",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "35e243e9-d0b1-40b7-b216-5bc6cc15e243", "lina.marlina", "mypassword2", "Lina Marlina", "lina.marlina@example.com", "Jl. Bougenville No. 12, Palembang", "Tidak Terdefinisi", "081234567801", 0, 0, "")
+				user := user.User{
+					ID:        "35e243e9-d0b1-40b7-b216-5bc6cc15e243",
+					Name:      "Lina Marlina",
+					Password:  "mypassword2",
+					Email:     "lina.marlina@example.com",
+					Username:  "lina.marlina",
+					Address:   "Jl. Bougenville No. 12, Palembang",
+					Gender:    "Tidak Terdefinisi",
+					Phone:     "081234567801",
+					Coin:      0,
+					Exp:       0,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers14",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "8f14519b-ea61-457b-bf96-90504221de90", "mulyadi.saputra", "pass2022", "Mulyadi Saputra", "mulyadi.saputra@example.com", "Jl. Tulip No. 13, Balikpapan", "Tidak Terdefinisi", "081234567802", 0, 0, "")
+				user := user.User{
+					ID:        "8f14519b-ea61-457b-bf96-90504221de90",
+					Name:      "Mulyadi Saputra",
+					Password:  "pass2022",
+					Email:     "mulyadi.saputra@example.com",
+					Username:  "mulyadi.saputra",
+					Address:   "Jl. Tulip No. 13, Balikpapan",
+					Gender:    "Tidak Terdefinisi",
+					Phone:     "081234567802",
+					Coin:      0,
+					Exp:       0,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		{
 			Name: "CreateUsers15",
 			Run: func(db *gorm.DB) error {
-				return CreateUsers(db, "3fb1eb90-805f-4727-9f7d-a6fefc6115f9", "nina.agustina", "password789", "Nina Agustina", "nina.agustina@example.com", "Jl. Sakura No. 14, Pontianak", "Tidak Terdefinisi", "081234567803", 100, 50, "")
+				user := user.User{
+					ID:        "3fb1eb90-805f-4727-9f7d-a6fefc6115f9",
+					Name:      "Nina Agustina",
+					Password:  "password789",
+					Email:     "nina.agustina@example.com",
+					Username:  "nina.agustina",
+					Address:   "Jl. Sakura No. 14, Pontianak",
+					Gender:    "Tidak Terdefinisi",
+					Phone:     "081234567803",
+					Coin:      100,
+					Exp:       50,
+					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+				}
+				return CreateUsers(db, user)
 			},
 		},
 		// End of Users

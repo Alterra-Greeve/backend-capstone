@@ -7,25 +7,11 @@ import (
 	"gorm.io/gorm"
 )
 
-func CreateUsers(db *gorm.DB, id, name, password, email, username, address, gender, phone string, coin, exp int, avatar_url string) error {
-	hashedPassword, err := helper.HashPassword(password)
+func CreateUsers(db *gorm.DB, user user.User) error {
+	hashedPassword, err := helper.HashPassword(user.Password)
 	if err != nil {
 		return err
 	}
-
-	usersRecord := user.User{
-		ID:        id,
-		Name:      name,
-		Password:  hashedPassword,
-		Email:     email,
-		Username:  username,
-		Address:   address,
-		Gender:    gender,
-		Phone:     phone,
-		Coin:      coin,
-		Exp:       exp,
-		AvatarURL: avatar_url,
-	}
-
-	return db.Where("id = ?", id).FirstOrCreate(&usersRecord).Error
+	user.Password = hashedPassword
+	return db.Where("id = ?", user.ID).FirstOrCreate(&user).Error
 }

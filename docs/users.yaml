@@ -1605,7 +1605,7 @@ paths:
                 product_id:
                   type: string
               example:
-                product_id: 123e4567-e89b-12d3-a456-426614174000
+                product_id: 005c310b-015a-4075-b3b5-575b1feb14d6
       responses:
         "200":
           description: OK
@@ -2029,12 +2029,8 @@ paths:
                 description:
                   type: string
               example:
-                voucher_code: "DISC10"
-                address: "Jl. Raya Cikarus"
-                description: "This is a transaction description"
-                products:
-                  - 123e4567-e89b-12d3-a456-426614174000
-                  - 123e4567-e89b-12d3-a456-426614174000
+                voucher_code: "RENEWNY"
+                using_coin: true
       responses:
         "200":
           description: OK
@@ -2164,260 +2160,260 @@ paths:
                   status: false
                   message: Transaction not found
                   data: null
-  /transaction/{transaction_id}:
-    get:
-      tags:
-        - transactions
-      summary: Get Transaction by id
-      description: User melihat detail transaksi yang telah dilakuakn user tersebut
-      operationId: getTransactionid
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: transaction_id
-          schema:
-            type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
-          required: true
-          description: ID of transaction
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Get Transaction Detail Success
-                  data:
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      user:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          username: user1
-                          email: user1@example.com
-                      voucher:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          name: Voucher 1
-                          code: DISC10
-                          discount: 10000
-                      address: Jl. Raya Cikarus
-                      description: This is a transaction description
-                      status: Success
-                      total: 100000
-                      date: 2024-05-10
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
-  /validate-voucher/{voucher_code}:
-    get:
-      tags:
-        - transactions
-      summary: Validate Voucher
-      description: User mengvalidasi voucher
-      operationId: validateVoucher
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: voucher_code
-          in: path
-          required: true
-          schema:
-            type: string
-          example: DISC10
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Validate Voucher Success
-                  data:
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                    name: Diskon Hari Raya
-                    discount: "10000"
-                    code: "DISC10"
-                    description: Diskon 10%
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Voucher code is invalid
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Voucher code is not found
-                  data: null
-  /payment:
-    post:
-      tags:
-        - transactions
-      summary: Create Payment
-      description: User membuat payment
-      operationId: createPayment
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                transaction_id:
-                  type: string
-              example:
-                transaction_id: 123e4567-e89b-12d3-a456-426614174000
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Create Payment Success
-                  data:
-                    payment_id: 123e4567-e89b-12d3-a456-426614174000
-                    transaction:
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      total: 10000
-                    user:
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                      name: User 1
-                    snap_url: https://app.sandbox.midtrans.com/snap/v1/transactions/123e4567-e89b-12d3-a456-426614174000
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
+  # /transaction/{transaction_id}:
+  #   get:
+  #     tags:
+  #       - transactions
+  #     summary: Get Transaction by id
+  #     description: User melihat detail transaksi yang telah dilakuakn user tersebut
+  #     operationId: getTransactionid
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - in: path
+  #         name: transaction_id
+  #         schema:
+  #           type: string
+  #         example: 123e4567-e89b-12d3-a456-426614174000
+  #         required: true
+  #         description: ID of transaction
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Get Transaction Detail Success
+  #                 data:
+  #                   - id: 123e4567-e89b-12d3-a456-426614174000
+  #                     user:
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         username: user1
+  #                         email: user1@example.com
+  #                     voucher:
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         name: Voucher 1
+  #                         code: DISC10
+  #                         discount: 10000
+  #                     address: Jl. Raya Cikarus
+  #                     description: This is a transaction description
+  #                     status: Success
+  #                     total: 100000
+  #                     date: 2024-05-10
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
+  # /validate-voucher/{voucher_code}:
+  #   get:
+  #     tags:
+  #       - transactions
+  #     summary: Validate Voucher
+  #     description: User mengvalidasi voucher
+  #     operationId: validateVoucher
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: voucher_code
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: DISC10
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Validate Voucher Success
+  #                 data:
+  #                   id: 123e4567-e89b-12d3-a456-426614174000
+  #                   name: Diskon Hari Raya
+  #                   discount: "10000"
+  #                   code: "DISC10"
+  #                   description: Diskon 10%
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Voucher code is invalid
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Voucher code is not found
+  #                 data: null
+  # /payment:
+  #   post:
+  #     tags:
+  #       - transactions
+  #     summary: Create Payment
+  #     description: User membuat payment
+  #     operationId: createPayment
+  #     security:
+  #       - bearerAuth: []
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               transaction_id:
+  #                 type: string
+  #             example:
+  #               transaction_id: 123e4567-e89b-12d3-a456-426614174000
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Create Payment Success
+  #                 data:
+  #                   payment_id: 123e4567-e89b-12d3-a456-426614174000
+  #                   transaction:
+  #                     id: 123e4567-e89b-12d3-a456-426614174000
+  #                     total: 10000
+  #                   user:
+  #                     id: 123e4567-e89b-12d3-a456-426614174000
+  #                     name: User 1
+  #                   snap_url: https://app.sandbox.midtrans.com/snap/v1/transactions/123e4567-e89b-12d3-a456-426614174000
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
 
   /challenges:
     get:
@@ -2558,40 +2554,6 @@ paths:
                   status: false
                   message: cannto get data, challenge id not found
                   data: null
-  /challenges/participate?status={status}:
-    get:
-      tags:
-        - challenges
-      summary: Get User Challenges (WIP)
-      description: User mendapatkan semua challenge yang sudah diambil<br>status :Diterima, Ditolak, Pending
-      operationId: getUserChallengesByStatus
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: status
-          in: query
-          required: false
-          schema:
-            type: string
-          example: Diterima
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Get User Challenges Success
-                  data: null
   /challenges/participate:
     post:
       tags:
@@ -2662,6 +2624,88 @@ paths:
                   status: false
                   message: cannot get data, user id not found
                   data: null
+  /challenges/participate?status={status}:
+    get:
+      tags:
+        - challenges
+      summary: Get User Challenges
+      description: User mendapatkan semua challenge yang sudah diambil<br>status :Diterima, Ditolak, Pending
+      operationId: getUserChallengesByStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+          example: Diterima
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: true
+                  message: Get User Challenges Success
+                  data: null
+
+  /challenges/participate/{challenge_confrimation_id}:
+    get:
+      tags:
+        - challenges
+      summary: Get Challenge Confirmation
+      description: User mendapatkan detail challenge confirmation
+      operationId: getChallengeConfirmation
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: challenge_confrimation_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Challenge Confirmation Success
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: cannot get data, challenge confirmation id not found
+                  data: null
     put:
       tags:
         - challenges
@@ -2676,14 +2720,15 @@ paths:
             schema:
               type: object
               properties:
-                challenge_id:
-                  type: string
+
                 type:
                   type: string
               example:
-                challenge_id: 123e4567-e89b-12d3-a456-426614174000
                 image:
-                  - url: https://www.example.com/challenge-1.jpg
+                  - https://www.example.com/challenge-1.jpg
+                  - https://www.example.com/challenge-2.jpg
+                  - https://www.example.com/challenge-3.jpg
+
       responses:
         "200":
           description: OK
@@ -2732,107 +2777,107 @@ paths:
                   status: false
                   message: Challenge Already Accepted
                   data: null
-  /challenges/user:
-    get:
-      tags:
-        - challenges
-      summary: Get User Challenges (WIP)
-      description: User mendapatkan semua challenge yang sudah diambil
-      operationId: getUserChallenges
-      security:
-        - bearerAuth: []
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Get User Challenges Success
-                  data:
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Challenge 1
-                      description: Challenge 1 description
-                      point: 100
-                      exp: 100
-                      status: Accepted
-                      image:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-3.jpg
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Challenge 2
-                      description: Challenge 2 description
-                      point: 200
-                      exp: 200
-                      status: Pending
-                      image:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-3.jpg
-                    - id: 123e4567-e89b-12d3-a456-426614174000
-                      title: Challenge 3
-                      description: Challenge 3 description
-                      point: 300
-                      exp: 300
-                      status: Declined
-                      image:
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-1.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-2.jpg
-                        - id: 123e4567-e89b-12d3-a456-426614174000
-                          url: https://www.example.com/challenge-3.jpg
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: cannot get data, user id not found
-                  data: null
+  # /challenges/user:
+  #   get:
+  #     tags:
+  #       - challenges
+  #     summary: Get User Challenges (WIP)
+  #     description: User mendapatkan semua challenge yang sudah diambil
+  #     operationId: getUserChallenges
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Get User Challenges Success
+  #                 data:
+  #                   - id: 123e4567-e89b-12d3-a456-426614174000
+  #                     title: Challenge 1
+  #                     description: Challenge 1 description
+  #                     point: 100
+  #                     exp: 100
+  #                     status: Accepted
+  #                     image:
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-1.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-2.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-3.jpg
+  #                   - id: 123e4567-e89b-12d3-a456-426614174000
+  #                     title: Challenge 2
+  #                     description: Challenge 2 description
+  #                     point: 200
+  #                     exp: 200
+  #                     status: Pending
+  #                     image:
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-1.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-2.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-3.jpg
+  #                   - id: 123e4567-e89b-12d3-a456-426614174000
+  #                     title: Challenge 3
+  #                     description: Challenge 3 description
+  #                     point: 300
+  #                     exp: 300
+  #                     status: Declined
+  #                     image:
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-1.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-2.jpg
+  #                       - id: 123e4567-e89b-12d3-a456-426614174000
+  #                         url: https://www.example.com/challenge-3.jpg
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: cannot get data, user id not found
+  #                 data: null
   /leaderboard:
     get:
       tags:
         - challenges
-      summary: Get Leaderboard (WIP)
+      summary: Get Leaderboard
       description: User dapat melihat leaderboard
       operationId: getLeaderboard
       security:
