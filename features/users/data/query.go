@@ -75,24 +75,58 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		return users.User{}, err
 	}
 
-	if user.Email != existingUser.Email && user.Username != existingUser.Username {
+	if user.Email != "" && user.Email != existingUser.Email {
 		var count int64
-		u.DB.Table("users").Where("email = ? OR username = ?", user.Email, user.Username).Count(&count)
+		u.DB.Table("users").Where("email = ?", user.Email).Count(&count)
 		if count > 0 {
-			return users.User{}, constant.ErrEmailUsernameAlreadyExist
+			return users.User{}, constant.ErrEmailAlreadyExist
 		}
 	}
 
-	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(&user).Error; err != nil {
+	if user.Username != "" && user.Username != existingUser.Username {
+		var count int64
+		u.DB.Table("users").Where("username = ?", user.Username).Count(&count)
+		if count > 0 {
+			return users.User{}, constant.ErrUsernameAlreadyExist
+		}
+	}
+
+	// updateData := map[string]interface{}{}
+	// if user.Email != "" {
+	// 	updateData["email"] = user.Email
+	// }
+	// if user.Username != "" {
+	// 	updateData["username"] = user.Username
+	// }
+	// if user.Password != "" {
+	// 	updateData["password"] = user.Password
+	// }
+	// if user.Address != "" {
+	// 	updateData["address"] = user.Address
+	// }
+	// if user.Name != "" {
+	// 	updateData["name"] = user.Name
+	// }
+	// if user.Gender != "" {
+	// 	updateData["gender"] = user.Gender
+	// }
+	// if user.Phone != "" {
+	// 	updateData["phone"] = user.Phone
+	// }
+	// if user.AvatarURL != "" {
+	// 	updateData["avatar_url"] = user.AvatarURL
+	// }
+
+	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(user).Error; err != nil {
 		return users.User{}, constant.ErrUpdateUser
 	}
 
-	var userData users.User
-	userData, err = u.GetUserByID(user.ID)
+	var updatedUser users.User
+	updatedUser, err = u.GetUserByID(user.ID)
 	if err != nil {
 		return users.User{}, err
 	}
-	return userData, nil
+	return updatedUser, nil
 }
 
 func (u *UserData) Delete(user users.User) error {
@@ -349,5 +383,3 @@ func (u *UserData) GetUserImpactPointByUsername(username string) (int, error) {
 	}
 	return impactPoint, nil
 }
-
-

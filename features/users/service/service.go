@@ -91,7 +91,7 @@ func (s *UserService) Login(user users.User) (users.UserLogin, error) {
 }
 
 func (s *UserService) Update(user users.UserUpdate) (users.UserUpdate, error) {
-	if user.Email == "" && user.Password == "" && user.Address == "" && user.Name == "" && user.Gender == "" && user.Phone == "" {
+	if user.Password == "" && user.Address == "" && user.Name == "" && user.Gender == "" && user.Phone == "" && user.AvatarURL == "" {
 		return users.UserUpdate{}, constant.ErrEmptyUpdate
 	}
 
