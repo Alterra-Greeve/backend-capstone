@@ -3,6 +3,7 @@ package seeds
 import (
 	challenge "backendgreeve/features/challenges/data"
 	product "backendgreeve/features/product/data"
+	transaction "backendgreeve/features/transaction/data"
 	"backendgreeve/utils/database/seed"
 	"time"
 
@@ -2436,95 +2437,335 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateVoucher1",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Christmas Sale", "SUSTXMAS", "20000", "Special discounts on sustainable products", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Promo Natal", "NATAL2024", "20000", "Diskon khusus untuk produk ramah lingkungan", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher2",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Lebaran Bundle", "ECOLEBARAN", "15%", "Bundle deals on eco-friendly items for Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Promo Idul Fitri", "PAKETLEBARAN", "15%", "Paket penawaran barang-barang ramah lingkungan untuk Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher3",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Independence Day Sale", "RECYID", "15000", "Discounts on recyclable products for 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Promo Hari Kemerdekaan Indonesia", "MERDEKA2024", "15000", "Diskon produk daur ulang untuk 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher4",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "New Year Offer", "RENEWNY", "30%", "Special offers on renewable resources for New Year", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "Harga Spesial Tahun Baru", "TAHUNBARU2024", "30%", "Penawaran khusus pada sumber daya terbarukan untuk Tahun Baru", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher5",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Earth Day Deals", "BIODEED", "10000", "Discounts on biodegradable goods for Earth Day", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Promo Hari Bumi", "HARIBUMI2024", "10000", "Diskon barang biodegradable untuk Hari Bumi", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher6",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Halloween Sale", "ENERHALLOW", "25%", "Savings on energy-efficient products for Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Diskon Halloween", "HALLOWEEN2024", "25%", "Penghematan produk hemat energi untuk Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher7",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Kartini Day Discount", "LOWCKARTINI", "30000", "Discounts on low carbon footprint items for Kartini Day", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Potongan Harga Spesial Hari Kartini", "KARTINI2024", "30000", "Diskon item rendah karbon untuk Hari Kartini", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher8",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Eid al-Adha Special", "WATEID", "20%", "Special offers for water-saving products for Eid al-Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Promo Idul Adha", "IDULADHA2024", "20%", "Penawaran spesial produk hemat air untuk Idul Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher9",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "National Batik Day", "ZEROBATIK", "35%", "Big discounts for zero waste products for National Batik Day", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "Batik Nasional", "BATIK2024", "35%", "Diskon besar produk zero waste di Hari Batik Nasional", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher10",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Lunar New Year Delights", "ORGLUNAR", "25%", "Discounts on organic and natural products for Lunar New Year", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Tahun Baru Imlek", "IMLEK2024", "25%", "Diskon produk organik dan alami untuk Tahun Baru Imlek", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher11",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Valentine's Day Sale", "NONTOXVAL", "12000", "Savings on non-toxic household items for Valentine's Day", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Promo Hari Kasih Sayang", "VALENTINE2024", "12000", "Potongan harga untuk Menghemat barang-barang rumah tangga tidak beracun di Hari Valentine", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher12",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Earth Hour Offers", "COMPSEARTH", "15000", "Offers on compostable products for Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Promo Spesial Earth Hour", "JAMBUMI2024", "15000", "Penawaran produk kompos untuk Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher13",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "National Education Day Sale", "REUSEDU", "20%", "Discounts on reusable items for National Education Day", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "Diskon Hari Pendidikan ", "PENDIDIKAN2024", "20%", "Diskon barang pakai ulang dalam rangka Hari Pendidikan Nasional", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher14",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "National Health Day Special", "UPCYHEALTH", "30000", "Special deals on upcycled products for National Health Day", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "Diskon Hari Kesehatan Nasional", "KESEHATAN2024", "30000", "Penawaran khusus untuk produk daur ulang dalam rangka Hari Kesehatan Nasional", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher15",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Pancasila Day Savings", "FAIRTPAN", "15%", "Savings on fair trade certified products for Pancasila Day", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Potongan Harga Spesial Hari Pancasila", "PANCASILA2024", "15%", "Penghematan produk bersertifikat perdagangan yang adil untuk Hari Pancasila", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		// End Voucher
 		// Start Challenge log
+		{
+			Name: "CreateTransaction1",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "7af9d694-63bf-42cd-9afc-8b00716a0083",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 1",
+					Status:      "Berhasil",
+					Total:       105000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction2",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "3b7e3cde-a4ff-4be5-a583-f76bcc3fdf77",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 2",
+					Status:      "Berhasil",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction3",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "9f180211-bd78-483b-b824-0125376ba593",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 3",
+					Status:      "Gagal",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction4",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "1c16e3ac-9a15-4203-8ff2-09f448a86228",
+					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Diponegoro No. 321, Bandung",
+					Description: "deskripsi 4",
+					Status:      "Berhasil",
+					Total:       1600000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction5",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "f129e567-fc84-437e-a0fd-2b4b94dd90f9",
+					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Brawijaya No. 654, Malang",
+					Description: "deskripsi 5",
+					Status:      "Berhasil",
+					Total:       20000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction6",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "7671e308-40e3-4c0c-b64a-982d4bb1c7e1",
+					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Thamrin No. 987, Makassar",
+					Description: "deskripsi 6",
+					Status:      "Berhasil",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction7",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "41895902-5859-4f51-8023-5a4473978e08",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 7",
+					Status:      "Berhasil",
+					Total:       17000,
+					Coin:        75,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction8",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "1e166b59-fdd2-4bce-93b6-d81d35723e41",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 8",
+					Status:      "Gagal",
+					Total:       174000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction9",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "489b813b-ecdc-4fd6-90ea-3c692528a344",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 9",
+					Status:      "Berhasil",
+					Total:       900000,
+					Coin:        25,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction10",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "e137483a-3426-4316-801e-4e992a6451c4",
+					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Diponegoro No. 321, Bandung",
+					Description: "deskripsi 10",
+					Status:      "Berhasil",
+					Total:       1500000,
+					Coin:        165,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction11",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "0970df7d-7d7d-4d1c-b435-8536a35efb81",
+					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Brawijaya No. 654, Malang",
+					Description: "deskripsi 11",
+					Status:      "Berhasil",
+					Total:       80000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction12",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "b063bb48-baa7-4ac9-9a1a-db57214dd3fd",
+					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Thamrin No. 987, Makassar",
+					Description: "deskripsi 12",
+					Status:      "Gagal",
+					Total:       245000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction13",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "44c09473-4b70-4849-90a7-8c5db2430e1f",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "83c4db38-d196-49c8-9cb7-b53423e1658f",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 13",
+					Status:      "Berhasil",
+					Total:       24000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction14",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "3cef7e44-efd9-4518-8f11-440f2db92b54",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 14",
+					Status:      "Menunggu Pembayaran",
+					Total:       1405000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction15",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "59a80fc1-c324-4d65-8cf2-fc3e17793412",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 15",
+					Status:      "Berhasil",
+					Total:       955000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
 		// End Challenge
 
 		// Start Challenge Confirmation
