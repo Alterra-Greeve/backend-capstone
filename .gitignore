@@ -1,6 +1,7 @@
 .env
 .env.local
 .env.prod
+.env.dev
 go.sum
 coverage.out
 credentials.json

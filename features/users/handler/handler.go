@@ -139,6 +139,11 @@ func (h *UserHandler) GetUserData() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
+		impactPoint, err := h.s.GetUserImpactPointById(user.ID)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
 		var response UserInfoResponse
 		response.ID = user.ID
 		response.Name = user.Name
@@ -149,7 +154,7 @@ func (h *UserHandler) GetUserData() echo.HandlerFunc {
 		response.Phone = user.Phone
 		response.Coin = user.Coin
 		response.Exp = user.Exp
-		response.ImpactPoint = user.ImpactPoint
+		response.ImpactPoint = impactPoint
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
@@ -174,6 +179,10 @@ func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
+		impactPoint, err := h.s.GetUserImpactPointByUsername(username)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
 		var response UserInfoResponse
 		response.ID = user.ID
 		response.Name = user.Name
@@ -184,7 +193,7 @@ func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
 		response.Phone = user.Phone
 		response.Coin = user.Coin
 		response.Exp = user.Exp
-		response.ImpactPoint = user.ImpactPoint
+		response.ImpactPoint = impactPoint
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}

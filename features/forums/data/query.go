@@ -42,9 +42,6 @@ func (u *ForumData) GetAllByPage(page int) ([]forums.Forum, int, error) {
 	if tx.Error != nil {
 		return nil, 0, constant.ErrGetForum
 	}
-	if tx.RowsAffected == 0 {
-		return nil, 0, constant.ErrForumNotFound
-	}
 	return forum, totalPages, nil
 }
 
@@ -112,9 +109,6 @@ func (u *ForumData) GetForumByUserID(userID string, page int) ([]forums.Forum, i
 	tx := u.DB.Model(&Forum{}).Preload("User").Order("created_at DESC, last_message_at DESC").Offset((page-1)*dataforumPerPage).Limit(dataforumPerPage).Where("user_id = ?", userID).Find(&forums)
 	if tx.Error != nil {
 		return nil, 0, constant.ErrGetProduct
-	}
-	if tx.RowsAffected == 0 {
-		return nil, 0, constant.ErrProductNotFound
 	}
 	return forums, totalPages, nil
 }

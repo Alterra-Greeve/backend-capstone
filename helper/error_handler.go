@@ -71,7 +71,7 @@ func ConvertResponseCode(err error) int {
 	case constant.ErrEmptyResetPassword:
 		return http.StatusBadRequest
 	case constant.ErrInvalidEmail:
-    return http.StatusBadRequest
+		return http.StatusBadRequest
 	// User Admin
 	case constant.ErrUserDataEmpty:
 		return http.StatusNotFound
@@ -115,6 +115,8 @@ func ConvertResponseCode(err error) int {
 		return http.StatusNotFound
 	case constant.ErrForumDataNotFound:
 		return http.StatusNotFound
+	case constant.ErrFieldForumCannotBeEmpty:
+		return http.StatusBadRequest
 
 	// Admin Error
 	case constant.ErrGetDataAdmin:

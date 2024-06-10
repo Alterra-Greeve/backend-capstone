@@ -7,20 +7,19 @@ import (
 )
 
 type User struct {
-	ID          string
-	Name        string
-	Email       string
-	Username    string
-	Password    string
-	Address     string
-	Gender      string
-	Phone       string
-	Coin        int
-	Exp         int
-	AvatarURL   string
-	ImpactPoint int
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID        string
+	Name      string
+	Email     string
+	Username  string
+	Password  string
+	Address   string
+	Gender    string
+	Phone     string
+	Coin      int
+	Exp       int
+	AvatarURL string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type ForgotPassword struct {
@@ -28,15 +27,11 @@ type ForgotPassword struct {
 	Email     string
 	OTP       string
 	ExpiredAt time.Time
-	CreatedAt time.Time
-	UpdatedAt time.Time
 }
 type VerifyOTP struct {
 	Email     string
 	OTP       string
 	ExpiredAt time.Time
-	CreatedAt time.Time
-	UpdatedAt time.Time
 }
 
 type UserLogin struct {
@@ -63,7 +58,6 @@ type UserUpdate struct {
 	Phone     string
 	AvatarURL string
 	Token     string
-	UpdatedAt time.Time
 }
 
 type UpdateUserByAdmin struct {
@@ -107,6 +101,8 @@ type UserServiceInterface interface {
 	Update(UserUpdate) (UserUpdate, error)
 	GetUserData(User) (User, error)
 	GetUserByUsername(username string) (User, error)
+	GetUserImpactPointById(userID string) (int, error)
+	GetUserImpactPointByUsername(username string) (int, error)
 	Delete(User) error
 	ForgotPassword(User) error
 	VerifyOTP(VerifyOTP) error
@@ -126,6 +122,8 @@ type UserDataInterface interface {
 	Login(User) (User, error)
 	Update(UserUpdate) (User, error)
 	Delete(User) error
+	GetUserImpactPointById(userID string) (int, error)
+	GetUserImpactPointByUsername(username string) (int, error)
 	ForgotPassword(ForgotPassword) error
 	VerifyOTP(VerifyOTP) error
 	ResetPassword(UserResetPassword) error

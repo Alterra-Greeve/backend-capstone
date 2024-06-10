@@ -40,6 +40,10 @@ type ChallengeConfirmation struct {
 	Challenge Challenge
 }
 
+type ChallengeConfirmationUpdate struct {
+	ID    string
+	Image []string
+}
 type ChallengeHandlerInterface interface {
 	GetAllForUser() echo.HandlerFunc
 	GetByID() echo.HandlerFunc

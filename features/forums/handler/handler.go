@@ -85,8 +85,7 @@ func (h *ForumHandler) PostForum() echo.HandlerFunc {
 		var forum CreateForumRequest
 		c.Bind(&forum)
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCreateForum.Error(), nil))
 		}
 
 		forumData := forums.Forum{
@@ -122,12 +121,12 @@ func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
 
 		forums, err := h.s.GetForumByID(forumid)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusNotFound, helper.ObjectFormatResponse(false, constant.ErrGetForumByID.Error(), nil))
 		}
 
 		messages, err := h.s.GetMessagesByForumID(forumid)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetMessage.Error()), nil))
 		}
 
 		var messageResponses []MessageResponse
@@ -301,9 +300,14 @@ func (h *ForumHandler) PostMessageForum() echo.HandlerFunc {
 			UserID:  userId,
 			Message: forumMessage.Messages,
 		}
+		_, err = h.s.GetForumByID(forumData.ForumID)
+		if err != nil {
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrGetForumByID.Error(), nil))
+		}
+
 		err = h.s.PostMessageForum(forumData)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCreateMessage.Error(), nil))
 		}
 
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.MessageSuccessCreate, nil))
@@ -331,7 +335,7 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 		messageForumID := c.Param("id")
 		existingMessageForum, err := h.s.GetMessageForumByID(messageForumID)
 		if err != nil {
-			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetForumByID.Error()), nil))
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetMessageByID.Error()), nil))
 		}
 
 		if existingMessageForum.UserID != userId {
@@ -365,7 +369,7 @@ func (h *ForumHandler) UpdateMessageForum() echo.HandlerFunc {
 		messageId := c.Param("id")
 		existingMessage, err := h.s.GetMessageForumByID(messageId)
 		if err != nil {
-			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrForumNotFound.Error()), nil))
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrMessgaeNotFound.Error()), nil))
 		}
 
 		if existingMessage.UserID != userId {
@@ -382,7 +386,7 @@ func (h *ForumHandler) UpdateMessageForum() echo.HandlerFunc {
 			Message: messageForum.Messages,
 		}
 		if err := h.s.UpdateMessageForum(messageResponse); err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrUpdateMessage.Error(), nil))
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.MessageSuccessUpdate, nil))
@@ -413,6 +417,6 @@ func (h *ForumHandler) GetMessageForumByID() echo.HandlerFunc {
 			Message: message.Message,
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, forumsResponse))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.MessageSuccessGetByID, forumsResponse))
 	}
 }
