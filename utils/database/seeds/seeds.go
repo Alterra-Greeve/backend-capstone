@@ -4,6 +4,7 @@ import (
 	challenge "backendgreeve/features/challenges/data"
 	product "backendgreeve/features/product/data"
 	user "backendgreeve/features/users/data"
+	transaction "backendgreeve/features/transaction/data"
 	"backendgreeve/utils/database/seed"
 	"time"
 
@@ -1421,20 +1422,26 @@ func Seeds() []seed.Seed {
 					{
 						ID:        uuid.New().String(),
 						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a5f87eb5-b186-4b3c-bca8-9baf76c74904goodearth-goodearthxashiesh-2020-d1.webp",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/271fe697-b266-404b-8f39-169819a59bc1front-FS01-WH__37153.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/0331be78-a4be-4d67-bb46-2cc18a9acd51fairtrade_white_t_2__30295.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				products.Images = images
@@ -1446,25 +1453,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct39",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-					Name:        "Baterai Isi Ulang",
-					Description: "Baterai AA yang dapat diisi ulang, membantu mengurangi limbah baterai sekali pakai.",
-					Price:       100000,
-					Coin:        25,
+					ID:          "591c7cbe-3820-4ce1-991c-3294169f815b",
+					Name:        "Sabun Berbasis Tumbuhan",
+					Description: "Sabun yang dibuat dari bahan alami, bebas dari bahan kimia sintetis dan pewangi buatan. Lembut di kulit, cocok untuk semua jenis kulit, termasuk kulit sensitif.",
+					Price:       180000,
+					Coin:        35,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2ac41750-85e3-45f8-95fa-46fa9f4a0c06baterai_isi_ulang.jpg",
+						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c41ebb0d-2ebc-49a6-b9ce-44af452dd01363aec880-1385-4edd-950e-763f339eb6ad.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2aa2e341-7c9d-4e71-9ea1-ad8f3b0efae9a5c9b2a6-926e-44c3-8be1-7d2964081a37.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1476,25 +1494,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct40",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-					Name:        "Lampu LED Hemat Energi",
-					Description: "Lampu LED yang hemat energi dan tahan lama, mengurangi konsumsi listrik.",
-					Price:       50000,
-					Coin:        10,
+					ID:          "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+					Name:        "Lilin Kedelai",
+					Description: "Lilin yang bersih terbakar dan berkelanjutan yang terbuat dari lilin kedelai.",
+					Price:       150000,
+					Coin:        28,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/03afaa45-b95b-41bb-aaf0-fd2b5d1e7c02led_light_bulb.jpg",
+						ProductID: "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/aea1114f-c3f9-4ed3-b0a7-1c635cfa875310ae8479-c692-4960-8b8e-8335548f093d.jpg",
 						Position:  1,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1506,30 +1524,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct41",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-					Name:        "Botol Minum Stainless Steel",
-					Description: "Botol minum yang dapat digunakan kembali dan ramah lingkungan, terbuat dari stainless steel berkualitas tinggi.",
-					Price:       75000,
-					Coin:        15,
+					ID:          "bddb97ac-1212-440a-ae73-00c89a1621b2",
+					Name:        "Wadah Persiapan Makanan Kaca",
+					Description: "Wadah penyimpanan makanan yang tahan lama dan dapat digunakan kembali.",
+					Price:       300000,
+					Coin:        45,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/02c6f527-c9db-414f-bc08-5d96210b35dfbottle_stainless_steel.jpg",
+						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/fc50a02b-ace4-4b6e-872b-5a12543520f671oWCoV+sFL._AC_SX679_.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a9e14f84-6978-44ab-82ca-2b2193871b5f8150MJRwgjL._AC_SY879_.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
+						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1541,30 +1565,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct42",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-					Name:        "Tas Belanja Lipat",
-					Description: "Tas belanja yang dapat dilipat dan digunakan kembali, mengurangi penggunaan kantong plastik sekali pakai.",
-					Price:       60000,
-					Coin:        12,
+					ID:          "7a371522-d22e-431b-bf25-149e80809c27",
+					Name:        "Organizer Meja Bambu",
+					Description: "Solusi organisasi meja yang berkelanjutan dan serbaguna.",
+					Price:       350000,
+					Coin:        32,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8c5b6440-79c2-4e58-9fd3-9f6a4a35f4f3foldable_shopping_bag.jpg",
+						ProductID: "7a371522-d22e-431b-bf25-149e80809c27",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/19a98ddb-7c04-4cd2-bfcc-70d0d62ab81e633f74d7ed5b7f6c86198e36-bamboo-desktop-organizer-home-office.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8c5b6440-79c2-4e58-9fd3-9f6a4a35f4f3foldable_shopping_bag_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
+						ProductID:        "7a371522-d22e-431b-bf25-149e80809c27",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1577,31 +1595,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct43",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-					Name:        "Sabun Batang Alami",
-					Description: "Sabun batang yang terbuat dari bahan-bahan alami, bebas dari bahan kimia keras.",
-					Price:       30000,
-					Coin:        10,
+					ID:          "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+					Name:        "Cat Ramah Lingkungan",
+					Description: "Cat tidak beracun, rendah VOC yang terbuat dari bahan berkelanjutan.",
+					Price:       500000,
+					Coin:        50,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/89c3d505-e332-44ad-97fa-46c5d03b60ccnatural_soap_bar.jpg",
+						ProductID: "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/93a90f0a-8e21-4fe7-8f7d-e4f23bb9e7bdeggshell_paint_wb-800x800.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/89c3d505-e332-44ad-97fa-46c5d03b60ccnatural_soap_bar_packaging.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				products.Images = images
@@ -1613,30 +1625,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct44",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-					Name:        "Sikat Gigi Bambu",
-					Description: "Sikat gigi yang terbuat dari bambu yang dapat terurai secara alami, alternatif yang lebih baik dari sikat gigi plastik.",
-					Price:       20000,
-					Coin:        8,
+					ID:          "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
+					Name:        "Kotak Makan Bambu",
+					Description: "Kotak makan yang tahan lama dan dapat terurai yang terbuat dari bambu yang dapat diperbaharui.",
+					Price:       220000,
+					Coin:        35,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/50e0040b-0c4a-4d3b-8325-8490b8b96740bamboo_toothbrush.jpg",
+						ProductID: "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/86ab5c9f-64ff-4768-b9de-d6e402a4783c71ohIptAImL._AC_UF894,1000_QL80_.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/50e0040b-0c4a-4d3b-8325-8490b8b96740bamboo_toothbrush_packaging.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
+						ProductID:        "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1649,30 +1655,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct45",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-					Name:        "Kompos Bin",
-					Description: "Kompos bin yang mudah digunakan untuk mendaur ulang limbah organik di rumah.",
-					Price:       150000,
-					Coin:        30,
+					ID:          "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
+					Name:        "Sapu Plastik Daur Ulang",
+					Description: "Sapu kokoh yang terbuat dari 100% plastik daur ulang untuk pembersihan nol limbah.",
+					Price:       170000,
+					Coin:        25,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/67e9c472-2b85-4a55-b499-3ff46f524f31compost_bin.jpg",
+						ProductID: "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/91856227-4892-408d-8b48-70fcd60f30e6EZAHM37.webp",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/67e9c472-2b85-4a55-b499-3ff46f524f31compost_bin_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
+						ProductID:        "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1685,25 +1685,42 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct46",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-					Name:        "Kantong Sampah Kompos",
-					Description: "Kantong sampah yang dapat terurai secara alami dan cocok untuk kompos.",
-					Price:       50000,
-					Coin:        10,
+					ID:          "868790b7-4439-49c4-b960-d48bde0fed0b",
+					Name:        "Lampu Teras Tenaga Surya",
+					Description: "Manfaatkan energi terbarukan untuk menerangi ruang luar Anda.",
+					Price:       550000,
+					Coin:        60,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/f7e9d9d4-7f68-4741-bdf3-c5f2ef10e3a2compostable_garbage_bags.jpg",
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/680ffddc-0275-469c-b2f8-0f92842dd0fe71VOmyQRn0L.__AC_SY445_SX342_QL70_FMwebp_.webp",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a2e14472-f661-4d22-86e4-67e97120dfc161xuY0H-eIL._AC_SX679_.jpg",
+						Position:  2,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/60f95086-7144-4b12-8798-5055acfefd9b71yejp4eNPL._AC_SX679_.jpg",
+						Position:  3,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1715,36 +1732,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct47",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-					Name:        "Gelas Kopi Bawa Pulang",
-					Description: "Gelas kopi yang dapat digunakan kembali dan ramah lingkungan, cocok untuk kopi bawa pulang.",
-					Price:       75000,
-					Coin:        15,
+					ID:          "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
+					Name:        "Kaus Kaki Katun Organik",
+					Description: "Kaus kaki yang terbuat dari 100% katun organik bersertifikat GOTS, memberikan kenyamanan dan ketahanan sambil tetap ramah lingkungan. Katun organik ditanam tanpa pestisida berbahaya atau pupuk sintetis, meningkatkan ekosistem yang lebih sehat. Kaus kaki ini juga dirancang untuk tahan lama, mengurangi frekuensi penggantian.",
+					Price:       40000,
+					Coin:        30,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/78d75fa0-f104-4d69-aed9-fd60b46ff8a7reusable_coffee_cup.jpg",
+						ProductID: "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b422f557-fb5f-4bbc-a2c5-649f01642310136311-a18e6b57f5fd4fa488aaaa859c1d891a_900x.webp",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/78d75fa0-f104-4d69-aed9-fd60b46ff8a7reusable_coffee_cup_lid.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
+						ProductID:        "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
-					},
-					{
-						ID:               uuid.New().String(),
-						ProductID:        "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 				}
 				products.Images = images
@@ -1756,30 +1762,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct48",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-					Name:        "Penghilang Bau Alami",
-					Description: "Penghilang bau yang terbuat dari bahan-bahan alami, bebas dari bahan kimia berbahaya.",
-					Price:       40000,
-					Coin:        10,
+					ID:          "66bcdf40-2544-4bec-b9be-0283a030e709",
+					Name:        "Sweter Katun Organik",
+					Description: "Pakaian lembut dan berkelanjutan yang terbuat dari katun organik bersertifikat GOTS.",
+					Price:       650000,
+					Coin:        55,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/1c3a77de-718f-4a91-b06e-4a819ef86dbdnatural_deodorizer.jpg",
+						ProductID: "66bcdf40-2544-4bec-b9be-0283a030e709",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/eb0e7a1f-f54f-48a8-8fd3-cc94b629bcf6dg_organic_basics-men-organic_cotton-merch-sweatshirt-grey_melange-packshot-1.webp",
 						Position:  1,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
+						ProductID:        "66bcdf40-2544-4bec-b9be-0283a030e709",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
-					},
-					{
-						ID:               uuid.New().String(),
-						ProductID:        "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1791,25 +1792,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct49",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
-					Name:        "Talenan Kayu",
-					Description: "Talenan yang terbuat dari kayu berkualitas tinggi, alternatif yang ramah lingkungan dari talenan plastik.",
-					Price:       120000,
-					Coin:        20,
+					ID:          "b677eb44-63be-4ffb-8741-8d155b912d21",
+					Name:        "Kepala Shower Hemat Air",
+					Description: "Kurangi konsumsi air dengan kepala shower yang efisien ini.",
+					Price:       400000,
+					Coin:        45,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/4b17a6de-3f37-4e0b-8d6f-3fda5167f849wooden_cutting_board.jpg",
+						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d559f50a-68c0-460a-be9f-7eb909e735e4ZZH_T27573A01_000_02.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/ce1583ab-fbae-4afa-839c-d44732810d7fZZH_T27929A01_000_03.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
+						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1821,31 +1833,30 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct50",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-					Name:        "Tempat Penyimpanan Kain",
-					Description: "Tempat penyimpanan yang terbuat dari kain yang dapat digunakan kembali dan tahan lama.",
-					Price:       85000,
-					Coin:        15,
+					ID:          "7beeb22b-1928-4f72-8e9e-55525d792d89",
+					Name:        "Pot Bunga dari Ban Daur Ulang",
+					Description: "Beri kehidupan baru pada ban bekas dengan pot bunga unik ini.",
+					Price:       200000,
+					Coin:        30,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/9e65e2a2-5d64-4ae1-87d7-8f9e3f3c607bcloth_storage_bin.jpg",
+						ProductID: "7beeb22b-1928-4f72-8e9e-55525d792d89",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/e0ec28d3-9ed0-49e3-a898-ef497eca9c06Classic-Pot-L-Front.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/9e65e2a2-5d64-4ae1-87d7-8f9e3f3c607bcloth_storage_bin_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
+						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1867,7 +1878,7 @@ func Seeds() []seed.Seed {
 					Coin:        50,
 					DateStart:   time.Date(2024, 6, 10, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 6, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/12f1af01-9c5c-4223-a39f-640d4d5c46c2images (7).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1897,7 +1908,7 @@ func Seeds() []seed.Seed {
 					Coin:        100,
 					DateStart:   time.Date(2024, 7, 1, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 7, 8, 8, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/70126aef-8d2c-4776-8556-de3e14b452b8Zero-Waste-Week-1.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1927,7 +1938,7 @@ func Seeds() []seed.Seed {
 					Coin:        25,
 					DateStart:   time.Date(2024, 8, 15, 10, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 8, 22, 10, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/3afd2556-65de-47eb-b461-e84beb9cfe63images (8).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1957,7 +1968,7 @@ func Seeds() []seed.Seed {
 					Coin:        75,
 					DateStart:   time.Date(2024, 9, 5, 7, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 9, 12, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/411ed466-9abf-465a-b351-d84b9d746812images (9).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1992,7 +2003,7 @@ func Seeds() []seed.Seed {
 					Coin:        150,
 					DateStart:   time.Date(2024, 10, 1, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/21dc1d7c-34e0-4057-9cfc-0e2ac83189cbimages.png",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2027,7 +2038,7 @@ func Seeds() []seed.Seed {
 					Coin:        60,
 					DateStart:   time.Date(2024, 11, 10, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 11, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/81d13e21-9952-4afb-a68c-6c968d58250emaxresdefault.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2057,7 +2068,7 @@ func Seeds() []seed.Seed {
 					Coin:        125,
 					DateStart:   time.Date(2024, 12, 01, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 12, 15, 8, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/32f31bf9-96ad-41f9-98a7-ec207425e57aunnamed.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2092,7 +2103,7 @@ func Seeds() []seed.Seed {
 					Coin:        40,
 					DateStart:   time.Date(2024, 12, 20, 10, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 12, 27, 10, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/3b796884-3c8b-4817-9e32-c31c63963495images (10).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2122,7 +2133,7 @@ func Seeds() []seed.Seed {
 					Coin:        55,
 					DateStart:   time.Date(2025, 01, 05, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 01, 12, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/4ee25df4-a2c6-42c1-9b33-a9487d775ad3diy-upcycled-trash-ideas-featured-homebnc-v2.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2152,7 +2163,7 @@ func Seeds() []seed.Seed {
 					Coin:        45,
 					DateStart:   time.Date(2025, 02, 20, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 01, 0, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/dc808bf3-5f9e-4009-9d87-20a6adaca058less-plastic-1195643968.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2182,7 +2193,7 @@ func Seeds() []seed.Seed {
 					Coin:        140,
 					DateStart:   time.Date(2025, 03, 01, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 23, 59, 59, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/64198baa-1814-4c1d-8150-156cfef53226images (11).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2217,7 +2228,7 @@ func Seeds() []seed.Seed {
 					Coin:        20,
 					DateStart:   time.Date(2025, 03, 29, 20, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 29, 21, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/4d8d8751-1ac4-4d28-99b6-9ed9c0f8f766earth-hour-campaign-poster-or-banner-turn-off-your-lights-for-our-planet-60-minutes-free-vector.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2252,7 +2263,7 @@ func Seeds() []seed.Seed {
 					Coin:        65,
 					DateStart:   time.Date(2025, 04, 01, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 04, 30, 59, 59, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/2641676b-7411-44bb-a9c9-01fd78bc3b61images%20(1).png",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2282,7 +2293,7 @@ func Seeds() []seed.Seed {
 					Coin:        35,
 					DateStart:   time.Date(2025, 05, 01, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 05, 05, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/92eb26ef-d764-43ba-9f89-d6766b268bfcimages%20(12).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2317,7 +2328,7 @@ func Seeds() []seed.Seed {
 					Coin:        50,
 					DateStart:   time.Date(2025, 06, 05, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 06, 06, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/399b5b8a-98a6-47f0-acb6-d314882d8b625eeef3334ed2b.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2632,95 +2643,335 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateVoucher1",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Christmas Sale", "SUSTXMAS", "20000", "Special discounts on sustainable products", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Promo Natal", "NATAL2024", "20000", "Diskon khusus untuk produk ramah lingkungan", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher2",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Lebaran Bundle", "ECOLEBARAN", "15%", "Bundle deals on eco-friendly items for Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Promo Idul Fitri", "PAKETLEBARAN", "15%", "Paket penawaran barang-barang ramah lingkungan untuk Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher3",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Independence Day Sale", "RECYID", "15000", "Discounts on recyclable products for 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Promo Hari Kemerdekaan Indonesia", "MERDEKA2024", "15000", "Diskon produk daur ulang untuk 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher4",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "New Year Offer", "RENEWNY", "30%", "Special offers on renewable resources for New Year", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "Harga Spesial Tahun Baru", "TAHUNBARU2024", "30%", "Penawaran khusus pada sumber daya terbarukan untuk Tahun Baru", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher5",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Earth Day Deals", "BIODEED", "10000", "Discounts on biodegradable goods for Earth Day", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Promo Hari Bumi", "HARIBUMI2024", "10000", "Diskon barang biodegradable untuk Hari Bumi", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher6",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Halloween Sale", "ENERHALLOW", "25%", "Savings on energy-efficient products for Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Diskon Halloween", "HALLOWEEN2024", "25%", "Penghematan produk hemat energi untuk Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher7",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Kartini Day Discount", "LOWCKARTINI", "30000", "Discounts on low carbon footprint items for Kartini Day", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Potongan Harga Spesial Hari Kartini", "KARTINI2024", "30000", "Diskon item rendah karbon untuk Hari Kartini", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher8",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Eid al-Adha Special", "WATEID", "20%", "Special offers for water-saving products for Eid al-Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Promo Idul Adha", "IDULADHA2024", "20%", "Penawaran spesial produk hemat air untuk Idul Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher9",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "National Batik Day", "ZEROBATIK", "35%", "Big discounts for zero waste products for National Batik Day", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "Batik Nasional", "BATIK2024", "35%", "Diskon besar produk zero waste di Hari Batik Nasional", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher10",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Lunar New Year Delights", "ORGLUNAR", "25%", "Discounts on organic and natural products for Lunar New Year", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Tahun Baru Imlek", "IMLEK2024", "25%", "Diskon produk organik dan alami untuk Tahun Baru Imlek", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher11",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Valentine's Day Sale", "NONTOXVAL", "12000", "Savings on non-toxic household items for Valentine's Day", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Promo Hari Kasih Sayang", "VALENTINE2024", "12000", "Potongan harga untuk Menghemat barang-barang rumah tangga tidak beracun di Hari Valentine", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher12",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Earth Hour Offers", "COMPSEARTH", "15000", "Offers on compostable products for Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Promo Spesial Earth Hour", "JAMBUMI2024", "15000", "Penawaran produk kompos untuk Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher13",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "National Education Day Sale", "REUSEDU", "20%", "Discounts on reusable items for National Education Day", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "Diskon Hari Pendidikan ", "PENDIDIKAN2024", "20%", "Diskon barang pakai ulang dalam rangka Hari Pendidikan Nasional", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher14",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "National Health Day Special", "UPCYHEALTH", "30000", "Special deals on upcycled products for National Health Day", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "Diskon Hari Kesehatan Nasional", "KESEHATAN2024", "30000", "Penawaran khusus untuk produk daur ulang dalam rangka Hari Kesehatan Nasional", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		{
 			Name: "CreateVoucher15",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Pancasila Day Savings", "FAIRTPAN", "15%", "Savings on fair trade certified products for Pancasila Day", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
+				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Potongan Harga Spesial Hari Pancasila", "PANCASILA2024", "15%", "Penghematan produk bersertifikat perdagangan yang adil untuk Hari Pancasila", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
 			},
 		},
 		// End Voucher
 		// Start Challenge log
+		{
+			Name: "CreateTransaction1",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "7af9d694-63bf-42cd-9afc-8b00716a0083",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 1",
+					Status:      "Berhasil",
+					Total:       105000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction2",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "3b7e3cde-a4ff-4be5-a583-f76bcc3fdf77",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "2e419999-cb91-4e36-a363-289976b7e83b",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 2",
+					Status:      "Berhasil",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction3",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "9f180211-bd78-483b-b824-0125376ba593",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 3",
+					Status:      "Gagal",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction4",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "1c16e3ac-9a15-4203-8ff2-09f448a86228",
+					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Diponegoro No. 321, Bandung",
+					Description: "deskripsi 4",
+					Status:      "Berhasil",
+					Total:       1600000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction5",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "f129e567-fc84-437e-a0fd-2b4b94dd90f9",
+					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Brawijaya No. 654, Malang",
+					Description: "deskripsi 5",
+					Status:      "Berhasil",
+					Total:       20000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction6",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "7671e308-40e3-4c0c-b64a-982d4bb1c7e1",
+					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Thamrin No. 987, Makassar",
+					Description: "deskripsi 6",
+					Status:      "Berhasil",
+					Total:       70000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction7",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "41895902-5859-4f51-8023-5a4473978e08",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "7e9c42d0-707c-4f88-b098-ae47888104fa",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 7",
+					Status:      "Berhasil",
+					Total:       17000,
+					Coin:        75,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction8",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "1e166b59-fdd2-4bce-93b6-d81d35723e41",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 8",
+					Status:      "Gagal",
+					Total:       174000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction9",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "489b813b-ecdc-4fd6-90ea-3c692528a344",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "880d707a-744b-41b9-991f-65c306074c03",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 9",
+					Status:      "Berhasil",
+					Total:       900000,
+					Coin:        25,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction10",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "e137483a-3426-4316-801e-4e992a6451c4",
+					UserID:      "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Diponegoro No. 321, Bandung",
+					Description: "deskripsi 10",
+					Status:      "Berhasil",
+					Total:       1500000,
+					Coin:        165,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction11",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "0970df7d-7d7d-4d1c-b435-8536a35efb81",
+					UserID:      "8f25169f-5084-45c3-a99f-40daf59485d4",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Brawijaya No. 654, Malang",
+					Description: "deskripsi 11",
+					Status:      "Berhasil",
+					Total:       80000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction12",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "b063bb48-baa7-4ac9-9a1a-db57214dd3fd",
+					UserID:      "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					VoucherID:   "fb2643f7-796b-4a20-a3a7-bd009582215e",
+					Address:     "Jl. Thamrin No. 987, Makassar",
+					Description: "deskripsi 12",
+					Status:      "Gagal",
+					Total:       245000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction13",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "44c09473-4b70-4849-90a7-8c5db2430e1f",
+					UserID:      "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					VoucherID:   "83c4db38-d196-49c8-9cb7-b53423e1658f",
+					Address:     "Jl. Sudirman No. 123, Jakarta",
+					Description: "deskripsi 13",
+					Status:      "Berhasil",
+					Total:       24000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction14",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "3cef7e44-efd9-4518-8f11-440f2db92b54",
+					UserID:      "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:     "Jl. Gajah Mada No. 456, Surabaya",
+					Description: "deskripsi 14",
+					Status:      "Menunggu Pembayaran",
+					Total:       1405000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
+		{
+			Name: "CreateTransaction15",
+			Run: func(db *gorm.DB) error {
+				transaction := transaction.Transaction{
+					ID:          "59a80fc1-c324-4d65-8cf2-fc3e17793412",
+					UserID:      "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					VoucherID:   "84c65b94-163f-4880-badd-ad10ff8bfead",
+					Address:     "Jl. Pahlawan No. 789, Yogyakarta",
+					Description: "deskripsi 15",
+					Status:      "Berhasil",
+					Total:       955000,
+					Coin:        0,
+				}
+				return CreateTransaction(db, transaction)
+			},
+		},
 		// End Challenge
 
 		// Start Challenge Confirmation

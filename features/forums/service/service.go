@@ -32,14 +32,14 @@ func (s *ForumService) GetForumByID(ID string) (forums.Forum, error) {
 
 func (s *ForumService) PostForum(forum forums.Forum) error {
 	if forum.Title == "" || forum.Description == "" {
-		return constant.ErrCreateMessage
+		return constant.ErrFieldForumCannotBeEmpty
 	}
 	return s.d.PostForum(forum)
 }
 
 func (s *ForumService) UpdateForum(forum forums.EditForum) error {
 	if forum.ID == "" {
-		return constant.ErrEditForum
+		return constant.ErrGetForumByID
 	}
 	if forum.Title == "" && forum.Description == "" {
 		return constant.ErrEditForum
@@ -52,8 +52,11 @@ func (s *ForumService) DeleteForum(forumID string) error {
 }
 
 func (s *ForumService) PostMessageForum(messageForum forums.MessageForum) error {
-	if messageForum.ForumID == "" || messageForum.Message == "" {
-		return constant.ErrCreateMessage
+	if messageForum.ForumID == "" {
+		return constant.ErrGetForumByID
+	}
+	if messageForum.Message == "" {
+		return constant.ErrFieldForumMessageCannotBeEmpty
 	}
 	return s.d.PostMessageForum(messageForum)
 }

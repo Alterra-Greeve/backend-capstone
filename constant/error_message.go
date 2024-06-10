@@ -50,6 +50,8 @@ var ErrGetForumByID = errors.New("Failed to get forum by ID")
 var ErrEditForum = errors.New("Field Description Cannot be Empty")
 var ErrForumNotFound = errors.New("error, id Forum Not Found")
 var ErrForumDataNotFound = errors.New("Forum data not found")
+var ErrFieldForumCannotBeEmpty = errors.New("Field title and description cannot be empty")
+var ErrFieldForumMessageCannotBeEmpty = errors.New("Field message cannot be empty")
 
 var ErrGetMessage = errors.New("Failed to get Message")
 var ErrGetMessageByID = errors.New("Failed to get Message by ID")
