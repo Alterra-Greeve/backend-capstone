@@ -1421,20 +1421,26 @@ func Seeds() []seed.Seed {
 					{
 						ID:        uuid.New().String(),
 						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a5f87eb5-b186-4b3c-bca8-9baf76c74904goodearth-goodearthxashiesh-2020-d1.webp",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/271fe697-b266-404b-8f39-169819a59bc1front-FS01-WH__37153.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/0331be78-a4be-4d67-bb46-2cc18a9acd51fairtrade_white_t_2__30295.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
-						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				products.Images = images
@@ -1446,25 +1452,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct39",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-					Name:        "Baterai Isi Ulang",
-					Description: "Baterai AA yang dapat diisi ulang, membantu mengurangi limbah baterai sekali pakai.",
-					Price:       100000,
-					Coin:        25,
+					ID:          "591c7cbe-3820-4ce1-991c-3294169f815b",
+					Name:        "Sabun Berbasis Tumbuhan",
+					Description: "Sabun yang dibuat dari bahan alami, bebas dari bahan kimia sintetis dan pewangi buatan. Lembut di kulit, cocok untuk semua jenis kulit, termasuk kulit sensitif.",
+					Price:       180000,
+					Coin:        35,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2ac41750-85e3-45f8-95fa-46fa9f4a0c06baterai_isi_ulang.jpg",
+						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c41ebb0d-2ebc-49a6-b9ce-44af452dd01363aec880-1385-4edd-950e-763f339eb6ad.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2aa2e341-7c9d-4e71-9ea1-ad8f3b0efae9a5c9b2a6-926e-44c3-8be1-7d2964081a37.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "883b2f74-5f4a-4e75-8e8d-07d6df2f9bde",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1476,25 +1493,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct40",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-					Name:        "Lampu LED Hemat Energi",
-					Description: "Lampu LED yang hemat energi dan tahan lama, mengurangi konsumsi listrik.",
-					Price:       50000,
-					Coin:        10,
+					ID:          "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+					Name:        "Lilin Kedelai",
+					Description: "Lilin yang bersih terbakar dan berkelanjutan yang terbuat dari lilin kedelai.",
+					Price:       150000,
+					Coin:        28,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/03afaa45-b95b-41bb-aaf0-fd2b5d1e7c02led_light_bulb.jpg",
+						ProductID: "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/aea1114f-c3f9-4ed3-b0a7-1c635cfa875310ae8479-c692-4960-8b8e-8335548f093d.jpg",
 						Position:  1,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "7af1e7fa-55b3-4711-b8ed-e91d9c0bb9de",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "aad3789d-706f-417a-ad86-2d8762d9ce3a",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1506,30 +1523,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct41",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-					Name:        "Botol Minum Stainless Steel",
-					Description: "Botol minum yang dapat digunakan kembali dan ramah lingkungan, terbuat dari stainless steel berkualitas tinggi.",
-					Price:       75000,
-					Coin:        15,
+					ID:          "bddb97ac-1212-440a-ae73-00c89a1621b2",
+					Name:        "Wadah Persiapan Makanan Kaca",
+					Description: "Wadah penyimpanan makanan yang tahan lama dan dapat digunakan kembali.",
+					Price:       300000,
+					Coin:        45,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/02c6f527-c9db-414f-bc08-5d96210b35dfbottle_stainless_steel.jpg",
+						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/fc50a02b-ace4-4b6e-872b-5a12543520f671oWCoV+sFL._AC_SX679_.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a9e14f84-6978-44ab-82ca-2b2193871b5f8150MJRwgjL._AC_SY879_.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
+						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "15c9a672-1c1d-41c4-9e65-5c0d2d92b722",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1541,30 +1564,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct42",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-					Name:        "Tas Belanja Lipat",
-					Description: "Tas belanja yang dapat dilipat dan digunakan kembali, mengurangi penggunaan kantong plastik sekali pakai.",
-					Price:       60000,
-					Coin:        12,
+					ID:          "7a371522-d22e-431b-bf25-149e80809c27",
+					Name:        "Organizer Meja Bambu",
+					Description: "Solusi organisasi meja yang berkelanjutan dan serbaguna.",
+					Price:       350000,
+					Coin:        32,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8c5b6440-79c2-4e58-9fd3-9f6a4a35f4f3foldable_shopping_bag.jpg",
+						ProductID: "7a371522-d22e-431b-bf25-149e80809c27",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/19a98ddb-7c04-4cd2-bfcc-70d0d62ab81e633f74d7ed5b7f6c86198e36-bamboo-desktop-organizer-home-office.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8c5b6440-79c2-4e58-9fd3-9f6a4a35f4f3foldable_shopping_bag_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "6e5a4e94-30f3-4a1e-87d1-0dace147e1bb",
+						ProductID:        "7a371522-d22e-431b-bf25-149e80809c27",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1577,31 +1594,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct43",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-					Name:        "Sabun Batang Alami",
-					Description: "Sabun batang yang terbuat dari bahan-bahan alami, bebas dari bahan kimia keras.",
-					Price:       30000,
-					Coin:        10,
+					ID:          "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+					Name:        "Cat Ramah Lingkungan",
+					Description: "Cat tidak beracun, rendah VOC yang terbuat dari bahan berkelanjutan.",
+					Price:       500000,
+					Coin:        50,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/89c3d505-e332-44ad-97fa-46c5d03b60ccnatural_soap_bar.jpg",
+						ProductID: "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/93a90f0a-8e21-4fe7-8f7d-e4f23bb9e7bdeggshell_paint_wb-800x800.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/89c3d505-e332-44ad-97fa-46c5d03b60ccnatural_soap_bar_packaging.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "8b51210c-c7a8-4e74-88f6-c59ed50333a4",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+						ProductID:        "627efc9c-a3bf-4850-b4fa-0eac1768d042",
+						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
 				products.Images = images
@@ -1613,30 +1624,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct44",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-					Name:        "Sikat Gigi Bambu",
-					Description: "Sikat gigi yang terbuat dari bambu yang dapat terurai secara alami, alternatif yang lebih baik dari sikat gigi plastik.",
-					Price:       20000,
-					Coin:        8,
+					ID:          "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
+					Name:        "Kotak Makan Bambu",
+					Description: "Kotak makan yang tahan lama dan dapat terurai yang terbuat dari bambu yang dapat diperbaharui.",
+					Price:       220000,
+					Coin:        35,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/50e0040b-0c4a-4d3b-8325-8490b8b96740bamboo_toothbrush.jpg",
+						ProductID: "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/86ab5c9f-64ff-4768-b9de-d6e402a4783c71ohIptAImL._AC_UF894,1000_QL80_.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/50e0040b-0c4a-4d3b-8325-8490b8b96740bamboo_toothbrush_packaging.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "27a731c4-e539-4a13-8b7f-6cf1a7c5d6d5",
+						ProductID:        "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1649,30 +1654,24 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct45",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-					Name:        "Kompos Bin",
-					Description: "Kompos bin yang mudah digunakan untuk mendaur ulang limbah organik di rumah.",
-					Price:       150000,
-					Coin:        30,
+					ID:          "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
+					Name:        "Sapu Plastik Daur Ulang",
+					Description: "Sapu kokoh yang terbuat dari 100% plastik daur ulang untuk pembersihan nol limbah.",
+					Price:       170000,
+					Coin:        25,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/67e9c472-2b85-4a55-b499-3ff46f524f31compost_bin.jpg",
+						ProductID: "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/91856227-4892-408d-8b48-70fcd60f30e6EZAHM37.webp",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/67e9c472-2b85-4a55-b499-3ff46f524f31compost_bin_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "ab6d0e7b-8c08-498e-8d91-39c530bb6c62",
+						ProductID:        "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 				}
@@ -1685,25 +1684,42 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct46",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-					Name:        "Kantong Sampah Kompos",
-					Description: "Kantong sampah yang dapat terurai secara alami dan cocok untuk kompos.",
-					Price:       50000,
-					Coin:        10,
+					ID:          "868790b7-4439-49c4-b960-d48bde0fed0b",
+					Name:        "Lampu Teras Tenaga Surya",
+					Description: "Manfaatkan energi terbarukan untuk menerangi ruang luar Anda.",
+					Price:       550000,
+					Coin:        60,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/f7e9d9d4-7f68-4741-bdf3-c5f2ef10e3a2compostable_garbage_bags.jpg",
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/680ffddc-0275-469c-b2f8-0f92842dd0fe71VOmyQRn0L.__AC_SY445_SX342_QL70_FMwebp_.webp",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a2e14472-f661-4d22-86e4-67e97120dfc161xuY0H-eIL._AC_SX679_.jpg",
+						Position:  2,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/60f95086-7144-4b12-8798-5055acfefd9b71yejp4eNPL._AC_SX679_.jpg",
+						Position:  3,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "1e570071-cfe2-46b1-a78b-e02b9ae35c0b",
-						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1715,36 +1731,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct47",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-					Name:        "Gelas Kopi Bawa Pulang",
-					Description: "Gelas kopi yang dapat digunakan kembali dan ramah lingkungan, cocok untuk kopi bawa pulang.",
-					Price:       75000,
-					Coin:        15,
+					ID:          "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
+					Name:        "Kaus Kaki Katun Organik",
+					Description: "Kaus kaki yang terbuat dari 100% katun organik bersertifikat GOTS, memberikan kenyamanan dan ketahanan sambil tetap ramah lingkungan. Katun organik ditanam tanpa pestisida berbahaya atau pupuk sintetis, meningkatkan ekosistem yang lebih sehat. Kaus kaki ini juga dirancang untuk tahan lama, mengurangi frekuensi penggantian.",
+					Price:       40000,
+					Coin:        30,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/78d75fa0-f104-4d69-aed9-fd60b46ff8a7reusable_coffee_cup.jpg",
+						ProductID: "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b422f557-fb5f-4bbc-a2c5-649f01642310136311-a18e6b57f5fd4fa488aaaa859c1d891a_900x.webp",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/78d75fa0-f104-4d69-aed9-fd60b46ff8a7reusable_coffee_cup_lid.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
+						ProductID:        "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
-					},
-					{
-						ID:               uuid.New().String(),
-						ProductID:        "4e0740c7-cb0e-43a3-aea6-66bdf5f9e57e",
-						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 				}
 				products.Images = images
@@ -1756,30 +1761,25 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct48",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-					Name:        "Penghilang Bau Alami",
-					Description: "Penghilang bau yang terbuat dari bahan-bahan alami, bebas dari bahan kimia berbahaya.",
-					Price:       40000,
-					Coin:        10,
+					ID:          "66bcdf40-2544-4bec-b9be-0283a030e709",
+					Name:        "Sweter Katun Organik",
+					Description: "Pakaian lembut dan berkelanjutan yang terbuat dari katun organik bersertifikat GOTS.",
+					Price:       650000,
+					Coin:        55,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/1c3a77de-718f-4a91-b06e-4a819ef86dbdnatural_deodorizer.jpg",
+						ProductID: "66bcdf40-2544-4bec-b9be-0283a030e709",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/eb0e7a1f-f54f-48a8-8fd3-cc94b629bcf6dg_organic_basics-men-organic_cotton-merch-sweatshirt-grey_melange-packshot-1.webp",
 						Position:  1,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
+						ProductID:        "66bcdf40-2544-4bec-b9be-0283a030e709",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
-					},
-					{
-						ID:               uuid.New().String(),
-						ProductID:        "ec7f68b0-f109-4cb3-8a68-5f7f1b3c593a",
-						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1791,25 +1791,36 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct49",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
-					Name:        "Talenan Kayu",
-					Description: "Talenan yang terbuat dari kayu berkualitas tinggi, alternatif yang ramah lingkungan dari talenan plastik.",
-					Price:       120000,
-					Coin:        20,
+					ID:          "b677eb44-63be-4ffb-8741-8d155b912d21",
+					Name:        "Kepala Shower Hemat Air",
+					Description: "Kurangi konsumsi air dengan kepala shower yang efisien ini.",
+					Price:       400000,
+					Coin:        45,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/4b17a6de-3f37-4e0b-8d6f-3fda5167f849wooden_cutting_board.jpg",
+						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d559f50a-68c0-460a-be9f-7eb909e735e4ZZH_T27573A01_000_02.jpg",
 						Position:  1,
+					},
+					{
+						ID:        uuid.New().String(),
+						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/ce1583ab-fbae-4afa-839c-d44732810d7fZZH_T27929A01_000_03.jpg",
+						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "f3d5b5d5-7d3f-48b4-9283-4741aef6a8a8",
+						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
@@ -1821,31 +1832,30 @@ func Seeds() []seed.Seed {
 			Name: "CreateProduct50",
 			Run: func(db *gorm.DB) error {
 				products := product.Product{
-					ID:          "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-					Name:        "Tempat Penyimpanan Kain",
-					Description: "Tempat penyimpanan yang terbuat dari kain yang dapat digunakan kembali dan tahan lama.",
-					Price:       85000,
-					Coin:        15,
+					ID:          "7beeb22b-1928-4f72-8e9e-55525d792d89",
+					Name:        "Pot Bunga dari Ban Daur Ulang",
+					Description: "Beri kehidupan baru pada ban bekas dengan pot bunga unik ini.",
+					Price:       200000,
+					Coin:        30,
 				}
 				images := []product.ProductImage{
 					{
 						ID:        uuid.New().String(),
-						ProductID: "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/9e65e2a2-5d64-4ae1-87d7-8f9e3f3c607bcloth_storage_bin.jpg",
+						ProductID: "7beeb22b-1928-4f72-8e9e-55525d792d89",
+						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/e0ec28d3-9ed0-49e3-a898-ef497eca9c06Classic-Pot-L-Front.jpg",
 						Position:  1,
-					},
-					{
-						ID:        uuid.New().String(),
-						ProductID: "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
-						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/9e65e2a2-5d64-4ae1-87d7-8f9e3f3c607bcloth_storage_bin_open.jpg",
-						Position:  2,
 					},
 				}
 				categories := []product.ProductImpactCategory{
 					{
 						ID:               uuid.New().String(),
-						ProductID:        "aedc1ef4-b4aa-45a4-b1e8-345ca7e55f0e",
+						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
+					},
+					{
+						ID:               uuid.New().String(),
+						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
+						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
 					},
 				}
 				products.Images = images
