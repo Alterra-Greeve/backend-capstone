@@ -3,25 +3,23 @@ package data
 import (
 	product "backendgreeve/features/product/data"
 	user "backendgreeve/features/users/data"
-	voucher "backendgreeve/features/voucher/data"
 
 	"gorm.io/gorm"
 )
 
 type Transaction struct {
 	*gorm.Model
-	ID            string          `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	VoucherID     string          `gorm:"type:varchar(50);not null;column:voucher_id"`
-	UserID        string          `gorm:"type:varchar(50);not null;column:user_id"`
-	Address       string          `gorm:"type:varchar(255);not null;column:address"`
-	Description   string          `gorm:"type:text;column:description"`
-	Total         float64         `gorm:"type:decimal(10,2);not null;column:total"`
-	Status        string          `gorm:"type:varchar(50);not null;column:status"`
-	PaymentMethod string          `gorm:"type:varchar(50);column:payment_method"`
-	SnapURL       string          `gorm:"type:varchar(255);not null;column:snap_url"`
-	Coin          int             `gorm:"type:int;column:coin"`
-	Voucher       voucher.Voucher `gorm:"foreignKey:VoucherID;references:ID"`
-	User          user.User       `gorm:"foreignKey:UserID;references:ID"`
+	ID               string            `gorm:"primary_key;type:varchar(50);not null;column:id"`
+	VoucherID        string            `gorm:"type:varchar(50);column:voucher_id"`
+	UserID           string            `gorm:"type:varchar(50);not null;column:user_id"`
+	Address          string            `gorm:"type:varchar(255);not null;column:address"`
+	Total            float64           `gorm:"type:decimal(10,2);not null;column:total"`
+	Status           string            `gorm:"type:varchar(50);not null;column:status"`
+	PaymentMethod    string            `gorm:"type:varchar(50);column:payment_method"`
+	SnapURL          string            `gorm:"type:varchar(255);not null;column:snap_url"`
+	Coin             int               `gorm:"type:int;column:coin"`
+	User             user.User         `gorm:"foreignKey:UserID;references:ID"`
+	TransactionItems []TransactionItem `gorm:"foreignKey:TransactionID;references:ID"`
 }
 
 type TransactionItem struct {

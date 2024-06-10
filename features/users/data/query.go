@@ -26,7 +26,6 @@ func (u *UserData) Register(newUser users.User) error {
 	if isEmailExist {
 		return constant.ErrEmailAlreadyExist
 	}
-
 	isUsernameExist := u.IsUsernameExist(newUser.Username)
 	if isUsernameExist {
 		return constant.ErrUsernameAlreadyExist
@@ -48,7 +47,7 @@ func (u *UserData) Register(newUser users.User) error {
 }
 
 func (u *UserData) Login(user users.User) (users.User, error) {
-	var UserLoginData users.User
+	var UserLoginData User
 	result := u.DB.Where("email = ?", user.Email).First(&UserLoginData)
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
@@ -60,8 +59,13 @@ func (u *UserData) Login(user users.User) (users.User, error) {
 	if !helper.CheckPasswordHash(user.Password, UserLoginData.Password) {
 		return users.User{}, constant.ErrLoginIncorrectPassword
 	}
-
-	return UserLoginData, nil
+	var userLogin users.User
+	userLogin.ID = UserLoginData.ID
+	userLogin.Name = UserLoginData.Name
+	userLogin.Email = UserLoginData.Email
+	userLogin.Username = UserLoginData.Username
+	userLogin.Address = UserLoginData.Address
+	return userLogin, nil
 }
 
 func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
@@ -79,7 +83,6 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		}
 	}
 
-	user.UpdatedAt = time.Now()
 	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(&user).Error; err != nil {
 		return users.User{}, constant.ErrUpdateUser
 	}
@@ -104,14 +107,19 @@ func (u *UserData) Delete(user users.User) error {
 }
 
 func (u *UserData) ForgotPassword(OTP users.ForgotPassword) error {
-	if err := u.DB.Table("users").Where("email = ?", OTP.Email).First(&OTP).Error; err != nil {
+	if err := u.DB.Model(&User{}).Where("email = ?", OTP.Email).First(&OTP).Error; err != nil {
 		return constant.ErrEmailNotFound
 	}
+
 	OTP.ID = uuid.New().String()
 	OTP.ExpiredAt = time.Now().Add(time.Minute * 5)
-	OTP.UpdatedAt = time.Now()
-
-	if err := u.DB.Table("verify_otp").Create(&OTP).Error; err != nil {
+	verifyOTP := VerifyOTP{
+		ID:        OTP.ID,
+		OTP:       OTP.OTP,
+		Email:     OTP.Email,
+		ExpiredAt: OTP.ExpiredAt,
+	}
+	if err := u.DB.Create(&verifyOTP).Error; err != nil {
 		return constant.ErrForgotPassword
 	}
 
@@ -120,12 +128,12 @@ func (u *UserData) ForgotPassword(OTP users.ForgotPassword) error {
 
 func (u *UserData) VerifyOTP(verifyOTP users.VerifyOTP) error {
 	var count int64
-	u.DB.Table("verify_otp").Where("email = ? AND otp = ?", verifyOTP.Email, verifyOTP.OTP).Count(&count)
+	u.DB.Model(&VerifyOTP{}).Where("email = ? AND otp = ?", verifyOTP.Email, verifyOTP.OTP).Count(&count)
 	if count == 0 {
 		return constant.ErrOTPNotValid
 	}
 
-	if err := u.DB.Table("verify_otp").Where("email = ? AND otp = ? AND expired_at > ?", verifyOTP.Email, verifyOTP.OTP, time.Now()).First(&verifyOTP).Error; err != nil {
+	if err := u.DB.Model(&VerifyOTP{}).Where("email = ? AND otp = ? AND expired_at > ?", verifyOTP.Email, verifyOTP.OTP, time.Now()).First(&verifyOTP).Error; err != nil {
 		return constant.ErrOTPExpired
 	}
 
@@ -154,7 +162,7 @@ func (u *UserData) ResetPassword(userResetPassword users.UserResetPassword) erro
 }
 
 func (u *UserData) IsUsernameExist(username string) bool {
-	var user users.User
+	var user User
 	if err := u.DB.Where("username = ?", username).First(&user).Error; err != nil {
 		return false
 	}
@@ -162,7 +170,7 @@ func (u *UserData) IsUsernameExist(username string) bool {
 }
 
 func (u *UserData) IsEmailExist(email string) bool {
-	var user users.User
+	var user User
 	if err := u.DB.Where("email = ?", email).First(&user).Error; err != nil {
 		return false
 	}
@@ -179,22 +187,28 @@ func (u *UserData) GetUserByID(id string) (users.User, error) {
 	if err := u.DB.Where("id = ?", id).First(&user).Error; err != nil {
 		return users.User{}, constant.UserNotFound
 	}
-	impactPoint, err := u.GetUserImpactPoint(user.ID)
-	if err != nil {
-		return users.User{}, err
-	}
-	user.ImpactPoint = impactPoint
 	return user, nil
 }
 
 func (u *UserData) GetUserByUsername(username string) (users.User, error) {
-	var user users.User
+	var user User
 
 	if err := u.DB.Where("username = ?", username).First(&user).Error; err != nil {
 		return users.User{}, constant.UserNotFound
 	}
-
-	return user, nil
+	users := users.User{
+		ID:        user.ID,
+		Name:      user.Name,
+		Email:     user.Email,
+		Username:  user.Username,
+		Address:   user.Address,
+		Gender:    user.Gender,
+		Coin:      user.Coin,
+		Exp:       user.Exp,
+		Phone:     user.Phone,
+		AvatarURL: user.AvatarURL,
+	}
+	return users, nil
 }
 
 func (u *UserData) GetLeaderboard() ([]users.Leaderboard, error) {
@@ -222,7 +236,7 @@ func (u *UserData) GetAllByPageForAdmin(page int) ([]users.User, int, error) {
 	var forum []users.User
 
 	var total int64
-	count := u.DB.Model(&users.User{}).Where("deleted_at IS NULL").Count(&total)
+	count := u.DB.Model(&User{}).Count(&total)
 	if count.Error != nil {
 		return nil, 0, constant.ErrUserDataEmpty
 	}
@@ -242,7 +256,7 @@ func (u *UserData) GetAllByPageForAdmin(page int) ([]users.User, int, error) {
 
 func (u *UserData) GetUserByIDForAdmin(id string) (users.User, error) {
 	var users users.User
-	res := u.DB.Model(&User{}).Where(" id = ? AND deleted_at IS NULL", id).First(&users)
+	res := u.DB.Model(&User{}).Where("id = ? AND deleted_at IS NULL", id).First(&users)
 	if res.Error != nil {
 		return users, res.Error
 	}
@@ -276,7 +290,7 @@ func (u *UserData) DeleteUserForAdmin(userID string) error {
 	return res.Commit().Error
 }
 
-func (u *UserData) GetUserImpactPoint(userId string) (int, error) {
+func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 	// Hitung total impact point dari pembelian produk
 	var totalProductImpactPoint int
 	u.DB.Table("transactions").
@@ -305,3 +319,35 @@ func (u *UserData) GetUserImpactPoint(userId string) (int, error) {
 	}
 	return impactPoint, nil
 }
+
+func (u *UserData) GetUserImpactPointByUsername(username string) (int, error) {
+	// Hitung total impact point dari pembelian produk
+	var totalProductImpactPoint int
+	u.DB.Table("transactions").
+		Joins("JOIN transaction_items ON transactions.id = transaction_items.transaction_id").
+		Joins("JOIN product ON transaction_items.product_id = product.id").
+		Joins("JOIN product_impact_categories ON product.id = product_impact_categories.product_id").
+		Joins("JOIN impact_categories ON product_impact_categories.impact_categories_id = impact_categories.id").
+		Where("transactions.user_id = (SELECT id FROM users WHERE username = ?)", username).
+		Where("transaction_items.status = 'capture' OR transaction_items.status = 'accept' OR transaction_items.status = 'settlement'").
+		Select("SUM(impact_categories.impact_point)").
+		Scan(&totalProductImpactPoint)
+
+	// Hitung total impact point dari challenge yang diikuti
+	var totalChallengeImpactPoint int
+	u.DB.Table("challenges").
+		Joins("JOIN challenge_confirmation ON challenges.id = challenge_confirmation.challenge_id").
+		Joins("JOIN challenge_impact_categories ON challenges.id = challenge_impact_categories.challenge_id").
+		Joins("JOIN impact_categories ON challenge_impact_categories.impact_category_id = impact_categories.id").
+		Where("challenge_confirmation.status = 'Diterima' AND challenge_confirmation.user_id = (SELECT id FROM users WHERE username = ?)", username).
+		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalImpactPoints").
+		Scan(&totalChallengeImpactPoint)
+
+	impactPoint := totalProductImpactPoint + totalChallengeImpactPoint
+	if impactPoint == 0 {
+		return 0, nil
+	}
+	return impactPoint, nil
+}
+
+

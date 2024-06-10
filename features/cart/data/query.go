@@ -3,8 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/cart"
-	"backendgreeve/features/impactcategory"
-	"backendgreeve/features/product"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -58,7 +56,6 @@ func (c *CartData) Get(userId string) (cart.Cart, error) {
 	var carts []Cart
 	var cartData cart.Cart
 
-	// Retrieve cart data from the database
 	err := c.DB.Model(&Cart{}).
 		Preload("Product").
 		Preload("User").
@@ -71,63 +68,20 @@ func (c *CartData) Get(userId string) (cart.Cart, error) {
 	}
 
 	if len(carts) == 0 {
-		// Return empty cart if no data found
-		return cartData, nil
+		return cart.Cart{}, nil
 	}
 
-	// Initialize cart user
 	cartData.User.ID = userId
 	cartData.User.Username = carts[0].User.Username
 	cartData.User.Email = carts[0].User.Email
 	cartData.User.Address = carts[0].User.Address
 	cartData.User.Phone = carts[0].User.Phone
-	// Populate other user fields as needed
 
-	var cartItems []cart.CartItems
-	for _, cartData := range carts {
-		var images []product.ProductImage
-		var impactCategories []product.ProductImpactCategory
-
-		for _, img := range cartData.Product.Images {
-			images = append(images, product.ProductImage{
-				ID:        img.ID,
-				ProductID: img.ProductID,
-				ImageURL:  img.ImageURL,
-				Position:  img.Position,
-			})
-		}
-
-		for _, impact := range cartData.Product.ImpactCategories {
-			impactCategories = append(impactCategories, product.ProductImpactCategory{
-				ID:               impact.ID,
-				ProductID:        impact.ProductID,
-				ImpactCategoryID: impact.ImpactCategoryID,
-				ImpactCategory: impactcategory.ImpactCategory{
-					ID:          impact.ImpactCategory.ID,
-					Name:        impact.ImpactCategory.Name,
-					ImpactPoint: impact.ImpactCategory.ImpactPoint,
-					IconURL:     impact.ImpactCategory.IconURL,
-				},
-			})
-		}
-
-		cartItems = append(cartItems, cart.CartItems{
-			Quantity: cartData.Quantity,
-			Product: product.Product{
-				ID:               cartData.Product.ID,
-				Name:             cartData.Product.Name,
-				Description:      cartData.Product.Description,
-				Price:            cartData.Product.Price,
-				Coin:             cartData.Product.Coin,
-				Stock:            cartData.Product.Stock,
-				CreatedAt:        cartData.Product.CreatedAt,
-				UpdatedAt:        cartData.Product.UpdatedAt,
-				Images:           images,
-				ImpactCategories: impactCategories,
-			},
-		})
+	for _, cartModel := range carts {
+		cartEntity := cartModel.CastDataToCartEntity()
+		cartData.Items = append(cartData.Items, cartEntity.Items...)
 	}
-	cartData.Items = cartItems
+
 	return cartData, nil
 }
 

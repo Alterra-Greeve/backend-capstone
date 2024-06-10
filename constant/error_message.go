@@ -145,3 +145,5 @@ var ErrFieldType = errors.New("Field type cannot be empty")
 
 // Transaction Errors
 var ErrAddressEmpty = errors.New("Address cannot be empty")
+var ErrCoinNotEnough = errors.New("Coin not enough")
+

@@ -64,7 +64,7 @@ func (s *UserService) Login(user users.User) (users.UserLogin, error) {
 		return users.UserLogin{}, constant.ErrInvalidEmail
 	}
 	user.Email = strings.ToLower(user.Email)
-	
+
 	userData, err := s.d.Login(user)
 	if err != nil {
 		return users.UserLogin{}, err
@@ -235,4 +235,10 @@ func (s *UserService) UpdateUserForAdmin(user users.UpdateUserByAdmin) error {
 
 func (s *UserService) DeleteUserForAdmin(userID string) error {
 	return s.d.DeleteUserForAdmin(userID)
+}
+func (s *UserService) GetUserImpactPointById(id string) (int, error) {
+	return s.d.GetUserImpactPointById(id)
+}
+func (s *UserService) GetUserImpactPointByUsername(username string) (int, error) {
+	return s.d.GetUserImpactPointByUsername(username)
 }
