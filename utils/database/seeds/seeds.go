@@ -1867,7 +1867,7 @@ func Seeds() []seed.Seed {
 					Coin:        50,
 					DateStart:   time.Date(2024, 6, 10, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 6, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/12f1af01-9c5c-4223-a39f-640d4d5c46c2images (7).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1897,7 +1897,7 @@ func Seeds() []seed.Seed {
 					Coin:        100,
 					DateStart:   time.Date(2024, 7, 1, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 7, 8, 8, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/70126aef-8d2c-4776-8556-de3e14b452b8Zero-Waste-Week-1.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1927,7 +1927,7 @@ func Seeds() []seed.Seed {
 					Coin:        25,
 					DateStart:   time.Date(2024, 8, 15, 10, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 8, 22, 10, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/3afd2556-65de-47eb-b461-e84beb9cfe63images (8).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1957,7 +1957,7 @@ func Seeds() []seed.Seed {
 					Coin:        75,
 					DateStart:   time.Date(2024, 9, 5, 7, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 9, 12, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/411ed466-9abf-465a-b351-d84b9d746812images (9).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -1992,7 +1992,7 @@ func Seeds() []seed.Seed {
 					Coin:        150,
 					DateStart:   time.Date(2024, 10, 1, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/21dc1d7c-34e0-4057-9cfc-0e2ac83189cbimages.png",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2027,7 +2027,7 @@ func Seeds() []seed.Seed {
 					Coin:        60,
 					DateStart:   time.Date(2024, 11, 10, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 11, 17, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/81d13e21-9952-4afb-a68c-6c968d58250emaxresdefault.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2057,7 +2057,7 @@ func Seeds() []seed.Seed {
 					Coin:        125,
 					DateStart:   time.Date(2024, 12, 01, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 12, 15, 8, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/32f31bf9-96ad-41f9-98a7-ec207425e57aunnamed.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2092,7 +2092,7 @@ func Seeds() []seed.Seed {
 					Coin:        40,
 					DateStart:   time.Date(2024, 12, 20, 10, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2024, 12, 27, 10, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/3b796884-3c8b-4817-9e32-c31c63963495images (10).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2122,7 +2122,7 @@ func Seeds() []seed.Seed {
 					Coin:        55,
 					DateStart:   time.Date(2025, 01, 05, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 01, 12, 9, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/4ee25df4-a2c6-42c1-9b33-a9487d775ad3diy-upcycled-trash-ideas-featured-homebnc-v2.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2152,7 +2152,7 @@ func Seeds() []seed.Seed {
 					Coin:        45,
 					DateStart:   time.Date(2025, 02, 20, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 01, 0, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/dc808bf3-5f9e-4009-9d87-20a6adaca058less-plastic-1195643968.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2182,7 +2182,7 @@ func Seeds() []seed.Seed {
 					Coin:        140,
 					DateStart:   time.Date(2025, 03, 01, 8, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 23, 59, 59, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/64198baa-1814-4c1d-8150-156cfef53226images (11).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2217,7 +2217,7 @@ func Seeds() []seed.Seed {
 					Coin:        20,
 					DateStart:   time.Date(2025, 03, 29, 20, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 03, 29, 21, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/4d8d8751-1ac4-4d28-99b6-9ed9c0f8f766earth-hour-campaign-poster-or-banner-turn-off-your-lights-for-our-planet-60-minutes-free-vector.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2252,7 +2252,7 @@ func Seeds() []seed.Seed {
 					Coin:        65,
 					DateStart:   time.Date(2025, 04, 01, 0, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 04, 30, 59, 59, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/2641676b-7411-44bb-a9c9-01fd78bc3b61images%20(1).png",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2282,7 +2282,7 @@ func Seeds() []seed.Seed {
 					Coin:        35,
 					DateStart:   time.Date(2025, 05, 01, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 05, 05, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/92eb26ef-d764-43ba-9f89-d6766b268bfcimages%20(12).jpeg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
@@ -2317,7 +2317,7 @@ func Seeds() []seed.Seed {
 					Coin:        50,
 					DateStart:   time.Date(2025, 06, 05, 9, 0, 0, 0, time.UTC),
 					DateEnd:     time.Date(2025, 06, 06, 7, 0, 0, 0, time.UTC),
-					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg",
+					ImageURL:    "https://storage.googleapis.com/alterra-greeve/greeve/399b5b8a-98a6-47f0-acb6-d314882d8b625eeef3334ed2b.jpg",
 				}
 				challengeCategories := []challenge.ChallengeImpactCategory{
 					{
