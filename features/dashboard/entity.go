@@ -2,6 +2,8 @@ package dashboard
 
 import (
 	"backendgreeve/features/product"
+
+	"github.com/labstack/echo/v4"
 )
 
 type Dashboard struct {
@@ -15,7 +17,7 @@ type Dashboard struct {
 }
 
 type DashboardHandlerInterface interface {
-	GetDashboard() (Dashboard, error)
+	GetDashboard() echo.HandlerFunc
 }
 
 type DashboardServiceInterface interface {

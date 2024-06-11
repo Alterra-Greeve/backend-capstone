@@ -324,21 +324,15 @@ func (h *ChallengeHandler) GetChallengeForUserByID() echo.HandlerFunc {
 			return helper.UnauthorizedError(c)
 		}
 
-		forumID := c.Param("id")
-
-		forum, err := h.s.GetChallengeForUserByID(forumID)
+		challengeConfirmationId := c.Param("id")
+		challenge, err := h.s.GetChallengeForUserByID(challengeConfirmationId)
 		if err != nil {
 			return c.JSON(http.StatusNotFound, helper.ObjectFormatResponse(false, constant.ErrGetForumByID.Error(), nil))
 		}
+		userChallengeResponse := new(UserChallengeConfirmationResponse)
+		response := userChallengeResponse.ToResponse(challenge)
 
-		confirmationResponse := UserChallengeConfirmationResponse{
-			ID:        forum.ID,
-			UserID:    forum.UserID,
-			Status:    forum.Status,
-			Challenge: ChallengeResponse{ID: forum.Challenge.ID, Title: forum.Challenge.Title, DateStart: forum.Challenge.DateStart.Format("02/01/06"), DateEnd: forum.Challenge.DateEnd.Format("02/01/06")},
-		}
-
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, confirmationResponse))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, response))
 	}
 }
 func (h *ChallengeHandler) EditChallengeForUserByID() echo.HandlerFunc {
@@ -372,12 +366,8 @@ func (h *ChallengeHandler) EditChallengeForUserByID() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		challengeResponse := challenges.ChallengeConfirmationUpdate{
-			ID:    challengeID,
-			Image: challenge.Image,
-		}
-
-		if err := h.s.EditChallengeForUserByID(challengeResponse); err != nil {
+		err = h.s.EditChallengeForUserByID(challengeID, challenge.Image)
+		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 

@@ -300,7 +300,6 @@ func (u *UserData) DeleteUserForAdmin(userID string) error {
 }
 
 func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
-	// Hitung total impact point dari pembelian produk
 	var totalProductImpactPoint int
 	u.DB.Table("transactions").
 		Joins("JOIN transaction_items ON transactions.id = transaction_items.transaction_id").
@@ -312,7 +311,6 @@ func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 		Select("SUM(impact_categories.impact_point)").
 		Scan(&totalProductImpactPoint)
 
-	// Hitung total impact point dari challenge yang diikuti
 	var totalChallengeImpactPoint int
 	u.DB.Table("challenges").
 		Joins("JOIN challenge_confirmation ON challenges.id = challenge_confirmation.challenge_id").

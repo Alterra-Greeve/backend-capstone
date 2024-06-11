@@ -100,18 +100,22 @@ func (cs *ChallengeService) Delete(challengeId string) error {
 	return nil
 }
 
-func (cs *ChallengeService) GetChallengeForUserByID(ID string) (challenges.ChallengeConfirmation, error) {
-	if ID == "" {
+func (cs *ChallengeService) GetChallengeForUserByID(challengeConfirmationId string) (challenges.ChallengeConfirmation, error) {
+	if challengeConfirmationId == "" {
 		return challenges.ChallengeConfirmation{}, constant.ErrGetChallengeByID
 	}
-	return cs.c.GetChallengeForUserByID(ID)
+	challenge, err := cs.c.GetChallengeForUserByID(challengeConfirmationId)
+	if err != nil {
+		return challenges.ChallengeConfirmation{}, err
+	}
+	return challenge, nil
 }
-func (cs *ChallengeService) EditChallengeForUserByID(challenge challenges.ChallengeConfirmationUpdate) error {
-	if challenge.ID == "" {
+func (cs *ChallengeService) EditChallengeForUserByID(challengeId string, images []string) error {
+	if challengeId == "" {
 		return constant.ErrGetChallengeByID
 	}
-	if challenge.Image == nil {
+	if images == nil {
 		return constant.ErrChallengeFieldUpdate
 	}
-	return cs.c.EditChallengeForUserByID(challenge)
+	return cs.c.EditChallengeForUserByID(challengeId, images)
 }

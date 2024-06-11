@@ -34,10 +34,17 @@ type ImpactCategory struct {
 }
 
 type ChallengeConfirmation struct {
-	ID        string
-	UserID    string
-	Status    string
-	Challenge Challenge
+	ID                          string
+	UserID                      string
+	Status                      string
+	Challenge                   Challenge
+	ChallengeConfirmationImages []ChallengeConfirmationImage
+}
+
+type ChallengeConfirmationImage struct {
+	ID                      string
+	ChallengeConfirmationID string
+	ImageURL                string
 }
 
 type ChallengeConfirmationUpdate struct {
@@ -65,7 +72,7 @@ type ChallengeServiceInterface interface {
 	GetUserParticipate(userId string, status string) ([]ChallengeConfirmation, error)
 	GetChallengeParticipant(challengeId string) (int, error)
 	GetChallengeForUserByID(ID string) (ChallengeConfirmation, error)
-	EditChallengeForUserByID(ChallengeConfirmationUpdate) error
+	EditChallengeForUserByID(challengeId string, images []string) error
 
 	GetAllForAdmin(page int) ([]Challenge, int, error)
 	Create(challenge Challenge) error
@@ -79,7 +86,7 @@ type ChallengeDataInterface interface {
 	GetChallengeParticipant(challengeId string) (int, error)
 	GetByID(challengeId string) (Challenge, error)
 	GetChallengeForUserByID(ID string) (ChallengeConfirmation, error)
-	EditChallengeForUserByID(ChallengeConfirmationUpdate) error
+	EditChallengeForUserByID(challengeId string, images []string) error
 
 	Swipe(userId string, challengeId string, challengeType string) error
 	AddToLogs(userId string, challengeId string, status string) error

@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/features/dashboard"
 	"backendgreeve/features/product"
+	productData "backendgreeve/features/product/data"
 	"fmt"
 
 	"gorm.io/gorm"
@@ -19,7 +20,6 @@ func New(db *gorm.DB) dashboard.DashboardDataInterface {
 }
 
 func (d *DashboardData) GetDashboard() (dashboard.Dashboard, error) {
-	// Implement logic here
 	totalProduct, err := d.GetTotalProduct()
 	if err != nil {
 		return dashboard.Dashboard{}, err
@@ -50,7 +50,6 @@ func (d *DashboardData) GetDashboard() (dashboard.Dashboard, error) {
 }
 
 func (d *DashboardData) GetTotalProduct() (int, error) {
-	// Implement logic here
 	var totalProduct int64
 	tx := d.DB.Table("products").Count(&totalProduct)
 	if tx.Error != nil {
@@ -60,24 +59,20 @@ func (d *DashboardData) GetTotalProduct() (int, error) {
 }
 
 func (d *DashboardData) GetTotalProductPercentage() (string, error) {
-	// Implement logic here
 	var totalProduct int64
 	var totalProductThisMonth int64
 	var totalProductPercentage float64
 
-	// Menghitung total produk sebelum bulan ini
 	txAll := d.DB.Table("products").Count(&totalProduct)
 	if txAll.Error != nil {
 		return "0%", txAll.Error
 	}
 
-	// Menghitung total produk bulan ini
-	txThisMonth := d.DB.Table("products").Where("MONTH(createdAt) = MONTH(NOW())").Count(&totalProductThisMonth)
+	txThisMonth := d.DB.Table("products").Where("MONTH(created_at) = MONTH(NOW())").Count(&totalProductThisMonth)
 	if txThisMonth.Error != nil {
 		return "0%", txThisMonth.Error
 	}
 
-	// Menghitung persentase total produk baru bulan ini
 	if totalProduct > 0 {
 		totalProductPercentage = float64(totalProductThisMonth) / float64(totalProduct) * 100
 	} else {
@@ -88,9 +83,10 @@ func (d *DashboardData) GetTotalProductPercentage() (string, error) {
 }
 
 func (d *DashboardData) GetTotalNewProductThisMonth() (int, error) {
-	// Implement logic here
 	var totalNewProductThisMonth int64
-	tx := d.DB.Table("products").Where("MONTH(createdAt) = MONTH(NOW())").Count(&totalNewProductThisMonth)
+	tx := d.DB.Table("products").
+		Where("MONTH(created_at) = MONTH(NOW())").
+		Count(&totalNewProductThisMonth)
 	if tx.Error != nil {
 		return 0, tx.Error
 	}
@@ -98,24 +94,20 @@ func (d *DashboardData) GetTotalNewProductThisMonth() (int, error) {
 }
 
 func (d *DashboardData) GetTotalNewProductPercentage() (string, error) {
-	// Implement logic here
 	var totalProductLastMonth int64
 	var totalProductThisMonth int64
 	var totalProductPercentage float64
 
-	// Menghitung total produk bulan sebelum bulan ini
-	txLastMonth := d.DB.Table("products").Where("MONTH(createdAt) = MONTH(NOW()) - 1").Count(&totalProductLastMonth)
+	txLastMonth := d.DB.Table("products").Where("MONTH(created_at) = MONTH(NOW()) - 1").Count(&totalProductLastMonth)
 	if txLastMonth.Error != nil {
 		return "0%", txLastMonth.Error
 	}
 
-	// Menghitung total produk bulan ini
-	txThisMonth := d.DB.Table("products").Where("MONTH(createdAt) = MONTH(NOW())").Count(&totalProductThisMonth)
+	txThisMonth := d.DB.Table("products").Where("MONTH(created_at) = MONTH(NOW())").Count(&totalProductThisMonth)
 	if txThisMonth.Error != nil {
 		return "0%", txThisMonth.Error
 	}
 
-	// Menghitung persentase total produk baru bulan ini
 	if totalProductLastMonth > 0 {
 		totalProductPercentage = float64(totalProductThisMonth) / float64(totalProductLastMonth) * 100
 	} else {
@@ -126,17 +118,24 @@ func (d *DashboardData) GetTotalNewProductPercentage() (string, error) {
 }
 
 func (d *DashboardData) GetNewProduct() ([]product.Product, error) {
-	// Implement logic here
+	var productDB []productData.Product
 	var top3Products []product.Product
-	tx := d.DB.Table("products").Order("created_at DESC").Limit(3).Find(&top3Products)
+	tx := d.DB.Model(&productData.Product{}).
+		Preload("Images").
+		Preload("ImpactCategories.ImpactCategory").
+		Order("created_at DESC").
+		Limit(3).
+		Find(&productDB)
 	if tx.Error != nil {
 		return nil, tx.Error
+	}
+	for _, product := range productDB {
+		top3Products = append(top3Products, product.ToEntity())
 	}
 	return top3Products, nil
 }
 
 func (d *DashboardData) GetTotalUser() (int, error) {
-	// Implement logic here
 	var totalUser int64
 	tx := d.DB.Table("users").Count(&totalUser)
 	if tx.Error != nil {
@@ -154,7 +153,7 @@ func (d *DashboardData) GetNewUserPercentage() (string, error) {
 	if txAll.Error != nil {
 		return "0%", txAll.Error
 	}
-	txThisMonth := d.DB.Table("users").Where("MONTH(createdAt) = MONTH(NOW())").Count(&totalUserThisMonth)
+	txThisMonth := d.DB.Table("users").Where("MONTH(created_at) = MONTH(NOW())").Count(&totalUserThisMonth)
 	if txThisMonth.Error != nil {
 		return "0%", txThisMonth.Error
 	}

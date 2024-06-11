@@ -6,6 +6,7 @@ import (
 	"backendgreeve/features/admin"
 	"backendgreeve/features/cart"
 	"backendgreeve/features/challenges"
+	"backendgreeve/features/dashboard"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
@@ -171,4 +172,12 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.GET("/api/v1/dashboard", dh.GetDashboard(), echojwt.WithConfig(jwtConfig))
 }
