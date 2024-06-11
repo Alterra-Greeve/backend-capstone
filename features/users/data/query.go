@@ -115,7 +115,8 @@ func (u *UserData) Delete(user users.User) error {
 }
 
 func (u *UserData) ForgotPassword(OTP users.ForgotPassword) error {
-	if err := u.DB.Model(&User{}).Where("email = ?", OTP.Email).First(&OTP).Error; err != nil {
+	var user User
+	if err := u.DB.Model(&User{}).Where("email = ?", OTP.Email).First(&user).Error; err != nil {
 		return constant.ErrEmailNotFound
 	}
 

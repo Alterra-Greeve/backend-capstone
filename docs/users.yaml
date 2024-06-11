@@ -747,7 +747,7 @@ paths:
                 email: kzquandary@gmail.com
                 otp: "123456"
                 password: kzquandary
-                confirm_password: kzquandary
+                confirmation_password: kzquandary
       responses:
         "200":
           description: OK
