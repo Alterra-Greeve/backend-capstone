@@ -73,7 +73,6 @@ func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, erro
 func (cd *ChallengeData) GetUserParticipate(userId string, status string) ([]challenges.ChallengeConfirmation, error) {
 	var challengeConfirmations []ChallengeConfirmation
 
-	// Memuat challenge confirmation dengan challenge dan impact categories terkait
 	tx := cd.DB.Model(&ChallengeConfirmation{}).
 		Preload("Challenge").
 		Preload("Challenge.ChallengeImpactCategories").
@@ -84,44 +83,7 @@ func (cd *ChallengeData) GetUserParticipate(userId string, status string) ([]cha
 		return nil, tx.Error
 	}
 
-	// Konversi dari []ChallengeConfirmation ke challenges.ChallengeConfirmation
-	var challengeData []challenges.ChallengeConfirmation
-	for _, confirmation := range challengeConfirmations {
-		// Membuat slice untuk menyimpan impact categories
-		var impactCategories []challenges.ChallengeImpactCategory
-		for _, category := range confirmation.Challenge.ChallengeImpactCategories {
-			impactCategories = append(impactCategories, challenges.ChallengeImpactCategory{
-				ID:               category.ID,
-				ChallengeID:      category.ChallengeID,
-				ImpactCategoryID: category.ImpactCategoryID,
-				ImpactCategory: challenges.ImpactCategory{
-					ID:          category.ImpactCategory.ID,
-					Name:        category.ImpactCategory.Name,
-					ImpactPoint: category.ImpactCategory.ImpactPoint,
-					IconURL:     category.ImpactCategory.IconURL,
-				},
-			})
-		}
-
-		// Memasukkan data ke dalam slice challengeData
-		challengeData = append(challengeData, challenges.ChallengeConfirmation{
-			ID:     confirmation.ID,
-			UserID: confirmation.UserID,
-			Status: confirmation.Status,
-			Challenge: challenges.Challenge{
-				ID:               confirmation.Challenge.ID,
-				Title:            confirmation.Challenge.Title,
-				Difficulty:       confirmation.Challenge.Difficulty,
-				Description:      confirmation.Challenge.Description,
-				Exp:              confirmation.Challenge.Exp,
-				Coin:             confirmation.Challenge.Coin,
-				ImageURL:         confirmation.Challenge.ImageURL,
-				DateStart:        confirmation.Challenge.DateStart,
-				DateEnd:          confirmation.Challenge.DateEnd,
-				ImpactCategories: impactCategories,
-			},
-		})
-	}
+	challengeData := new(ChallengeConfirmation).ConvertToArrayEntity(challengeConfirmations)
 
 	return challengeData, nil
 }
@@ -237,7 +199,7 @@ func (cd *ChallengeData) ParticipateChallenge(userId string, challengeId string)
 	return nil
 }
 
-func (cd *ChallengeData) UploadParticipateProof(userId string, challengeConfirmationId string, images []string) error {
+func (cd *ChallengeData) UploadParticipateProof(challengeConfirmationId string, images []string) error {
 	tx := cd.DB.Begin()
 	if tx.Error != nil {
 		return tx.Error
@@ -256,7 +218,6 @@ func (cd *ChallengeData) UploadParticipateProof(userId string, challengeConfirma
 		uploadParticipateProof := ChallengeConfirmationImage{
 			ID:                      uuid.New().String(),
 			ChallengeConfirmationID: challengeConfirmationId,
-			UserID:                  userId,
 			ImageURL:                img,
 		}
 		tx := cd.DB.Create(&uploadParticipateProof)
@@ -284,6 +245,73 @@ func (cd *ChallengeData) DeleteImageProof(challengeConfirmationId string) error 
 	tx := cd.DB.Delete(&ChallengeConfirmationImage{}, "challenge_confirmation_id = ?", challengeConfirmationId)
 	if tx.Error != nil {
 		return tx.Error
+	}
+	return nil
+}
+
+func (cd *ChallengeData) GetChallengeForUserByID(challengeConfirmationId string) (challenges.ChallengeConfirmation, error) {
+	var challengeConfirmations ChallengeConfirmation
+	tx := cd.DB.Model(&ChallengeConfirmation{}).
+		Preload("User").
+		Preload("Challenge").
+		Preload("Challenge.ChallengeImpactCategories").
+		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").
+		Preload("ChallengeConfirmationImages").
+		Where("id = ?", challengeConfirmationId).
+		Find(&challengeConfirmations)
+	if tx.Error != nil {
+		return challenges.ChallengeConfirmation{}, tx.Error
+	}
+	var challengeData challenges.ChallengeConfirmation
+	challengeData.ID = challengeConfirmations.ID
+	challengeData.UserID = challengeConfirmations.UserID
+	challengeData.Status = challengeConfirmations.Status
+	challengeData.Challenge = challenges.Challenge{
+		ID:          challengeConfirmations.Challenge.ID,
+		Title:       challengeConfirmations.Challenge.Title,
+		Description: challengeConfirmations.Challenge.Description,
+		Exp:         challengeConfirmations.Challenge.Exp,
+		Coin:        challengeConfirmations.Challenge.Coin,
+		DateStart:   challengeConfirmations.Challenge.DateStart,
+		DateEnd:     challengeConfirmations.Challenge.DateEnd,
+		Difficulty:  challengeConfirmations.Challenge.Difficulty,
+		ImageURL:    challengeConfirmations.Challenge.ImageURL,
+	}
+	for _, category := range challengeConfirmations.Challenge.ChallengeImpactCategories {
+		challengeData.Challenge.ImpactCategories = append(challengeData.Challenge.ImpactCategories, challenges.ChallengeImpactCategory{
+			ID: category.ID,
+			ImpactCategory: challenges.ImpactCategory{
+				ID:          category.ImpactCategory.ID,
+				Name:        category.ImpactCategory.Name,
+				ImpactPoint: category.ImpactCategory.ImpactPoint,
+				IconURL:     category.ImpactCategory.IconURL,
+			},
+		})
+	}
+	for _, image := range challengeConfirmations.ChallengeConfirmationImages {
+		challengeData.ChallengeConfirmationImages = append(challengeData.ChallengeConfirmationImages, challenges.ChallengeConfirmationImage{
+			ID:       image.ID,
+			ImageURL: image.ImageURL,
+		})
+	}
+
+	return challengeData, nil
+}
+
+func (cd *ChallengeData) EditChallengeForUserByID(challengeId string, images []string) error {
+	if err := cd.DB.Where("challenge_confirmation_id = ?", challengeId).Delete(&ChallengeConfirmationImage{}).Error; err != nil {
+		return err
+	}
+
+	for _, imageURL := range images {
+		newImage := ChallengeConfirmationImage{
+			ID:                      uuid.New().String(),
+			ChallengeConfirmationID: challengeId,
+			ImageURL:                imageURL,
+		}
+		if err := cd.DB.Create(&newImage).Error; err != nil {
+			return err
+		}
 	}
 	return nil
 }

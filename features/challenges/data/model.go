@@ -1,6 +1,7 @@
 package data
 
 import (
+	"backendgreeve/features/challenges"
 	impactcategory "backendgreeve/features/impactcategory/data"
 	user "backendgreeve/features/users/data"
 	"database/sql"
@@ -42,18 +43,15 @@ type ChallengeConfirmation struct {
 	Status                      string                       `gorm:"type:varchar(50);not null;column:status"`
 	Challenge                   Challenge                    `gorm:"foreignKey:ChallengeID;references:ID;association_foreignkey:ID"`
 	User                        user.User                    `gorm:"foreignKey:UserID;references:ID"`
-	ChallengeImpactCategories   []ChallengeImpactCategory    `gorm:"foreignKey:ChallengeID;references:ID;association_foreignkey:ID"`
 	ChallengeConfirmationImages []ChallengeConfirmationImage `gorm:"foreignKey:ChallengeConfirmationID"`
 }
 
 type ChallengeConfirmationImage struct {
 	*gorm.Model
 	ID                      string                `gorm:"primaryKey;type:varchar(50);not null;column:id"`
-	ChallengeConfirmationID string                `gorm:"type:varchar(50);not null;column:challenge_confirmation_id"`
-	UserID                  string                `gorm:"type:varchar(50);not null;column:user_id"`
 	ImageURL                string                `gorm:"type:varchar(255);not null;column:image_url"`
+	ChallengeConfirmationID string                `gorm:"type:varchar(50);not null;column:challenge_confirmation_id"`
 	ChallengeConfirmation   ChallengeConfirmation `gorm:"foreignKey:ChallengeConfirmationID;references:ID"`
-	User                    user.User             `gorm:"foreignKey:UserID;references:ID"`
 }
 
 type ChallengeLog struct {
@@ -84,4 +82,43 @@ func (*ChallengeConfirmationImage) TableName() string {
 
 func (*ChallengeLog) TableName() string {
 	return "challenge_logs"
+}
+
+func (cd *ChallengeConfirmation) ConvertToArrayEntity(challengeConfirmations []ChallengeConfirmation) []challenges.ChallengeConfirmation {
+	var challengeData []challenges.ChallengeConfirmation
+	for _, confirmation := range challengeConfirmations {
+		var impactCategories []challenges.ChallengeImpactCategory
+		for _, category := range confirmation.Challenge.ChallengeImpactCategories {
+			impactCategories = append(impactCategories, challenges.ChallengeImpactCategory{
+				ID:               category.ID,
+				ChallengeID:      category.ChallengeID,
+				ImpactCategoryID: category.ImpactCategoryID,
+				ImpactCategory: challenges.ImpactCategory{
+					ID:          category.ImpactCategory.ID,
+					Name:        category.ImpactCategory.Name,
+					ImpactPoint: category.ImpactCategory.ImpactPoint,
+					IconURL:     category.ImpactCategory.IconURL,
+				},
+			})
+		}
+
+		challengeData = append(challengeData, challenges.ChallengeConfirmation{
+			ID:     confirmation.ID,
+			UserID: confirmation.UserID,
+			Status: confirmation.Status,
+			Challenge: challenges.Challenge{
+				ID:               confirmation.Challenge.ID,
+				Title:            confirmation.Challenge.Title,
+				Difficulty:       confirmation.Challenge.Difficulty,
+				Description:      confirmation.Challenge.Description,
+				Exp:              confirmation.Challenge.Exp,
+				Coin:             confirmation.Challenge.Coin,
+				ImageURL:         confirmation.Challenge.ImageURL,
+				DateStart:        confirmation.Challenge.DateStart,
+				DateEnd:          confirmation.Challenge.DateEnd,
+				ImpactCategories: impactCategories,
+			},
+		})
+	}
+	return challengeData
 }

@@ -747,7 +747,7 @@ paths:
                 email: kzquandary@gmail.com
                 otp: "123456"
                 password: kzquandary
-                confirm_password: kzquandary
+                confirmation_password: kzquandary
       responses:
         "200":
           description: OK
@@ -1054,7 +1054,7 @@ paths:
           required: true
           schema:
             type: string
-          example: Energy Efficient
+          example: Termostat Pintar
       responses:
         "200":
           description: OK
@@ -1312,7 +1312,7 @@ paths:
           required: true
           schema:
             type: string
-          example: Energy Efficient
+          example: Hemat Uang
       responses:
         "200":
           description: OK
@@ -1399,7 +1399,7 @@ paths:
           required: true
           schema:
             type: string
-          example: Energy Efficient
+          example: Hemat Uang
         - name: page
           in: path
           required: true
@@ -1492,7 +1492,7 @@ paths:
           required: true
           schema:
             type: string
-          example: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+          example: 005c310b-015a-4075-b3b5-575b1feb14d6
       responses:
         "200":
           description: OK
@@ -1607,7 +1607,7 @@ paths:
               example:
                 product_id: 005c310b-015a-4075-b3b5-575b1feb14d6
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
@@ -1622,7 +1622,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Add Product to Cart Success
+                  message: Cart Created
                   data: null
         "400":
           description: Bad Request
@@ -1673,7 +1673,6 @@ paths:
                   status: false
                   message: Products id not found
                   data: null
-
     put:
       tags:
         - shopping cart
@@ -1697,7 +1696,7 @@ paths:
                 type: "increment"
                 qty: 2
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
@@ -1712,7 +1711,7 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Update Product in Cart Success
+                  message: Cart updated
                   data: null
         "400":
           description: Bad Request
@@ -1855,6 +1854,7 @@ paths:
                   status: false
                   message: Products not found
                   data: null
+  /cart/{product_id}: 
     delete:
       tags:
         - shopping cart
@@ -1863,16 +1863,13 @@ paths:
       operationId: deleteProductInCart
       security:
         - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                product_id:
-                  type: string
-              example:
-                product_id: 123e4567-e89b-12d3-a456-426614174000
+      parameters:
+         - name: product_id
+           in: path
+           required: true
+           schema:
+            type: string
+           example: 08989b73-113e-4161-8047-9642db33fea3
       responses:
         "200":
           description: OK
@@ -2079,88 +2076,88 @@ paths:
                   status: false
                   message: Voucher code is not found
                   data: null
-    put:
-      tags:
-        - transactions
-      summary: Cancel Transaction
-      description: User mengcancel transaksi
-      operationId: cancelTransaction
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                transaction_id:
-                  type: string
-              example:
-                transaction_id: 123e4567-e89b-12d3-a456-426614174000
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Cancel Transaction Success
-                  data: null
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Transaction not found
-                  data: null
-  # /transaction/{transaction_id}:
+  #   put:
+  #     tags:
+  #       - transactions
+  #     summary: Cancel Transaction
+  #     description: User mengcancel transaksi
+  #     operationId: cancelTransaction
+  #     security:
+  #       - bearerAuth: []
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               transaction_id:
+  #                 type: string
+  #             example:
+  #               transaction_id: 123e4567-e89b-12d3-a456-426614174000
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Cancel Transaction Success
+  #                 data: null
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Transaction not found
+  #                 data: null
+  # # /transaction/{transaction_id}:
   #   get:
   #     tags:
   #       - transactions
@@ -2714,6 +2711,13 @@ paths:
       operationId: swipeChallengeUpdate
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_confrimation_id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
       requestBody:
         content:
           application/json:

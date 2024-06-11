@@ -67,8 +67,7 @@ func (h *CartHandler) Update() echo.HandlerFunc {
 		tokenString := c.Request().Header.Get("Authorization")
 		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrGetProduct.Error(), nil))
 		}
 		userData := h.j.ExtractUserToken(token)
 		userId := userData[constant.JWT_ID]
@@ -89,7 +88,7 @@ func (h *CartHandler) Update() echo.HandlerFunc {
 
 		err = h.s.Update(newCart)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrUpdateCart.Error(), nil))
 		}
 
 		return c.JSON(http.StatusCreated, helper.FormatResponse(true, "Cart updated", nil))
@@ -98,7 +97,20 @@ func (h *CartHandler) Update() echo.HandlerFunc {
 
 func (h *CartHandler) Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return c.JSON(http.StatusCreated, "created")
+		tokenString := c.Request().Header.Get("Authorization")
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrGetProduct.Error(), nil))
+		}
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+
+		productID := c.Param("id")
+		err = h.s.Delete(userId.(string), productID)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrDeleteCart.Error(), nil))
+		}
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ProductSuccessDelete, nil))
 	}
 }
 
@@ -114,8 +126,7 @@ func (h *CartHandler) Get() echo.HandlerFunc {
 		userId := userData[constant.JWT_ID]
 		carts, err := h.s.Get(userId.(string))
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
 		var response CartResponse

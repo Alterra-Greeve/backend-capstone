@@ -105,48 +105,50 @@ func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
 		if tokenString == "" {
-			helper.UnauthorizedError(c)
+			return helper.UnauthorizedError(c)
 		}
 
 		_, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			helper.UnauthorizedError(c)
+			return helper.UnauthorizedError(c)
 		}
 
-		forumid := c.Param("id")
-		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
-		}
+		forumID := c.Param("id")
 
-		forums, err := h.s.GetForumByID(forumid)
+		forum, err := h.s.GetForumByID(forumID)
 		if err != nil {
 			return c.JSON(http.StatusNotFound, helper.ObjectFormatResponse(false, constant.ErrGetForumByID.Error(), nil))
 		}
 
-		messages, err := h.s.GetMessagesByForumID(forumid)
+		messages, err := h.s.GetMessagesByForumID(forumID)
 		if err != nil {
-			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetMessage.Error()), nil))
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrGetMessage.Error(), nil))
 		}
 
 		var messageResponses []MessageResponse
 		for _, msg := range messages {
 			messageResponses = append(messageResponses, MessageResponse{
-				ID:      msg.ID,
-				UserID:  msg.UserID,
+				ID: msg.ID,
+				User: AuthorMessage{
+					ID:        msg.User.ID,
+					Name:      msg.User.Name,
+					Username:  msg.User.Username,
+					Email:     msg.User.Email,
+					AvatarURL: msg.User.AvatarURL,
+				},
 				Message: msg.Message,
 			})
 		}
 
-		forumsResponse := ForumGetDetailResponse{
-			ID:            forums.ID,
-			Title:         forums.Title,
-			Description:   forums.Description,
-			Author:        Author{ID: forums.User.ID, Name: forums.User.Name, Username: forums.User.Username, Email: forums.User.Email, AvatarURL: forums.User.AvatarURL},
+		forumResponse := ForumGetDetailResponse{
+			ID:            forum.ID,
+			Title:         forum.Title,
+			Description:   forum.Description,
+			Author:        Author{ID: forum.User.ID, Name: forum.User.Name, Username: forum.User.Username, Email: forum.User.Email, AvatarURL: forum.User.AvatarURL},
 			ForumMessages: messageResponses,
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, forumsResponse))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, forumResponse))
 	}
 }
 
@@ -331,6 +333,7 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 		if userId == "" {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, constant.Unauthorized, nil))
 		}
+		isAdmin := userData[constant.JWT_ROLE] == constant.RoleAdmin
 
 		messageForumID := c.Param("id")
 		existingMessageForum, err := h.s.GetMessageForumByID(messageForumID)
@@ -338,7 +341,7 @@ func (h *ForumHandler) DeleteMessageForum() echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, string(constant.ErrGetMessageByID.Error()), nil))
 		}
 
-		if existingMessageForum.UserID != userId {
+		if existingMessageForum.UserID != userId && !isAdmin {
 			return c.JSON(http.StatusForbidden, helper.FormatResponse(false, constant.Unauthorized, nil))
 		}
 
@@ -409,14 +412,15 @@ func (h *ForumHandler) GetMessageForumByID() echo.HandlerFunc {
 		messageId := c.Param("id")
 		message, err := h.s.GetMessageForumByID(messageId)
 		if err != nil {
-			return c.JSON(helper.ConvertResponseCode(err), helper.ObjectFormatResponse(false, err.Error(), nil))
+			return c.JSON(http.StatusNotFound, helper.ObjectFormatResponse(false, constant.ErrGetMessageByID.Error(), nil))
 		}
 
-		forumsResponse := MessageResponse{
+		messagesResponse := MessageResponse{
 			ID:      message.ID,
+			User:    AuthorMessage{ID: message.UserID, Name: message.User.Name, Username: message.User.Username, Email: message.User.Email, AvatarURL: message.User.AvatarURL},
 			Message: message.Message,
 		}
 
-		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.MessageSuccessGetByID, forumsResponse))
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.MessageSuccessGetByID, messagesResponse))
 	}
 }
