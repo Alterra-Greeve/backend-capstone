@@ -173,8 +173,8 @@ paths:
               example:
                 name: Kaze User
                 email: users@kzquandary.my.id
-                address: Cimahi
-                gender: Laki-laki
+                password: kaze123
+                username: kazeuser
       responses:
         "200":
           description: OK
@@ -2231,6 +2231,8 @@ paths:
                 image_url: https://example.com/images/item3.jpg
                 date_start: 2024-10-10T00:00:00Z
                 date_end: 2024-10-11T00:00:00Z
+                category: 
+                 - 7d34a5fa-e2cf-466d-9f01-d731f6967082
       responses:
         "200":
           description: OK

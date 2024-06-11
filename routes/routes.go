@@ -84,7 +84,7 @@ func RouteCart(e *echo.Echo, ch cart.CartHandlerInterface, cfg config.GreeveConf
 	e.POST("/api/v1/cart", ch.Create(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/cart", ch.Get(), echojwt.WithConfig(jwtConfig))
 	e.PUT("/api/v1/cart", ch.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE("/api/v1/cart", ch.Delete(), echojwt.WithConfig(jwtConfig))
+	e.DELETE("/api/v1/cart/:id", ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, cfg config.GreeveConfig) {

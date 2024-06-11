@@ -98,6 +98,7 @@ var ErrCodeVoucherExists = errors.New("Voucher code already existed")
 // Product Errors
 var ErrProductNotFound = errors.New("Product Not Found")
 var ErrGetProduct = errors.New("Failed to get product")
+var ErrGetProductID = errors.New("Error, get product ID")
 var ErrProductEmpty = errors.New("There is no product")
 var ErrCreateProduct = errors.New("Failed to create product")
 var ErrUpdateProduct = errors.New("Failed to update product")
@@ -146,4 +147,3 @@ var ErrFieldType = errors.New("Field type cannot be empty")
 // Transaction Errors
 var ErrAddressEmpty = errors.New("Address cannot be empty")
 var ErrCoinNotEnough = errors.New("Coin not enough")
-

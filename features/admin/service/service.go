@@ -59,8 +59,13 @@ func (s *AdminService) Update(userAdmin admin.AdminUpdate) (admin.AdminUpdate, e
 	}
 
 	if userAdmin.Password != "" {
-		userAdmin.Password, _ = helper.HashPassword(userAdmin.Password)
+		hashedPassword, err := helper.HashPassword(userAdmin.Password)
+		if err != nil {
+			return admin.AdminUpdate{}, err
+		}
+		userAdmin.Password = hashedPassword
 	}
+
 	userData, err := s.d.Update(userAdmin)
 	if err != nil {
 		return admin.AdminUpdate{}, err
