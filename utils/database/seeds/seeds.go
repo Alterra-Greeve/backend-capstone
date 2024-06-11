@@ -1734,7 +1734,7 @@ func Seeds() []seed.Seed {
 				products := product.Product{
 					ID:          "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 					Name:        "Kaus Kaki Katun Organik",
-					Description: "Kaus kaki yang terbuat dari 100% katun organik bersertifikat GOTS, memberikan kenyamanan dan ketahanan sambil tetap ramah lingkungan. Katun organik ditanam tanpa pestisida berbahaya atau pupuk sintetis, meningkatkan ekosistem yang lebih sehat. Kaus kaki ini juga dirancang untuk tahan lama, mengurangi frekuensi penggantian.",
+					Description: "Kaus kaki yang terbuat dari 100% katun organik bersertifikat GOTS,  mengurangi frekuensi penggantian.",
 					Price:       40000,
 					Coin:        30,
 				}

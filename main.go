@@ -14,6 +14,10 @@ import (
 	AdminHandler "backendgreeve/features/admin/handler"
 	AdminService "backendgreeve/features/admin/service"
 
+	DashboardData "backendgreeve/features/dashboard/data"
+	DashboardHandler "backendgreeve/features/dashboard/handler"
+	DashboardService "backendgreeve/features/dashboard/service"
+
 	ProductData "backendgreeve/features/product/data"
 	ProductHandler "backendgreeve/features/product/handler"
 	ProductService "backendgreeve/features/product/service"
@@ -95,6 +99,10 @@ func main() {
 	adminService := AdminService.New(adminData, jwt, mailer)
 	adminHandler := AdminHandler.New(adminService, jwt)
 
+	dashboardData := DashboardData.New(db)
+	dashboardService := DashboardService.New(dashboardData)
+	dashboardHandler := DashboardHandler.New(dashboardService, jwt)
+
 	productData := ProductData.New(db)
 	productService := ProductService.New(productData)
 	productHandler := ProductHandler.New(productService, jwt)
@@ -127,6 +135,7 @@ func main() {
 	routes.RouteBucket(e, bucket, *cfg)
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
+	routes.RouteDashboard(e, dashboardHandler, *cfg)
 	routes.RouteProduct(e, productHandler, *cfg)
 	routes.RouteCart(e, cartHandler, *cfg)
 	routes.RouteTransaction(e, transactionHandler, *cfg)

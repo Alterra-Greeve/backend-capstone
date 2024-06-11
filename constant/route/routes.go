@@ -19,6 +19,7 @@ const ForumByID = ForumPath + "/:id"
 const GetForumByUserID = ForumPath + "/user"
 
 // Forum Message
+const ForumMessagePath = BasePath + "/message" + "/:id"
 const ForumMessage = ForumPath + "/message"
 const ForumMessageByID = ForumMessage + "/:id"
 
@@ -52,4 +53,6 @@ const ChallengePath = BasePath + "/challenges"
 const AdminChallengePath = AdminPath + "/challenges"
 const AdminChallengeByID = AdminChallengePath + "/:id"
 const ChallengeParticipate = ChallengePath + "/participate"
+const ChallengeByIDForUser = ChallengeParticipate + "/:id"
 const ChallengeByID = ChallengePath + "/:id"
+const ChallengeAdminEdit = AdminChallengePath + "/:id"

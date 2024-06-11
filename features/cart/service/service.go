@@ -60,5 +60,13 @@ func (cs *CartService) Delete(userId string, productId string) error {
 }
 
 func (cs *CartService) Get(userId string) (cart.Cart, error) {
-	return cs.d.Get(userId)
+	cartData, err := cs.d.Get(userId)
+	if err != nil {
+		return cart.Cart{}, err
+	}
+	if cartData.User.ID == "" {
+		return cart.Cart{}, constant.ErrCartNotFound
+	}
+
+	return cartData, nil
 }

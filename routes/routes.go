@@ -6,6 +6,7 @@ import (
 	"backendgreeve/features/admin"
 	"backendgreeve/features/cart"
 	"backendgreeve/features/challenges"
+	"backendgreeve/features/dashboard"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
 	"backendgreeve/features/product"
@@ -84,7 +85,7 @@ func RouteCart(e *echo.Echo, ch cart.CartHandlerInterface, cfg config.GreeveConf
 	e.POST("/api/v1/cart", ch.Create(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/cart", ch.Get(), echojwt.WithConfig(jwtConfig))
 	e.PUT("/api/v1/cart", ch.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE("/api/v1/cart", ch.Delete(), echojwt.WithConfig(jwtConfig))
+	e.DELETE("/api/v1/cart/:id", ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, cfg config.GreeveConfig) {
@@ -132,9 +133,14 @@ func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg c
 	e.GET(route.AdminChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeParticipate, ch.GetUserParticipate(), echojwt.WithConfig(jwtConfig))
+	//
+	e.GET(route.ChallengeByIDForUser, ch.GetChallengeForUserByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeByIDForUser, ch.EditChallengeForUserByID(), echojwt.WithConfig(jwtConfig))
+
+	// admin
 	e.GET(route.AdminChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeAdminEdit, ch.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ChallengeAdminEdit, ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {
@@ -162,7 +168,16 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 	e.PUT(route.ForumByID, fh.UpdateForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumByID, fh.DeleteForum(), echojwt.WithConfig(jwtConfig))
 
+	e.GET(route.ForumMessageByID, fh.GetMessageForumByID(), echojwt.WithConfig(jwtConfig))
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.GET("/api/v1/dashboard", dh.GetDashboard(), echojwt.WithConfig(jwtConfig))
 }

@@ -90,8 +90,22 @@ func (h *UserHandler) Update() echo.HandlerFunc {
 		var UserUpdateRequest UserUpdateRequest
 		err = c.Bind(&UserUpdateRequest)
 		if err != nil {
-			err, message := helper.HandleEchoError(err)
-			return c.JSON(err, helper.FormatResponse(false, message, nil))
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrUpdateUser.Error(), nil))
+		}
+
+		currentUser, err := h.s.GetUserByIDForAdmin(userId.(string))
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		if UserUpdateRequest.Email == "" || UserUpdateRequest.Email == currentUser.Email {
+			UserUpdateRequest.Email = currentUser.Email
+		}
+		if UserUpdateRequest.Username == "" || UserUpdateRequest.Username == currentUser.Username {
+			UserUpdateRequest.Username = currentUser.Username
+		}
+		if UserUpdateRequest.AvatarURL == "" || UserUpdateRequest.AvatarURL == currentUser.AvatarURL {
+			UserUpdateRequest.AvatarURL = currentUser.AvatarURL
 		}
 
 		user := users.UserUpdate{

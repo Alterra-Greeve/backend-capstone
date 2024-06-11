@@ -181,12 +181,12 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 		if userRole == constant.RoleAdmin {
 			product, err = h.s.GetById(productId.String())
 			if err != nil {
-				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+				return c.JSON(helper.ConvertResponseCode(constant.ErrGetProductID), helper.FormatResponse(false, constant.ErrGetProductID.Error(), nil))
 			}
 		} else {
 			product, err = h.s.GetByIdUser(productId.String(), userId.(string))
 			if err != nil {
-				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+				return c.JSON(helper.ConvertResponseCode(constant.ErrGetUser), helper.FormatResponse(false, constant.ErrGetUser.Error(), nil))
 			}
 		}
 

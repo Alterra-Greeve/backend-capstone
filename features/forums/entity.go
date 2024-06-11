@@ -19,6 +19,7 @@ type Forum struct {
 type MessageForum struct {
 	ID        string
 	UserID    string
+	User      users.User
 	ForumID   string
 	Message   string
 	CreatedAt time.Time

@@ -24,9 +24,16 @@ type Author struct {
 }
 
 type MessageResponse struct {
-	ID      string `json:"id"`
-	UserID  string `json:"user_id"`
-	Message string `json:"message"`
+	ID      string        `json:"id"`
+	User    AuthorMessage `json:"user"`
+	Message string        `json:"message"`
+}
+type AuthorMessage struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	AvatarURL string `json:"avatar_url"`
 }
 
 type PaginatedResponse struct {

@@ -75,24 +75,32 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		return users.User{}, err
 	}
 
-	if user.Email != existingUser.Email && user.Username != existingUser.Username {
+	if user.Email != "" && user.Email != existingUser.Email {
 		var count int64
-		u.DB.Table("users").Where("email = ? OR username = ?", user.Email, user.Username).Count(&count)
+		u.DB.Table("users").Where("email = ?", user.Email).Count(&count)
 		if count > 0 {
-			return users.User{}, constant.ErrEmailUsernameAlreadyExist
+			return users.User{}, constant.ErrEmailAlreadyExist
 		}
 	}
 
-	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(&user).Error; err != nil {
+	if user.Username != "" && user.Username != existingUser.Username {
+		var count int64
+		u.DB.Table("users").Where("username = ?", user.Username).Count(&count)
+		if count > 0 {
+			return users.User{}, constant.ErrUsernameAlreadyExist
+		}
+	}
+
+	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(user).Error; err != nil {
 		return users.User{}, constant.ErrUpdateUser
 	}
 
-	var userData users.User
-	userData, err = u.GetUserByID(user.ID)
+	var updatedUser users.User
+	updatedUser, err = u.GetUserByID(user.ID)
 	if err != nil {
 		return users.User{}, err
 	}
-	return userData, nil
+	return updatedUser, nil
 }
 
 func (u *UserData) Delete(user users.User) error {
@@ -107,7 +115,8 @@ func (u *UserData) Delete(user users.User) error {
 }
 
 func (u *UserData) ForgotPassword(OTP users.ForgotPassword) error {
-	if err := u.DB.Model(&User{}).Where("email = ?", OTP.Email).First(&OTP).Error; err != nil {
+	var user User
+	if err := u.DB.Model(&User{}).Where("email = ?", OTP.Email).First(&user).Error; err != nil {
 		return constant.ErrEmailNotFound
 	}
 
@@ -291,7 +300,6 @@ func (u *UserData) DeleteUserForAdmin(userID string) error {
 }
 
 func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
-	// Hitung total impact point dari pembelian produk
 	var totalProductImpactPoint int
 	u.DB.Table("transactions").
 		Joins("JOIN transaction_items ON transactions.id = transaction_items.transaction_id").
@@ -303,7 +311,6 @@ func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 		Select("SUM(impact_categories.impact_point)").
 		Scan(&totalProductImpactPoint)
 
-	// Hitung total impact point dari challenge yang diikuti
 	var totalChallengeImpactPoint int
 	u.DB.Table("challenges").
 		Joins("JOIN challenge_confirmation ON challenges.id = challenge_confirmation.challenge_id").
@@ -349,5 +356,3 @@ func (u *UserData) GetUserImpactPointByUsername(username string) (int, error) {
 	}
 	return impactPoint, nil
 }
-
-
