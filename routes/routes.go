@@ -132,9 +132,14 @@ func RouteChallenge(e *echo.Echo, ch challenges.ChallengeHandlerInterface, cfg c
 	e.GET(route.AdminChallengePath, ch.GetAllForAdmin(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.ChallengeParticipate, ch.GetUserParticipate(), echojwt.WithConfig(jwtConfig))
+	//
+	e.GET(route.ChallengeByIDForUser, ch.GetChallengeForUserByID(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeByIDForUser, ch.EditChallengeForUserByID(), echojwt.WithConfig(jwtConfig))
+
+	// admin
 	e.GET(route.AdminChallengeByID, ch.GetByID(), echojwt.WithConfig(jwtConfig))
-	e.PUT(route.ChallengeByID, ch.Update(), echojwt.WithConfig(jwtConfig))
-	e.DELETE(route.ChallengeByID, ch.Delete(), echojwt.WithConfig(jwtConfig))
+	e.PUT(route.ChallengeAdminEdit, ch.Update(), echojwt.WithConfig(jwtConfig))
+	e.DELETE(route.ChallengeAdminEdit, ch.Delete(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteBucket(e *echo.Echo, bh bucket.BucketInterface, cfg config.GreeveConfig) {

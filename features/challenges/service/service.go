@@ -99,3 +99,19 @@ func (cs *ChallengeService) Delete(challengeId string) error {
 	// Kode Anda di sini
 	return nil
 }
+
+func (cs *ChallengeService) GetChallengeForUserByID(ID string) (challenges.ChallengeConfirmation, error) {
+	if ID == "" {
+		return challenges.ChallengeConfirmation{}, constant.ErrGetChallengeByID
+	}
+	return cs.c.GetChallengeForUserByID(ID)
+}
+func (cs *ChallengeService) EditChallengeForUserByID(challenge challenges.ChallengeConfirmationUpdate) error {
+	if challenge.ID == "" {
+		return constant.ErrGetChallengeByID
+	}
+	if challenge.Image == nil {
+		return constant.ErrChallengeFieldUpdate
+	}
+	return cs.c.EditChallengeForUserByID(challenge)
+}

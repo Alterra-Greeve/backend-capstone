@@ -175,11 +175,6 @@ paths:
                 email: users@kzquandary.my.id
                 address: Cimahi
                 gender: Laki-laki
-                category:
-                  - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                  - 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                  - e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                  - b5d07366-3b31-4011-95e3-34735b0b61f8
       responses:
         "200":
           description: OK
@@ -443,6 +438,11 @@ paths:
                       address: Cimahi
                       gender: Laki-laki
                       phone: '62123456789'
+                      category:
+                          - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                          - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                          - e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                          - b5d07366-3b31-4011-95e3-34735b0b61f8
         "401":
           description: Unauthorized
           content:
@@ -534,6 +534,11 @@ paths:
                       address: Cimahi2
                       gender: Laki-laki
                       phone: 62123456789
+                      category:
+                        - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                        - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                        - e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                        - b5d07366-3b31-4011-95e3-34735b0b61f8
         "400":
           description: Bad Request
           content:
@@ -2226,9 +2231,6 @@ paths:
                 image_url: https://example.com/images/item3.jpg
                 date_start: 2024-10-10T00:00:00Z
                 date_end: 2024-10-11T00:00:00Z
-                category: 
-                  - 078817ea-4fcf-4eeb-96b2-f10961826469
-                  - 1350c308-05e7-4d49-a5ad-3e92b00ecba9
       responses:
         "200":
           description: OK

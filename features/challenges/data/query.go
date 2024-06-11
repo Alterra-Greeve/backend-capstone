@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
+	"log"
 	"math"
 	"time"
 
@@ -284,6 +285,34 @@ func (cd *ChallengeData) DeleteImageProof(challengeConfirmationId string) error 
 	tx := cd.DB.Delete(&ChallengeConfirmationImage{}, "challenge_confirmation_id = ?", challengeConfirmationId)
 	if tx.Error != nil {
 		return tx.Error
+	}
+	return nil
+}
+
+func (cd *ChallengeData) GetChallengeForUserByID(ID string) (challenges.ChallengeConfirmation, error) {
+	var challenge challenges.ChallengeConfirmation
+	tx := cd.DB.Model(&ChallengeConfirmation{}).
+		Preload("Challenge").
+		Preload("Challenge.ChallengeImpactCategories").
+		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").
+		Where("id = ?", ID).
+		Find(&ChallengeConfirmation{})
+	log.Println(tx)
+	if tx.Error != nil {
+		return challenges.ChallengeConfirmation{}, tx.Error
+	}
+	return challenge, nil
+}
+
+func (cd *ChallengeData) EditChallengeForUserByID(challenge challenges.ChallengeConfirmationUpdate) error {
+	var existingChallenge challenges.ChallengeConfirmation
+	if err := cd.DB.Where("id = ?", challenge.ID).First(&existingChallenge).Error; err != nil {
+		return err
+	}
+
+	err := cd.DB.Model(&existingChallenge).Updates(challenge).Error
+	if err != nil {
+		return err
 	}
 	return nil
 }

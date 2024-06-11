@@ -22,3 +22,8 @@ type ChallengeCreateRequest struct {
 type ChallengeImpactCategory struct {
 	ImpactCategoryID string `json:"impact_category_id"`
 }
+
+type EditChallengeConfirmationForUser struct {
+	ID    string   `json:"id"`
+	Image []string `json:"image"`
+}

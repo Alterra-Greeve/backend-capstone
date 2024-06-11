@@ -93,6 +93,7 @@ func (h *ChallengeHandler) GetByID() echo.HandlerFunc {
 				ImpactCategory: ImpactCategory{
 					Name:        cat.ImpactCategory.Name,
 					ImpactPoint: cat.ImpactCategory.ImpactPoint,
+					IconURL:     cat.ImpactCategory.IconURL,
 				},
 			}
 		}
@@ -104,8 +105,8 @@ func (h *ChallengeHandler) GetByID() echo.HandlerFunc {
 			Difficulty:  challenge.Difficulty,
 			Exp:         challenge.Exp,
 			Coin:        challenge.Coin,
-			DateStart:   challenge.DateStart.Format("2006-01-02"),
-			DateEnd:     challenge.DateEnd.Format("2006-01-02"),
+			DateStart:   challenge.DateStart.Format("02/01/06"),
+			DateEnd:     challenge.DateEnd.Format("02/01/06"),
 			Categories:  category,
 		}
 		response.Categories = category
@@ -164,14 +165,17 @@ func (h *ChallengeHandler) GetAllForAdmin() echo.HandlerFunc {
 				Title:       challenge.Title,
 				Description: challenge.Description,
 				ImageURL:    challenge.ImageURL,
-				DateStart:   challenge.DateStart.Format("2006-01-02"),
-				DateEnd:     challenge.DateEnd.Format("2006-01-02"),
+				Difficulty:  challenge.Difficulty,
+				Exp:         challenge.Exp,
+				Coin:        challenge.Coin,
+				DateStart:   challenge.DateStart.Format("02/01/06"),
+				DateEnd:     challenge.DateEnd.Format("02/01/06"),
 			}
 
 			var categories []ChallengeImpactCategories
 			for _, cat := range challenge.ImpactCategories {
 				categories = append(categories, ChallengeImpactCategories{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint},
+					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint, IconURL: cat.ImpactCategory.IconURL},
 				})
 			}
 
@@ -267,8 +271,8 @@ func (h *ChallengeHandler) GetUserParticipate() echo.HandlerFunc {
 				Exp:         challenge.Exp,
 				Coin:        challenge.Coin,
 				ImageURL:    challenge.ImageURL,
-				DateStart:   challenge.DateStart.Format("2006-01-02"),
-				DateEnd:     challenge.DateEnd.Format("2006-01-02"),
+				DateStart:   challenge.DateStart.Format("02/01/06"),
+				DateEnd:     challenge.DateEnd.Format("02/01/06"),
 			}
 
 			for _, category := range challenge.ImpactCategories {
@@ -305,5 +309,78 @@ func (h *ChallengeHandler) Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		// Your code here
 		return nil
+	}
+}
+
+func (h *ChallengeHandler) GetChallengeForUserByID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			return helper.UnauthorizedError(c)
+		}
+
+		_, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return helper.UnauthorizedError(c)
+		}
+
+		forumID := c.Param("id")
+
+		forum, err := h.s.GetChallengeForUserByID(forumID)
+		if err != nil {
+			return c.JSON(http.StatusNotFound, helper.ObjectFormatResponse(false, constant.ErrGetForumByID.Error(), nil))
+		}
+
+		confirmationResponse := UserChallengeConfirmationResponse{
+			ID:        forum.ID,
+			UserID:    forum.UserID,
+			Status:    forum.Status,
+			Challenge: ChallengeResponse{ID: forum.Challenge.ID, Title: forum.Challenge.Title, DateStart: forum.Challenge.DateStart.Format("02/01/06"), DateEnd: forum.Challenge.DateEnd.Format("02/01/06")},
+		}
+
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessGetByID, confirmationResponse))
+	}
+}
+func (h *ChallengeHandler) EditChallengeForUserByID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			return helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID].(string)
+
+		challengeID := c.Param("id")
+		existingChallenge, err := h.s.GetChallengeForUserByID(challengeID)
+		if err != nil {
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, constant.ErrForumNotFound.Error(), nil))
+		}
+
+		if existingChallenge.UserID != userId {
+			return c.JSON(http.StatusForbidden, helper.FormatResponse(false, constant.UnatuhorizeForumAndMessage.Error(), nil))
+		}
+
+		var challenge EditChallengeConfirmationForUser
+		if err := c.Bind(&challenge); err != nil {
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
+		}
+
+		challengeResponse := challenges.ChallengeConfirmationUpdate{
+			ID:    challengeID,
+			Image: challenge.Image,
+		}
+
+		if err := h.s.EditChallengeForUserByID(challengeResponse); err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessUpdate, nil))
 	}
 }

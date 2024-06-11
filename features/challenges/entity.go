@@ -49,6 +49,9 @@ type ChallengeHandlerInterface interface {
 	GetByID() echo.HandlerFunc
 	Swipe() echo.HandlerFunc
 	GetUserParticipate() echo.HandlerFunc
+	GetChallengeForUserByID() echo.HandlerFunc
+	EditChallengeForUserByID() echo.HandlerFunc
+
 	GetAllForAdmin() echo.HandlerFunc
 	Create() echo.HandlerFunc
 	Update() echo.HandlerFunc
@@ -61,6 +64,8 @@ type ChallengeServiceInterface interface {
 	Swipe(userId string, challengeId string, challengeType string) error
 	GetUserParticipate(userId string, status string) ([]ChallengeConfirmation, error)
 	GetChallengeParticipant(challengeId string) (int, error)
+	GetChallengeForUserByID(ID string) (ChallengeConfirmation, error)
+	EditChallengeForUserByID(ChallengeConfirmationUpdate) error
 
 	GetAllForAdmin(page int) ([]Challenge, int, error)
 	Create(challenge Challenge) error
@@ -73,6 +78,9 @@ type ChallengeDataInterface interface {
 	GetAllForUser(userId string) ([]Challenge, error)
 	GetChallengeParticipant(challengeId string) (int, error)
 	GetByID(challengeId string) (Challenge, error)
+	GetChallengeForUserByID(ID string) (ChallengeConfirmation, error)
+	EditChallengeForUserByID(ChallengeConfirmationUpdate) error
+
 	Swipe(userId string, challengeId string, challengeType string) error
 	AddToLogs(userId string, challengeId string, status string) error
 	IsUserParticipate(userId string, challengeId string) (error, bool)

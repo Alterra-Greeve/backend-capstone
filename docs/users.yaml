@@ -2714,6 +2714,13 @@ paths:
       operationId: swipeChallengeUpdate
       security:
         - bearerAuth: []
+      parameters:
+        - name: challenge_confrimation_id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ba2621ac-6f99-43cb-ab8a-7db626b7c4e4
       requestBody:
         content:
           application/json:
