@@ -148,7 +148,7 @@ func (u *ForumData) DeleteMessageForum(messageID string) error {
 
 func (r *ForumData) GetMessageForumByID(ID string) (forums.MessageForum, error) {
 	var messageForum forums.MessageForum
-	if err := r.DB.Where("id = ? AND deleted_at IS NULL", ID).First(&messageForum).Error; err != nil {
+	if err := r.DB.Model(&MessageForum{}).Preload("User").Where("id = ? AND deleted_at IS NULL", ID).First(&messageForum).Error; err != nil {
 		return forums.MessageForum{}, err
 	}
 	return messageForum, nil
@@ -173,7 +173,7 @@ func (r *ForumData) UpdateMessageForum(message forums.EditMessage) error {
 
 func (u *ForumData) GetMessagesByForumID(forumID string) ([]forums.MessageForum, error) {
 	var messages []forums.MessageForum
-	if err := u.DB.Where("forum_id = ? AND deleted_at IS NULL", forumID).Find(&messages).Error; err != nil {
+	if err := u.DB.Model(&MessageForum{}).Preload("User").Where("forum_id = ? AND deleted_at IS NULL", forumID).Find(&messages).Error; err != nil {
 		return nil, err
 	}
 	return messages, nil
