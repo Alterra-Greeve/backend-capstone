@@ -1,6 +1,7 @@
 package data
 
 import (
+	impactcategory "backendgreeve/features/impactcategory/data"
 	"time"
 
 	"gorm.io/gorm"
@@ -29,8 +30,21 @@ type VerifyOTP struct {
 	ExpiredAt time.Time `gorm:"not null;column:expired_at"`
 }
 
+type UserReccomendation struct {
+	*gorm.Model
+	ID               string                        `gorm:"primary_key;type:varchar(50);not null;column:id"`
+	UserID           string                        `gorm:"type:varchar(50);not null;column:user_id"`
+	ImpactCategoryID string                        `gorm:"type:varchar(50);not null;column:impact_category_id"`
+	ImpactCategory   impactcategory.ImpactCategory `gorm:"foreignKey:ImpactCategoryID;references:ID"`
+	User             User                          `gorm:"foreignKey:UserID;references:ID"`
+}
+
 func (u *User) TableName() string {
 	return "users"
+}
+
+func (u *UserReccomendation) TableName() string {
+	return "user_reccomendations"
 }
 
 func (u *VerifyOTP) TableName() string {

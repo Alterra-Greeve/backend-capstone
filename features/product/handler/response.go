@@ -17,6 +17,18 @@ type ProductResponse struct {
 	Images      []ProductImage          `json:"images"`
 }
 
+type ProductAdminResponse struct {
+	ID          string                  `json:"product_id"`
+	Name        string                  `json:"name"`
+	Description string                  `json:"description"`
+	Price       float64                 `json:"price"`
+	Coin        int                     `json:"coin"`
+	Stock       int                     `json:"stock"`
+	CreatedAt   string                  `json:"created_at"`
+	UpdatedAt   string                  `json:"updated_at"`
+	Category    []ProductImpactCategory `json:"category"`
+	Images      []string                `json:"image_url"`
+}
 type ProductImpactCategory struct {
 	ImpactCategory ImpactCategory `json:"impact_category"`
 }
@@ -56,6 +68,36 @@ func (p ProductResponse) ToResponse(product product.Product) ProductResponse {
 		}
 	}
 	return ProductResponse{
+		ID:          product.ID,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		Coin:        product.Coin,
+		Stock:       product.Stock,
+		CreatedAt:   product.CreatedAt.Format("2006-01-02 15:04:05"),
+		UpdatedAt:   product.UpdatedAt.Format("2006-01-02 15:04:05"),
+		Images:      images,
+		Category:    impactCategories,
+	}
+}
+
+func (p ProductAdminResponse) ToResponse(product product.Product) ProductAdminResponse {
+	images := make([]string, len(product.Images))
+	for i, image := range product.Images {
+		images[i] = image.ImageURL
+	}
+
+	impactCategories := make([]ProductImpactCategory, len(product.ImpactCategories))
+	for i, impactCategory := range product.ImpactCategories {
+		impactCategories[i] = ProductImpactCategory{
+			ImpactCategory: ImpactCategory{
+				Name:        impactCategory.ImpactCategory.Name,
+				ImpactPoint: impactCategory.ImpactCategory.ImpactPoint,
+				IconURL:     impactCategory.ImpactCategory.IconURL,
+			},
+		}
+	}
+	return ProductAdminResponse{
 		ID:          product.ID,
 		Name:        product.Name,
 		Description: product.Description,

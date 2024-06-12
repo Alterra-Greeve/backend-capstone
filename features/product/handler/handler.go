@@ -75,8 +75,7 @@ func (h *ProductHandler) Create() echo.HandlerFunc {
 
 		err = h.s.Create(productData)
 		if err != nil {
-			code, message := helper.HandleEchoError(err)
-			return c.JSON(code, helper.FormatResponse(false, message, nil))
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 
 		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessCreate, nil))
@@ -190,38 +189,44 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			}
 		}
 
-		images := make([]ProductImage, len(product.Images))
-		for i, img := range product.Images {
-			images[i] = ProductImage{
-				ImageURL: img.ImageURL,
-				Position: img.Position,
-			}
-		}
+		// images := make([]ProductImage, len(product.Images))
+		// for i, img := range product.Images {
+		// 	images[i] = ProductImage{
+		// 		ImageURL: img.ImageURL,
+		// 		Position: img.Position,
+		// 	}
+		// }
 
-		categories := make([]ProductImpactCategory, len(product.ImpactCategories))
-		for i, cat := range product.ImpactCategories {
-			categories[i] = ProductImpactCategory{
-				ImpactCategory: ImpactCategory{
-					Name:        cat.ImpactCategory.Name,
-					ImpactPoint: cat.ImpactCategory.ImpactPoint,
-					IconURL:     cat.ImpactCategory.IconURL,
-				},
-			}
-		}
+		// categories := make([]ProductImpactCategory, len(product.ImpactCategories))
+		// for i, cat := range product.ImpactCategories {
+		// 	categories[i] = ProductImpactCategory{
+		// 		ImpactCategory: ImpactCategory{
+		// 			Name:        cat.ImpactCategory.Name,
+		// 			ImpactPoint: cat.ImpactCategory.ImpactPoint,
+		// 			IconURL:     cat.ImpactCategory.IconURL,
+		// 		},
+		// 	}
+		// }
 
-		response := ProductResponse{
-			ID:          product.ID,
-			Name:        product.Name,
-			Description: product.Description,
-			Price:       product.Price,
-			Coin:        product.Coin,
-			Images:      images,
-			Category:    categories,
-			Stock:       product.Stock,
-			CreatedAt:   product.CreatedAt.Format("02/01/2006"),
-			UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
+		// response := ProductResponse{
+		// 	ID:          product.ID,
+		// 	Name:        product.Name,
+		// 	Description: product.Description,
+		// 	Price:       product.Price,
+		// 	Coin:        product.Coin,
+		// 	Images:      images,
+		// 	Category:    categories,
+		// 	Stock:       product.Stock,
+		// 	CreatedAt:   product.CreatedAt.Format("02/01/2006"),
+		// 	UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
+		// }
+		var response interface{}
+		if userRole == constant.RoleUser {
+			response = new(ProductResponse).ToResponse(product)
+			helper.Logger(userId.(string) + " OPEN-PRODUCT " + product.ID)
+		} else {
+			response = new(ProductAdminResponse).ToResponse(product)
 		}
-
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ProductSuccessGet, response))
 	}
 }
@@ -233,12 +238,14 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 			return nil
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 			return nil
 		}
-
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		userRole := userData[constant.JWT_ROLE]
 		productCategory := c.Param("category_name")
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
@@ -291,6 +298,9 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 			TotalPage: totalPages,
 			Page:      page,
 		}
+		if userRole == constant.RoleUser {
+			helper.Logger(userId.(string) + " OPEN-CATEGORY " + productCategory)
+		}
 		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ProductSuccessGet, metadata, response))
 	}
 }
@@ -302,17 +312,22 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 			return nil
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 			return nil
 		}
-
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		userRole := userData[constant.JWT_ROLE]
 		productName := c.QueryParam("name")
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
 		if err != nil {
 			page = 1
+		}
+		if userRole == constant.RoleUser {
+			helper.Logger(userId.(string) + " SEARCH-PRODUCT " + productName)
 		}
 		var totalPages int
 		var products []product.Product

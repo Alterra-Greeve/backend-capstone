@@ -85,6 +85,7 @@ func (s *ProductService) Create(product product.Product) error {
 	if product.Stock == 0 {
 		return constant.ErrProductStockEmpty
 	}
+	
 	return s.d.Create(product)
 }
 
