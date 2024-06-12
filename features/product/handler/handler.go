@@ -189,39 +189,43 @@ func (h *ProductHandler) GetById() echo.HandlerFunc {
 			}
 		}
 
-		images := make([]ProductImage, len(product.Images))
-		for i, img := range product.Images {
-			images[i] = ProductImage{
-				ImageURL: img.ImageURL,
-				Position: img.Position,
-			}
-		}
+		// images := make([]ProductImage, len(product.Images))
+		// for i, img := range product.Images {
+		// 	images[i] = ProductImage{
+		// 		ImageURL: img.ImageURL,
+		// 		Position: img.Position,
+		// 	}
+		// }
 
-		categories := make([]ProductImpactCategory, len(product.ImpactCategories))
-		for i, cat := range product.ImpactCategories {
-			categories[i] = ProductImpactCategory{
-				ImpactCategory: ImpactCategory{
-					Name:        cat.ImpactCategory.Name,
-					ImpactPoint: cat.ImpactCategory.ImpactPoint,
-					IconURL:     cat.ImpactCategory.IconURL,
-				},
-			}
-		}
+		// categories := make([]ProductImpactCategory, len(product.ImpactCategories))
+		// for i, cat := range product.ImpactCategories {
+		// 	categories[i] = ProductImpactCategory{
+		// 		ImpactCategory: ImpactCategory{
+		// 			Name:        cat.ImpactCategory.Name,
+		// 			ImpactPoint: cat.ImpactCategory.ImpactPoint,
+		// 			IconURL:     cat.ImpactCategory.IconURL,
+		// 		},
+		// 	}
+		// }
 
-		response := ProductResponse{
-			ID:          product.ID,
-			Name:        product.Name,
-			Description: product.Description,
-			Price:       product.Price,
-			Coin:        product.Coin,
-			Images:      images,
-			Category:    categories,
-			Stock:       product.Stock,
-			CreatedAt:   product.CreatedAt.Format("02/01/2006"),
-			UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
-		}
+		// response := ProductResponse{
+		// 	ID:          product.ID,
+		// 	Name:        product.Name,
+		// 	Description: product.Description,
+		// 	Price:       product.Price,
+		// 	Coin:        product.Coin,
+		// 	Images:      images,
+		// 	Category:    categories,
+		// 	Stock:       product.Stock,
+		// 	CreatedAt:   product.CreatedAt.Format("02/01/2006"),
+		// 	UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
+		// }
+		var response interface{}
 		if userRole == constant.RoleUser {
-			helper.Logger(userId.(string) + "OPEN-PRODUCT" + product.ID)
+			response = new(ProductResponse).ToResponse(product)
+			helper.Logger(userId.(string) + " OPEN-PRODUCT " + product.ID)
+		} else {
+			response = new(ProductAdminResponse).ToResponse(product)
 		}
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ProductSuccessGet, response))
 	}
@@ -295,7 +299,7 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 			Page:      page,
 		}
 		if userRole == constant.RoleUser {
-			helper.Logger(userId.(string) + "OPEN-CATEGORY" + productCategory)
+			helper.Logger(userId.(string) + " OPEN-CATEGORY " + productCategory)
 		}
 		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.ProductSuccessGet, metadata, response))
 	}
@@ -323,7 +327,7 @@ func (h *ProductHandler) GetByName() echo.HandlerFunc {
 			page = 1
 		}
 		if userRole == constant.RoleUser {
-			helper.Logger(userId.(string) + "SEARCH-PRODUCT" + productName)
+			helper.Logger(userId.(string) + " SEARCH-PRODUCT " + productName)
 		}
 		var totalPages int
 		var products []product.Product
