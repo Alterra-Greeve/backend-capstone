@@ -51,7 +51,7 @@ func (h *CartHandler) Create() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
-
+		helper.Logger("")
 		return c.JSON(http.StatusCreated, helper.FormatResponse(true, "Cart created", nil))
 	}
 }

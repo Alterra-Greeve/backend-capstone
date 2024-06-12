@@ -91,7 +91,7 @@ func (u *UserData) Update(user users.UserUpdate) (users.User, error) {
 		}
 	}
 
-	if err := u.DB.Table("users").Where("id = ?", user.ID).Updates(user).Error; err != nil {
+	if err := u.DB.Model(&User{}).Where("id = ?", user.ID).Updates(user).Error; err != nil {
 		return users.User{}, constant.ErrUpdateUser
 	}
 
@@ -355,4 +355,26 @@ func (u *UserData) GetUserImpactPointByUsername(username string) (int, error) {
 		return 0, nil
 	}
 	return impactPoint, nil
+}
+
+func (u *UserData) AddReccomendationToUser(userId string, category []string) error {
+	tx := u.DB.Begin()
+	err := u.DB.Model(&UserReccomendation{}).Where("user_id = ?", userId).Delete(&UserReccomendation{}).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	for _, cat := range category {
+		newUserReccomendation := UserReccomendation{
+			ID:               uuid.New().String(),
+			UserID:           userId,
+			ImpactCategoryID: cat,
+		}
+		if err := u.DB.Create(&newUserReccomendation).Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+	}
+	tx.Commit()
+	return nil
 }

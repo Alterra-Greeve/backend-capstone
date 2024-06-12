@@ -2,6 +2,7 @@ package seeds
 
 import (
 	challenge "backendgreeve/features/challenges/data"
+	forum "backendgreeve/features/forums/data"
 	product "backendgreeve/features/product/data"
 	transaction "backendgreeve/features/transaction/data"
 	user "backendgreeve/features/users/data"
@@ -2958,9 +2959,379 @@ func Seeds() []seed.Seed {
 			},
 		},
 		// End Challenge
-
-		// Start Challenge Confirmation
-		// End Challenge Confirmation
+		// Start Forum
+		{
+			Name: "CreateForum1",
+			Run: func(db *gorm.DB) error {
+				forums := forum.Forum{
+					ID:            "f9bc77cb-2b04-442e-ae9f-aa8f163781e0",
+					Title:         "Praktik Berkebun Berkelanjutan",
+					UserID:        "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					Description:   "Diskusi tentang metode berkebun yang ramah lingkungan untuk mengurangi dampak lingkungan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forums)
+			},
+		},
+		{
+			Name: "CreateForum2",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "69f4777d-6446-4903-b444-088bcf5a5978",
+					Title:         "Pertanian Perkotaan dan Kebun Komunitas",
+					UserID:        "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					Description:   "Berbagi pengalaman dan ide-ide untuk membudidayakan makanan di lingkungan perkotaan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum3",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "e06255df-6eb4-4ff0-bf8f-bf0efbf27e22",
+					Title:         "Solusi Energi Terbarukan",
+					UserID:        "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					Description:   "Forum untuk berbagi pengetahuan dan pengalaman dengan teknologi energi terbarukan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum4",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "d76ffcc9-b17c-4c40-b6da-2236a41b1120",
+					Title:         "Diskusi Kebijakan Energi Hijau",
+					UserID:        "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					Description:   "Terlibat dalam diskusi tentang kebijakan dan peraturan pemerintah terkait energi terbarukan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum5",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "a3da4123-c266-4e7f-aabf-e3e8835c6b97",
+					Title:         "Alternatif Transportasi Berkelanjutan",
+					UserID:        "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					Description:   "Diskusikan penggunaan kendaraan listrik, transportasi umum, dan opsi komuter hijau lainnya.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum6",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "4d54c743-74d0-4486-9df8-a3952fc1e1c0",
+					Title:         "Daur Ulang dan Manajemen Sampah",
+					UserID:        "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
+					Description:   "Diskusi tentang praktik terbaik untuk mendaur ulang dan mengurangi sampah secara efektif.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum7",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "7c7c311b-58ff-48da-b649-3a1c17e649f2",
+					Title:         "Desain Bangunan Hijau",
+					UserID:        "8f14519b-ea61-457b-bf96-90504221de90",
+					Description:   "Eksplorasi teknik arsitektur dan konstruksi yang berkelanjutan untuk bangunan ramah lingkungan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum8",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "84580f82-f68c-46be-9f31-8dd2e7353e45",
+					Title:         "Mode dan Tekstil Berkelanjutan",
+					UserID:        "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					Description:   "Eksplorasi alternatif ramah lingkungan di industri fashion dan tekstil.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum9",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "71ee6052-75f0-4c5f-802c-ac5a6e785626",
+					Title:         "Upaya Konservasi Lingkungan",
+					UserID:        "8f14519b-ea61-457b-bf96-90504221de90",
+					Description:   "Diskusikan inisiatif dan strategi untuk melindungi habitat alam dan satwa liar.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		{
+			Name: "CreateForum10",
+			Run: func(db *gorm.DB) error {
+				forum := forum.Forum{
+					ID:            "c9f69700-7534-4285-81a7-22d71cdfd09b",
+					Title:         "Pilihan Gaya Hidup Ramah Lingkungan",
+					UserID:        "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
+					Description:   "Eksplorasi cara untuk mengadopsi gaya hidup yang lebih berkelanjutan dan ramah lingkungan.",
+					LastMessageAt: time.Now(),
+				}
+				return CreateForum(db, forum)
+			},
+		},
+		// End Forum
+		// Start Message Forum
+		{
+			Name: "CreateMessageForum1",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "771e3b98-cdd4-46e2-8f80-ef1e3136f9f8",
+					UserID:  "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					ForumID: "c9f69700-7534-4285-81a7-22d71cdfd09b",
+					Message: "Haloo guys",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum2",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "2407dc1d-8152-4a99-ad13-a814b9712437",
+					UserID:  "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					ForumID: "69f4777d-6446-4903-b444-088bcf5a5978",
+					Message: "Pagii teman-teman",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum3",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "a78529e3-d6d6-4212-842a-a083b846b594",
+					UserID:  "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					ForumID: "f9bc77cb-2b04-442e-ae9f-aa8f163781e0",
+					Message: "Apa Kabarnya kalian?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum4",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "cc9d6cb1-a3a9-43b3-972d-df3ee968b2a4",
+					UserID:  "6932e20c-3c55-4d95-91c5-ce316cc5843f",
+					ForumID: "7c7c311b-58ff-48da-b649-3a1c17e649f2",
+					Message: "Tetap semangat!!",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum5",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "b3b3a835-edc5-4970-b512-11ab983a9b98",
+					UserID:  "8f25169f-5084-45c3-a99f-40daf59485d4",
+					ForumID: "4d54c743-74d0-4486-9df8-a3952fc1e1c0",
+					Message: "Selamat pagi semuanya!",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum6",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "db85c8d1-54b7-43eb-9673-8fef60135526",
+					UserID:  "b7352ca3-fae1-4f3c-85b9-095de368b706",
+					ForumID: "71ee6052-75f0-4c5f-802c-ac5a6e785626",
+					Message: "Bagaimana hari kalian?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum7",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "cd388472-8641-40eb-b5c3-72b03424aae0",
+					UserID:  "29a1ee6d-05bd-4f11-b42a-a6769fd6a509",
+					ForumID: "a3da4123-c266-4e7f-aabf-e3e8835c6b97",
+					Message: "Semoga harimu menyenangkan.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum8",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "0798fab9-4db7-4e58-8a87-49a475a34add",
+					UserID:  "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
+					ForumID: "e06255df-6eb4-4ff0-bf8f-bf0efbf27e22",
+					Message: "Jangan lupa sarapan.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum9",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "c073c6cb-f873-456e-85c1-2b74d696bcf6",
+					UserID:  "4fe8e112-e3d7-4468-bfd0-24058790bb6e",
+					ForumID: "84580f82-f68c-46be-9f31-8dd2e7353e45",
+					Message: "Semangat menjalani hari ini.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum10",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "b454c9de-5d87-462e-8fe7-54b2f8aca53e",
+					UserID:  "56a85666-b5aa-4b39-8823-99c7f789ac7b",
+					ForumID: "d76ffcc9-b17c-4c40-b6da-2236a41b1120",
+					Message: "Ada yang punya rencana seru hari ini?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum11",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "73cf3dc6-6ddf-44b4-8965-a0fb2873cc01",
+					UserID:  "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
+					ForumID: "c9f69700-7534-4285-81a7-22d71cdfd09b",
+					Message: "Selamat siang teman-teman.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum12",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "710f3757-90ae-4893-b596-5b90f8bb4555",
+					UserID:  "6220c455-f14e-42d3-a73d-2f4573f4cf52",
+					ForumID: "69f4777d-6446-4903-b444-088bcf5a5978",
+					Message: "Jangan lupa minum air putih.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum13",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "8984b04a-57b2-4f18-8ad7-1f44ed6ebe5c",
+					UserID:  "35e243e9-d0b1-40b7-b216-5bc6cc15e243",
+					ForumID: "f9bc77cb-2b04-442e-ae9f-aa8f163781e0",
+					Message: "Sudah makan siang belum?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum14",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "2dfc2b53-5a6e-4058-868c-384d0f845ac0",
+					UserID:  "8f14519b-ea61-457b-bf96-90504221de90",
+					ForumID: "7c7c311b-58ff-48da-b649-3a1c17e649f2",
+					Message: "Semoga harimu produktif.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum15",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "d75e6c42-2747-4d69-a676-ab6aa8088c48",
+					UserID:  "3fb1eb90-805f-4727-9f7d-a6fefc6115f9",
+					ForumID: "4d54c743-74d0-4486-9df8-a3952fc1e1c0",
+					Message: "Tetap jaga kesehatan.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum16",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "d0644609-f5be-4050-80a5-3651b31efe96",
+					UserID:  "6220c455-f14e-42d3-a73d-2f4573f4cf52",
+					ForumID: "71ee6052-75f0-4c5f-802c-ac5a6e785626",
+					Message: "Bagaimana pekerjaan kalian?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum17",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "b0257295-327a-4239-b119-d7c5e6ce103d",
+					UserID:  "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
+					ForumID: "a3da4123-c266-4e7f-aabf-e3e8835c6b97",
+					Message: "Jangan terlalu stress, ya.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum18",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "022cb108-ee7f-4b85-a1cb-b99c29190c29",
+					UserID:  "35e243e9-d0b1-40b7-b216-5bc6cc15e243",
+					ForumID: "e06255df-6eb4-4ff0-bf8f-bf0efbf27e22",
+					Message: "Selamat sore semuanya.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum19",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "30e430fb-3e1f-48be-8dfe-89e7e13726cb",
+					UserID:  "29a1ee6d-05bd-4f11-b42a-a6769fd6a509",
+					ForumID: "84580f82-f68c-46be-9f31-8dd2e7353e45",
+					Message: "Apa yang kalian lakukan sore ini?",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "CreateMessageForum20",
+			Run: func(db *gorm.DB) error {
+				messageForum := forum.MessageForum{
+					ID:      "48f34810-1b26-49b2-8f73-dd8d83eeaefe",
+					UserID:  "b7352ca3-fae1-4f3c-85b9-095de368b706",
+					ForumID: "d76ffcc9-b17c-4c40-b6da-2236a41b1120",
+					Message: "Jangan lupa istirahat cukup malam ini.",
+				}
+				return CreateForumMessage(db, messageForum)
+			},
+		},
 	}
 	return seeds
 }

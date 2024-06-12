@@ -324,7 +324,7 @@ paths:
         - user
       summary: Get All Users
       description: Admin mendapatkan semua user, untuk menggunakan route ini harus menggunakan token admin
-      operationId: getAllUser
+      operationId: getAllUserbypage
       security:
         - bearerAuth: []
       parameters:
@@ -2735,7 +2735,7 @@ paths:
         - forum
       summary: Get Forum
       description: User dapat melihat forum
-      operationId: getForum
+      operationId: getForumbypage
       security:
         - bearerAuth: []
       parameters:
@@ -3697,7 +3697,7 @@ paths:
         - voucher
       summary: Get Voucher Data By Admin
       description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: getDataVoucher
+      operationId: getDataVoucherbyid
       security:
         - bearerAuth: []
       parameters:
