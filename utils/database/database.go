@@ -21,7 +21,9 @@ func InitDB(c config.GreeveConfig) (*gorm.DB, error) {
 	// fmt.Println(dsn)
 	//DEV MODE
 	// dsn := "root:@tcp(127.0.0.1:3306)/mentalhealth?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		// Logger: logger.Default.LogMode(logger.Silent),
+	})
 	if err != nil {
 		log.Error("terjadi kesalahan pada database, error:", err.Error())
 		return nil, err
