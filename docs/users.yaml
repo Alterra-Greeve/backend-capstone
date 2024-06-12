@@ -3130,7 +3130,7 @@ paths:
         - forum
       summary: Get Forum
       description: User dapat melihat forum
-      operationId: getForum
+      operationId: getForumbypage
       security:
         - bearerAuth: []
       parameters:
@@ -3489,7 +3489,6 @@ paths:
                   status: false
                   message: cannot get data, id user not found
                   data: null
-  
   /forums/user?page={page}:
     get:
       tags:
