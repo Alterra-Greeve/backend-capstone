@@ -1929,13 +1929,12 @@ paths:
                   description: product
                   coin: 200
                   price: 30000
+                  stock: 100
                   category:
-                    - e965bc1d-9bfa-4512-8e28-64a101201d9d
-                    - e965bc1d-9bfa-4512-8e28-64a101201d9e
-                    - e965bc1d-9bfa-4512-8e28-64a101201d9f
+                    - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                    - b5d07366-3b31-4011-95e3-34735b0b61f8
                   image_url: 
-                  - https://example.com/images/water-bottle3.jpg
-                  - https://example.com/images/water-bottle3.jpg
+                  - https://storage.googleapis.com/alterra-greeve/greeve/25e1e158-3fb0-42ff-97f7-d728167f2a7eicon4.svg
                   - https://example.com/images/water-bottle3.jpg
       responses:
         "200":

@@ -39,6 +39,8 @@ type UserChallengeConfirmationResponse struct {
 	Status    string                       `json:"status"`
 	Challenge ChallengeResponse            `json:"challenge"`
 	Images    []ChallengeConfirmationImage `json:"images"`
+	CreatedAt string                       `json:"created_at"`
+	UpdatedAt string                       `json:"updated_at"`
 }
 type ChallengeConfirmationImage struct {
 	ID       string `json:"id"`
@@ -73,6 +75,8 @@ func (*UserChallengeConfirmationResponse) ToResponse(challenge challenge.Challen
 		UserID:    challenge.UserID,
 		Status:    challenge.Status,
 		Challenge: challengeResponse,
+		CreatedAt: challenge.CreatedAt.Format("02/01/06"),
+		UpdatedAt: challenge.UpdatedAt.Format("02/01/06"),
 	}
 	for _, image := range challenge.ChallengeConfirmationImages {
 		response.Images = append(response.Images, ChallengeConfirmationImage{

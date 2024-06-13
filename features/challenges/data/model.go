@@ -44,6 +44,8 @@ type ChallengeConfirmation struct {
 	Challenge                   Challenge                    `gorm:"foreignKey:ChallengeID;references:ID;association_foreignkey:ID"`
 	User                        user.User                    `gorm:"foreignKey:UserID;references:ID"`
 	ChallengeConfirmationImages []ChallengeConfirmationImage `gorm:"foreignKey:ChallengeConfirmationID"`
+	CreatedAt                   time.Time                    `gorm:"column:created_at"`
+	UpdatedAt                   time.Time                    `gorm:"column:updated_at"`
 }
 
 type ChallengeConfirmationImage struct {

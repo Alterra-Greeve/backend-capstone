@@ -3,6 +3,7 @@ package transaction
 import (
 	"backendgreeve/features/product"
 	"backendgreeve/features/users"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -48,6 +49,8 @@ type TransactionData struct {
 	SnapURL          string
 	User             users.User
 	TransactionItems []TransactionItems
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 }
 
 type TransactionHandlerInterface interface {
