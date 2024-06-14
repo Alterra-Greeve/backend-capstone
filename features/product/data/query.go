@@ -204,6 +204,7 @@ func (pd *ProductData) Update(products product.Product) error {
 		Coin:        products.Coin,
 		Price:       products.Price,
 		Description: products.Description,
+		Stock:       products.Stock,
 	}
 
 	for _, image := range products.Images {

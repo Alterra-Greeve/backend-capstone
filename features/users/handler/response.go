@@ -39,6 +39,8 @@ type UserbyAdminandPageResponse struct {
 	Coin      int    `json:"coin"`
 	Exp       int    `json:"exp"`
 	AvatarURL string `json:"avatar_url"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 type UserbyAdminResponse struct {
@@ -53,6 +55,8 @@ type UserbyAdminResponse struct {
 	Coin      int    `json:"coin"`
 	Exp       int    `json:"exp"`
 	AvatarURL string `json:"avatar_url"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 type MetadataResponse struct {

@@ -266,6 +266,8 @@ func (cd *ChallengeData) GetChallengeForUserByID(challengeConfirmationId string)
 	challengeData.ID = challengeConfirmations.ID
 	challengeData.UserID = challengeConfirmations.UserID
 	challengeData.Status = challengeConfirmations.Status
+	challengeData.CreatedAt = challengeConfirmations.CreatedAt
+	challengeData.UpdatedAt = challengeConfirmations.UpdatedAt
 	challengeData.Challenge = challenges.Challenge{
 		ID:          challengeConfirmations.Challenge.ID,
 		Title:       challengeConfirmations.Challenge.Title,
@@ -312,6 +314,11 @@ func (cd *ChallengeData) EditChallengeForUserByID(challengeId string, images []s
 			ID:                      uuid.New().String(),
 			ChallengeConfirmationID: challengeId,
 			ImageURL:                imageURL,
+		}
+		var existingChallenge challenges.ChallengeConfirmation
+		tx := cd.DB.Model(&existingChallenge).Omit("CreatedAt").Where("id = ?", existingChallenge.ID).Save(&existingChallenge)
+		if tx.Error != nil {
+			return constant.ErrUpdateChallenge
 		}
 		if err := cd.DB.Create(&newImage).Error; err != nil {
 			return err

@@ -272,8 +272,8 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 				Images:      images,
 				Category:    categories,
 				Stock:       p.Stock,
-				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
-				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
+				CreatedAt:   p.CreatedAt.Format("02/01/06"),
+				UpdatedAt:   p.UpdatedAt.Format("02/01/06"),
 			})
 		}
 		metadata := MetadataResponse{
@@ -416,7 +416,7 @@ func (h *ProductHandler) Update() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
 	}
 }
 func (h *ProductHandler) Delete() echo.HandlerFunc {
