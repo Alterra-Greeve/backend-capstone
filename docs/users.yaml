@@ -24,6 +24,8 @@ tags:
     description: Operations about transaction
   - name: challenges
     description: Operations about challenge
+  - name: impact category
+    description: Operations about impact category
   - name: forum
     description: Operations about forum
 paths:
@@ -2655,7 +2657,6 @@ paths:
                   status: true
                   message: Get User Challenges Success
                   data: null
-
   /challenges/participate/{challenge_confrimation_id}:
     get:
       tags:
@@ -3832,6 +3833,136 @@ paths:
                   status: false
                   message: Id Message not found
                   data: null
+  /impact:
+    get:
+      tags:
+        - data impact
+      summary: Get All Data Impact By Admin
+      description: Admin dapat melihat semua data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getAllDataImpact
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        impact_poin:
+                          type: integer
+                        icon_url:
+                          type: string
+                example:
+                  status: true
+                  message: Get All Data Impact Success
+                  data: 
+                    - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                      name: Mengurangi Limbah
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Mengurangi Limbah
+                    - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                      name: Hemat Uang
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Hemat Uang
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: data impact not found
+                  data: null
+  /impact/{impact_id}:
+    get:
+      tags:
+        - data impact
+      summary: Get Data Impact By Admin
+      description: Admin dapat melihat detail data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      impact_poin:
+                        type: integer
+                      icon_url:
+                        type: string
+                example:
+                  status: true
+                  message: Get Data Impact Success
+                  data: 
+                    id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                    name: Mengurangi Limbah
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+                    image_url: https://example.com/images/item3.jpg
+                    description : Mengurangi Limbah
+
   /media/upload:
     post:
       tags:
