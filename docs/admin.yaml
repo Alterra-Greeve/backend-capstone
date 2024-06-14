@@ -561,6 +561,11 @@ paths:
                 address: Cimahi2
                 gender: Laki-laki
                 phone: "62123456789"
+                category:
+                    - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                    - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                    - e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                    - b5d07366-3b31-4011-95e3-34735b0b61f8
       responses:
         "200":
           description: OK
