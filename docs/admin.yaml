@@ -57,6 +57,32 @@ paths:
                   status: true
                   message: Get Dashboard Success
                   data: null
+  
+  /order/product:
+    get:
+      tags:
+        - admin
+      summary: Get Orders
+      description: Admin mendapatkan Orders, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getOrders
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Orders Success
+                  data: null
   /admin/login:
     post:
       tags:

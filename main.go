@@ -18,6 +18,10 @@ import (
 	DashboardHandler "backendgreeve/features/dashboard/handler"
 	DashboardService "backendgreeve/features/dashboard/service"
 
+	OrdersData "backendgreeve/features/orders/data"
+	OrdersHandler "backendgreeve/features/orders/handler"
+	OrdersService "backendgreeve/features/orders/service"
+
 	ProductData "backendgreeve/features/product/data"
 	ProductHandler "backendgreeve/features/product/handler"
 	ProductService "backendgreeve/features/product/service"
@@ -103,6 +107,10 @@ func main() {
 	dashboardService := DashboardService.New(dashboardData)
 	dashboardHandler := DashboardHandler.New(dashboardService, jwt)
 
+	ordersData := OrdersData.New(db)
+	ordersService := OrdersService.New(ordersData)
+	ordersHandler := OrdersHandler.New(ordersService, jwt)
+
 	productData := ProductData.New(db)
 	productService := ProductService.New(productData)
 	productHandler := ProductHandler.New(productService, jwt)
@@ -136,6 +144,7 @@ func main() {
 	routes.PaymentNotification(e, webhookHandler, *cfg)
 	routes.RouteAdmin(e, adminHandler, *cfg)
 	routes.RouteDashboard(e, dashboardHandler, *cfg)
+	routes.RouteOrder(e, ordersHandler, *cfg)
 	routes.RouteProduct(e, productHandler, *cfg)
 	routes.RouteCart(e, cartHandler, *cfg)
 	routes.RouteTransaction(e, transactionHandler, *cfg)

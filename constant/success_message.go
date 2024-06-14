@@ -10,6 +10,8 @@ const UserSuccessOTPValidation = "OTP Validation Success"
 const UserSuccessResetPassword = "Password has been changed"
 const UserSuccessDelete = "Account has been deleted"
 
+const GetDataSuccess = "Get Data Success"
+
 // Leaderboard
 const SuccessGetLeaderboard = "Get Leaderboard Success"
 
