@@ -90,11 +90,13 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 			return nil
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 			return nil
 		}
+		userData := h.j.ExtractUserToken(token)
+		userRole := userData[constant.JWT_ROLE]
 
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
@@ -103,14 +105,24 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 		}
 		var totalPages int
 		var products []product.Product
-		products, totalPages, err = h.s.GetByPage(page)
+		if userRole == constant.RoleUser {
+			products, totalPages, err = h.s.GetByPage(page)
+		} else {
+			products, totalPages, err = h.s.GetByPageAdmin(page)
+		}
 
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		var response []ProductResponse
-		for _, product := range products {
-			response = append(response, new(ProductResponse).ToResponse(product))
+		var response []interface{}
+		if userRole == constant.RoleUser {
+			for _, product := range products {
+				response = append(response, new(ProductResponse).ToResponse(product))
+			}
+		} else {
+			for _, product := range products {
+				response = append(response, new(ProductAdminResponse).ToResponse(product))
+			}
 		}
 
 		metadata := MetadataResponse{
