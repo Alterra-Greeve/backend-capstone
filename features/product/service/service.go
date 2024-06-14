@@ -32,6 +32,19 @@ func (s *ProductService) GetByPage(page int) ([]product.Product, int, error) {
 	}
 	return products, total, nil
 }
+func (s *ProductService) GetByPageAdmin(page int) ([]product.Product, int, error) {
+	if page <= 0 {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	products, total, err := s.d.GetByPageAdmin(page)
+	if err != nil {
+		return nil, 0, err
+	}
+	if page > total {
+		return nil, 0, constant.ErrPageInvalid
+	}
+	return products, total, nil
+}
 
 func (s *ProductService) GetById(id string) (product.Product, error) {
 	return s.d.GetById(id)

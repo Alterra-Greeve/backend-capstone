@@ -56,6 +56,7 @@ type ProductServiceInterface interface {
 	GetById(id string) (Product, error)
 	GetByIdUser(id string, userId string) (Product, error)
 	GetByPage(page int) ([]Product, int, error)
+	GetByPageAdmin(page int) ([]Product, int, error)
 	GetByCategory(category string, page int) ([]Product, int, error)
 	GetByName(name string, page int) ([]Product, int, error)
 	Create(product Product) error
@@ -66,6 +67,7 @@ type ProductServiceInterface interface {
 type ProductDataInterface interface {
 	Get() ([]Product, error)
 	GetByPage(page int) ([]Product, int, error)
+	GetByPageAdmin(page int) ([]Product, int, error)
 	GetById(id string) (Product, error)
 	GetByIdUser(id string, userId string) (Product, error)
 	InsertToProductLog(id string, userId string) error

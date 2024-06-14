@@ -304,7 +304,11 @@ func (cd *ChallengeData) EditChallengeForUserByID(challengeId string, images []s
 	if err := cd.DB.Where("challenge_confirmation_id = ?", challengeId).Delete(&ChallengeConfirmationImage{}).Error; err != nil {
 		return err
 	}
-
+	err := cd.DB.Model(&ChallengeConfirmation{}).Where("id = ? ", challengeId).Update("status", "Diterima").Error
+	if err != nil {
+		return err
+	}
+	
 	for _, imageURL := range images {
 		newImage := ChallengeConfirmationImage{
 			ID:                      uuid.New().String(),
