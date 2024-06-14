@@ -90,11 +90,13 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 			return nil
 		}
 
-		_, err := h.j.ValidateToken(tokenString)
+		token, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 			return nil
 		}
+		userData := h.j.ExtractUserToken(token)
+		userRole := userData[constant.JWT_ROLE]
 
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
@@ -103,46 +105,26 @@ func (h *ProductHandler) Get() echo.HandlerFunc {
 		}
 		var totalPages int
 		var products []product.Product
-		products, totalPages, err = h.s.GetByPage(page)
+		if userRole == constant.RoleUser {
+			products, totalPages, err = h.s.GetByPage(page)
+		} else {
+			products, totalPages, err = h.s.GetByPageAdmin(page)
+		}
 
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-
-		var response []ProductResponse
-		for _, p := range products {
-			images := make([]ProductImage, len(p.Images))
-			for i, img := range p.Images {
-				images[i] = ProductImage{
-					ImageURL: img.ImageURL,
-					Position: img.Position,
-				}
+		var response []interface{}
+		if userRole == constant.RoleUser {
+			for _, product := range products {
+				response = append(response, new(ProductResponse).ToResponse(product))
 			}
-
-			categories := make([]ProductImpactCategory, len(p.ImpactCategories))
-			for i, cat := range p.ImpactCategories {
-				categories[i] = ProductImpactCategory{
-					ImpactCategory: ImpactCategory{
-						Name:        cat.ImpactCategory.Name,
-						ImpactPoint: cat.ImpactCategory.ImpactPoint,
-						IconURL:     cat.ImpactCategory.IconURL,
-					},
-				}
+		} else {
+			for _, product := range products {
+				response = append(response, new(ProductAdminResponse).ToResponse(product))
 			}
-
-			response = append(response, ProductResponse{
-				ID:          p.ID,
-				Name:        p.Name,
-				Description: p.Description,
-				Price:       p.Price,
-				Coin:        p.Coin,
-				Images:      images,
-				Category:    categories,
-				Stock:       p.Stock,
-				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
-				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
-			})
 		}
+
 		metadata := MetadataResponse{
 			TotalPage: totalPages,
 			Page:      page,
@@ -290,8 +272,8 @@ func (h *ProductHandler) GetByCategory() echo.HandlerFunc {
 				Images:      images,
 				Category:    categories,
 				Stock:       p.Stock,
-				CreatedAt:   p.CreatedAt.Format("02/01/2006"),
-				UpdatedAt:   p.UpdatedAt.Format("02/01/2006"),
+				CreatedAt:   p.CreatedAt.Format("02/01/06"),
+				UpdatedAt:   p.UpdatedAt.Format("02/01/06"),
 			})
 		}
 		metadata := MetadataResponse{
@@ -434,7 +416,7 @@ func (h *ProductHandler) Update() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
-		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessUpdate, nil))
 	}
 }
 func (h *ProductHandler) Delete() echo.HandlerFunc {

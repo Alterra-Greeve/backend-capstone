@@ -39,6 +39,8 @@ type ChallengeConfirmation struct {
 	Status                      string
 	Challenge                   Challenge
 	ChallengeConfirmationImages []ChallengeConfirmationImage
+	CreatedAt                   time.Time
+	UpdatedAt                   time.Time
 }
 
 type ChallengeConfirmationImage struct {

@@ -278,10 +278,15 @@ func (u *UserData) UpdateUserForAdmin(user users.UpdateUserByAdmin) error {
 		return err
 	}
 
+	tx := u.DB.Model(&existingUser).Omit("CreatedAt").Where("id = ?", existingUser.ID).Save(&existingUser)
+	if tx.Error != nil {
+		return constant.ErrUpdateUser
+	}
 	err := u.DB.Model(&existingUser).Updates(user).Error
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 

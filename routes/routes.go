@@ -9,6 +9,7 @@ import (
 	"backendgreeve/features/dashboard"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
+	"backendgreeve/features/orders"
 	"backendgreeve/features/product"
 	"backendgreeve/features/transaction"
 	"backendgreeve/features/users"
@@ -172,6 +173,15 @@ func RouteForum(e *echo.Echo, fh forums.ForumHandlerInterface, cfg config.Greeve
 	e.POST(route.ForumMessage, fh.PostMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.ForumMessageByID, fh.DeleteMessageForum(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.ForumMessageByID, fh.UpdateMessageForum(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteOrder(e *echo.Echo, uh orders.OrdersHandlerInterface, cfg config.GreeveConfig) {
+	jwtConfig := echojwt.Config{
+		SigningKey:   []byte(cfg.JWT_Secret),
+		ErrorHandler: helper.JWTErrorHandler,
+	}
+	e.GET("/api/v1/order/product", uh.GetOrdersProduct(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/order/challenge", uh.GetOrdersProduct(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg config.GreeveConfig) {

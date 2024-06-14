@@ -50,6 +50,29 @@ func (pd *ProductData) GetByPage(page int) ([]product.Product, int, error) {
 	return products, totalPages, nil
 }
 
+func (pd *ProductData) GetByPageAdmin(page int) ([]product.Product, int, error) {
+	var products []product.Product
+
+	var totalProducts int64
+	countTx := pd.DB.Model(&Product{}).Count(&totalProducts)
+	if countTx.Error != nil {
+		return nil, 0, constant.ErrProductEmpty
+	}
+
+	productsPerPage := 20
+	totalPages := int((totalProducts + int64(productsPerPage) - 1) / int64(productsPerPage))
+
+	tx := pd.DB.Model(&Product{}).Preload("Images").Preload("ImpactCategories.ImpactCategory").
+		Offset((page - 1) * productsPerPage).Find(&products)
+	if tx.Error != nil {
+		return nil, 0, constant.ErrGetProduct
+	}
+	if tx.RowsAffected == 0 {
+		return nil, 0, constant.ErrProductNotFound
+	}
+	return products, totalPages, nil
+}
+
 func (pd *ProductData) GetById(id string) (product.Product, error) {
 	var products product.Product
 
@@ -181,6 +204,7 @@ func (pd *ProductData) Update(products product.Product) error {
 		Coin:        products.Coin,
 		Price:       products.Price,
 		Description: products.Description,
+		Stock:       products.Stock,
 	}
 
 	for _, image := range products.Images {

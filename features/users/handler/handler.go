@@ -6,6 +6,7 @@ import (
 	"backendgreeve/helper"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -404,6 +405,8 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 				Coin:      user.Coin,
 				Exp:       user.Exp,
 				AvatarURL: user.AvatarURL,
+				CreatedAt: user.CreatedAt.Format("02/01/06"),
+				UpdatedAt: user.UpdatedAt.Format("02/01/06"),
 			})
 		}
 		return c.JSON(http.StatusOK, helper.MetadataFormatResponse(true, constant.AdminSuccessGetAllUser, metadata, response))
@@ -452,6 +455,8 @@ func (h *UserHandler) GetUserByIDForAdmin() echo.HandlerFunc {
 			Coin:      users.Coin,
 			Exp:       users.Exp,
 			AvatarURL: users.AvatarURL,
+			CreatedAt: users.CreatedAt.Format("02/01/06"),
+			UpdatedAt: users.UpdatedAt.Format("02/01/06"),
 		}
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.AdminSuccessGetUser, response))
@@ -489,11 +494,12 @@ func (h *UserHandler) UpdateUserForAdmin() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 		response := users.UpdateUserByAdmin{
-			ID:      id,
-			Name:    userEdit.Name,
-			Address: userEdit.Address,
-			Gender:  userEdit.Gender,
-			Phone:   userEdit.Phone,
+			ID:       id,
+			Name:     userEdit.Name,
+			Address:  userEdit.Address,
+			Gender:   userEdit.Gender,
+			Phone:    userEdit.Phone,
+			UpdateAt: time.Now(),
 		}
 
 		if err := h.s.UpdateUserForAdmin(response); err != nil {

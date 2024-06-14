@@ -130,6 +130,8 @@ func (td *TransactionData) GetUserTransaction(userId string) ([]transaction.Tran
 				UpdatedAt: txn.User.UpdatedAt,
 			},
 			TransactionItems: txnItems,
+			CreatedAt:        txn.CreatedAt,
+			UpdatedAt:        txn.UpdatedAt,
 		})
 	}
 

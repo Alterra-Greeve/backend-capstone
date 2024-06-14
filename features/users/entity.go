@@ -61,11 +61,12 @@ type UserUpdate struct {
 }
 
 type UpdateUserByAdmin struct {
-	ID      string
-	Name    string
-	Address string
-	Gender  string
-	Phone   string
+	ID       string
+	Name     string
+	Address  string
+	Gender   string
+	Phone    string
+	UpdateAt time.Time
 }
 
 type Leaderboard struct {
