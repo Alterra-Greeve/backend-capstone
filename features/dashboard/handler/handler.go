@@ -33,7 +33,14 @@ func (h *DashboardHandler) GetDashboard() echo.HandlerFunc {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
 		response := new(DashboardResponse).ToResponse(data)
-
+		monthlyImpact, err := h.s.GetMonthlyImpact()
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		for _, impact := range monthlyImpact {
+			response.MonthlyImpact = append(response.MonthlyImpact, new(MonthlyImpactResponse).ToResponse(impact))
+		}
+		
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", response))
 	}
 }
