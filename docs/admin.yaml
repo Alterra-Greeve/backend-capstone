@@ -83,6 +83,33 @@ paths:
                   status: true
                   message: Get Orders Success
                   data: null
+  
+  /order/challenge:
+    get:
+      tags:
+        - admin
+      summary: Get Orders
+      description: Admin mendapatkan Orders, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getorderchallenge
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Orders Success
+                  data: null
+  
   /admin/login:
     post:
       tags:
