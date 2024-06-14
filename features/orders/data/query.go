@@ -45,7 +45,7 @@ func (d *OrdersData) GetOrdersProduct() ([]orders.OrdersProduct, error) {
 
 		var impactCategories []orders.ImpactCategory
 		if err := d.DB.Table("product_impact_categories").
-			Select("impact_categories.id, impact_categories.name, impact_categories.impact_point").
+			Select("impact_categories.id, impact_categories.name, impact_categories.image_url,impact_categories.impact_point").
 			Joins("JOIN impact_categories ON impact_categories.id = product_impact_categories.impact_category_id").
 			Where("product_impact_categories.product_id = ?", ordersProduct.ProductID).
 			Scan(&impactCategories).Error; err != nil {
@@ -90,7 +90,7 @@ func (cd *OrdersData) GetOrdersChallenge() ([]orders.ChallengeConfirmation, erro
 	tx := cd.DB.Preload("User").
 		Preload("Challenge").
 		Preload("Challenge.ChallengeImpactCategories").
-		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").
+		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").Order("created_at DESC").
 		Find(&challengeConfirmations)
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -102,8 +102,8 @@ func (cd *OrdersData) GetOrdersChallenge() ([]orders.ChallengeConfirmation, erro
 		var impactPointTotal int
 		for _, cic := range cc.Challenge.ChallengeImpactCategories {
 			impactCategories = append(impactCategories, orders.ImpactCategory{
-				ID:   cic.ImpactCategory.ID,
-				Name: cic.ImpactCategory.Name,
+				Name:     cic.ImpactCategory.Name,
+				ImageURL: cic.ImpactCategory.ImageURL,
 			})
 			impactPointTotal += cic.ImpactCategory.ImpactPoint
 		}
@@ -111,6 +111,7 @@ func (cd *OrdersData) GetOrdersChallenge() ([]orders.ChallengeConfirmation, erro
 		challengeData = append(challengeData, orders.ChallengeConfirmation{
 			ID:               cc.ID,
 			Username:         cc.User.Username,
+			Email:            cc.User.Email,
 			Status:           cc.Status,
 			ImpactCategories: impactCategories,
 			ImpactPointTotal: impactPointTotal,

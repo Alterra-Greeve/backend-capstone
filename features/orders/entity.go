@@ -25,7 +25,7 @@ type OrdersProduct struct {
 type ImpactCategory struct {
 	ID          string
 	Name        string
-	IconURL     string
+	ImageURL    string
 	ImpactPoint int
 }
 
@@ -33,6 +33,7 @@ type ImpactCategory struct {
 type ChallengeConfirmation struct {
 	ID               string
 	Username         string
+	Email            string
 	Status           string
 	Challenge        Challenge
 	ImpactCategories []ImpactCategory

@@ -18,8 +18,12 @@ type OrdersProductResponse struct {
 }
 
 type ImpactCategoryResponse struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ImpactCategory ImpactCategory `json:"impact_category"`
+}
+
+type ImpactCategory struct {
+	Name     string `json:"name"`
+	ImageURL string `json:"image_url"`
 }
 
 func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
@@ -28,7 +32,10 @@ func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
 		var helps []ImpactCategoryResponse
 		for _, category := range order.ImpactCategories {
 			helps = append(helps, ImpactCategoryResponse{
-				Name: category.Name,
+				ImpactCategory: ImpactCategory{
+					Name:     category.Name,
+					ImageURL: category.ImageURL,
+				},
 			})
 		}
 
@@ -54,6 +61,7 @@ func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
 // Challenge
 type ChallengeConfirmationResponse struct {
 	Username       string                   `json:"username"`
+	Email          string                   `json:"email"`
 	ChallengeName  string                   `json:"challenge_name"`
 	ImpactPoint    int                      `json:"impact_point"`
 	ImpactCategory []ImpactCategoryResponse `json:"helps"`
@@ -67,13 +75,16 @@ func ToChallengeConfirmationResponse(data []orders.ChallengeConfirmation) []Chal
 		var helps []ImpactCategoryResponse
 		for _, category := range confirmation.ImpactCategories {
 			helps = append(helps, ImpactCategoryResponse{
-				ID:   category.ID,
-				Name: category.Name,
+				ImpactCategory: ImpactCategory{
+					Name:     category.Name,
+					ImageURL: category.ImageURL,
+				},
 			})
 		}
 
 		response := ChallengeConfirmationResponse{
 			Username:       confirmation.Username,
+			Email:          confirmation.Email,
 			ChallengeName:  confirmation.Challenge.Title,
 			ImpactPoint:    confirmation.ImpactPointTotal,
 			ImpactCategory: helps,
