@@ -181,7 +181,7 @@ func RouteOrder(e *echo.Echo, uh orders.OrdersHandlerInterface, cfg config.Greev
 		ErrorHandler: helper.JWTErrorHandler,
 	}
 	e.GET("/api/v1/order/product", uh.GetOrdersProduct(), echojwt.WithConfig(jwtConfig))
-	e.GET("/api/v1/order/challenge", uh.GetOrdersProduct(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/order/challenge", uh.GetOrdersChallenge(), echojwt.WithConfig(jwtConfig))
 }
 
 func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg config.GreeveConfig) {

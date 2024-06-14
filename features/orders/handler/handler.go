@@ -35,14 +35,17 @@ func (h *OrdersProductHandler) GetOrdersProduct() echo.HandlerFunc {
 	}
 }
 
-// func (h *OrdersProductHandler) GetOrdersChallenge() echo.HandlerFunc {
-// 	return func(c echo.Context) error {
-// 		challengeConfirmations, err := h.s.GetOrdersChallenge()
-// 		if err != nil {
-// 			return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 		}
+func (h *OrdersProductHandler) GetOrdersChallenge() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		challengeConfirmations, err := h.s.GetOrdersChallenge()
+		if err != nil {
+			return c.JSON(http.StatusNotFound, helper.FormatResponse(false, err.Error(), nil))
+		}
+		if len(challengeConfirmations) == 0 {
+			helper.ObjectFormatResponse(true, constant.GetDataSuccess, nil)
+		}
 
-// 		response := ToChallengeConfirmationResponse(challengeConfirmations)
-// 		return c.JSON(http.StatusOK, response)
-// 	}
-// }
+		response := ToChallengeConfirmationResponse(challengeConfirmations)
+		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.GetDataSuccess, response))
+	}
+}
