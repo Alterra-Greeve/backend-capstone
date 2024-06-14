@@ -10,6 +10,7 @@ type OrdersProductResponse struct {
 	Coin        int                      `json:"coin"`
 	Qty         int                      `json:"qty"`
 	ProductName string                   `json:"product_name"`
+	TotalHarga  float64                  `json:"total"`
 	Helps       []ImpactCategoryResponse `json:"helps"`
 	ImpactPoint int                      `json:"impact_point"`
 	CreatedAt   string                   `json:"createdAt"`
@@ -27,18 +28,18 @@ func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
 		var helps []ImpactCategoryResponse
 		for _, category := range order.ImpactCategories {
 			helps = append(helps, ImpactCategoryResponse{
-				ID:   category.ID,
 				Name: category.Name,
 			})
 		}
 
-		totalCoin := order.Coin * order.Qty // Calculate the total coin
-
+		totalCoin := order.Coin * order.Qty
+		Total := int(order.TotalHarga)
 		response := OrdersProductResponse{
 			Username:    order.Username,
 			Email:       order.Email,
 			Qty:         order.Qty,
-			Coin:        totalCoin, // Set the total coin here
+			Coin:        totalCoin,
+			TotalHarga:  float64(Total),
 			ProductName: order.ProductName,
 			Helps:       helps,
 			ImpactPoint: order.ImpactPointTotal,

@@ -17,6 +17,7 @@ type OrdersProduct struct {
 	Coin             int
 	ImpactPointTotal int
 	TotalCoin        int
+	TotalHarga       float64
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
@@ -24,6 +25,7 @@ type OrdersProduct struct {
 type ImpactCategory struct {
 	ID          string
 	Name        string
+	IconURL     string
 	ImpactPoint int
 }
 

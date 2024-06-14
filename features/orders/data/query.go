@@ -23,7 +23,7 @@ func (d *OrdersData) GetOrdersProduct() ([]orders.OrdersProduct, error) {
 	rows, err := d.DB.Table("transactions").
 		Select(`transactions.user_id, users.username, users.email,
 			products.id AS product_id, products.name AS product_name, products.coin AS product_coin,
-			transaction_items.quantity, 
+			transaction_items.quantity, transactions.total,
 			transactions.created_at, transactions.updated_at`).
 		Joins("JOIN users ON users.id = transactions.user_id").
 		Joins("JOIN transaction_items ON transaction_items.transaction_id = transactions.id").
@@ -38,7 +38,7 @@ func (d *OrdersData) GetOrdersProduct() ([]orders.OrdersProduct, error) {
 		var ordersProduct orders.OrdersProduct
 		if err := rows.Scan(&ordersProduct.UserID, &ordersProduct.Username, &ordersProduct.Email,
 			&ordersProduct.ProductID, &ordersProduct.ProductName, &ordersProduct.Coin,
-			&ordersProduct.Qty,
+			&ordersProduct.Qty, &ordersProduct.TotalHarga,
 			&ordersProduct.CreatedAt, &ordersProduct.UpdatedAt); err != nil {
 			return nil, err
 		}
