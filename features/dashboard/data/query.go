@@ -5,6 +5,7 @@ import (
 	"backendgreeve/features/product"
 	productData "backendgreeve/features/product/data"
 	"fmt"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -158,4 +159,59 @@ func (d *DashboardData) GetNewUserPercentage() (string, error) {
 		return "0%", txThisMonth.Error
 	}
 	return fmt.Sprintf("%.2f%%", totalUserPercentage), nil
+}
+
+func (d *DashboardData) GetMonthlyImpactProduct(month string) ([]dashboard.ImpactPoint, error) {
+	var impactPoints []dashboard.ImpactPoint
+
+	monthTime, err := time.Parse("2006-01", month)
+	if err != nil {
+		return nil, fmt.Errorf("invalid month format: %w", err)
+	}
+
+	startDate := monthTime
+	endDate := monthTime.AddDate(0, 1, 0)
+
+	err = d.DB.Table("transaction_items").
+		Select("impact_categories.name as name, SUM(impact_categories.impact_point * transaction_items.quantity) as total_point").
+		Joins("JOIN products ON products.id = transaction_items.product_id").
+		Joins("JOIN product_impact_categories ON product_impact_categories.product_id = products.id").
+		Joins("JOIN impact_categories ON impact_categories.id = product_impact_categories.impact_category_id").
+		Where("transaction_items.created_at BETWEEN ? AND ?", startDate, endDate).
+		Group("impact_categories.name").
+		Scan(&impactPoints).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return impactPoints, nil
+}
+
+func (d *DashboardData) GetMonthlyImpactChallenge(month string) ([]dashboard.ImpactPoint, error) {
+	var impactPoints []dashboard.ImpactPoint
+
+	monthTime, err := time.Parse("2006-01", month)
+	if err != nil {
+		return nil, fmt.Errorf("invalid month format: %w", err)
+	}
+
+	startDate := monthTime
+	endDate := monthTime.AddDate(0, 1, 0)
+
+	err = d.DB.Table("challenge_confirmations").
+		Select("impact_categories.name as name, SUM(impact_categories.impact_point) as total_point").
+		Joins("JOIN challenges ON challenges.id = challenge_confirmations.challenge_id").
+		Joins("JOIN challenge_impact_categories ON challenge_impact_categories.challenge_id = challenges.id").
+		Joins("JOIN impact_categories ON impact_categories.id = challenge_impact_categories.impact_category_id").
+		Where("challenge_confirmations.created_at BETWEEN ? AND ?", startDate, endDate).
+		Where("challenge_confirmations.status = ?", "Berhasil").
+		Group("impact_categories.name").
+		Scan(&impactPoints).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return impactPoints, nil
 }

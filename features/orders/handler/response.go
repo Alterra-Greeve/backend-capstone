@@ -10,6 +10,7 @@ type OrdersProductResponse struct {
 	Coin        int                      `json:"coin"`
 	Qty         int                      `json:"qty"`
 	ProductName string                   `json:"product_name"`
+	TotalHarga  float64                  `json:"total"`
 	Helps       []ImpactCategoryResponse `json:"helps"`
 	ImpactPoint int                      `json:"impact_point"`
 	CreatedAt   string                   `json:"createdAt"`
@@ -17,8 +18,12 @@ type OrdersProductResponse struct {
 }
 
 type ImpactCategoryResponse struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ImpactCategory ImpactCategory `json:"impact_category"`
+}
+
+type ImpactCategory struct {
+	Name     string `json:"name"`
+	ImageURL string `json:"image_url"`
 }
 
 func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
@@ -27,56 +32,66 @@ func ToResponse(data []orders.OrdersProduct) []OrdersProductResponse {
 		var helps []ImpactCategoryResponse
 		for _, category := range order.ImpactCategories {
 			helps = append(helps, ImpactCategoryResponse{
-				ID:   category.ID,
-				Name: category.Name,
+				ImpactCategory: ImpactCategory{
+					Name:     category.Name,
+					ImageURL: category.ImageURL,
+				},
 			})
 		}
 
+		totalCoin := order.Coin * order.Qty
+		Total := int(order.TotalHarga)
 		response := OrdersProductResponse{
 			Username:    order.Username,
 			Email:       order.Email,
-			Coin:        order.TotalCoin,
 			Qty:         order.Qty,
+			Coin:        totalCoin,
+			TotalHarga:  float64(Total),
 			ProductName: order.ProductName,
 			Helps:       helps,
 			ImpactPoint: order.ImpactPointTotal,
-			CreatedAt:   order.CreatedAt.String(),
-			UpdatedAt:   order.UpdatedAt.String(),
+			CreatedAt:   order.CreatedAt.Format("02/01/06"),
+			UpdatedAt:   order.UpdatedAt.Format("02/01/06"),
 		}
 		responses = append(responses, response)
 	}
 	return responses
 }
 
-// type ChallengeConfirmationResponse struct {
-// 	Username       string                   `json:"username"`
-// 	ChallengeName  string                   `json:"nama_challenge"`
-// 	ImpactPoint    int                      `json:"impact_point"`
-// 	ImpactCategory []ImpactCategoryResponse `json:"impact_category_helps"`
-// 	CreatedAt      string                   `json:"createdAt"`
-// 	UpdatedAt      string                   `json:"updatedAt"`
-// }
+// Challenge
+type ChallengeConfirmationResponse struct {
+	Username       string                   `json:"username"`
+	Email          string                   `json:"email"`
+	ChallengeName  string                   `json:"challenge_name"`
+	ImpactPoint    int                      `json:"impact_point"`
+	ImpactCategory []ImpactCategoryResponse `json:"helps"`
+	CreatedAt      string                   `json:"createdAt"`
+	UpdatedAt      string                   `json:"updatedAt"`
+}
 
-// func ToChallengeConfirmationResponse(data []orders.OrderChallengeConfirmation) []ChallengeConfirmationResponse {
-// 	var responses []ChallengeConfirmationResponse
-// 	for _, confirmation := range data {
-// 		var helps []ImpactCategoryResponse
-// 		for _, category := range confirmation.ImpactCategories {
-// 			helps = append(helps, ImpactCategoryResponse{
-// 				ID:   category.ID,
-// 				Name: category.Name,
-// 			})
-// 		}
+func ToChallengeConfirmationResponse(data []orders.ChallengeConfirmation) []ChallengeConfirmationResponse {
+	var responses []ChallengeConfirmationResponse
+	for _, confirmation := range data {
+		var helps []ImpactCategoryResponse
+		for _, category := range confirmation.ImpactCategories {
+			helps = append(helps, ImpactCategoryResponse{
+				ImpactCategory: ImpactCategory{
+					Name:     category.Name,
+					ImageURL: category.ImageURL,
+				},
+			})
+		}
 
-// 		response := ChallengeConfirmationResponse{
-// 			Username:       confirmation.Username, // Make sure to fetch User's Username
-// 			ChallengeName:  confirmation.Challenge.Title,
-// 			ImpactPoint:    confirmation.ImpactPointTotal,
-// 			ImpactCategory: helps,
-// 			CreatedAt:      confirmation.CreatedAt.Format(time.RFC3339),
-// 			UpdatedAt:      confirmation.UpdatedAt.Format(time.RFC3339),
-// 		}
-// 		responses = append(responses, response)
-// 	}
-// 	return responses
-// }
+		response := ChallengeConfirmationResponse{
+			Username:       confirmation.Username,
+			Email:          confirmation.Email,
+			ChallengeName:  confirmation.Challenge.Title,
+			ImpactPoint:    confirmation.ImpactPointTotal,
+			ImpactCategory: helps,
+			CreatedAt:      confirmation.CreatedAt.Format("02/01/06"),
+			UpdatedAt:      confirmation.UpdatedAt.Format("02/01/06"),
+		}
+		responses = append(responses, response)
+	}
+	return responses
+}

@@ -103,11 +103,18 @@ func (cd *ChallengeConfirmation) ConvertToArrayEntity(challengeConfirmations []C
 				},
 			})
 		}
-
+		var images []challenges.ChallengeConfirmationImage
+		for _, image := range confirmation.ChallengeConfirmationImages {
+			images = append(images, challenges.ChallengeConfirmationImage{
+				ID:       image.ID,
+				ImageURL: image.ImageURL,
+			})
+		}
 		challengeData = append(challengeData, challenges.ChallengeConfirmation{
-			ID:     confirmation.ID,
-			UserID: confirmation.UserID,
-			Status: confirmation.Status,
+			ID:                          confirmation.ID,
+			UserID:                      confirmation.UserID,
+			Status:                      confirmation.Status,
+			ChallengeConfirmationImages: images,
 			Challenge: challenges.Challenge{
 				ID:               confirmation.Challenge.ID,
 				Title:            confirmation.Challenge.Title,

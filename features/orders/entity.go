@@ -1,7 +1,6 @@
 package orders
 
 import (
-	"backendgreeve/features/challenges"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -18,53 +17,71 @@ type OrdersProduct struct {
 	Coin             int
 	ImpactPointTotal int
 	TotalCoin        int
+	TotalHarga       float64
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
 
 type ImpactCategory struct {
-	ID   string
-	Name string
+	ID          string
+	Name        string
+	ImageURL    string
+	ImpactPoint int
 }
 
 // Challenge
-type OrderChallengeConfirmation struct {
+type ChallengeConfirmation struct {
 	ID               string
 	Username         string
+	Email            string
 	Status           string
-	Challenge        challenges.Challenge
+	Challenge        Challenge
 	ImpactCategories []ImpactCategory
 	ImpactPointTotal int
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
+
 type Challenge struct {
-	ID          string
-	Title       string
-	Difficulty  string
-	Description string
-	Exp         int
-	Coin        int
-	ImageURL    string
-	DateStart   time.Time
-	DateEnd     time.Time
+	ID                        string
+	Title                     string
+	Difficulty                string
+	Description               string
+	Exp                       int
+	Coin                      int
+	ImageURL                  string
+	DateStart                 time.Time
+	DateEnd                   time.Time
+	ChallengeImpactCategories []ChallengeImpactCategory
 }
 
+type ChallengeImpactCategory struct {
+	ID               string
+	ChallengeID      string
+	ImpactCategoryID string
+	ImpactCategory   ImpactCategory
+}
+
+//	type User struct {
+//		ID       string
+//		Username string
+//		Email    string
+//	}
 type OrdersHandlerInterface interface {
 	GetOrdersProduct() echo.HandlerFunc
-	// GetOrdersChallenge() echo.HandlerFunc
+	GetOrdersChallenge() echo.HandlerFunc
 }
 
 type OrdersServiceInterface interface {
 	GetOrdersProduct() ([]OrdersProduct, error)
-	// GetOrdersChallenge() ([]OrderChallengeConfirmation, error)
+	GetOrdersChallenge() ([]ChallengeConfirmation, error)
 }
 
 type OrdersDataInterface interface {
 	GetOrdersProduct() ([]OrdersProduct, error)
-	GetTotalImpactPoint() (int, error)
+	// GetTotalImpactPoint() (int, error)
 	GetTotalCoin() (int, error)
 
 	// Challenge
-	// GetOrdersChallenge() ([]OrderChallengeConfirmation, error)
+	GetOrdersChallenge() ([]ChallengeConfirmation, error)
 }

@@ -16,6 +16,6 @@ func (s *OrderService) GetOrdersProduct() ([]orders.OrdersProduct, error) {
 	return s.d.GetOrdersProduct()
 }
 
-// func (s *OrderService) GetOrdersChallenge() ([]orders.OrderChallengeConfirmation, error) {
-// 	return s.d.GetOrdersChallenge()
-// }
+func (s *OrderService) GetOrdersChallenge() ([]orders.ChallengeConfirmation, error) {
+	return s.d.GetOrdersChallenge()
+}

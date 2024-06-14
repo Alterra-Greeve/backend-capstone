@@ -35,7 +35,11 @@ func (h *TransactionHandler) GetUserTransaction() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success get user transaction", transactions))
+		response := []TransactionUserResponse{}
+		for _, transaction := range transactions {
+			response = append(response, new(TransactionUserResponse).FromEntity(transaction))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success get user transaction", response))
 	}
 }
 

@@ -261,36 +261,8 @@ func (h *ChallengeHandler) GetUserParticipate() echo.HandlerFunc {
 		}
 
 		var response []UserChallengeConfirmationResponse
-		for _, confirmation := range challenges {
-			challenge := confirmation.Challenge
-			challengeResponse := ChallengeResponse{
-				ID:          challenge.ID,
-				Title:       challenge.Title,
-				Difficulty:  challenge.Difficulty,
-				Description: challenge.Description,
-				Exp:         challenge.Exp,
-				Coin:        challenge.Coin,
-				ImageURL:    challenge.ImageURL,
-				DateStart:   challenge.DateStart.Format("02/01/06"),
-				DateEnd:     challenge.DateEnd.Format("02/01/06"),
-			}
-
-			for _, category := range challenge.ImpactCategories {
-				challengeResponse.Categories = append(challengeResponse.Categories, ChallengeImpactCategories{
-					ImpactCategory: ImpactCategory{
-						Name:        category.ImpactCategory.Name,
-						ImpactPoint: category.ImpactCategory.ImpactPoint,
-						IconURL:     category.ImpactCategory.IconURL,
-					},
-				})
-			}
-
-			response = append(response, UserChallengeConfirmationResponse{
-				ID:        confirmation.ID,
-				UserID:    confirmation.UserID,
-				Status:    confirmation.Status,
-				Challenge: challengeResponse,
-			})
+		for _, challenge := range challenges {
+			response = append(response, new(UserChallengeConfirmationResponse).ToResponse(challenge))
 		}
 
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", response))
@@ -374,3 +346,4 @@ func (h *ChallengeHandler) EditChallengeForUserByID() echo.HandlerFunc {
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessUpdate, nil))
 	}
 }
+

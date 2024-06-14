@@ -94,6 +94,7 @@ type ChallengeDataInterface interface {
 	AddToLogs(userId string, challengeId string, status string) error
 	IsUserParticipate(userId string, challengeId string) (error, bool)
 	GetUserParticipate(userId string, status string) ([]ChallengeConfirmation, error)
+	InsertCoinAndExpUser(challengeConfirmationId string) error
 	Create(Challenge) error
 	Update(Challenge) error
 	Delete(string) error

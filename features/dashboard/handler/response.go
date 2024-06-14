@@ -13,6 +13,17 @@ type DashboardResponse struct {
 	TotalUser                          int                              `json:"total_user"`
 	TotalUserPercentage                string                           `json:"total_user_percentage"`
 	NewProducts                        []productHandler.ProductResponse `json:"new_products"`
+	MonthlyImpact                      []MonthlyImpactResponse          `json:"monthly_impact"`
+}
+
+type MonthlyImpactResponse struct {
+	Date  string        `json:"month"`
+	Point []ImpactPoint `json:"point"`
+}
+
+type ImpactPoint struct {
+	Name  string `json:"name"`
+	Point int64  `json:"point"`
 }
 
 func (d *DashboardResponse) ToResponse(data dashboard.Dashboard) *DashboardResponse {
@@ -29,5 +40,19 @@ func (d *DashboardResponse) ToResponse(data dashboard.Dashboard) *DashboardRespo
 		TotalUser:                          data.TotalUser,
 		TotalUserPercentage:                data.NewUserPercentage,
 		NewProducts:                        newProducts,
+	}
+}
+
+func (m *MonthlyImpactResponse) ToResponse(data dashboard.MonthlyImpact) MonthlyImpactResponse {
+	impactPoints := make([]ImpactPoint, len(data.ImpactPoint))
+	for i, point := range data.ImpactPoint {
+		impactPoints[i] = ImpactPoint{
+			Name:  point.Name,
+			Point: int64(point.TotalPoint),
+		}
+	}
+	return MonthlyImpactResponse{
+		Date:  data.Date,
+		Point: impactPoints,
 	}
 }
