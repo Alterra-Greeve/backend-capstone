@@ -42,12 +42,17 @@ func (d *DashboardData) GetDashboard() (dashboard.Dashboard, error) {
 	if err != nil {
 		return dashboard.Dashboard{}, err
 	}
+	totalMembership, err := d.GetTotalMembership()
+	if err != nil {
+		return dashboard.Dashboard{}, err
+	}
 	return dashboard.Dashboard{
 		TotalProduct:              totalProduct,
 		TotalNewProductThisMonth:  totalNewProductThisMonth,
 		TotalNewProductPercentage: totalNewProductPercentage,
 		TotalUser:                 totalUser,
 		NewProduct:                newProduct,
+		TotalMembership:           totalMembership,
 	}, nil
 }
 
