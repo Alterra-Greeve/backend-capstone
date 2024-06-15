@@ -223,21 +223,22 @@ func (pd *ProductData) Update(products product.Product) error {
 			ImpactCategoryID: impactCategory.ImpactCategoryID,
 		})
 	}
+	tx := pd.DB.Begin()
+	err := pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImage{})
+	if err.Error != nil {
 
-	tx := pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImage{})
-	if tx.Error != nil {
 		return tx.Error
 	}
-	tx = pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImpactCategory{})
-	if tx.Error != nil {
+	err = pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImpactCategory{})
+	if err.Error != nil {
 		return tx.Error
 	}
 
-	tx = pd.DB.Model(&productQuery).Omit("CreatedAt").Where("id = ?", productQuery.ID).Save(&productQuery)
-	if tx.Error != nil {
+	err = pd.DB.Model(&productQuery).Where("id = ?", productQuery.ID).Save(&productQuery)
+	if err.Error != nil {
 		return constant.ErrUpdateProduct
 	}
-	return nil
+	return tx.Commit().Error
 }
 
 func (pd *ProductData) Delete(productId string) error {
