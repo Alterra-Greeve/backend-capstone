@@ -3,7 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/product"
-	"fmt"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
