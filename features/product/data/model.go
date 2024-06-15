@@ -48,14 +48,6 @@ type ProductLog struct {
 	Product   Product   `gorm:"foreignKey:ProductID;references:ID"`
 }
 
-type ProductReccomendation struct {
-	*gorm.Model
-	ID               string                        `gorm:"primary_key;type:varchar(50);not null;column:id"`
-	UserID           string                        `gorm:"type:varchar(50);not null;column:user_id"`
-	ImpactCategoryID string                        `gorm:"type:varchar(50);not null;column:impact_category_id"`
-	User             user.User                     `gorm:"foreignKey:UserID;references:ID"`
-	ImpactCategory   impactcategory.ImpactCategory `gorm:"foreignKey:ImpactCategoryID;references:ID"`
-}
 
 func (product *Product) TableName() string {
 	return "products"

@@ -2,8 +2,6 @@ package service
 
 import (
 	"backendgreeve/features/dashboard"
-	"fmt"
-	"log"
 )
 
 type DashboardService struct {
@@ -32,13 +30,12 @@ func (s *DashboardService) GetMonthlyImpact() ([]dashboard.MonthlyImpact, error)
 		}
 
 		monthlyImpact := dashboard.MonthlyImpact{
-			Date:        fmt.Sprintf("%s", month),
+			Date:        month,
 			ImpactPoint: impactPoints,
 		}
 
 		monthlyImpacts = append(monthlyImpacts, monthlyImpact)
 	}
-	log.Println(monthlyImpacts)
 	return monthlyImpacts, nil
 }
 

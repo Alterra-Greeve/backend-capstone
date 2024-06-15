@@ -89,7 +89,7 @@ func (p ProductAdminResponse) ToResponse(product product.Product) ProductAdminRe
 
 	category := make([]string, len(product.ImpactCategories))
 	for i, impactCategory := range product.ImpactCategories {
-		category[i] = impactCategory.ImpactCategory.Name
+		category[i] = impactCategory.ImpactCategory.ID
 	}
 	return ProductAdminResponse{
 		ID:          product.ID,

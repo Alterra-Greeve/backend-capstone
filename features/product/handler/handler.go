@@ -452,3 +452,28 @@ func (h *ProductHandler) Delete() echo.HandlerFunc {
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessDelete, nil))
 	}
 }
+
+func (h *ProductHandler) GetRecommendation() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+		products, err := h.s.GetRecommendation(userId.(string))
+
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		var response []ProductResponse
+		for _, p := range products {
+			response = append(response, new(ProductResponse).ToResponse(p))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ProductSuccessGet, response))
+	}
+}

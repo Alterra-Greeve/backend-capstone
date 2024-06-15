@@ -10,6 +10,7 @@ type UserInfoResponse struct {
 	Phone       string `json:"phone"`
 	Coin        int    `json:"coin"`
 	Exp         int    `json:"exp"`
+	Membership  bool   `json:"membership"`
 	ImpactPoint int    `json:"impact_point"`
 	AvatarURL   string `json:"avatar_url"`
 }
@@ -28,35 +29,37 @@ type UserUpdateResponse struct {
 
 // Admin
 type UserbyAdminandPageResponse struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Email     string `json:"email"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Address   string `json:"address"`
-	Gender    string `json:"gender"`
-	Phone     string `json:"phone"`
-	Coin      int    `json:"coin"`
-	Exp       int    `json:"exp"`
-	AvatarURL string `json:"avatar_url"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID         string `json:"id"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Username   string `json:"username"`
+	Password   string `json:"password"`
+	Address    string `json:"address"`
+	Gender     string `json:"gender"`
+	Phone      string `json:"phone"`
+	Coin       int    `json:"coin"`
+	Exp        int    `json:"exp"`
+	Membership bool   `json:"membership"`
+	AvatarURL  string `json:"avatar_url"`
+	CreatedAt  string `json:"created_at"`
+	UpdatedAt  string `json:"updated_at"`
 }
 
 type UserbyAdminResponse struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Email     string `json:"email"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Address   string `json:"address"`
-	Gender    string `json:"gender"`
-	Phone     string `json:"phone"`
-	Coin      int    `json:"coin"`
-	Exp       int    `json:"exp"`
-	AvatarURL string `json:"avatar_url"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID         string `json:"id"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Username   string `json:"username"`
+	Password   string `json:"password"`
+	Address    string `json:"address"`
+	Gender     string `json:"gender"`
+	Phone      string `json:"phone"`
+	Coin       int    `json:"coin"`
+	Exp        int    `json:"exp"`
+	Membership bool   `json:"membership"`
+	AvatarURL  string `json:"avatar_url"`
+	CreatedAt  string `json:"created_at"`
+	UpdatedAt  string `json:"updated_at"`
 }
 
 type MetadataResponse struct {
