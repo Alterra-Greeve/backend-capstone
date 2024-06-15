@@ -34,7 +34,8 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.POST(route.UserForgotPassword, uh.ForgotPassword())
 	e.POST(route.UserVerifyOTP, uh.VerifyOTP())
 	e.POST(route.UserResetPassword, uh.ResetPassword())
-
+	e.POST(route.UserRegisterMembership, uh.RegisterMembership(), echojwt.WithConfig(jwtConfig))
+	
 	e.GET(route.UserByUsername, uh.GetUserByUsername())
 	e.GET(route.UserPath, uh.GetUserData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
@@ -71,6 +72,7 @@ func RouteProduct(e *echo.Echo, ph product.ProductHandlerInterface, cfg config.G
 
 	e.POST("/api/v1/products", ph.Create())
 	e.GET("/api/v1/products", ph.Get(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/products/recommendation", ph.GetRecommendation(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/products/search", ph.GetByName(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/products/category/:category_name", ph.GetByCategory(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/products/:id", ph.GetById(), echojwt.WithConfig(jwtConfig))

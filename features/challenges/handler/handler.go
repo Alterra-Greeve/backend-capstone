@@ -91,6 +91,7 @@ func (h *ChallengeHandler) GetByID() echo.HandlerFunc {
 		for i, cat := range challenge.ImpactCategories {
 			category[i] = ChallengeImpactCategories{
 				ImpactCategory: ImpactCategory{
+					ID:          cat.ImpactCategory.ID,
 					Name:        cat.ImpactCategory.Name,
 					ImpactPoint: cat.ImpactCategory.ImpactPoint,
 					IconURL:     cat.ImpactCategory.IconURL,
@@ -175,7 +176,12 @@ func (h *ChallengeHandler) GetAllForAdmin() echo.HandlerFunc {
 			var categories []ChallengeImpactCategories
 			for _, cat := range challenge.ImpactCategories {
 				categories = append(categories, ChallengeImpactCategories{
-					ImpactCategory: ImpactCategory{Name: cat.ImpactCategory.Name, ImpactPoint: cat.ImpactCategory.ImpactPoint, IconURL: cat.ImpactCategory.IconURL},
+					ImpactCategory: ImpactCategory{
+						ID:          cat.ImpactCategory.ID,
+						Name:        cat.ImpactCategory.Name,
+						ImpactPoint: cat.ImpactCategory.ImpactPoint,
+						IconURL:     cat.ImpactCategory.IconURL,
+					},
 				})
 			}
 
@@ -271,16 +277,79 @@ func (h *ChallengeHandler) GetUserParticipate() echo.HandlerFunc {
 
 func (h *ChallengeHandler) Update() echo.HandlerFunc {
 	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
 
-		// Your code here
-		return nil
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		adminData := h.j.ExtractUserToken(token)
+		adminRole := adminData[constant.JWT_ROLE].(string)
+		if adminRole != constant.RoleAdmin {
+			helper.UnauthorizedError(c)
+		}
+
+		challengeId := c.Param("id")
+		var request ChallengeCreateRequest
+		if err := c.Bind(&request); err != nil {
+			code, message := helper.HandleEchoError(err)
+			return c.JSON(code, helper.FormatResponse(false, message, nil))
+		}
+
+		challenge := challenges.Challenge{
+			ID:          challengeId,
+			Title:       request.Title,
+			Description: request.Description,
+			Difficulty:  request.Difficulty,
+			Exp:         request.Exp,
+			Coin:        request.Coin,
+			ImageURL:    request.ImageURL,
+			DateStart:   request.DateStart,
+			DateEnd:     request.DateEnd,
+		}
+
+		for _, category := range request.ImpactCategories {
+			challenge.ImpactCategories = append(challenge.ImpactCategories, challenges.ChallengeImpactCategory{
+				ImpactCategoryID: category,
+			})
+		}
+		err = h.s.Update(challenge)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", nil))
 	}
 }
 
 func (h *ChallengeHandler) Delete() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		// Your code here
-		return nil
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		adminData := h.j.ExtractUserToken(token)
+		adminRole := adminData[constant.JWT_ROLE].(string)
+		if adminRole != constant.RoleAdmin {
+			helper.UnauthorizedError(c)
+		}
+
+		challengeId := c.Param("id")
+		err = h.s.Delete(challengeId)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", nil))
 	}
 }
 
@@ -346,4 +415,3 @@ func (h *ChallengeHandler) EditChallengeForUserByID() echo.HandlerFunc {
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.ForumSuccessUpdate, nil))
 	}
 }
-

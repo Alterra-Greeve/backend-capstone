@@ -49,6 +49,7 @@ type ProductHandlerInterface interface {
 	Create() echo.HandlerFunc
 	Update() echo.HandlerFunc
 	Delete() echo.HandlerFunc
+	GetRecommendation() echo.HandlerFunc
 }
 
 type ProductServiceInterface interface {
@@ -62,6 +63,7 @@ type ProductServiceInterface interface {
 	Create(product Product) error
 	Update(product Product) error
 	Delete(productId string) error
+	GetRecommendation(userId string) ([]Product, error)
 }
 
 type ProductDataInterface interface {
@@ -76,4 +78,8 @@ type ProductDataInterface interface {
 	Create(product Product) error
 	Update(product Product) error
 	Delete(productId string) error
+	GetRecommendation(categoryId string) ([]Product, error)
+	GetImpactCategoryFromTransactionItems(userId string) (string, error)
+	GetImpactCategoryFromProductLog(userId string) (string, error)
+	GetRandomRecommendation() ([]Product, error)
 }

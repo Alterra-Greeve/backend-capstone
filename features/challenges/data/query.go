@@ -34,7 +34,7 @@ func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, 
 	totalPages := int(math.Ceil(float64(totalChallenges) / float64(challengePerPage)))
 
 	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").
-		Offset((page - 1) * challengePerPage).Limit(challengePerPage).Find(&challenges)
+		Offset((page - 1) * challengePerPage).Find(&challenges)
 
 	if tx.Error != nil {
 		return nil, 0, tx.Error
@@ -62,7 +62,6 @@ func (cd *ChallengeData) GetChallengeParticipant(challengeId string) (int, error
 	return int(count), nil
 }
 func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, error) {
-	// Kode Anda di sini
 	var challenge challenges.Challenge
 	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").Find(&challenge, "id = ?", challengeId)
 	if tx.Error != nil {
@@ -170,10 +169,23 @@ func (cd *ChallengeData) Create(challenge challenges.Challenge) error {
 }
 
 func (cd *ChallengeData) Update(challenge challenges.Challenge) error {
-	tx := cd.DB.Model(&Challenge{}).Where("id = ?", challenge.ID).Updates(&challenge)
+	tx := cd.DB.Begin()
 	if tx.Error != nil {
 		return tx.Error
 	}
+	err := cd.DB.Model(&ChallengeImpactCategory{}).Where("challenge_id = ?", challenge.ID).Delete(&ChallengeImpactCategory{}).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = cd.DB.Model(&Challenge{}).Where("id = ?", challenge.ID).Updates(&challenge).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	
+	tx.Commit()
 	return nil
 }
 
