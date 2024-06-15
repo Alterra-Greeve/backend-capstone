@@ -199,11 +199,6 @@ func (pd *ProductData) Create(product product.Product) error {
 }
 
 func (pd *ProductData) Update(products product.Product) error {
-	tx := pd.DB.Begin()
-	if tx.Error != nil {
-		return tx.Error
-	}
-
 	productQuery := Product{
 		ID:          products.ID,
 		Name:        products.Name,
@@ -212,9 +207,6 @@ func (pd *ProductData) Update(products product.Product) error {
 		Description: products.Description,
 		Stock:       products.Stock,
 	}
-
-	// Adding debug log for productQuery
-	fmt.Println("Product Query:", productQuery)
 
 	for _, image := range products.Images {
 		productQuery.Images = append(productQuery.Images, ProductImage{
@@ -232,27 +224,22 @@ func (pd *ProductData) Update(products product.Product) error {
 			ImpactCategoryID: impactCategory.ImpactCategoryID,
 		})
 	}
+	tx := pd.DB.Begin()
+	err := pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImage{})
+	if err.Error != nil {
 
-	tx = pd.DB.Where("product_id = ?", productQuery.ID).Delete(&ProductImage{})
-	if tx.Error != nil {
-		tx.Rollback()
+		return tx.Error
+	}
+	err = pd.DB.Where("product_id = ?", productQuery.ID).Delete(product.ProductImpactCategory{})
+	if err.Error != nil {
 		return tx.Error
 	}
 
-	tx = pd.DB.Where("product_id = ?", productQuery.ID).Delete(&ProductImpactCategory{})
-	if tx.Error != nil {
-		tx.Rollback()
-		return tx.Error
-	}
-
-	tx = pd.DB.Model(&productQuery).Where("id = ?", productQuery.ID).Save(&productQuery)
-	if tx.Error != nil {
-		tx.Rollback()
+	err = pd.DB.Model(&productQuery).Where("id = ?", productQuery.ID).Save(&productQuery)
+	if err.Error != nil {
 		return constant.ErrUpdateProduct
 	}
-
-	tx.Commit()
-	return nil
+	return tx.Commit().Error
 }
 
 func (pd *ProductData) Delete(productId string) error {
