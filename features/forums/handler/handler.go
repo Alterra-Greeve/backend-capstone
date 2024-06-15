@@ -7,6 +7,7 @@ import (
 	"errors"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
@@ -38,7 +39,7 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
-		if err != nil {
+		if err != nil || page < 1 {
 			page = 1
 		}
 		var totalPages int
@@ -88,6 +89,9 @@ func (h *ForumHandler) PostForum() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCreateForum.Error(), nil))
 		}
 
+		forum.Title = strings.TrimSpace(forum.Title)
+		forum.Description = strings.TrimSpace(forum.Description)
+
 		forumData := forums.Forum{
 			ID:          uuid.New().String(),
 			Title:       forum.Title,
@@ -98,7 +102,7 @@ func (h *ForumHandler) PostForum() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.ForumSuccessCreate, nil))
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.ForumSuccessCreate, nil))
 	}
 }
 func (h *ForumHandler) GetForumByID() echo.HandlerFunc {
@@ -182,6 +186,8 @@ func (h *ForumHandler) UpdateForum() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
+		forum.Title = strings.TrimSpace(forum.Title)
+		forum.Description = strings.TrimSpace(forum.Description)
 		forumsResponse := forums.EditForum{
 			ID:          forumid,
 			Title:       forum.Title,
@@ -312,7 +318,7 @@ func (h *ForumHandler) PostMessageForum() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCreateMessage.Error(), nil))
 		}
 
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.MessageSuccessCreate, nil))
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.MessageSuccessCreate, nil))
 	}
 }
 

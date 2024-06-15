@@ -374,7 +374,7 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
-		if err != nil {
+		if err != nil || page < 1 {
 			page = 1
 		}
 		var totalPages int

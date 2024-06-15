@@ -117,6 +117,8 @@ func ConvertResponseCode(err error) int {
 		return http.StatusNotFound
 	case constant.ErrFieldForumCannotBeEmpty:
 		return http.StatusBadRequest
+	case constant.ErrFieldData:
+		return http.StatusBadRequest
 
 	// Admin Error
 	case constant.ErrGetDataAdmin:
