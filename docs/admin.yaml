@@ -2307,8 +2307,8 @@ paths:
                 exp: 100
                 coin: 100
                 image_url: https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg
-                date_start: 01/01/2024
-                date_end: 01/07/2024
+                date_start: 2024-01-01
+                date_end: 2024-01-07
                 category: 
                  - 7d34a5fa-e2cf-466d-9f01-d731f6967082
       responses:
@@ -2597,8 +2597,8 @@ paths:
                 exp: 100
                 coin: 100
                 image_url: https://storage.googleapis.com/alterra-greeve/greeve/170a0d9d-5c57-4d41-aa73-6e0ce1335345images.jpeg
-                date_start: 01/01/2024
-                date_end: 01/07/2024
+                date_start: 2024-01-01
+                date_end: 2024-01-07
                 category: 
                  - 7d34a5fa-e2cf-466d-9f01-d731f6967082
       responses:
