@@ -221,6 +221,14 @@ func (h *ChallengeHandler) Create() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
+		dateStart, err := helper.ParseDate(challengeRequest.DateStart)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, err.Error(), nil))
+		}
+		dateEnd, err := helper.ParseDate(challengeRequest.DateEnd)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, err.Error(), nil))
+		}
 		challenge := challenges.Challenge{
 			Title:       challengeRequest.Title,
 			Difficulty:  challengeRequest.Difficulty,
@@ -228,8 +236,8 @@ func (h *ChallengeHandler) Create() echo.HandlerFunc {
 			Exp:         challengeRequest.Exp,
 			Coin:        challengeRequest.Coin,
 			ImageURL:    challengeRequest.ImageURL,
-			DateStart:   challengeRequest.DateStart,
-			DateEnd:     challengeRequest.DateEnd,
+			DateStart:   dateStart,
+			DateEnd:     dateEnd,
 		}
 		for _, category := range challengeRequest.ImpactCategories {
 			challenge.ImpactCategories = append(challenge.ImpactCategories, challenges.ChallengeImpactCategory{
@@ -299,7 +307,14 @@ func (h *ChallengeHandler) Update() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
-
+		dateStart, err := helper.ParseDate(request.DateStart)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, err.Error(), nil))
+		}
+		dateEnd, err := helper.ParseDate(request.DateEnd)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, err.Error(), nil))
+		}
 		challenge := challenges.Challenge{
 			ID:          challengeId,
 			Title:       request.Title,
@@ -308,8 +323,8 @@ func (h *ChallengeHandler) Update() echo.HandlerFunc {
 			Exp:         request.Exp,
 			Coin:        request.Coin,
 			ImageURL:    request.ImageURL,
-			DateStart:   request.DateStart,
-			DateEnd:     request.DateEnd,
+			DateStart:   dateStart,
+			DateEnd:     dateEnd,
 		}
 
 		for _, category := range request.ImpactCategories {
