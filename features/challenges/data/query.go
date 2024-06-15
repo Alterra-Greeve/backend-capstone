@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
+	user "backendgreeve/features/users/data"
 	"math"
 	"time"
 
@@ -33,7 +34,7 @@ func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, 
 	totalPages := int(math.Ceil(float64(totalChallenges) / float64(challengePerPage)))
 
 	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").
-		Offset((page - 1) * challengePerPage).Limit(challengePerPage).Find(&challenges)
+		Offset((page - 1) * challengePerPage).Find(&challenges)
 
 	if tx.Error != nil {
 		return nil, 0, tx.Error
@@ -61,7 +62,6 @@ func (cd *ChallengeData) GetChallengeParticipant(challengeId string) (int, error
 	return int(count), nil
 }
 func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, error) {
-	// Kode Anda di sini
 	var challenge challenges.Challenge
 	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").Find(&challenge, "id = ?", challengeId)
 	if tx.Error != nil {
@@ -75,6 +75,7 @@ func (cd *ChallengeData) GetUserParticipate(userId string, status string) ([]cha
 
 	tx := cd.DB.Model(&ChallengeConfirmation{}).
 		Preload("Challenge").
+		Preload("ChallengeConfirmationImages").
 		Preload("Challenge.ChallengeImpactCategories").
 		Preload("Challenge.ChallengeImpactCategories.ImpactCategory").
 		Where("user_id = ? AND status = ?", userId, status).
@@ -168,10 +169,23 @@ func (cd *ChallengeData) Create(challenge challenges.Challenge) error {
 }
 
 func (cd *ChallengeData) Update(challenge challenges.Challenge) error {
-	tx := cd.DB.Model(&Challenge{}).Where("id = ?", challenge.ID).Updates(&challenge)
+	tx := cd.DB.Begin()
 	if tx.Error != nil {
 		return tx.Error
 	}
+	err := cd.DB.Model(&ChallengeImpactCategory{}).Where("challenge_id = ?", challenge.ID).Delete(&ChallengeImpactCategory{}).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = cd.DB.Model(&Challenge{}).Where("id = ?", challenge.ID).Updates(&challenge).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	
+	tx.Commit()
 	return nil
 }
 
@@ -209,11 +223,12 @@ func (cd *ChallengeData) UploadParticipateProof(challengeConfirmationId string, 
 		tx.Rollback()
 		return err
 	}
-	err = cd.DB.Model(&ChallengeConfirmation{}).Where("id = ?", challengeConfirmationId).Update("date_upload", time.Now()).Error
+	err = cd.DB.Model(&ChallengeConfirmation{}).Where("id = ?", challengeConfirmationId).Update("date_upload", time.Now()).Update("status", "Diterima").Error
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
+
 	for _, img := range images {
 		uploadParticipateProof := ChallengeConfirmationImage{
 			ID:                      uuid.New().String(),
@@ -300,29 +315,75 @@ func (cd *ChallengeData) GetChallengeForUserByID(challengeConfirmationId string)
 	return challengeData, nil
 }
 
-func (cd *ChallengeData) EditChallengeForUserByID(challengeId string, images []string) error {
-	if err := cd.DB.Where("challenge_confirmation_id = ?", challengeId).Delete(&ChallengeConfirmationImage{}).Error; err != nil {
+func (cd *ChallengeData) EditChallengeForUserByID(challengeConfirmationId string, images []string) error {
+	tx := cd.DB.Begin()
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	err := cd.DeleteImageProof(challengeConfirmationId)
+	if err != nil {
+		tx.Rollback()
 		return err
 	}
-	err := cd.DB.Model(&ChallengeConfirmation{}).Where("id = ? ", challengeId).Update("status", "Diterima").Error
+
+	err = cd.DB.Model(&ChallengeConfirmation{}).Where("id = ?", challengeConfirmationId).Update("date_upload", time.Now()).Update("status", "Diterima").Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	err = cd.InsertCoinAndExpUser(challengeConfirmationId)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	for _, img := range images {
+		uploadParticipateProof := ChallengeConfirmationImage{
+			ID:                      uuid.New().String(),
+			ChallengeConfirmationID: challengeConfirmationId,
+			ImageURL:                img,
+		}
+		tx := cd.DB.Create(&uploadParticipateProof)
+		if tx.Error != nil {
+			tx.Rollback()
+			return tx.Error
+		}
+	}
+	tx.Commit()
+	return nil
+}
+
+func (cd *ChallengeData) InsertCoinAndExpUser(challengeConfirmationId string) error {
+	var challengeConfirmation ChallengeConfirmation
+	tx := cd.DB.Begin()
+	if tx.Error != nil {
+		return tx.Error
+	}
+	err := cd.DB.Model(&ChallengeConfirmation{}).Where("id = ?", challengeConfirmationId).Find(&challengeConfirmation).Error
 	if err != nil {
 		return err
 	}
-	
-	for _, imageURL := range images {
-		newImage := ChallengeConfirmationImage{
-			ID:                      uuid.New().String(),
-			ChallengeConfirmationID: challengeId,
-			ImageURL:                imageURL,
-		}
-		var existingChallenge challenges.ChallengeConfirmation
-		tx := cd.DB.Model(&existingChallenge).Omit("CreatedAt").Where("id = ?", existingChallenge.ID).Save(&existingChallenge)
-		if tx.Error != nil {
-			return constant.ErrUpdateChallenge
-		}
-		if err := cd.DB.Create(&newImage).Error; err != nil {
-			return err
-		}
+
+	var challengeData Challenge
+	err = cd.DB.Model(&Challenge{}).Where("id = ?", challengeConfirmation.ChallengeID).Find(&challengeData).Error
+	if err != nil {
+		return err
 	}
+
+	var userData user.User
+	err = cd.DB.Model(&user.User{}).Where("id = ?", challengeConfirmation.UserID).Find(&userData).Error
+	if err != nil {
+		return err
+	}
+
+	var userDataUpdate user.User
+	userDataUpdate.Coin = userData.Coin + challengeData.Coin
+	userDataUpdate.Exp = userData.Exp + challengeData.Exp
+
+	err = cd.DB.Model(&user.User{}).Where("id = ?", challengeConfirmation.UserID).Updates(&userDataUpdate).Error
+	if err != nil {
+		return err
+	}
+	tx.Commit()
 	return nil
 }

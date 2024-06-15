@@ -35,7 +35,7 @@ func (u *ForumData) GetAllByPage(page int) ([]forums.Forum, int, error) {
 		return nil, 0, constant.ErrProductEmpty
 	}
 
-	dataforumPerPage := 5
+	dataforumPerPage := 20
 	totalPages := int((total + int64(dataforumPerPage) - 1) / int64(dataforumPerPage))
 
 	tx := u.DB.Model(&Forum{}).Preload("User").Order("GREATEST(COALESCE(last_message_at, '2000-01-01'), created_at) DESC").Offset((page - 1) * dataforumPerPage).Limit(dataforumPerPage).Find(&forum)

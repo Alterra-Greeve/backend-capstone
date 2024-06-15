@@ -28,14 +28,8 @@ func (h *ImpactCategoryHandler) GetAll() echo.HandlerFunc {
 		if tokenString == "" {
 			helper.UnauthorizedError(c)
 		}
-		token, err := h.j.ValidateToken(tokenString)
+		_, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			helper.UnauthorizedError(c)
-		}
-
-		adminData := h.j.ExtractUserToken(token)
-		role := adminData[constant.JWT_ROLE]
-		if role != constant.RoleAdmin {
 			helper.UnauthorizedError(c)
 		}
 
@@ -67,16 +61,11 @@ func (h *ImpactCategoryHandler) GetByID() echo.HandlerFunc {
 		if tokenString == "" {
 			helper.UnauthorizedError(c)
 		}
-		token, err := h.j.ValidateToken(tokenString)
+		_, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 		}
 
-		adminData := h.j.ExtractUserToken(token)
-		role := adminData[constant.JWT_ROLE]
-		if role != constant.RoleAdmin {
-			helper.UnauthorizedError(c)
-		}
 
 		impactId := c.Param("id")
 		impactCategory, err := h.i.GetByID(impactId)
@@ -103,13 +92,8 @@ func (h *ImpactCategoryHandler) Create() echo.HandlerFunc {
 		if tokenString == "" {
 			helper.UnauthorizedError(c)
 		}
-		token, err := h.j.ValidateToken(tokenString)
+		_, err := h.j.ValidateToken(tokenString)
 		if err != nil {
-			helper.UnauthorizedError(c)
-		}
-		adminData := h.j.ExtractUserToken(token)
-		role := adminData[constant.JWT_ROLE]
-		if role != constant.RoleAdmin {
 			helper.UnauthorizedError(c)
 		}
 
@@ -141,16 +125,12 @@ func (h *ImpactCategoryHandler) Update() echo.HandlerFunc {
 		if tokenString == "" {
 			helper.UnauthorizedError(c)
 		}
-		token, err := h.j.ValidateToken(tokenString)
+		_, err := h.j.ValidateToken(tokenString)
 		if err != nil {
 			helper.UnauthorizedError(c)
 		}
-		adminData := h.j.ExtractUserToken(token)
-		role := adminData[constant.JWT_ROLE]
-		if role != constant.RoleAdmin {
-			helper.UnauthorizedError(c)
-		}
 
+		
 		impactId := c.Param("id")
 		var impactRequest CreateImpactCategoryRequest
 		err = c.Bind(&impactRequest)

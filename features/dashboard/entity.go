@@ -14,6 +14,17 @@ type Dashboard struct {
 	NewProduct                []product.Product
 	TotalUser                 int
 	NewUserPercentage         string
+	TotalMembership           int
+}
+
+type MonthlyImpact struct {
+	Date        string
+	ImpactPoint []ImpactPoint
+}
+
+type ImpactPoint struct {
+	Name       string
+	TotalPoint int
 }
 
 type DashboardHandlerInterface interface {
@@ -22,6 +33,7 @@ type DashboardHandlerInterface interface {
 
 type DashboardServiceInterface interface {
 	GetDashboard() (Dashboard, error)
+	GetMonthlyImpact() ([]MonthlyImpact, error)
 }
 
 type DashboardDataInterface interface {
@@ -33,4 +45,7 @@ type DashboardDataInterface interface {
 	GetNewProduct() ([]product.Product, error)
 	GetTotalUser() (int, error)
 	GetNewUserPercentage() (string, error)
+	GetMonthlyImpactChallenge(month string) ([]ImpactPoint, error)
+	GetMonthlyImpactProduct(month string) ([]ImpactPoint, error)
+	GetTotalMembership() (int, error)
 }

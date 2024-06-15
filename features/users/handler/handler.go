@@ -170,6 +170,7 @@ func (h *UserHandler) GetUserData() echo.HandlerFunc {
 		response.Coin = user.Coin
 		response.Exp = user.Exp
 		response.ImpactPoint = impactPoint
+		response.Membership = user.Membership
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
@@ -209,6 +210,7 @@ func (h *UserHandler) GetUserByUsername() echo.HandlerFunc {
 		response.Coin = user.Coin
 		response.Exp = user.Exp
 		response.ImpactPoint = impactPoint
+		response.Membership = user.Membership
 		response.AvatarURL = user.AvatarURL
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.UserSuccessGetUser, response))
 	}
@@ -312,6 +314,29 @@ func (h *UserHandler) ResetPassword() echo.HandlerFunc {
 	}
 }
 
+func (h *UserHandler) RegisterMembership() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get(constant.HeaderAuthorization)
+		if tokenString == "" {
+			helper.UnauthorizedError(c)
+		}
+
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			helper.UnauthorizedError(c)
+		}
+
+		userData := h.j.ExtractUserToken(token)
+		userId := userData[constant.JWT_ID]
+
+		err = h.s.RegisterMembership(userId.(string))
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", nil))
+	}
+}
+
 // Leaderboard
 func (h *UserHandler) GetLeaderboard() echo.HandlerFunc {
 	return func(c echo.Context) error {
@@ -374,7 +399,7 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 
 		pageStr := c.QueryParam("page")
 		page, err := strconv.Atoi(pageStr)
-		if err != nil {
+		if err != nil || page < 1 {
 			page = 1
 		}
 		var totalPages int

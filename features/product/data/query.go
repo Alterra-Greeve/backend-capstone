@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/product"
+	"fmt"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -269,4 +270,85 @@ func (pd *ProductData) Delete(productId string) error {
 	}
 
 	return tx.Commit().Error
+}
+
+func (pd *ProductData) GetRecommendation(categoryId string) ([]product.Product, error) {
+	var products []product.Product
+
+	tx := pd.DB.Model(&Product{}).
+		Preload("Images").
+		Preload("ImpactCategories.ImpactCategory").
+		Order("RAND()").
+		Joins("JOIN product_impact_categories ON products.id = product_impact_categories.product_id").
+		Where("product_impact_categories.impact_category_id = ?", categoryId).
+		Find(&products).Limit(10)
+	if tx.Error != nil {
+		return nil, constant.ErrGetProduct
+	}
+
+	return products, nil
+}
+
+func (pd *ProductData) GetImpactCategoryFromTransactionItems(userId string) (string, error) {
+	var impactCategoryId string
+	var totalQuantity int64
+
+	row := pd.DB.Table("transaction_items").
+		Select("product_impact_categories.impact_category_id, SUM(transaction_items.quantity) as total_quantity").
+		Joins("JOIN products ON transaction_items.product_id = products.id").
+		Joins("JOIN product_impact_categories ON products.id = product_impact_categories.product_id").
+		Where("transaction_items.transaction_id IN (SELECT id FROM transactions WHERE user_id = ?)", userId).
+		Group("product_impact_categories.impact_category_id").
+		Order("total_quantity DESC").
+		Limit(1).
+		Row()
+
+	err := row.Scan(&impactCategoryId, &totalQuantity)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return "", nil // No transactions found for the user
+		}
+		return "", constant.ErrGetProduct
+	}
+
+	return impactCategoryId, nil
+}
+
+func (pd *ProductData) GetImpactCategoryFromProductLog(userId string) (string, error) {
+	var impactCategoryId string
+	var visits int64
+
+	row := pd.DB.Table("product_logs").
+		Select("product_impact_categories.impact_category_id, COUNT(*) as visits").
+		Joins("JOIN products ON product_logs.product_id = products.id").
+		Joins("JOIN product_impact_categories ON products.id = product_impact_categories.product_id").
+		Where("user_id = ?", userId).
+		Group("product_impact_categories.impact_category_id").
+		Order("visits DESC").
+		Limit(1).
+		Row()
+
+	err := row.Scan(&impactCategoryId, &visits)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return "", nil
+		}
+		return "", constant.ErrGetProduct
+	}
+
+	return impactCategoryId, nil
+}
+
+func (pd *ProductData) GetRandomRecommendation() ([]product.Product, error) {
+	var products []product.Product
+
+	tx := pd.DB.Model(&Product{}).
+		Preload("Images").
+		Preload("ImpactCategories.ImpactCategory").
+		Order("RAND()").
+		Find(&products).Limit(10)
+	if tx.Error != nil {
+		return nil, constant.ErrGetProduct
+	}
+	return products, nil
 }

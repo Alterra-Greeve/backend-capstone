@@ -98,7 +98,7 @@ func (s *ProductService) Create(product product.Product) error {
 	if product.Stock == 0 {
 		return constant.ErrProductStockEmpty
 	}
-	
+
 	return s.d.Create(product)
 }
 
@@ -115,4 +115,37 @@ func (s *ProductService) Update(product product.Product) error {
 
 func (s *ProductService) Delete(productId string) error {
 	return s.d.Delete(productId)
+}
+
+func (s *ProductService) GetRecommendation(userId string) ([]product.Product, error) {
+	categoryIdTransactionItem, err := s.d.GetImpactCategoryFromTransactionItems(userId)
+	if err != nil {
+		return nil, err
+	}
+	if categoryIdTransactionItem != "" {
+		products, err := s.d.GetRecommendation(categoryIdTransactionItem)
+		if err != nil {
+			return nil, err
+		}
+		return products, nil
+	}
+
+	categoryIdProductLog, err := s.d.GetImpactCategoryFromProductLog(userId)
+	if err != nil {
+		return nil, err
+	}
+	if categoryIdProductLog != "" {
+		products, err := s.d.GetRecommendation(categoryIdProductLog)
+		if err != nil {
+			return nil, err
+		}
+		return products, nil
+	}
+
+	randomRecommendation, err := s.d.GetRandomRecommendation()
+	if err != nil {
+		return nil, err
+	}
+
+	return randomRecommendation, nil
 }

@@ -8,6 +8,7 @@ const BadInput = "Format data not valid"
 
 var BadRequest = errors.New("Format data not valid")
 var ErrPageInvalid = errors.New("Page is invalid")
+var ErrFieldData = errors.New("Error word types on the fields")
 
 // Users Errors
 var ErrEmptyLogin = errors.New("Email or Password cannot be empty")

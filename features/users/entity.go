@@ -7,19 +7,20 @@ import (
 )
 
 type User struct {
-	ID        string
-	Name      string
-	Email     string
-	Username  string
-	Password  string
-	Address   string
-	Gender    string
-	Phone     string
-	Coin      int
-	Exp       int
-	AvatarURL string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID         string
+	Name       string
+	Email      string
+	Username   string
+	Password   string
+	Address    string
+	Gender     string
+	Phone      string
+	Coin       int
+	Exp        int
+	Membership bool
+	AvatarURL  string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
 type ForgotPassword struct {
@@ -88,6 +89,7 @@ type UserHandlerInterface interface {
 	VerifyOTP() echo.HandlerFunc
 	ResetPassword() echo.HandlerFunc
 	GetLeaderboard() echo.HandlerFunc
+	RegisterMembership() echo.HandlerFunc
 
 	// Admin
 	GetAllUsersForAdmin() echo.HandlerFunc
@@ -108,6 +110,7 @@ type UserServiceInterface interface {
 	ForgotPassword(User) error
 	VerifyOTP(VerifyOTP) error
 	ResetPassword(UserResetPassword) error
+	RegisterMembership(userId string) error
 	GetLeaderboard() ([]Leaderboard, error)
 
 	// Admin
@@ -132,6 +135,7 @@ type UserDataInterface interface {
 	IsEmailExist(email string) bool
 	GetUserByID(id string) (User, error)
 	GetUserByUsername(username string) (User, error)
+	RegisterMembership(userId string) error
 	GetLeaderboard() ([]Leaderboard, error)
 
 	// Admin

@@ -215,11 +215,20 @@ func (u *UserData) GetUserByUsername(username string) (users.User, error) {
 		Coin:      user.Coin,
 		Exp:       user.Exp,
 		Phone:     user.Phone,
+		Membership: user.Membership,
 		AvatarURL: user.AvatarURL,
 	}
 	return users, nil
 }
 
+func (u *UserData) RegisterMembership(userId string) error {
+	var user User
+	if err := u.DB.Where("id = ?", userId).First(&user).Error; err != nil {
+		return constant.UserNotFound
+	}
+	user.Membership = true
+	return u.DB.Model(&user).Update("membership", true).Error
+}
 func (u *UserData) GetLeaderboard() ([]users.Leaderboard, error) {
 	var usersLeaderboard []users.Leaderboard
 	res := u.DB.Table("users").Where("deleted_at IS NULL").Order("exp DESC").Limit(20).Scan(&usersLeaderboard)
@@ -308,20 +317,20 @@ func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 	var totalProductImpactPoint int
 	u.DB.Table("transactions").
 		Joins("JOIN transaction_items ON transactions.id = transaction_items.transaction_id").
-		Joins("JOIN product ON transaction_items.product_id = product.id").
-		Joins("JOIN product_impact_categories ON product.id = product_impact_categories.product_id").
-		Joins("JOIN impact_categories ON product_impact_categories.impact_categories_id = impact_categories.id").
+		Joins("JOIN products ON transaction_items.product_id = products.id").
+		Joins("JOIN product_impact_categories ON products.id = product_impact_categories.product_id").
+		Joins("JOIN impact_categories ON product_impact_categories.impact_category_id = impact_categories.id").
 		Where("transactions.user_id = ?", userId).
-		Where("transaction_items.status = 'capture' OR transaction_items.status = 'accept' OR transaction_items.status = 'settlement'").
+		Where("transactions.status = 'Berhasil'").
 		Select("SUM(impact_categories.impact_point)").
 		Scan(&totalProductImpactPoint)
 
 	var totalChallengeImpactPoint int
 	u.DB.Table("challenges").
-		Joins("JOIN challenge_confirmation ON challenges.id = challenge_confirmation.challenge_id").
+		Joins("JOIN challenge_confirmations ON challenges.id = challenge_confirmations.challenge_id").
 		Joins("JOIN challenge_impact_categories ON challenges.id = challenge_impact_categories.challenge_id").
 		Joins("JOIN impact_categories ON challenge_impact_categories.impact_category_id = impact_categories.id").
-		Where("challenge_confirmation.status = 'Diterima' AND challenge_confirmation.user_id = ?", userId).
+		Where("challenge_confirmations.status = 'Diterima' AND challenge_confirmations.user_id = ?", userId).
 		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalImpactPoints").
 		Scan(&totalChallengeImpactPoint)
 

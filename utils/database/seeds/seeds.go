@@ -124,7 +124,7 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				description := "<div><p><strong>Save Money</strong> atau <strong>Hemat Uang</strong> adalah konsep yang mendorong individu untuk mengelola keuangan mereka dengan bijak. Ini melibatkan praktik-praktik seperti mengurangi pengeluaran yang tidak perlu, mencari cara untuk mendapatkan nilai lebih dari setiap pembelian, dan memaksimalkan efisiensi dalam penggunaan sumber daya. Dengan menghemat uang, individu dapat mencapai stabilitas finansial dan lebih mampu menghadapi situasi darurat atau merencanakan masa depan dengan lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Mengurangi emisi gas rumah kaca dari produksi dan transportasi barang</li><li>Menghemat sumber daya alam seperti air, kayu, dan energi</li><li>Mengurangi polusi udara dan air dari limbah industri dan rumah tangga</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg"
-				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/9e01061a-e622-414a-a3f1-27263620c0cbicon2.svg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/hemat-uang.svg"
 				return CreateImpactCategory(db, "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd", "Hemat Uang", 40, description, imageUrl, iconUrl)
 			},
 		},
@@ -133,7 +133,7 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				description := "<div><p><strong>Less Waste</strong> atau <strong>Mengurangi Limbah</strong> adalah pendekatan yang menekankan pada pengurangan jumlah limbah yang dihasilkan, baik oleh individu, komunitas, maupun perusahaan. Tujuannya adalah untuk meminimalisir dampak negatif terhadap lingkungan dengan cara mengelola sumber daya secara lebih efisien dan bertanggung jawab. Strategi ini mencakup berbagai tindakan seperti daur ulang, pengomposan, penggunaan ulang barang, dan pengurangan penggunaan bahan sekali pakai.</p><p>Contoh Dampak Positif Less Waste pada Lingkungan:</p><ul><li>Pengurangan Polusi Tanah dan Air</li><li>Penurunan Emisi Gas Rumah Kaca</li><li>Konservasi Sumber Daya Alam</li><li>Mengurangi Energi yang Dibutuhkan untuk Produksi</li><li>Mengurangi Beban Tempat Pembuangan Akhir</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/91d948ca-3576-49e5-b435-0c3c7eccff7963ca36bac45556620e0ff4ba7ec5790d.jpeg"
-				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/25e1e158-3fb0-42ff-97f7-d728167f2a7eicon4.svg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/mengurangi-limbah.svg"
 				return CreateImpactCategory(db, "7d34a5fa-e2cf-466d-9f01-d731f6967082", "Mengurangi Limbah", 50, description, imageUrl, iconUrl)
 			},
 		},
@@ -142,7 +142,7 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				description := "<div><p><strong>Expand Your Mind</strong> atau <strong>Perluas Wawasan Anda</strong> adalah konsep yang mendorong individu untuk terbuka terhadap pengetahuan, ide, dan pengalaman baru. Ini melibatkan pembelajaran berkelanjutan, eksplorasi topik yang beragam, dan berpikir kritis. Dengan memperluas wawasan, kita tidak hanya meningkatkan pemahaman kita tentang dunia, tetapi juga mengembangkan empati, kreativitas, dan kemampuan untuk membuat keputusan yang lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Kesadaran Lingkungan yang Lebih Tinggi</li><li>Inovasi dalam Solusi Ramah Lingkungan</li><li>Dukungan untuk Kebijakan Lingkungan yang Lebih Baik</li><li>Pengembangan Komunitas Berkelanjutan</li><li>Konsumsi yang Lebih Bertanggung Jawab</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/fd98dcdc-4cea-428a-a008-e1ca6f972ca72f0376e551eec4f1af915d5983a621c1.jpeg"
-				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/1f3dbf92-1d5a-4eb1-9e1f-385c6ea89220icon3.svg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/menambah-wawasan.svg"
 				return CreateImpactCategory(db, "e8e714bd-c34e-4278-980c-39bd1f55b5fb", "Perluas Wawasan", 45, description, imageUrl, iconUrl)
 			},
 		},
@@ -151,7 +151,7 @@ func Seeds() []seed.Seed {
 			Run: func(db *gorm.DB) error {
 				description := "<div><p><strong>Less Global Warming</strong> atau <strong>Mengurangi Pemanasan Global</strong> adalah upaya untuk menurunkan peningkatan suhu rata-rata bumi yang disebabkan oleh aktivitas manusia, terutama melalui emisi gas rumah kaca seperti karbon dioksida (CO<sub>2</sub>) dan metana (CH<sub>4</sub>). Upaya ini mencakup berbagai tindakan, seperti meningkatkan efisiensi energi, menggunakan energi terbarukan, mengurangi deforestasi, dan mempromosikan praktik pertanian berkelanjutan. Tujuannya adalah untuk memperlambat perubahan iklim, melindungi ekosistem, dan menjaga keseimbangan alami bumi.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Pengurangan Fenomena Cuaca Ekstrem</li><li>Perlindungan Keanekaragaman Hayati</li><li>Stabilisasi Tingkat Permukaan Laut</li><li>Kualitas Udara yang Lebih Baik</li><li>Konservasi Sumber Daya Air</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg"
-				iconUrl := "https://storage.googleapis.com/alterra-greeve/greeve/eb285b2b-19b2-447e-894e-81a12fbfb517icon1.svg"
+				iconUrl := "https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg"
 				return CreateImpactCategory(db, "b5d07366-3b31-4011-95e3-34735b0b61f8", "Mengurangi Pemanasan Global", 35, description, imageUrl, iconUrl)
 			},
 		},
@@ -2368,6 +2368,7 @@ func Seeds() []seed.Seed {
 					Phone:     "081234567804",
 					Coin:      350,
 					Exp:       140,
+					Membership: true,
 					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
@@ -2387,6 +2388,7 @@ func Seeds() []seed.Seed {
 					Phone:     "081234567890",
 					Coin:      200,
 					Exp:       129,
+					Membership: true,
 					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
@@ -2406,6 +2408,7 @@ func Seeds() []seed.Seed {
 					Phone:     "081234567891",
 					Coin:      50,
 					Exp:       124,
+					Membership: true,
 					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
@@ -2444,6 +2447,7 @@ func Seeds() []seed.Seed {
 					Phone:     "081234567893",
 					Coin:      0,
 					Exp:       24,
+					Membership: true,
 					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
@@ -2463,6 +2467,7 @@ func Seeds() []seed.Seed {
 					Phone:     "081234567894",
 					Coin:      200,
 					Exp:       100,
+					Membership: true,
 					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)

@@ -8,7 +8,6 @@ import (
 	"backendgreeve/features/users"
 	user "backendgreeve/features/users/data"
 	voucher "backendgreeve/features/voucher/data"
-	"log"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -135,7 +134,6 @@ func (td *TransactionData) GetUserTransaction(userId string) ([]transaction.Tran
 		})
 	}
 
-	log.Println(result)
 	return result, nil
 }
 

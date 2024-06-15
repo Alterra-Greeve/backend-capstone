@@ -29,4 +29,5 @@ type MidtransNotificationService interface {
 
 type MidtransNotificationData interface {
 	HandleNotification(notification PaymentNotification, transaction transaction.Transaction) error
+	InsertUserCoin(transactionID string) error
 }
