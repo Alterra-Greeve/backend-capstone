@@ -74,8 +74,8 @@ func (p ProductResponse) ToResponse(product product.Product) ProductResponse {
 		Price:       product.Price,
 		Coin:        product.Coin,
 		Stock:       product.Stock,
-		CreatedAt:   product.CreatedAt.Format("02-01-2006"),
-		UpdatedAt:   product.UpdatedAt.Format("02-01-2006"),
+		CreatedAt:   product.CreatedAt.Format("02/01/2006"),
+		UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
 		Images:      images,
 		Category:    impactCategories,
 	}
@@ -98,8 +98,8 @@ func (p ProductAdminResponse) ToResponse(product product.Product) ProductAdminRe
 		Price:       product.Price,
 		Coin:        product.Coin,
 		Stock:       product.Stock,
-		CreatedAt:   product.CreatedAt.Format("02-01-2006"),
-		UpdatedAt:   product.UpdatedAt.Format("02-01-2006"),
+		CreatedAt:   product.CreatedAt.Format("02/01/2006"),
+		UpdatedAt:   product.UpdatedAt.Format("02/01/2006"),
 		Images:      images,
 		Category:    category,
 	}
