@@ -1187,7 +1187,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 08989b73-113e-4161-8047-9642db33fea3
       responses:
         "200":
           description: OK
@@ -1430,7 +1430,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Lampu Hemat Energi
       responses:
         "200":
           description: OK
@@ -1571,7 +1571,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Lampu Hemat Energi
         - name: page
           in: path
           required: true
@@ -1718,7 +1718,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Mengurangi Pemanasan Global
       responses:
         "200":
           description: OK
@@ -1835,7 +1835,7 @@ paths:
           required: true
           schema:
             type: string
-          example: product
+          example: Mengurangi Pemanasan Global
         - name: page
           in: path
           required: true
@@ -2883,7 +2883,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: c9f69700-7534-4285-81a7-22d71cdfd09b
       responses:
         "200":
           description: OK
@@ -3067,7 +3067,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 73cf3dc6-6ddf-44b4-8965-a0fb2873cc01
       responses:
         "200":
           description: OK
@@ -3154,7 +3154,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 73cf3dc6-6ddf-44b4-8965-a0fb2873cc01
       responses:
         "200":
           description: OK
@@ -3437,7 +3437,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+          example: c9f69700-7534-4285-81a7-22d71cdfd09b
       requestBody:
         content:
           application/json:
@@ -3533,7 +3533,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+          example: c9f69700-7534-4285-81a7-22d71cdfd09b
       responses:
         "200":
           description: OK
@@ -3758,7 +3758,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
       responses:
         "200":
           description: OK
@@ -3824,7 +3824,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
       requestBody:
         content:
           application/json:
@@ -3941,7 +3941,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 342fea98-14ff-4d60-8fd6-ed98a1e2fbd1
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
       responses:
         "200":
           description: OK
@@ -4011,7 +4011,7 @@ paths:
               example:
                 file: image
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:

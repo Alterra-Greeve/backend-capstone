@@ -132,7 +132,7 @@ func (h *VoucherHandler) Create() echo.HandlerFunc {
 			}
 			return c.JSON(helper.ConvertResponseCode(constant.ErrCreateVoucher), helper.FormatResponse(false, constant.ErrCreateVoucher.Error(), nil))
 		}
-		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.VoucherSuccessCreate, nil))
+		return c.JSON(http.StatusCreated, helper.FormatResponse(true, constant.VoucherSuccessCreate, nil))
 	}
 }
 

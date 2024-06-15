@@ -3,6 +3,7 @@ package service
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
+	"backendgreeve/helper"
 )
 
 type ForumService struct {
@@ -34,6 +35,9 @@ func (s *ForumService) PostForum(forum forums.Forum) error {
 	if forum.Title == "" || forum.Description == "" {
 		return constant.ErrFieldForumCannotBeEmpty
 	}
+	if !helper.IsValidInput(forum.Title) || !helper.IsValidInput(forum.Description) {
+		return constant.ErrFieldData
+	}
 	return s.d.PostForum(forum)
 }
 
@@ -41,8 +45,12 @@ func (s *ForumService) UpdateForum(forum forums.EditForum) error {
 	if forum.ID == "" {
 		return constant.ErrGetForumByID
 	}
-	if forum.Title == "" && forum.Description == "" {
+	if forum.Title == "" && forum.Description == " " {
 		return constant.ErrEditForum
+	}
+
+	if !helper.IsValidInput(forum.Title) && !helper.IsValidInput(forum.Description) {
+		return constant.ErrFieldData
 	}
 	return s.d.UpdateForum(forum)
 }
@@ -57,6 +65,10 @@ func (s *ForumService) PostMessageForum(messageForum forums.MessageForum) error 
 	}
 	if messageForum.Message == "" {
 		return constant.ErrFieldForumMessageCannotBeEmpty
+	}
+
+	if !helper.IsValidInput(messageForum.Message) {
+		return constant.ErrFieldData
 	}
 	return s.d.PostMessageForum(messageForum)
 }
@@ -78,6 +90,10 @@ func (s *ForumService) UpdateMessageForum(message forums.EditMessage) error {
 	}
 	if message.Message == "" {
 		return constant.ErrEditMessage
+	}
+
+	if !helper.IsValidInput(message.Message) {
+		return constant.ErrFieldData
 	}
 	return s.d.UpdateMessageForum(message)
 }
