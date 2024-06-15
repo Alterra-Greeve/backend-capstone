@@ -215,11 +215,20 @@ func (u *UserData) GetUserByUsername(username string) (users.User, error) {
 		Coin:      user.Coin,
 		Exp:       user.Exp,
 		Phone:     user.Phone,
+		Membership: user.Membership,
 		AvatarURL: user.AvatarURL,
 	}
 	return users, nil
 }
 
+func (u *UserData) RegisterMembership(userId string) error {
+	var user User
+	if err := u.DB.Where("id = ?", userId).First(&user).Error; err != nil {
+		return constant.UserNotFound
+	}
+	user.Membership = true
+	return u.DB.Model(&user).Update("membership", true).Error
+}
 func (u *UserData) GetLeaderboard() ([]users.Leaderboard, error) {
 	var usersLeaderboard []users.Leaderboard
 	res := u.DB.Table("users").Where("deleted_at IS NULL").Order("exp DESC").Limit(20).Scan(&usersLeaderboard)

@@ -92,11 +92,37 @@ func (cs *ChallengeService) GetUserParticipate(userId string, status string) ([]
 }
 func (cs *ChallengeService) Update(challenge challenges.Challenge) error {
 	// Kode Anda di sini
+	if challenge.Title == "" || challenge.Description == "" || challenge.Exp == 0 || challenge.Coin == 0 || challenge.DateStart.IsZero() || challenge.DateEnd.IsZero() || challenge.Difficulty == "" || challenge.ImpactCategories == nil {
+		return constant.ErrChallengeFieldCreate
+	}
+	isChallengeExist, err := cs.c.GetByID(challenge.ID)
+	if err != nil {
+		return err
+	}
+	if isChallengeExist.ID == "" {
+		return constant.ErrChallengeNotFound
+	}
+
+	err = cs.c.Update(challenge)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
 func (cs *ChallengeService) Delete(challengeId string) error {
-	// Kode Anda di sini
+	isChallengeExist, err := cs.c.GetByID(challengeId)
+	if err != nil {
+		return err
+	}
+	if isChallengeExist.ID == "" {
+		return constant.ErrChallengeNotFound
+	}
+
+	err = cs.c.Delete(challengeId)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

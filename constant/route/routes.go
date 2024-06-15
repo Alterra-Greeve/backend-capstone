@@ -6,6 +6,7 @@ const UserPath = BasePath + "/user"
 const UserByUsername = UserPath + "/:username"
 const UserLogin = UserPath + "/login"
 const UserRegister = UserPath + "/register"
+const UserRegisterMembership = UserPath + "/membership"
 const UserForgotPassword = UserPath + "/forgot-password"
 const UserVerifyOTP = UserPath + "/verify-otp"
 const UserResetPassword = UserPath + "/reset-password"
@@ -36,7 +37,7 @@ const AdminManageUserPath = AdminPath + "/users"
 const AdminManageUserByID = AdminManageUserPath + "/:id"
 
 // Impact Category Path
-const ImpactCategoryPath = AdminPath + "/impact"
+const ImpactCategoryPath = BasePath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"
 
 // Voucher

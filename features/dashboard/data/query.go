@@ -4,6 +4,7 @@ import (
 	"backendgreeve/features/dashboard"
 	"backendgreeve/features/product"
 	productData "backendgreeve/features/product/data"
+	userData "backendgreeve/features/users/data"
 	"fmt"
 	"time"
 
@@ -214,4 +215,13 @@ func (d *DashboardData) GetMonthlyImpactChallenge(month string) ([]dashboard.Imp
 	}
 
 	return impactPoints, nil
+}
+
+func (d *DashboardData) GetTotalMembership() (int, error) {
+	var totalMembership int64
+	tx := d.DB.Model(&userData.User{}).Where("membership = ?", true).Count(&totalMembership)
+	if tx.Error != nil {
+		return 0, tx.Error
+	}
+	return int(totalMembership), nil
 }

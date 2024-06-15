@@ -24,6 +24,8 @@ tags:
     description: Operations about transaction
   - name: challenges
     description: Operations about challenge
+  - name: impact category
+    description: Operations about impact category
   - name: forum
     description: Operations about forum
 paths:
@@ -224,6 +226,40 @@ paths:
                   status: false
                   message: User not found
                   data: null
+  /user/membership:
+    post:
+      tags:
+        - users
+      summary: Register Membership
+      description: User melakukan register membership, untuk menggunakan route ini harus menggunakan token user
+      operationId: registerMembership
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Register Membership Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /user:
     get:
       tags:
@@ -803,6 +839,125 @@ paths:
       summary: Get Products
       description: User mendapatkan semua products
       operationId: getProducts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+                        coin:
+                          type: number
+                        category:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              impact_category_id:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              product_id:
+                                type: string
+                              image_url:
+                                type: string
+                              position:
+                                type: number
+                example:
+                  status: true
+                  message: Product fetched successfully
+                  data:
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category:
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images:
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                      name: product 3
+                      description: product
+                      price: 30000
+                      coin: 200
+                      category:
+                        - id: 67617191-bc11-4367-9590-d088429c163f
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
+                        - id: deb66563-0946-4aac-a863-21c452d2da16
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                      images:
+                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 2
+                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
+                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                          image_url: https://example.com/images/water-bottle3.jpg
+                          position: 1
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Products not found
+                  data: null
+  /products/recommendation:
+    get:
+      tags:
+        - products
+      summary: Get Products
+      description: User mendapatkan semua products
+      operationId: getProductsRecommendation
       responses:
         "200":
           description: OK
@@ -2655,7 +2810,6 @@ paths:
                   status: true
                   message: Get User Challenges Success
                   data: null
-
   /challenges/participate/{challenge_confrimation_id}:
     get:
       tags:
@@ -3832,6 +3986,136 @@ paths:
                   status: false
                   message: Id Message not found
                   data: null
+  /impact:
+    get:
+      tags:
+        - data impact
+      summary: Get All Data Impact By Admin
+      description: Admin dapat melihat semua data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getAllDataImpact
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        impact_poin:
+                          type: integer
+                        icon_url:
+                          type: string
+                example:
+                  status: true
+                  message: Get All Data Impact Success
+                  data: 
+                    - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                      name: Mengurangi Limbah
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Mengurangi Limbah
+                    - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                      name: Hemat Uang
+                      impact_poin: 100
+                      icon_url: https://example.com/images/item3.jpg
+                      image_url: https://example.com/images/item3.jpg
+                      description : Hemat Uang
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: data impact not found
+                  data: null
+  /impact/{impact_id}:
+    get:
+      tags:
+        - data impact
+      summary: Get Data Impact By Admin
+      description: Admin dapat melihat detail data impact, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataImpact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      impact_poin:
+                        type: integer
+                      icon_url:
+                        type: string
+                example:
+                  status: true
+                  message: Get Data Impact Success
+                  data: 
+                    id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                    name: Mengurangi Limbah
+                    impact_poin: 100
+                    icon_url: https://example.com/images/item3.jpg
+                    image_url: https://example.com/images/item3.jpg
+                    description : Mengurangi Limbah
+
   /media/upload:
     post:
       tags:

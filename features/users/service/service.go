@@ -208,6 +208,10 @@ func (s *UserService) ResetPassword(userResetPassword users.UserResetPassword) e
 	return s.d.ResetPassword(userResetPassword)
 }
 
+func (s *UserService) RegisterMembership(userId string) error {
+	return s.d.RegisterMembership(userId)
+}
+
 // Leaderboard
 func (s *UserService) GetLeaderboard() ([]users.Leaderboard, error) {
 	return s.d.GetLeaderboard()

@@ -23,6 +23,7 @@ type ChallengeImpactCategories struct {
 }
 
 type ImpactCategory struct {
+	ID          string `json:"id"`
 	Name        string `json:"name"`
 	ImpactPoint int    `json:"impact_point"`
 	IconURL     string `json:"icon_url"`
@@ -62,6 +63,7 @@ func (cd UserChallengeConfirmationResponse) ToResponse(challenge challenge.Chall
 	for _, category := range challenge.Challenge.ImpactCategories {
 		challengeResponse.Categories = append(challengeResponse.Categories, ChallengeImpactCategories{
 			ImpactCategory: ImpactCategory{
+				ID:          category.ImpactCategory.ID,
 				Name:        category.ImpactCategory.Name,
 				ImpactPoint: category.ImpactCategory.ImpactPoint,
 				IconURL:     category.ImpactCategory.IconURL,
