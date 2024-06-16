@@ -160,7 +160,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct1",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7dcf0f20-d1c6-4d8a-8cf5-de60f5c420be",
 					Name:        "Sedotan yang Dapat Digunakan Kembali",
 					Description: "Satu set sedotan stainless steel dengan sikat pembersih.",
@@ -196,7 +210,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct2",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7fbf0a60-57bf-419f-900a-a993d3168cec",
 					Name:        "Tas Katun Organik",
 					Description: "Tas ramah lingkungan yang terbuat dari 100% katun organik.",
@@ -231,7 +259,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct3",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7c45085a-2466-4f5e-9ccd-bdd139751dac",
 					Name:        "Sikat Gigi Biodegradable",
 					Description: "Sikat gigi yang terbuat dari bambu dengan bulu sikat yang dapat terurai.",
@@ -267,7 +309,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct4",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "b3b4ae7a-ed2e-4163-bf71-1a00b089c8a3",
 					Name:        "Buku Catatan Ramah Lingkungan",
 					Description: "Buku catatan yang terbuat dari kertas daur ulang dan tinta ramah lingkungan.",
@@ -303,7 +359,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct5",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7dc84308-0330-41f1-8072-ca635e5055c8",
 					Name:        "Botol Air yang Dapat Digunakan Kembali",
 					Description: "Botol air tahan lama yang terbuat dari stainless steel.",
@@ -339,7 +409,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct6",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "cc8d605c-db48-40ec-b62c-826a6aa5f9a2",
 					Name:        "Pengisi Daya Tenaga Surya",
 					Description: "Pengisi daya portabel bertenaga surya untuk perangkat Anda.",
@@ -374,7 +458,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct7",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "809db141-0071-478e-bf49-9666968c82b5",
 					Name:        "Set Alat Makan Bambu",
 					Description: "Satu set alat makan yang dapat digunakan kembali yang terbuat dari bambu.",
@@ -404,7 +502,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct8",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "5d502c20-9e83-4e84-9d93-db901a3508b5",
 					Name:        "Kopi Perdagangan Adil",
 					Description: "Biji kopi organik dan perdagangan adil.",
@@ -439,7 +551,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct9",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "f5e9bae2-1e04-4e2f-8ed5-319849ba8b39",
 					Name:        "Piring Kompos",
 					Description: "Piring yang terbuat dari bahan kompos.",
@@ -469,7 +595,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct10",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "08989b73-113e-4161-8047-9642db33fea3",
 					Name:        "Lampu Hemat Energi",
 					Description: "Bola lampu LED yang menghemat energi dan tahan lama.",
@@ -504,7 +644,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct11",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "bc601a3e-513f-4ba5-b1ac-171d27489b90",
 					Name:        "Laci Daur Ulang",
 					Description: "Laci yang terbuat dari bahan daur ulang.",
@@ -534,7 +688,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct12",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "e5da3310-6ec6-4b43-81c2-a6eb5a0538c8",
 					Name:        "Sepatu dengan Jejak Karbon Rendah",
 					Description: "Sepatu dengan jejak karbon rendah.",
@@ -570,7 +738,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct13",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "a10882e9-ef38-4796-bc25-f56ca2374fed",
 					Name:        "Cat Non-Toksik",
 					Description: "Cat yang terbuat dari bahan alami dan tidak beracun.",
@@ -600,7 +782,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct14",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "0e1c5843-a637-4a92-bfa0-7c7342f51846",
 					Name:        "Kertas Daur Ulang",
 					Description: "Kertas yang terbuat dari 100% bahan daur ulang.",
@@ -630,7 +826,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct15",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "de45d430-da60-4701-a51a-ffda02ba69c5",
 					Name:        "Tas Belanja yang Dapat Digunakan Kembali",
 					Description: "Tas belanja yang kuat dan tahan lama yang terbuat dari bahan daur ulang.",
@@ -660,7 +870,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct16",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "9d1a9780-55e1-43c0-ba09-9e0b40e7cb81",
 					Name:        "Perawatan Kulit Organik",
 					Description: "Produk perawatan kulit yang terbuat dari bahan organik.",
@@ -690,7 +914,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct17",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "9376eb2d-b9b6-4674-b949-8e3bf42616f5",
 					Name:        "Cangkir Kopi yang Dapat Digunakan Kembali",
 					Description: "Cangkir kopi yang dapat digunakan kembali, terbuat dari bahan ramah lingkungan.",
@@ -720,7 +958,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct18",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "f0f542fb-4810-458a-b679-8f4ab4e08493",
 					Name:        "Batang Cokelat Perdagangan Adil",
 					Description: "Batang cokelat yang terbuat dari kakao perdagangan adil.",
@@ -755,7 +1007,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct19",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "fae8d2c5-8374-41e3-b2dc-f38ca67f1723",
 					Name:        "Sarung Ponsel Biodegradable",
 					Description: "Sarung ponsel yang sepenuhnya dapat terurai.",
@@ -785,7 +1051,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct20",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "23cf052f-26ce-4f99-b61c-6b1cba4e630e",
 					Name:        "Matras Yoga Ramah Lingkungan",
 					Description: "Matras yoga yang terbuat dari bahan ramah lingkungan dan tidak beracun.",
@@ -815,7 +1095,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct21",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "f5dac7fe-afb6-4eff-9203-68f6994be2db",
 					Name:        "Pembungkus Makanan yang Dapat Digunakan Kembali",
 					Description: "Pembungkus yang terbuat dari lilin lebah dan katun organik.",
@@ -857,7 +1151,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct22",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "644c996a-5407-416f-86a3-b8fa9233886f",
 					Name:        "Lampu Taman Tenaga Surya",
 					Description: "Lampu taman yang bertenaga surya.",
@@ -904,7 +1212,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct23",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "30b3c9d3-3304-4da4-8cda-01052e385eb5",
 					Name:        "Alat Makan Kompos",
 					Description: "Alat makan sekali pakai yang dapat terkompos.",
@@ -934,7 +1256,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct24",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7ec87ad7-5380-438e-996d-dea7538d3b64",
 					Name:        "Dompet Daur Ulang",
 					Description: "Dompet yang terbuat dari bahan daur ulang",
@@ -964,7 +1300,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct25",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "4f164404-0792-470c-89ee-3e48fd53e50c",
 					Name:        "Ransel dengan Jejak Karbon Rendah",
 					Description: "Ransel dengan jejak karbon rendah,",
@@ -1006,7 +1356,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct26",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "0e65c6d4-15ab-435f-8b63-364df43fd70f",
 					Name:        "Tisu Pembersih Biodegradable",
 					Description: "Tisu pembersih yang terbuat dari bahan yang dapat terurai.",
@@ -1036,7 +1400,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct27",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "4d1d4263-491f-4eb9-a9b3-e61c5ba812e5",
 					Name:        "Tas Sandwich yang Dapat Digunakan Kembali",
 					Description: "Tas sandwich yang terbuat dari bahan yang tahan lama dan bisa dicuci.",
@@ -1072,7 +1450,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct28",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "2dd4ca9b-d2e8-40c9-8a56-964c9db60106",
 					Name:        "Handuk Katun Organik",
 					Description: "Handuk lembut yang terbuat dari katun organik.",
@@ -1102,7 +1494,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct29",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "2c0819d5-5c18-4954-b99a-f796e655f8f2",
 					Name:        "Deterjen Cucian Ramah Lingkungan",
 					Description: "Deterjen cucian yang terbuat dari bahan alami.",
@@ -1132,7 +1538,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct30",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "4d844f6d-a1e1-44d4-8627-29ee6d06ec44",
 					Name:        "Vas Kaca Daur Ulang",
 					Description: "Vas yang terbuat dari kaca daur ulang.",
@@ -1162,7 +1582,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct31",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "e3f27cb4-dcda-4114-b1aa-d1afd1e65ab3",
 					Name:        "Mainan Anak Non-Toksik",
 					Description: "Mainan yang terbuat dari bahan yang tidak beracun dan aman.",
@@ -1198,7 +1632,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct32",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "dfddfce8-553a-45da-b62a-80d3bc6f96ac",
 					Name:        "Teh Herbal Organik",
 					Description: "Teh herbal yang terbuat dari bahan organik dan perdagangan adil.",
@@ -1228,7 +1676,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct33",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7be7821a-c433-4597-bf94-a4e464cbc37e",
 					Name:        "Bantalan Penghapus Riasan yang Dapat Digunakan Kembali",
 					Description: "Bantalan yang terbuat dari katun organik, dapat digunakan kembali dan bisa dicuci.",
@@ -1264,7 +1726,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct34",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "4895d8dd-0231-44dc-a3a5-a7ab395d1094",
 					Name:        "Masker Wajah Katun Organik",
 					Description: "Masker wajah yang terbuat dari 100% katun organik, lembut, bisa bernapas, dan nyaman untuk penggunaan sehari-hari. Masker ini dirancang untuk dapat digunakan kembali dan dicuci, mengurangi kebutuhan akan masker sekali pakai.",
@@ -1300,7 +1776,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct35",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "005c310b-015a-4075-b3b5-575b1feb14d6",
 					Name:        "Termostat Pintar",
 					Description: "Termostat yang dapat diprogram yang menghemat energi dan uang.",
@@ -1335,7 +1825,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct36",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "ba8150f4-103a-438a-8d14-90ad8dc46a30",
 					Name:        "Mesin Cuci Hemat Air",
 					Description: "Mesin cuci yang hemat energi dan menghemat air.",
@@ -1376,7 +1880,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct37",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "9d73a948-298b-4896-8d43-2ad828cbd836",
 					Name:        "Lengan Laptop Denim Daur Ulang",
 					Description: "Perlindungan laptop yang unik dan ramah lingkungan yang terbuat dari denim daur ulang.",
@@ -1412,7 +1930,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct38",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
 					Name:        "Kaos Katun Organik Perdagangan Adil",
 					Description: "Kaos katun organik yang bersumber secara etis dan berkelanjutan.",
@@ -1453,7 +1985,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct39",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "591c7cbe-3820-4ce1-991c-3294169f815b",
 					Name:        "Sabun Berbasis Tumbuhan",
 					Description: "Sabun yang dibuat dari bahan alami, bebas dari bahan kimia sintetis dan pewangi buatan. Lembut di kulit, cocok untuk semua jenis kulit, termasuk kulit sensitif.",
@@ -1494,7 +2040,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct40",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "aad3789d-706f-417a-ad86-2d8762d9ce3a",
 					Name:        "Lilin Kedelai",
 					Description: "Lilin yang bersih terbakar dan berkelanjutan yang terbuat dari lilin kedelai.",
@@ -1524,7 +2084,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct41",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "bddb97ac-1212-440a-ae73-00c89a1621b2",
 					Name:        "Wadah Persiapan Makanan Kaca",
 					Description: "Wadah penyimpanan makanan yang tahan lama dan dapat digunakan kembali.",
@@ -1565,7 +2139,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct42",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7a371522-d22e-431b-bf25-149e80809c27",
 					Name:        "Organizer Meja Bambu",
 					Description: "Solusi organisasi meja yang berkelanjutan dan serbaguna.",
@@ -1595,7 +2183,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct43",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "627efc9c-a3bf-4850-b4fa-0eac1768d042",
 					Name:        "Cat Ramah Lingkungan",
 					Description: "Cat tidak beracun, rendah VOC yang terbuat dari bahan berkelanjutan.",
@@ -1625,7 +2227,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct44",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
 					Name:        "Kotak Makan Bambu",
 					Description: "Kotak makan yang tahan lama dan dapat terurai yang terbuat dari bambu yang dapat diperbaharui.",
@@ -1655,7 +2271,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct45",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
 					Name:        "Sapu Plastik Daur Ulang",
 					Description: "Sapu kokoh yang terbuat dari 100% plastik daur ulang untuk pembersihan nol limbah.",
@@ -1685,7 +2315,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct46",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "868790b7-4439-49c4-b960-d48bde0fed0b",
 					Name:        "Lampu Teras Tenaga Surya",
 					Description: "Manfaatkan energi terbarukan untuk menerangi ruang luar Anda.",
@@ -1732,7 +2376,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct47",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 					Name:        "Kaus Kaki Katun Organik",
 					Description: "Kaus kaki yang terbuat dari 100% katun organik bersertifikat GOTS,  mengurangi frekuensi penggantian.",
@@ -1762,7 +2420,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct48",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "66bcdf40-2544-4bec-b9be-0283a030e709",
 					Name:        "Sweter Katun Organik",
 					Description: "Pakaian lembut dan berkelanjutan yang terbuat dari katun organik bersertifikat GOTS.",
@@ -1792,7 +2464,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct49",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "b677eb44-63be-4ffb-8741-8d155b912d21",
 					Name:        "Kepala Shower Hemat Air",
 					Description: "Kurangi konsumsi air dengan kepala shower yang efisien ini.",
@@ -1833,7 +2519,21 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct50",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				if err != nil {
+					return err
+				}
+
 				products := product.Product{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "7beeb22b-1928-4f72-8e9e-55525d792d89",
 					Name:        "Pot Bunga dari Ban Daur Ulang",
 					Description: "Beri kehidupan baru pada ban bekas dengan pot bunga unik ini.",
@@ -1870,7 +2570,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge1",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "5fe8f4f6-43ee-4420-8969-bf1a0e19260c",
 					Title:       "Menanam Pohon",
 					Difficulty:  "Sedang",
@@ -1900,7 +2613,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge2",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "ba2621ac-6f99-43cb-ab8a-7db626b7c4e4",
 					Title:       "Minggu Tanpa Limbah",
 					Difficulty:  "Sulit",
@@ -1930,7 +2656,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge3",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "5086c59a-e2f9-44d0-bcc6-f7fdb58f07a4",
 					Title:       "Kerja Bakti Membersihkan Lingkungan",
 					Difficulty:  "Mudah",
@@ -1960,7 +2699,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge4",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "aa013dc7-4fb3-4cf1-9cc0-e1a0ad60414d",
 					Title:       "Bersepeda ke Tempat Kerja",
 					Difficulty:  "Sedang",
@@ -1995,7 +2747,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge5",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "5550e03b-15c6-43c9-997c-4086adc8b573",
 					Title:       "Bulan Hemat Energi",
 					Difficulty:  "Sulit",
@@ -2030,7 +2795,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge6",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "9b21b3e5-46ff-42a1-92cc-4969c078ff83",
 					Title:       "Membuat Produk Ramah Lingkungan",
 					Difficulty:  "Sedang",
@@ -2060,7 +2838,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge7",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "85dd4189-9d2a-42f9-8b26-b03daa7e5869",
 					Title:       "Gunakan Sistem Transportasi Hijau",
 					Difficulty:  "Sulit",
@@ -2095,7 +2886,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge8",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "4cc8b34f-9e3e-4f05-a73a-035395ff546d",
 					Title:       "Berkebun Organik",
 					Difficulty:  "Mudah",
@@ -2125,7 +2929,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge9",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "1e0f4c4f-5b54-4421-b8c1-46a2d382f8b2",
 					Title:       "Proyek Daur Ulang",
 					Difficulty:  "Sedang",
@@ -2155,7 +2972,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge10",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "c0aa381d-4c14-4eba-9811-c6356176ab67",
 					Title:       "Belanja Barang Ramah Lingkungan",
 					Difficulty:  "Mudah",
@@ -2185,7 +3015,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge11",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "1f6774a8-a173-4161-ad3e-e58400e007b2",
 					Title:       "Penghematan Air",
 					Difficulty:  "Sulit",
@@ -2220,7 +3063,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge12",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "b0ac9f1c-4e13-4848-977a-02dd540369a7",
 					Title:       "Ikut Serta dalam Earth Hour",
 					Difficulty:  "Mudah",
@@ -2255,7 +3111,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge13",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "2e80a9cf-5007-4eac-9cc8-9a603d954d6a",
 					Title:       "Senin Tanpa Daging",
 					Difficulty:  "Sedang",
@@ -2285,7 +3154,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge14",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "0d1233b8-d6e0-40df-8c6f-2ae1f8f2bfb7",
 					Title:       "Membuat Kompos Rumahan Sederhana",
 					Difficulty:  "Mudah",
@@ -2320,7 +3202,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateChallenge15",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/01/2024 8:00:00")
+				if err != nil {
+					return err
+				}
 				challenges := challenge.Challenge{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:          "ce6bf160-34ba-4685-80d7-10df1bd04fd1",
 					Title:       "Ikut Serta dalam Hari Bebas Mobil",
 					Difficulty:  "Sedang",
@@ -2357,19 +3252,32 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers1",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
-					ID:        "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					Name:      "Oscar Simanjuntak",
-					Password:  "secret123",
-					Email:     "oscar.simanjuntak@example.com",
-					Username:  "oscar.simanjuntak",
-					Address:   "Jl. Kamboja No. 15, Jayapura",
-					Gender:    "Laki-laki",
-					Phone:     "081234567804",
-					Coin:      350,
-					Exp:       140,
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
+					ID:         "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
+					Name:       "Oscar Simanjuntak",
+					Password:   "secret123",
+					Email:      "oscar.simanjuntak@example.com",
+					Username:   "oscar.simanjuntak",
+					Address:    "Jl. Kamboja No. 15, Jayapura",
+					Gender:     "Laki-laki",
+					Phone:      "081234567804",
+					Coin:       350,
+					Exp:        140,
 					Membership: true,
-					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+					AvatarURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
 			},
@@ -2377,19 +3285,32 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers2",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/01/2024 19:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/01/2024 19:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
-					ID:        "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					Name:      "Ahmad Fauzi",
-					Password:  "password123",
-					Email:     "ahmad.fauzi@example.com",
-					Username:  "ahmad.fauzi",
-					Address:   "Jl. Merdeka No. 1, Jakarta",
-					Gender:    "Laki-laki",
-					Phone:     "081234567890",
-					Coin:      200,
-					Exp:       129,
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
+					ID:         "5b9a23e5-e562-4fae-b11c-787e655a67d7",
+					Name:       "Ahmad Fauzi",
+					Password:   "password123",
+					Email:      "ahmad.fauzi@example.com",
+					Username:   "ahmad.fauzi",
+					Address:    "Jl. Merdeka No. 1, Jakarta",
+					Gender:     "Laki-laki",
+					Phone:      "081234567890",
+					Coin:       200,
+					Exp:        129,
 					Membership: true,
-					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+					AvatarURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
 			},
@@ -2397,19 +3318,32 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers3",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/01/2024 10:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/01/2024 10:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
-					ID:        "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					Name:      "Budi Santoso",
-					Password:  "passw0rd",
-					Email:     "budi.santoso@example.com",
-					Username:  "budi.santoso",
-					Address:   "Jl. Pahlawan No. 2, Surabaya",
-					Gender:    "Laki-laki",
-					Phone:     "081234567891",
-					Coin:      50,
-					Exp:       124,
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
+					ID:         "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
+					Name:       "Budi Santoso",
+					Password:   "passw0rd",
+					Email:      "budi.santoso@example.com",
+					Username:   "budi.santoso",
+					Address:    "Jl. Pahlawan No. 2, Surabaya",
+					Gender:     "Laki-laki",
+					Phone:      "081234567891",
+					Coin:       50,
+					Exp:        124,
 					Membership: true,
-					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+					AvatarURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
 			},
@@ -2417,7 +3351,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers4",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "14/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "14/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "6932e20c-3c55-4d95-91c5-ce316cc5843f",
 					Name:      "Citra Lestari",
 					Password:  "mypassword",
@@ -2436,19 +3383,32 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers5",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "19/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "19/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
-					ID:        "8f25169f-5084-45c3-a99f-40daf59485d4",
-					Name:      "Dewi Ayu",
-					Password:  "securepass",
-					Email:     "dewi.ayu@example.com",
-					Username:  "dewi.ayu",
-					Address:   "Jl. Mawar No. 4, Yogyakarta",
-					Gender:    "Perempuan",
-					Phone:     "081234567893",
-					Coin:      0,
-					Exp:       24,
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
+					ID:         "8f25169f-5084-45c3-a99f-40daf59485d4",
+					Name:       "Dewi Ayu",
+					Password:   "securepass",
+					Email:      "dewi.ayu@example.com",
+					Username:   "dewi.ayu",
+					Address:    "Jl. Mawar No. 4, Yogyakarta",
+					Gender:     "Perempuan",
+					Phone:      "081234567893",
+					Coin:       0,
+					Exp:        24,
 					Membership: true,
-					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+					AvatarURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
 			},
@@ -2456,19 +3416,32 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers6",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "21/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "21/01/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
-					ID:        "b7352ca3-fae1-4f3c-85b9-095de368b706",
-					Name:      "Eko Prasetyo",
-					Password:  "password321",
-					Email:     "eko.prasetyo@example.com",
-					Username:  "eko.prasetyo",
-					Address:   "Jl. Kenanga No. 5, Semarang",
-					Gender:    "Laki-laki",
-					Phone:     "081234567894",
-					Coin:      200,
-					Exp:       100,
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
+					ID:         "b7352ca3-fae1-4f3c-85b9-095de368b706",
+					Name:       "Eko Prasetyo",
+					Password:   "password321",
+					Email:      "eko.prasetyo@example.com",
+					Username:   "eko.prasetyo",
+					Address:    "Jl. Kenanga No. 5, Semarang",
+					Gender:     "Laki-laki",
+					Phone:      "081234567894",
+					Coin:       200,
+					Exp:        100,
 					Membership: true,
-					AvatarURL: "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
+					AvatarURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8aec5e90-b197-4e38-9f52-72b328259384user.png",
 				}
 				return CreateUsers(db, user)
 			},
@@ -2476,7 +3449,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers7",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "10/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "10/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "29a1ee6d-05bd-4f11-b42a-a6769fd6a509",
 					Name:      "Fani Nugraha",
 					Password:  "pass1234",
@@ -2495,7 +3481,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers8",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
 					Name:      "Gilang Permana",
 					Password:  "qwerty123",
@@ -2514,7 +3513,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers9",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "25/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "25/02/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "4fe8e112-e3d7-4468-bfd0-24058790bb6e",
 					Name:      "Hana Putri",
 					Password:  "letmein",
@@ -2533,7 +3545,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers10",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "56a85666-b5aa-4b39-8823-99c7f789ac7b",
 					Name:      "Indra Maulana",
 					Password:  "welcome1",
@@ -2552,7 +3577,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers11",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "c0045c29-d1fa-4524-85fd-3e9341f99c6a",
 					Name:      "Surya Rahmat",
 					Password:  "trustno1",
@@ -2571,7 +3609,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers12",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 8:59:59")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "6220c455-f14e-42d3-a73d-2f4573f4cf52",
 					Name:      "Kiki Amalia",
 					Password:  "password456",
@@ -2590,7 +3641,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers13",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "35e243e9-d0b1-40b7-b216-5bc6cc15e243",
 					Name:      "Lina Marlina",
 					Password:  "mypassword2",
@@ -2609,7 +3673,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers14",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "8f14519b-ea61-457b-bf96-90504221de90",
 					Name:      "Mulyadi Saputra",
 					Password:  "pass2022",
@@ -2628,7 +3705,20 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers15",
 			Run: func(db *gorm.DB) error {
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "20/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
+
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "20/03/2024 16:00:00")
+				if err != nil {
+					return err
+				}
 				user := user.User{
+					Model: &gorm.Model{
+						CreatedAt: createdAt,
+						UpdatedAt: updatedAt,
+					},
 					ID:        "3fb1eb90-805f-4727-9f7d-a6fefc6115f9",
 					Name:      "Nina Agustina",
 					Password:  "password789",
