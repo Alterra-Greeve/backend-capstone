@@ -183,12 +183,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7dcf0f20-d1c6-4d8a-8cf5-de60f5c420be",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/af266a14-78bd-4076-817d-10ebec2403698158DFd-L5L.__AC_SX300_SY300_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7dcf0f20-d1c6-4d8a-8cf5-de60f5c420be",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/3e4c422e-163d-4916-bfd6-d9bb1768a57d71-3ljQvVDL._AC_SX679_.jpg",
@@ -197,6 +205,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7dcf0f20-d1c6-4d8a-8cf5-de60f5c420be",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -233,6 +245,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7fbf0a60-57bf-419f-900a-a993d3168cec",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/6b391e80-0aef-491e-82be-17716d7047aamessy_hair_amazingy_bag.jpg",
@@ -241,11 +257,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7fbf0a60-57bf-419f-900a-a993d3168cec",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7fbf0a60-57bf-419f-900a-a993d3168cec",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -282,12 +306,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7c45085a-2466-4f5e-9ccd-bdd139751dac",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b27c09ea-ae32-4cfc-85e6-0c2e962305e8818HQZIZgZL.__AC_SY300_SX300_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7c45085a-2466-4f5e-9ccd-bdd139751dac",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/ae7d23a8-3710-4961-a4c5-d510252fe9fc71nbjZF6TxL._AC_SX679_.jpg",
@@ -296,6 +328,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7c45085a-2466-4f5e-9ccd-bdd139751dac",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -332,12 +368,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "b3b4ae7a-ed2e-4163-bf71-1a00b089c8a3",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c75dc5f6-7510-4d25-90a9-36e61112b1eaECO-notebooks.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "b3b4ae7a-ed2e-4163-bf71-1a00b089c8a3",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/627c1804-50fe-4797-ae83-90f11fbd7276ECO-notebooks-2-980x980.webp",
@@ -346,6 +390,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "b3b4ae7a-ed2e-4163-bf71-1a00b089c8a3",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -382,12 +430,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7dc84308-0330-41f1-8072-ca635e5055c8",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d8707133-71f4-4b7e-aa76-6356f0c455d471t8zZuv+aL._AC_SY300_SX300_.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7dc84308-0330-41f1-8072-ca635e5055c8",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/cc9059cf-4e00-46bc-9e21-7d2534b5d2d3718B2kwwspL._AC_SX679_.jpg",
@@ -396,6 +452,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7dc84308-0330-41f1-8072-ca635e5055c8",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -432,6 +492,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "cc8d605c-db48-40ec-b62c-826a6aa5f9a2",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/55c70474-5251-421b-a4b2-7fcd9bb44272518fd648-46dc-4fbb-a2bc-15b0e57db458.jpg",
@@ -440,11 +504,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "cc8d605c-db48-40ec-b62c-826a6aa5f9a2",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "cc8d605c-db48-40ec-b62c-826a6aa5f9a2",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -481,6 +553,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "809db141-0071-478e-bf49-9666968c82b5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2ea547b6-f906-44b9-af13-80705afd4528images.jpeg",
@@ -489,6 +565,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "809db141-0071-478e-bf49-9666968c82b5",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -525,6 +605,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "5d502c20-9e83-4e84-9d93-db901a3508b5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/58e8b9ea-57c0-4bf2-8f36-be23fb2ccccbimages (1).jpeg",
@@ -533,11 +617,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "5d502c20-9e83-4e84-9d93-db901a3508b5",
 						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "5d502c20-9e83-4e84-9d93-db901a3508b5",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -574,6 +666,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "f5e9bae2-1e04-4e2f-8ed5-319849ba8b39",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a2720d40-a2f0-4bb2-9d96-853d39039047images (2).jpeg",
@@ -582,6 +678,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "f5e9bae2-1e04-4e2f-8ed5-319849ba8b39",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -618,6 +718,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "08989b73-113e-4161-8047-9642db33fea3",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/4b5e6cab-59dd-4d81-988e-e1d390cb9b0c24ba49e1-c01c-4bff-bf1c-e26b0e3e660a.jpg.webp",
@@ -626,11 +730,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "08989b73-113e-4161-8047-9642db33fea3",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "08989b73-113e-4161-8047-9642db33fea3",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -667,6 +779,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "bc601a3e-513f-4ba5-b1ac-171d27489b90",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/63355302-4eb9-4585-aabb-fb2cf36db1d3upcycle-furniture-ideas.jpg",
@@ -675,6 +791,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "bc601a3e-513f-4ba5-b1ac-171d27489b90",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -711,12 +831,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "e5da3310-6ec6-4b43-81c2-a6eb5a0538c8",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/505e2f53-bffd-4d0b-9986-48c57aa51431seoarticle7desktop1-1645003305937.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "e5da3310-6ec6-4b43-81c2-a6eb5a0538c8",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/4b31515d-913e-4562-b17c-a398c7bf287aseoarticle7desktop2-1645003305957.webp",
@@ -725,6 +853,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "e5da3310-6ec6-4b43-81c2-a6eb5a0538c8",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -761,6 +893,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "a10882e9-ef38-4796-bc25-f56ca2374fed",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b354682c-0d94-4b60-8a5b-81ec3e68d71fimages (3).jpeg",
@@ -769,6 +905,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "a10882e9-ef38-4796-bc25-f56ca2374fed",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -805,6 +945,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "0e1c5843-a637-4a92-bfa0-7c7342f51846",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/499b5dd0-1df5-4f50-a909-9cc297dd5dac5d1c5b4a544aa5b3ec360cc6db50b318.jpeg",
@@ -813,6 +957,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "0e1c5843-a637-4a92-bfa0-7c7342f51846",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -849,6 +997,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "de45d430-da60-4701-a51a-ffda02ba69c5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2603e2f9-26f8-44dc-8e8f-92f604f00dffTrashy_Smart_Bag_-_Unfolded.jpg",
@@ -857,6 +1009,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "de45d430-da60-4701-a51a-ffda02ba69c5",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -893,6 +1049,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "9d1a9780-55e1-43c0-ba09-9e0b40e7cb81",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2290ad20-df4c-4bfd-8bb7-94283bf7f920regenerating-cleanser-main.webp",
@@ -901,6 +1061,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "9d1a9780-55e1-43c0-ba09-9e0b40e7cb81",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -937,6 +1101,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "9376eb2d-b9b6-4674-b949-8e3bf42616f5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2d11719e-b9b6-434f-b4a1-783b79ffd799no-brand_no-brand_full01.webp",
@@ -945,6 +1113,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "9376eb2d-b9b6-4674-b949-8e3bf42616f5",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -981,6 +1153,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "f0f542fb-4810-458a-b679-8f4ab4e08493",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/561cd4c0-3fbb-4578-87a0-b127b5a40220images (4).jpeg",
@@ -989,11 +1165,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "f0f542fb-4810-458a-b679-8f4ab4e08493",
 						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "f0f542fb-4810-458a-b679-8f4ab4e08493",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1030,6 +1214,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "fae8d2c5-8374-41e3-b2dc-f38ca67f1723",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/7101ef8d-d9c1-4ed3-a8ea-f46f5cec3d08images (5).jpeg",
@@ -1038,6 +1226,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "fae8d2c5-8374-41e3-b2dc-f38ca67f1723",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1074,6 +1266,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "23cf052f-26ce-4f99-b61c-6b1cba4e630e",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8f317cad-8d3e-4341-a253-6d60a8334cb0REECH.jpeg",
@@ -1082,6 +1278,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "23cf052f-26ce-4f99-b61c-6b1cba4e630e",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1118,18 +1318,30 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "f5dac7fe-afb6-4eff-9203-68f6994be2db",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b95275d1-d50c-4365-a804-a0d86168bd3fHoneycombRoll1_1200x.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "f5dac7fe-afb6-4eff-9203-68f6994be2db",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a9e852d0-b485-4675-b45f-80a7078cf2b6BW.comPDPLifestyleImages_1000x1000px_19_1200x.webp",
 						Position:  2,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "f5dac7fe-afb6-4eff-9203-68f6994be2db",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a4a917b4-20e4-4150-a7a0-8437ef94c9853_29941402-9cba-4802-9f45-edbaaf64e64b_1200x.webp",
@@ -1138,6 +1350,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "f5dac7fe-afb6-4eff-9203-68f6994be2db",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1174,18 +1390,30 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "644c996a-5407-416f-86a3-b8fa9233886f",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "644c996a-5407-416f-86a3-b8fa9233886f",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg",
 						Position:  2,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "644c996a-5407-416f-86a3-b8fa9233886f",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg",
@@ -1194,11 +1422,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "644c996a-5407-416f-86a3-b8fa9233886f",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "644c996a-5407-416f-86a3-b8fa9233886f",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1235,6 +1471,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "30b3c9d3-3304-4da4-8cda-01052e385eb5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/24e88d99-d3ec-4f1e-a08a-433ec28542d741J7+D28yIL._SX342_SY445_.jpg",
@@ -1243,6 +1483,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "30b3c9d3-3304-4da4-8cda-01052e385eb5",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1279,6 +1523,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7ec87ad7-5380-438e-996d-dea7538d3b64",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c5e5cfd7-accc-4a33-a1e4-2173c1b1a3fcil_1588xN.1925528247_3zpq.webp",
@@ -1287,6 +1535,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7ec87ad7-5380-438e-996d-dea7538d3b64",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1323,18 +1575,30 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4f164404-0792-470c-89ee-3e48fd53e50c",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/db2ab4ba-4865-4a11-bd99-86c15c057da0814-173-38113.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4f164404-0792-470c-89ee-3e48fd53e50c",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/732499c3-ccba-49b0-8f64-0220ce13e8f6814-173-38113_1.jpg",
 						Position:  2,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4f164404-0792-470c-89ee-3e48fd53e50c",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/8f3f23bd-55f9-46f3-b46d-8ebeed584f6a814-173-38113_2.webp",
@@ -1343,6 +1607,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "4f164404-0792-470c-89ee-3e48fd53e50c",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1379,6 +1647,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "0e65c6d4-15ab-435f-8b63-364df43fd70f",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/5fe5c383-3e39-41dc-9b40-eb0fabcbfe9agreenworks-wipes.webp",
@@ -1387,6 +1659,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "0e65c6d4-15ab-435f-8b63-364df43fd70f",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1423,12 +1699,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4d1d4263-491f-4eb9-a9b3-e61c5ba812e5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/0da34de6-7fce-4df0-9d49-6fe9b9d48c8c81evah0JzDL.__AC_SX300_SY300_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4d1d4263-491f-4eb9-a9b3-e61c5ba812e5",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d07e981e-fc49-4a67-9e9f-cce6ca76512371oFThg1eOL._AC_SX679_.jpg",
@@ -1437,6 +1721,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "4d1d4263-491f-4eb9-a9b3-e61c5ba812e5",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1473,6 +1761,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "2dd4ca9b-d2e8-40c9-8a56-964c9db60106",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/58a83c3d-2b7d-45e1-b188-674e9713f1feORIB-BLU_fddceb2b-aa79-4f09-bad8-c4fa3d7dffc6_768x.webp",
@@ -1481,6 +1773,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "2dd4ca9b-d2e8-40c9-8a56-964c9db60106",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1517,6 +1813,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "2c0819d5-5c18-4954-b99a-f796e655f8f2",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/30aa05ec-6d97-4807-a1cb-a3ae04fc313cbest-eco-detergents-good-housekeeping-1624544533.png",
@@ -1525,6 +1825,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "2c0819d5-5c18-4954-b99a-f796e655f8f2",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1561,6 +1865,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4d844f6d-a1e1-44d4-8627-29ee6d06ec44",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/03be69a9-6bfb-4b3b-aaeb-19c8262b53dfimages (6).jpeg",
@@ -1569,6 +1877,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "4d844f6d-a1e1-44d4-8627-29ee6d06ec44",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1605,12 +1917,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "e3f27cb4-dcda-4114-b1aa-d1afd1e65ab3",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/e6945979-9a10-4abc-b64c-bf6a8fa10f663416_-_Packshot_-_01.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "e3f27cb4-dcda-4114-b1aa-d1afd1e65ab3",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/1c71b970-f061-4a45-bfc8-e146a04586683416_-_Packshot_-_02.webp",
@@ -1619,6 +1939,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "e3f27cb4-dcda-4114-b1aa-d1afd1e65ab3",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1655,6 +1979,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "dfddfce8-553a-45da-b62a-80d3bc6f96ac",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b1b9cea6-a5da-47a9-9bad-09dbe3e2aa00rs=w_600,h_600.webp",
@@ -1663,6 +1991,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "dfddfce8-553a-45da-b62a-80d3bc6f96ac",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1699,12 +2031,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7be7821a-c433-4597-bf94-a4e464cbc37e",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b3acfa7d-10bb-43cd-a2df-422b6db1af1441ecjg7T0pL._SY445_SX342_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7be7821a-c433-4597-bf94-a4e464cbc37e",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/82520c0e-2159-4bca-8f87-4c4558d6471e91h0aTKT2-L._SX466_.jpg",
@@ -1749,12 +2089,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4895d8dd-0231-44dc-a3a5-a7ab395d1094",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/38616064-57d5-46a5-b744-9e18cf851413face_mask_organic_cotton_13.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "4895d8dd-0231-44dc-a3a5-a7ab395d1094",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/93e2f710-6e28-4ad9-b5dc-a6b2fa77bc22face_mask_organic_cotton_9.jpg",
@@ -1763,6 +2111,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "4895d8dd-0231-44dc-a3a5-a7ab395d1094",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -1799,6 +2151,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "005c310b-015a-4075-b3b5-575b1feb14d6",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/7395c073-f751-4017-8662-3da92efe4511sZWtCnFaQH.webp",
@@ -1848,12 +2204,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "ba8150f4-103a-438a-8d14-90ad8dc46a30",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d95092b9-6bf2-44e9-bf2e-81fa18a648ebasko-w2084cw_1.jpeg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "ba8150f4-103a-438a-8d14-90ad8dc46a30",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/284813e4-e6e5-4546-97a8-5a92a1b89530asko-w2084cw_3.jpeg",
@@ -1862,11 +2226,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "ba8150f4-103a-438a-8d14-90ad8dc46a30",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "ba8150f4-103a-438a-8d14-90ad8dc46a30",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1903,12 +2275,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "9d73a948-298b-4896-8d43-2ad828cbd836",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c37ba60a-952c-45b7-8d14-79a25a2a3c48Rimagined_Laptop_Sleeves_Checkered_Src_4_1800x1800.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "9d73a948-298b-4896-8d43-2ad828cbd836",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/3b3a6921-b046-4e77-9a19-4d1c9f29cc82Rimagined_Laptop_Sleeves_Checkered_Src_8.webp",
@@ -1917,6 +2297,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "9d73a948-298b-4896-8d43-2ad828cbd836",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -1953,12 +2337,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/271fe697-b266-404b-8f39-169819a59bc1front-FS01-WH__37153.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/0331be78-a4be-4d67-bb46-2cc18a9acd51fairtrade_white_t_2__30295.jpg",
@@ -1967,11 +2359,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
 						ImpactCategoryID: "e8e714bd-c34e-4278-980c-39bd1f55b5fb",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7e7a386a-c8c9-430c-b7d6-2e81f1bad678",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2008,12 +2408,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/c41ebb0d-2ebc-49a6-b9ce-44af452dd01363aec880-1385-4edd-950e-763f339eb6ad.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "591c7cbe-3820-4ce1-991c-3294169f815b",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/2aa2e341-7c9d-4e71-9ea1-ad8f3b0efae9a5c9b2a6-926e-44c3-8be1-7d2964081a37.jpg",
@@ -2022,11 +2430,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "591c7cbe-3820-4ce1-991c-3294169f815b",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -2063,6 +2479,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "aad3789d-706f-417a-ad86-2d8762d9ce3a",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/aea1114f-c3f9-4ed3-b0a7-1c635cfa875310ae8479-c692-4960-8b8e-8335548f093d.jpg",
@@ -2071,6 +2491,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "aad3789d-706f-417a-ad86-2d8762d9ce3a",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -2107,12 +2531,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/fc50a02b-ace4-4b6e-872b-5a12543520f671oWCoV+sFL._AC_SX679_.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a9e14f84-6978-44ab-82ca-2b2193871b5f8150MJRwgjL._AC_SY879_.jpg",
@@ -2121,11 +2553,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "bddb97ac-1212-440a-ae73-00c89a1621b2",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -2162,6 +2602,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7a371522-d22e-431b-bf25-149e80809c27",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/19a98ddb-7c04-4cd2-bfcc-70d0d62ab81e633f74d7ed5b7f6c86198e36-bamboo-desktop-organizer-home-office.jpg",
@@ -2170,6 +2614,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7a371522-d22e-431b-bf25-149e80809c27",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2206,6 +2654,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "627efc9c-a3bf-4850-b4fa-0eac1768d042",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/93a90f0a-8e21-4fe7-8f7d-e4f23bb9e7bdeggshell_paint_wb-800x800.jpg",
@@ -2214,6 +2666,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "627efc9c-a3bf-4850-b4fa-0eac1768d042",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2250,6 +2706,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/86ab5c9f-64ff-4768-b9de-d6e402a4783c71ohIptAImL._AC_UF894,1000_QL80_.jpg",
@@ -2258,6 +2718,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "719d7f9e-7ae5-4e8a-97fe-eda6dcf8a756",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2294,6 +2758,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/91856227-4892-408d-8b48-70fcd60f30e6EZAHM37.webp",
@@ -2302,6 +2770,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "8b99ccfa-8517-45bc-b7c5-fd4fd5a56b29",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2338,18 +2810,30 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/680ffddc-0275-469c-b2f8-0f92842dd0fe71VOmyQRn0L.__AC_SY445_SX342_QL70_FMwebp_.webp",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/a2e14472-f661-4d22-86e4-67e97120dfc161xuY0H-eIL._AC_SX679_.jpg",
 						Position:  2,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "868790b7-4439-49c4-b960-d48bde0fed0b",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/60f95086-7144-4b12-8798-5055acfefd9b71yejp4eNPL._AC_SX679_.jpg",
@@ -2358,11 +2842,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "868790b7-4439-49c4-b960-d48bde0fed0b",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -2399,6 +2891,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/b422f557-fb5f-4bbc-a2c5-649f01642310136311-a18e6b57f5fd4fa488aaaa859c1d891a_900x.webp",
@@ -2407,6 +2903,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "0d4dc83a-6a0c-4d38-8ae0-8a0eba8c03dc",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2443,6 +2943,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "66bcdf40-2544-4bec-b9be-0283a030e709",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/eb0e7a1f-f54f-48a8-8fd3-cc94b629bcf6dg_organic_basics-men-organic_cotton-merch-sweatshirt-grey_melange-packshot-1.webp",
@@ -2451,6 +2955,10 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "66bcdf40-2544-4bec-b9be-0283a030e709",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
@@ -2487,12 +2995,20 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/d559f50a-68c0-460a-be9f-7eb909e735e4ZZH_T27573A01_000_02.jpg",
 						Position:  1,
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/ce1583ab-fbae-4afa-839c-d44732810d7fZZH_T27929A01_000_03.jpg",
@@ -2501,11 +3017,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImpactCategoryID: "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "b677eb44-63be-4ffb-8741-8d155b912d21",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
@@ -2542,6 +3066,10 @@ func Seeds() []seed.Seed {
 				}
 				images := []product.ProductImage{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:        uuid.New().String(),
 						ProductID: "7beeb22b-1928-4f72-8e9e-55525d792d89",
 						ImageURL:  "https://storage.googleapis.com/alterra-greeve/greeve/e0ec28d3-9ed0-49e3-a898-ef497eca9c06Classic-Pot-L-Front.jpg",
@@ -2550,11 +3078,19 @@ func Seeds() []seed.Seed {
 				}
 				categories := []product.ProductImpactCategory{
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
 						ImpactCategoryID: "7d34a5fa-e2cf-466d-9f01-d731f6967082",
 					},
 					{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 						ID:               uuid.New().String(),
 						ProductID:        "7beeb22b-1928-4f72-8e9e-55525d792d89",
 						ImpactCategoryID: "b5d07366-3b31-4011-95e3-34735b0b61f8",
