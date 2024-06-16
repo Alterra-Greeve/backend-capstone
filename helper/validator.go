@@ -30,3 +30,14 @@ func IsValidInput(input string) bool {
 	alphanumericMatched, _ := regexp.MatchString(containsAlphanumericPattern, trimmed)
 	return alphanumericMatched
 }
+
+func ValidateUsername(username string) bool {
+	trimmed := strings.TrimSpace(username)
+	return len(trimmed) >= 6 && IsValidInput(trimmed)
+}
+
+func ValidatePhone(phone string) bool {
+	trimmed := strings.TrimSpace(phone)
+	regex := regexp.MustCompile(`^08\d{8,11}$`)
+	return regex.MatchString(trimmed)
+}

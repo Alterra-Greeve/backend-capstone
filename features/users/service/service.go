@@ -107,12 +107,34 @@ func (s *UserService) Update(user users.UserUpdate) (users.UserUpdate, error) {
 		user.Email = strings.ToLower(user.Email)
 	}
 
+	if user.Username != "" {
+		trimmedUsername := strings.TrimSpace(user.Username)
+		isUsernameValid := helper.ValidateUsername(trimmedUsername)
+		if !isUsernameValid {
+			return users.UserUpdate{}, constant.ErrInvalidUsername
+		}
+		user.Username = trimmedUsername
+	}
+
+	if user.Phone != "" {
+		trimmedPhone := strings.TrimSpace(user.Phone)
+		isPhoneValid := helper.ValidatePhone(trimmedPhone)
+		if !isPhoneValid {
+			return users.UserUpdate{}, constant.ErrInvalidPhone
+		}
+		user.Phone = trimmedPhone
+	}
+
 	if user.Password != "" {
 		hashedPassword, err := helper.HashPassword(user.Password)
 		if err != nil {
 			return users.UserUpdate{}, err
 		}
 		user.Password = hashedPassword
+	}
+
+	if !helper.IsValidInput(user.Name) || !helper.IsValidInput(user.Address) || !helper.IsValidInput(user.Gender) {
+		return users.UserUpdate{}, constant.ErrFieldData
 	}
 
 	userData, err := s.d.Update(user)
