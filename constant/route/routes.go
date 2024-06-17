@@ -41,7 +41,7 @@ const ImpactCategoryPath = BasePath + "/impact"
 const ImpactCategoryByID = ImpactCategoryPath + "/:id"
 
 // Voucher
-const VoucherPath = AdminPath + "/voucher"
+const VoucherPath = BasePath + "/voucher"
 const VoucherByID = VoucherPath + "/:id"
 
 // Product Path

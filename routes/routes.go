@@ -35,7 +35,7 @@ func RouteUser(e *echo.Echo, uh users.UserHandlerInterface, cfg config.GreeveCon
 	e.POST(route.UserVerifyOTP, uh.VerifyOTP())
 	e.POST(route.UserResetPassword, uh.ResetPassword())
 	e.POST(route.UserRegisterMembership, uh.RegisterMembership(), echojwt.WithConfig(jwtConfig))
-	
+
 	e.GET(route.UserByUsername, uh.GetUserByUsername())
 	e.GET(route.UserPath, uh.GetUserData(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.UserPath, uh.Update(), echojwt.WithConfig(jwtConfig))
@@ -192,4 +192,5 @@ func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg co
 		ErrorHandler: helper.JWTErrorHandler,
 	}
 	e.GET("/api/v1/dashboard", dh.GetDashboard(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/coin", dh.GetUserCoin(), echojwt.WithConfig(jwtConfig))
 }
