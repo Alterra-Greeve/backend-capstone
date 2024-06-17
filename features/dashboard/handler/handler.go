@@ -4,6 +4,7 @@ import (
 	"backendgreeve/features/dashboard"
 	"backendgreeve/helper"
 	"net/http"
+	"backendgreeve/constant"
 
 	"github.com/labstack/echo/v4"
 )
@@ -42,5 +43,22 @@ func (h *DashboardHandler) GetDashboard() echo.HandlerFunc {
 		}
 		
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", response))
+	}
+}
+
+func (h *DashboardHandler) GetUserCoin() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get("Authorization")
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return helper.UnauthorizedError(c)
+		}
+		userData := h.j.ExtractUserToken(token)
+		userID := userData[constant.JWT_ID].(string)
+		data, err := h.s.GetUserCoin(userID)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success", data))
 	}
 }

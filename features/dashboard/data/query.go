@@ -30,11 +30,19 @@ func (d *DashboardData) GetDashboard() (dashboard.Dashboard, error) {
 	if err != nil {
 		return dashboard.Dashboard{}, err
 	}
+	totalProductPercentage, err := d.GetTotalProductPercentage()
+	if err != nil {
+		return dashboard.Dashboard{}, err
+	}
 	totalNewProductPercentage, err := d.GetTotalNewProductPercentage()
 	if err != nil {
 		return dashboard.Dashboard{}, err
 	}
 	totalUser, err := d.GetTotalUser()
+	if err != nil {
+		return dashboard.Dashboard{}, err
+	}
+	newUserPercentage, err := d.GetNewUserPercentage()
 	if err != nil {
 		return dashboard.Dashboard{}, err
 	}
@@ -48,11 +56,13 @@ func (d *DashboardData) GetDashboard() (dashboard.Dashboard, error) {
 	}
 	return dashboard.Dashboard{
 		TotalProduct:              totalProduct,
+		TotalProductPercentage:    totalProductPercentage,
 		TotalNewProductThisMonth:  totalNewProductThisMonth,
 		TotalNewProductPercentage: totalNewProductPercentage,
 		TotalUser:                 totalUser,
-		NewProduct:                newProduct,
+		NewUserPercentage:         newUserPercentage,
 		TotalMembership:           totalMembership,
+		NewProduct:                newProduct,
 	}, nil
 }
 
@@ -152,7 +162,6 @@ func (d *DashboardData) GetTotalUser() (int, error) {
 }
 
 func (d *DashboardData) GetNewUserPercentage() (string, error) {
-	// Implement logic here
 	var totalUser int64
 	var totalUserThisMonth int64
 	var totalUserPercentage float64
@@ -164,6 +173,13 @@ func (d *DashboardData) GetNewUserPercentage() (string, error) {
 	if txThisMonth.Error != nil {
 		return "0%", txThisMonth.Error
 	}
+
+	if totalUser != 0 {
+		totalUserPercentage = (float64(totalUserThisMonth) / float64(totalUser)) * 100
+	} else {
+		totalUserPercentage = 0
+	}
+
 	return fmt.Sprintf("%.2f%%", totalUserPercentage), nil
 }
 
@@ -229,4 +245,38 @@ func (d *DashboardData) GetTotalMembership() (int, error) {
 		return 0, tx.Error
 	}
 	return int(totalMembership), nil
+}
+
+func (d *DashboardData) GetChallengeCoinEarned(userId string) ([]dashboard.UserCoin, error) {
+	var challengeCoinEarned []dashboard.UserCoin
+
+	err := d.DB.Table("challenge_confirmations").
+		Select("challenge_confirmations.id as id, 'challenge' as type, challenges.coin as coin").
+		Joins("join challenges on challenge_confirmations.challenge_id = challenges.id").
+		Where("challenge_confirmations.user_id = ? AND challenge_confirmations.status = ?", userId, "Diterima").
+		Scan(&challengeCoinEarned).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return challengeCoinEarned, nil
+}
+
+func (d *DashboardData) GetTransactionCoinEarned(userId string) ([]dashboard.UserCoin, error) {
+	var transactionCoinEarned []dashboard.UserCoin
+
+	err := d.DB.Table("transaction_items").
+		Select("transaction_items.id as id, 'transaction' as type, transaction_items.quantity * products.coin as coin").
+		Joins("join transactions on transaction_items.transaction_id = transactions.id").
+		Joins("join users on transactions.user_id = users.id").
+		Joins("join products on transaction_items.product_id = products.id").
+		Where("users.id = ?", userId).
+		Scan(&transactionCoinEarned).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return transactionCoinEarned, nil
 }

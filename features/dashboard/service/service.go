@@ -43,6 +43,9 @@ func (s *DashboardService) getMonthlyImpactPoints(month string) ([]dashboard.Imp
 	productPoints := []dashboard.ImpactPoint{}
 	challengePoints := []dashboard.ImpactPoint{}
 
+	// Static categories
+	staticCategories := []string{"Mengurangi Pemanasan Global", "Hemat Uang", "Mengurangi Limbah", "Perluas Wawasan"}
+
 	impactPoints, err := s.d.GetMonthlyImpactChallenge(month)
 	if err != nil {
 		return nil, err
@@ -65,9 +68,31 @@ func (s *DashboardService) getMonthlyImpactPoints(month string) ([]dashboard.Imp
 	}
 
 	var totalImpactPoints []dashboard.ImpactPoint
-	for name, totalPoint := range totalPoints {
+	for _, name := range staticCategories {
+		totalPoint, exists := totalPoints[name]
+		if !exists {
+			totalPoint = 0
+		}
 		totalImpactPoints = append(totalImpactPoints, dashboard.ImpactPoint{Name: name, TotalPoint: totalPoint})
 	}
 
 	return totalImpactPoints, nil
+}
+
+
+func (s *DashboardService) GetUserCoin(userID string) ([]dashboard.UserCoin, error) {
+	productEarning, err := s.d.GetTransactionCoinEarned(userID)
+	if err != nil {
+		return nil, err
+	}
+	challengeEarning, err := s.d.GetChallengeCoinEarned(userID)
+	if err != nil {
+		return nil, err
+	}
+
+	result := []dashboard.UserCoin{}
+	result = append(result, productEarning...)
+	result = append(result, challengeEarning...)
+
+	return result, nil
 }

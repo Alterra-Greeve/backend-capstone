@@ -206,17 +206,17 @@ func (u *UserData) GetUserByUsername(username string) (users.User, error) {
 		return users.User{}, constant.UserNotFound
 	}
 	users := users.User{
-		ID:        user.ID,
-		Name:      user.Name,
-		Email:     user.Email,
-		Username:  user.Username,
-		Address:   user.Address,
-		Gender:    user.Gender,
-		Coin:      user.Coin,
-		Exp:       user.Exp,
-		Phone:     user.Phone,
+		ID:         user.ID,
+		Name:       user.Name,
+		Email:      user.Email,
+		Username:   user.Username,
+		Address:    user.Address,
+		Gender:     user.Gender,
+		Coin:       user.Coin,
+		Exp:        user.Exp,
+		Phone:      user.Phone,
 		Membership: user.Membership,
-		AvatarURL: user.AvatarURL,
+		AvatarURL:  user.AvatarURL,
 	}
 	return users, nil
 }
@@ -322,7 +322,7 @@ func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 		Joins("JOIN impact_categories ON product_impact_categories.impact_category_id = impact_categories.id").
 		Where("transactions.user_id = ?", userId).
 		Where("transactions.status = 'Berhasil'").
-		Select("SUM(impact_categories.impact_point)").
+		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalProductImpactPoint").
 		Scan(&totalProductImpactPoint)
 
 	var totalChallengeImpactPoint int
@@ -331,7 +331,7 @@ func (u *UserData) GetUserImpactPointById(userId string) (int, error) {
 		Joins("JOIN challenge_impact_categories ON challenges.id = challenge_impact_categories.challenge_id").
 		Joins("JOIN impact_categories ON challenge_impact_categories.impact_category_id = impact_categories.id").
 		Where("challenge_confirmations.status = 'Diterima' AND challenge_confirmations.user_id = ?", userId).
-		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalImpactPoints").
+		Select("COALESCE(SUM(impact_categories.impact_point), 0) AS totalChallengeImpactPoint").
 		Scan(&totalChallengeImpactPoint)
 
 	impactPoint := totalProductImpactPoint + totalChallengeImpactPoint

@@ -6,7 +6,10 @@ import (
 	product "backendgreeve/features/product/data"
 	transaction "backendgreeve/features/transaction/data"
 	user "backendgreeve/features/users/data"
+	"backendgreeve/helper"
 	"backendgreeve/utils/database/seed"
+	"encoding/csv"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -30,91 +33,91 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateAdmin3",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b1e7fdc4-6465-4f06-8914-85b36255368e", "susantowijaya", "Susanto Wijaya", "susantowijaya@example.com", "password123")
+				return CreateAdminLogin(db, "b1e7fdc4-6465-4f06-8914-85b36255368e", "Susanto Wijaya", "susantowijaya", "susantowijaya@example.com", "password123")
 			},
 		},
 		{
 			Name: "CreateAdmin4",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cf98c726-fb72-4687-9c88-e8ce671c32d6", "indrianisetiawati", "Indrianie Setiawati", "indrianisetiawati@example.com", "secret456")
+				return CreateAdminLogin(db, "cf98c726-fb72-4687-9c88-e8ce671c32d6", "Indrianie Setiawati", "indrianisetiawati", "indrianisetiawati@example.com", "secret456")
 			},
 		},
 		{
 			Name: "CreateAdmin5",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "06db6d61-e7c8-4126-ab0f-f2b6bc1458d1", "ahmadrizkiputra", "Ahmad Rizki Putra", "ahmadrizkiputra@example.com", "qwerty789")
+				return CreateAdminLogin(db, "06db6d61-e7c8-4126-ab0f-f2b6bc1458d1", "Ahmad Rizki Putra", "ahmadrizkiputra", "ahmadrizkiputra@example.com", "qwerty789")
 			},
 		},
 		{
 			Name: "CreateAdmin6",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6a53c2db-2fa5-47df-8462-baea4308d48f", "sucimutiara", "Suci Mutiara", "sucimutiara@example.com", "12345abcd")
+				return CreateAdminLogin(db, "6a53c2db-2fa5-47df-8462-baea4308d48f", "Suci Mutiara", "sucimutiara", "sucimutiara@example.com", "12345abcd")
 			},
 		},
 		{
 			Name: "CreateAdmin7",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "90aae29b-bf80-44bd-ab59-e7388e84e27f", "ariefulhaq", "Arie Ul Haq", "ariefulhaq@example.com", "mypassword")
+				return CreateAdminLogin(db, "90aae29b-bf80-44bd-ab59-e7388e84e27f", "Arie Ul Haq", "ariefulhaq", "ariefulhaq@example.com", "mypassword")
 			},
 		},
 		{
 			Name: "CreateAdmin8",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6112389a-2e44-4c78-ae64-849a5af60678", "dewianinditya", "Dewi Aninditya", "dewianinditya@example.com", "superstrong")
+				return CreateAdminLogin(db, "6112389a-2e44-4c78-ae64-849a5af60678", "Dewi Aninditya", "dewianinditya", "dewianinditya@example.com", "superstrong")
 			},
 		},
 		{
 			Name: "CreateAdmin9",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "9e66633a-cc3b-4887-8c44-dc8e4bf3530a", "rahmandarmawan", "Rahman Darmawan", "rahmandarmawan@example.com", "password!@#")
+				return CreateAdminLogin(db, "9e66633a-cc3b-4887-8c44-dc8e4bf3530a", "Rahman Darmawan", "rahmandarmawan", "rahmandarmawan@example.com", "password!@#")
 			},
 		},
 		{
 			Name: "CreateAdmin10",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b0835feb-2404-4a28-846a-52fafc8e6902", "natasyanurhaliza", "Natasya Nurhaliza", "natasyanurhaliza@example.com", "123456789")
+				return CreateAdminLogin(db, "b0835feb-2404-4a28-846a-52fafc8e6902", "Natasya Nurhaliza", "natasyanurhaliza", "natasyanurhaliza@example.com", "123456789")
 			},
 		},
 		{
 			Name: "CreateAdmin11",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6562a858-84e7-412b-9e03-542f951fe0a2", "ilhamfauzan", "Ilham Fauzan", "ilhamfauzan@example.com", "password1")
+				return CreateAdminLogin(db, "6562a858-84e7-412b-9e03-542f951fe0a2", "Ilham Fauzan", "ilhamfauzan", "ilhamfauzan@example.com", "password1")
 			},
 		},
 		{
 			Name: "CreateAdmin12",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "46a36705-f7d0-48a4-bb69-8cd5826b0da5", "tiaraputri", "Tiara Putri", "tiaraputri@example.com", "mypassword1")
+				return CreateAdminLogin(db, "46a36705-f7d0-48a4-bb69-8cd5826b0da5", "Tiara Putri", "tiaraputri", "tiaraputri@example.com", "mypassword1")
 			},
 		},
 		{
 			Name: "CreateAdmin13",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "d1e93661-00b0-41a4-ab51-f2afaef8f86f", "gilangpratama", "Gilang Pratama", "gilangpratama@example.com", "secretpass")
+				return CreateAdminLogin(db, "d1e93661-00b0-41a4-ab51-f2afaef8f86f", "Gilang Pratama", "gilangpratama", "gilangpratama@example.com", "secretpass")
 			},
 		},
 		{
 			Name: "CreateAdmin14",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "bb2c878b-2f05-4964-9307-a46d6bbccd31", "rianasafitri", "Riana Safitri", "rianasafitri@example.com", "strongpassword")
+				return CreateAdminLogin(db, "bb2c878b-2f05-4964-9307-a46d6bbccd31", "Riana Safitri", "rianasafitri", "rianasafitri@example.com", "strongpassword")
 			},
 		},
 		{
 			Name: "CreateAdmin15",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "7b8df5e7-c440-44f0-898a-d2714f762842", "yudhistirapratama", "Yudhistira Pratama", "yudhistirapratama@example.com", "password123!")
+				return CreateAdminLogin(db, "7b8df5e7-c440-44f0-898a-d2714f762842", "Yudhistira Pratama", "yudhistirapratama", "yudhistirapratama@example.com", "password123!")
 			},
 		},
 		{
 			Name: "CreateAdmin16",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "98f9e9d2-9b19-4e14-b148-c1bb84104d07", "aisyahnuraini", "Aisyah Nuraini", "aisyahnuraini@example.com", "12345678")
+				return CreateAdminLogin(db, "98f9e9d2-9b19-4e14-b148-c1bb84104d07", "Aisyah Nuraini", "aisyahnuraini", "aisyahnuraini@example.com", "12345678")
 			},
 		},
 		{
 			Name: "CreateAdmin17",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cea38442-5ede-409c-930f-d5f7dd772d5e", "rizkiadnan", "Rizki Adnan", "rizkiadnan@example.com", "mypassword2")
+				return CreateAdminLogin(db, "cea38442-5ede-409c-930f-d5f7dd772d5e", "Rizki Adnan", "rizkiadnan", "rizkiadnan@example.com", "mypassword2")
 			},
 		},
 		// End Admin
@@ -3788,12 +3791,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers1",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/03/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/03/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -3821,12 +3824,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers2",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/01/2024 19:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 19:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/01/2024 19:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 19:59:59")
 				if err != nil {
 					return err
 				}
@@ -3854,12 +3857,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers3",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/01/2024 10:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 10:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/01/2024 10:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 10:59:59")
 				if err != nil {
 					return err
 				}
@@ -3887,12 +3890,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers4",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "14/01/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "14/03/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "14/01/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "14/03/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -3919,12 +3922,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers5",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "19/01/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "19/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "19/01/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "19/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -3952,12 +3955,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers6",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "21/01/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "21/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "21/01/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "21/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -3985,12 +3988,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers7",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "10/02/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "10/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "10/02/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "10/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4017,12 +4020,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers8",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/02/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/02/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4049,12 +4052,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers9",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "25/02/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "25/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "25/02/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "25/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4081,12 +4084,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers10",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/03/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/03/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4113,12 +4116,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers11",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/03/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/03/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/06/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4145,12 +4148,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers12",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 8:59:59")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 8:59:59")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/05/2024 8:59:59")
 				if err != nil {
 					return err
 				}
@@ -4177,12 +4180,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers13",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 16:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "11/05/2024 16:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/03/2024 16:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "11/05/2024 16:00:00")
 				if err != nil {
 					return err
 				}
@@ -4209,12 +4212,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers14",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 16:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "13/05/2024 16:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/03/2024 16:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "13/05/2024 16:00:00")
 				if err != nil {
 					return err
 				}
@@ -4241,12 +4244,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateUsers15",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "20/03/2024 16:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "20/06/2024 16:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "20/03/2024 16:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "20/06/2024 16:00:00")
 				if err != nil {
 					return err
 				}
@@ -4961,6 +4964,96 @@ func Seeds() []seed.Seed {
 					Message: "Jangan lupa istirahat cukup malam ini.",
 				}
 				return CreateForumMessage(db, messageForum)
+			},
+		},
+		{
+			Name: "TransactionSeeder",
+			Run: func(db *gorm.DB) error {
+				file, err := os.Open("data/transaction-greeve.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[9])
+					if err != nil {
+						return err
+					}
+
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[10])
+					if err != nil {
+						return err
+					}
+					seed := transaction.Transaction{
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
+						ID:            record[0],
+						UserID:        record[1],
+						VoucherID:     record[2],
+						Address:       record[3],
+						Status:        record[5],
+						SnapURL:       record[6],
+						Total:         helper.Atof(record[7]),
+						PaymentMethod: record[8],
+						Coin:          helper.Atoi(record[11]),
+					}
+					err = CreateTransaction(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
+			},
+		},
+		{
+			Name: "TransactionSeeder",
+			Run: func(db *gorm.DB) error {
+				file, err := os.Open("data/transaction-items-greeve.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[4])
+					if err != nil {
+						return err
+					}
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[5])
+					if err != nil {
+						return err
+					}
+					seed := transaction.TransactionItem{
+						ID:            record[0],
+						TransactionID: record[1],
+						ProductID:     record[2],
+						Quantity:      helper.Atoi(record[3]),
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
+					}
+					err = CreateTransactionItem(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
 			},
 		},
 	}
