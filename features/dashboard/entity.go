@@ -27,13 +27,21 @@ type ImpactPoint struct {
 	TotalPoint int
 }
 
+type UserCoin struct {
+	ID   string `json:"id"`
+	Type string `json:"type"`
+	Coin int    `json:"coin"`
+}
+
 type DashboardHandlerInterface interface {
 	GetDashboard() echo.HandlerFunc
+	GetUserCoin() echo.HandlerFunc
 }
 
 type DashboardServiceInterface interface {
 	GetDashboard() (Dashboard, error)
 	GetMonthlyImpact() ([]MonthlyImpact, error)
+	GetUserCoin(userID string) ([]UserCoin, error)
 }
 
 type DashboardDataInterface interface {
@@ -48,4 +56,7 @@ type DashboardDataInterface interface {
 	GetMonthlyImpactChallenge(month string) ([]ImpactPoint, error)
 	GetMonthlyImpactProduct(month string) ([]ImpactPoint, error)
 	GetTotalMembership() (int, error)
+
+	GetTransactionCoinEarned(userId string) ([]UserCoin, error)
+	GetChallengeCoinEarned(userId string) ([]UserCoin, error)
 }

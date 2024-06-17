@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/product"
+	"log"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -280,11 +281,12 @@ func (pd *ProductData) GetRecommendation(categoryId string) ([]product.Product, 
 		Order("RAND()").
 		Joins("JOIN product_impact_categories ON products.id = product_impact_categories.product_id").
 		Where("product_impact_categories.impact_category_id = ?", categoryId).
-		Find(&products).Limit(10)
+		Limit(10).Find(&products)
 	if tx.Error != nil {
+		log.Println(tx.Error)
 		return nil, constant.ErrGetProduct
 	}
-
+	log.Println(products)
 	return products, nil
 }
 
@@ -305,7 +307,7 @@ func (pd *ProductData) GetImpactCategoryFromTransactionItems(userId string) (str
 	err := row.Scan(&impactCategoryId, &totalQuantity)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return "", nil // No transactions found for the user
+			return "", nil
 		}
 		return "", constant.ErrGetProduct
 	}
@@ -345,7 +347,8 @@ func (pd *ProductData) GetRandomRecommendation() ([]product.Product, error) {
 		Preload("Images").
 		Preload("ImpactCategories.ImpactCategory").
 		Order("RAND()").
-		Find(&products).Limit(10)
+		Limit(10).
+		Find(&products)
 	if tx.Error != nil {
 		return nil, constant.ErrGetProduct
 	}

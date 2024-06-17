@@ -330,16 +330,34 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                    - id: 422344
+                    - id: f4ad5003-a31d-42f8-902c-cace5ba48370
                       name: Kaze User
+                      username: kaze
                       email: users@kzquandary.my.id
+                      password: $2y$10$qcC.u1SKfvZW/02r/rmYAOLfSM346VqN4OsPPhFetWoQJ.ZGEfTtG
                       address: Cimahi
                       gender: Laki-laki
-                    - id: 422322
+                      phone: 081234567890
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/1.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
+                    - id: 59225f75-3745-4378-a8e9-dea7131a04d9
                       name: Kuze 
+                      username: kuze
                       email: users@kuze.my.id
+                      password: $2y$10$C7rLX8L7s0X0vTlZ5r4v9.6DZf0p/5P6u6XyC7JN6H9t0jGpLs5
                       address: Cilacap
                       gender: Laki-laki
+                      phone: 081234567890
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/2.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
         "401":
           description: Unauthorized
           content:
@@ -401,17 +419,38 @@ paths:
                 example:
                   status: true
                   message: Get User Success
+                  metadata:
+                    current_page: 1
+                    total_page: 1
                   data:
-                    - id: 422344
+                    - id: f4ad5003-a31d-42f8-902c-cace5ba48370
                       name: Kaze User
+                      username: kaze
                       email: users@kzquandary.my.id
+                      password: $2y$10$qcC.u1SKfvZW/02r/rmYAOLfSM346VqN4OsPPhFetWoQJ.ZGEfTtG
                       address: Cimahi
                       gender: Laki-laki
-                    - id: 422322
+                      phone: 081234567890
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/1.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
+                    - id: 59225f75-3745-4378-a8e9-dea7131a04d9
                       name: Kuze 
+                      username: kuze
                       email: users@kuze.my.id
+                      password: $2y$10$C7rLX8L7s0X0vTlZ5r4v9.6DZf0p/5P6u6XyC7JN6H9t0jGpLs5
                       address: Cilacap
                       gender: Laki-laki
+                      phone: 081234567890
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/2.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
         "401":
           description: Unauthorized
           content:
@@ -472,7 +511,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
+          example: 35e243e9-d0b1-40b7-b216-5bc6cc15e243
       responses:
         "200":
           description: OK
@@ -507,12 +546,20 @@ paths:
                   status: true
                   message: Get Id User Success
                   data: 
-                      id: 422344
-                      name: Kaze User
-                      email: users@kzquandary.my.id
+                      id: 35e243e9-d0b1-40b7-b216-5bc6cc15e243
+                      name: kuda User
+                      username: kuda
+                      email: users@kuda.my.id
+                      password: $2y$10$qcC.u1SKfvZW/02r/rmYAOLfSM346VqN4OsPPhFetWoQJ.ZGEfTtG
                       address: Cimahi
                       gender: Laki-laki
-                      phone: '62123456789'
+                      phone: 081234567821
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/11.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
                       category:
                           - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
                           - 7d34a5fa-e2cf-466d-9f01-d731f6967082
@@ -560,7 +607,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
+          example: 35e243e9-d0b1-40b7-b216-5bc6cc15e243
       requestBody:
         content:
           application/json:
@@ -608,12 +655,20 @@ paths:
                   status: true
                   message: Update User Success
                   data: 
-                      id: 422344
-                      name: Kuze User
-                      email: users@kzquandary.my.id
-                      address: Cimahi2
+                      id: 35e243e9-d0b1-40b7-b216-5bc6cc15e243
+                      name: Kazejin 
+                      username: Kazejin
+                      email: users@Kazejin.my.id
+                      password: $2y$10$C7rLX8L7s0X0vTlZ5r4v9.6DZf0p/5P6u6XyC7JN6H9t0jGpLs5
+                      address: Cilacap
                       gender: Laki-laki
-                      phone: 62123456789
+                      phone: 081234567810
+                      coin: 0
+                      exp: 0
+                      membership: false
+                      avatar_url: https://example/12.png
+                      created_at: "16/01/2024"
+                      updated_at: "16/01/2024"
                       category:
                         - 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
                         - 7d34a5fa-e2cf-466d-9f01-d731f6967082
@@ -678,7 +733,7 @@ paths:
           required: true
           schema:
             type: string
-          example: 5f2f3a2f-dcb4-42ff-9d5e-c636a3aa25f0
+          example: 56a85666-b5aa-4b39-8823-99c7f789ac7b
       responses:
         "200":
           description: OK
@@ -3580,414 +3635,414 @@ paths:
                   status: false
                   message: Id Impact Not Found
                   data: null
-  /admin/voucher:
-    get:
-      tags:
-        - voucher
-      summary: Get Data Voucher By Admin
-      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: getDataVoucher
-      security:
-        - bearerAuth: []
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: true
-                  message: Get Data Voucher Success
-                  data: 
-                    - id: eb628b30-9305-475f-9a54-85229936650a
-                      name: Voucher Lebaran
-                      code: A10238013
-                      discount: 10%
-                      description: Discount Hari Raya voucher terbatas hingga 5 Hari
-                      expired_at: 2024-07-30
-                    - id: eb628b30-9305-475f-9a54-852314936650a
-                      name: Surprise Voucher
-                      code: A10238013
-                      discount: 20%
-                      description: Discount Dadakan WOW!!!
-                      expired_at: 2024-08-01
+  # /admin/voucher:
+  #   get:
+  #     tags:
+  #       - voucher
+  #     summary: Get Data Voucher By Admin
+  #     description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: getDataVoucher
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: true
+  #                 message: Get Data Voucher Success
+  #                 data: 
+  #                   - id: eb628b30-9305-475f-9a54-85229936650a
+  #                     name: Voucher Lebaran
+  #                     code: A10238013
+  #                     discount: 10%
+  #                     description: Discount Hari Raya voucher terbatas hingga 5 Hari
+  #                     expired_at: 2024-07-30
+  #                   - id: eb628b30-9305-475f-9a54-852314936650a
+  #                     name: Surprise Voucher
+  #                     code: A10238013
+  #                     discount: 20%
+  #                     description: Discount Dadakan WOW!!!
+  #                     expired_at: 2024-08-01
                     
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Voucher Not Found
-                  data: null
-    post:
-      tags:
-        - voucher
-      summary: Add Data Voucher By Admin 
-      description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: addDataVoucher
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema: 
-              type: object
-              properties:
-                name:
-                  type: string
-                code:
-                  type: string            
-                discount:
-                  type: string
-                description:
-                  type: string
-                expired_at:
-                  type: string
-              example: 
-                name: Discount Hari Raya
-                code: A10238013
-                discount: 10%
-                description: Discount Hari Raya voucher terbatas hingga 5 Hari
-                expired_at : "2024-10-30T00:00:00Z"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: true
-                  message: Add Data Voucher Success
-                  data: 
-                    id: 001
-                    name: Discount Hari Raya
-                    code: A10238013
-                    discount: 10%
-                    expired_at: 2024-10-30
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-              examples:
-                Empty Field:
-                  value:
-                    status: false
-                    message: Failed to create voucher
-                    data: null
-                Code Exist:
-                  value:
-                    status: false
-                    message: Failed to create voucher, code already exist
-                    data: null
-                Bad Input:
-                  value:
-                    status: false
-                    message: Error when generate code voucher, at least 9 characters
-                    data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-  /admin/voucher/{voucher_id}:
-    get:
-      tags:
-        - voucher
-      summary: Get Voucher Data By Admin
-      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: getDataVoucherbyid
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: voucher_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: true
-                  message: Get Data Voucher Success
-                  data: 
-                    id: 001
-                    name: Discount Hari Raya
-                    code: A10238013
-                    discount: 10%
-                    expired_at: 2024-10-30
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Voucher Not Found
-                  data: null
-    put:
-      tags:
-        - voucher
-      summary: Update Voucher Data By Admin
-      description: Admin dapat melakukan perintah update data voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: updateDataVoucher
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: voucher_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-      requestBody:
-        content:
-          application/json:
-            schema: 
-              type: object
-              properties:
-                name:
-                  type: string
-                code:
-                  type: string            
-                discount:
-                  type: string
-                description:
-                  type: string
-                expired_at:
-                  type: string
-              example: 
-                name: Discount Hari Raya
-                code: A10238013
-                discount: 10%
-                description: Discount Hari Raya voucher terbatas hingga 5 Hari
-                expired_at : "2024-10-30T00:00:00Z"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: true
-                  message: Update Data Voucher Success
-                  data: 
-                    id: 001
-                    name: Discount Hari Raya
-                    code: A10238013
-                    discount: 10%
-                    expired_at: 2024-10-30
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-              examples:
-                Empty Field:
-                  value:
-                    status: false
-                    message: Failed to create voucher
-                    data: null
-                Code Exist:
-                  value:
-                    status: false
-                    message: Failed to create voucher, code already exist
-                    data: null
-                Bad Input:
-                  value:
-                    status: false
-                    message: Error when generate code voucher, at least 9 characters
-                    data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Voucher Not Found
-                  data: null
-    delete:
-      tags:
-        - voucher
-      summary: Delete Voucher Data By Admin
-      description: Admin dapat melakukan perintah delete data voucher, untuk menggunakan route ini harus menggunakan token admin
-      operationId: deleteDataVoucher
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: voucher_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: true
-                  message: Delete Data Voucher Success
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":  
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Voucher Not Found
-                  data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":  
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Id Voucher Not Found
+  #                 data: null
+  #   post:
+  #     tags:
+  #       - voucher
+  #     summary: Add Data Voucher By Admin 
+  #     description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: addDataVoucher
+  #     security:
+  #       - bearerAuth: []
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema: 
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #               code:
+  #                 type: string            
+  #               discount:
+  #                 type: string
+  #               description:
+  #                 type: string
+  #               expired_at:
+  #                 type: string
+  #             example: 
+  #               name: Discount Hari Raya
+  #               code: A10238013
+  #               discount: 10%
+  #               description: Discount Hari Raya voucher terbatas hingga 5 Hari
+  #               expired_at : "2024-10-30T00:00:00Z"
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: true
+  #                 message: Add Data Voucher Success
+  #                 data: 
+  #                   id: 001
+  #                   name: Discount Hari Raya
+  #                   code: A10238013
+  #                   discount: 10%
+  #                   expired_at: 2024-10-30
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #             examples:
+  #               Empty Field:
+  #                 value:
+  #                   status: false
+  #                   message: Failed to create voucher
+  #                   data: null
+  #               Code Exist:
+  #                 value:
+  #                   status: false
+  #                   message: Failed to create voucher, code already exist
+  #                   data: null
+  #               Bad Input:
+  #                 value:
+  #                   status: false
+  #                   message: Error when generate code voucher, at least 9 characters
+  #                   data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  # /admin/voucher/{voucher_id}:
+  #   get:
+  #     tags:
+  #       - voucher
+  #     summary: Get Voucher Data By Admin
+  #     description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: getDataVoucherbyid
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: voucher_id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: true
+  #                 message: Get Data Voucher Success
+  #                 data: 
+  #                   id: 001
+  #                   name: Discount Hari Raya
+  #                   code: A10238013
+  #                   discount: 10%
+  #                   expired_at: 2024-10-30
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":  
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Id Voucher Not Found
+  #                 data: null
+  #   put:
+  #     tags:
+  #       - voucher
+  #     summary: Update Voucher Data By Admin
+  #     description: Admin dapat melakukan perintah update data voucher, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: updateDataVoucher
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: voucher_id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema: 
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #               code:
+  #                 type: string            
+  #               discount:
+  #                 type: string
+  #               description:
+  #                 type: string
+  #               expired_at:
+  #                 type: string
+  #             example: 
+  #               name: Discount Hari Raya
+  #               code: A10238013
+  #               discount: 10%
+  #               description: Discount Hari Raya voucher terbatas hingga 5 Hari
+  #               expired_at : "2024-10-30T00:00:00Z"
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: true
+  #                 message: Update Data Voucher Success
+  #                 data: 
+  #                   id: 001
+  #                   name: Discount Hari Raya
+  #                   code: A10238013
+  #                   discount: 10%
+  #                   expired_at: 2024-10-30
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #             examples:
+  #               Empty Field:
+  #                 value:
+  #                   status: false
+  #                   message: Failed to create voucher
+  #                   data: null
+  #               Code Exist:
+  #                 value:
+  #                   status: false
+  #                   message: Failed to create voucher, code already exist
+  #                   data: null
+  #               Bad Input:
+  #                 value:
+  #                   status: false
+  #                   message: Error when generate code voucher, at least 9 characters
+  #                   data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":  
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Id Voucher Not Found
+  #                 data: null
+  #   delete:
+  #     tags:
+  #       - voucher
+  #     summary: Delete Voucher Data By Admin
+  #     description: Admin dapat melakukan perintah delete data voucher, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: deleteDataVoucher
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: voucher_id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: true
+  #                 message: Delete Data Voucher Success
+  #                 data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":  
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Id Voucher Not Found
+  #                 data: null
   /media/upload:
     post:
       tags:

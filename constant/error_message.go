@@ -11,6 +11,8 @@ var ErrPageInvalid = errors.New("Page is invalid")
 var ErrFieldData = errors.New("Error word types on the fields")
 
 // Users Errors
+var ErrInvalidUsername = errors.New("Username formating not valid")
+var ErrInvalidPhone = errors.New("Phone formating not valid")
 var ErrEmptyLogin = errors.New("Email or Password cannot be empty")
 var UserNotFound = errors.New("User not found")
 var ErrLoginIncorrectPassword = errors.New("Incorrect password")

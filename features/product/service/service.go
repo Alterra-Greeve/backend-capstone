@@ -118,10 +118,7 @@ func (s *ProductService) Delete(productId string) error {
 }
 
 func (s *ProductService) GetRecommendation(userId string) ([]product.Product, error) {
-	categoryIdTransactionItem, err := s.d.GetImpactCategoryFromTransactionItems(userId)
-	if err != nil {
-		return nil, err
-	}
+	categoryIdTransactionItem, _ := s.d.GetImpactCategoryFromTransactionItems(userId)
 	if categoryIdTransactionItem != "" {
 		products, err := s.d.GetRecommendation(categoryIdTransactionItem)
 		if err != nil {
@@ -129,11 +126,7 @@ func (s *ProductService) GetRecommendation(userId string) ([]product.Product, er
 		}
 		return products, nil
 	}
-
-	categoryIdProductLog, err := s.d.GetImpactCategoryFromProductLog(userId)
-	if err != nil {
-		return nil, err
-	}
+	categoryIdProductLog, _ := s.d.GetImpactCategoryFromProductLog(userId)
 	if categoryIdProductLog != "" {
 		products, err := s.d.GetRecommendation(categoryIdProductLog)
 		if err != nil {

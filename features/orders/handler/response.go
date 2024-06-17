@@ -63,6 +63,8 @@ type ChallengeConfirmationResponse struct {
 	Username       string                   `json:"username"`
 	Email          string                   `json:"email"`
 	ChallengeName  string                   `json:"challenge_name"`
+	Exp            int                      `json:"exp"`
+	Difficulty     string                   `json:"difficulty"`
 	ImpactPoint    int                      `json:"impact_point"`
 	ImpactCategory []ImpactCategoryResponse `json:"helps"`
 	CreatedAt      string                   `json:"createdAt"`
@@ -86,6 +88,8 @@ func ToChallengeConfirmationResponse(data []orders.ChallengeConfirmation) []Chal
 			Username:       confirmation.Username,
 			Email:          confirmation.Email,
 			ChallengeName:  confirmation.Challenge.Title,
+			Exp:            confirmation.Challenge.Exp,
+			Difficulty:     confirmation.Challenge.Difficulty,
 			ImpactPoint:    confirmation.ImpactPointTotal,
 			ImpactCategory: helps,
 			CreatedAt:      confirmation.CreatedAt.Format("02/01/06"),
