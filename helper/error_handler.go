@@ -119,6 +119,10 @@ func ConvertResponseCode(err error) int {
 		return http.StatusBadRequest
 	case constant.ErrFieldData:
 		return http.StatusBadRequest
+	case constant.ErrInvalidUsername:
+		return http.StatusBadRequest
+	case constant.ErrInvalidPhone:
+		return http.StatusBadRequest
 
 	// Admin Error
 	case constant.ErrGetDataAdmin:
