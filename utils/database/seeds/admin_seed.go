@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func CreateAdminLogin(db *gorm.DB, id string, name string, password string, email string, username string) error {
+func CreateAdminLogin(db *gorm.DB, id string, name string, username string, email string, password string) error {
 	hashedPassword, err := helper.HashPassword(password)
 	if err != nil {
 		return err
@@ -17,8 +17,8 @@ func CreateAdminLogin(db *gorm.DB, id string, name string, password string, emai
 		ID:       id,
 		Name:     name,
 		Password: hashedPassword,
-		Email:    email,
 		Username: username,
+		Email:    email,
 	}
 
 	return db.Where("id = ?", id).FirstOrCreate(&adminRecord).Error
