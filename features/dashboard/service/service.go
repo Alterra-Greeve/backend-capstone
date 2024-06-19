@@ -2,6 +2,7 @@ package service
 
 import (
 	"backendgreeve/features/dashboard"
+	"time"
 )
 
 type DashboardService struct {
@@ -79,7 +80,6 @@ func (s *DashboardService) getMonthlyImpactPoints(month string) ([]dashboard.Imp
 	return totalImpactPoints, nil
 }
 
-
 func (s *DashboardService) GetUserCoin(userID string) ([]dashboard.UserCoin, error) {
 	productEarning, err := s.d.GetTransactionCoinEarned(userID)
 	if err != nil {
@@ -93,6 +93,21 @@ func (s *DashboardService) GetUserCoin(userID string) ([]dashboard.UserCoin, err
 	result := []dashboard.UserCoin{}
 	result = append(result, productEarning...)
 	result = append(result, challengeEarning...)
-
+	for i, res := range result {
+		date, _ := time.Parse(time.RFC3339, res.Date)
+		result[i].Date = date.Format("2006-01-02")
+	}
 	return result, nil
+}
+
+func (s *DashboardService) GetUserSpending(userID string) ([]dashboard.UserSpending, error) {
+	userSpending, err := s.d.GetUserSpending(userID)
+	if err != nil {
+		return nil, err
+	}
+	for i, res := range userSpending {
+		date, _ := time.Parse(time.RFC3339, res.Date)
+		userSpending[i].Date = date.Format("2006-01-02")
+	}
+	return userSpending, nil
 }

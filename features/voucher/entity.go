@@ -40,6 +40,7 @@ type VoucherServiceInterface interface {
 	Create(Voucher) error
 	Update(VoucherEdit) error
 	Delete(voucherID string) error
+	GetVoucherUsed(voucherId string) (int, error)
 }
 
 type VoucherDataInterface interface {
@@ -48,4 +49,5 @@ type VoucherDataInterface interface {
 	Create(Voucher) error
 	Update(VoucherEdit) error
 	Delete(voucherID string) error
+	GetVoucherUsed(voucherId string) (int, error)
 }

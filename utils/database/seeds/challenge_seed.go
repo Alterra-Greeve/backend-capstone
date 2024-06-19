@@ -9,3 +9,7 @@ import (
 func CreateChallenge(db *gorm.DB, challenge data.Challenge) error {
 	return db.Where("id = ?", challenge.ID).FirstOrCreate(&challenge).Error
 }
+
+func CreateChallengeConfirmation(db *gorm.DB, challengeConfirmation data.ChallengeConfirmation) error {
+	return db.Where("id = ?", challengeConfirmation.ID).FirstOrCreate(&challengeConfirmation).Error
+}

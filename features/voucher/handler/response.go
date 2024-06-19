@@ -7,4 +7,5 @@ type VoucherResponse struct {
 	Discount    string `json:"discount"`
 	Description string `json:"description"`
 	ExpiredAt   string `json:"expired_at"`
+	Used        int    `json:"used"`
 }
