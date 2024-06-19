@@ -41,4 +41,33 @@
 | Cancel Transaction                 | PUT                 | Yes                     | No                                      |
 | Payment For Transaction            | POST                | Yes                     | No                                      |
 | Challenge Feature                                                                                                            |
-| Payment For Shooping cart          | POST                | Yes                     | No                                      |
+| View All Challenge                 | GET                 | Yes                     | Yes                                     |
+| Get Challenge by ID                | GET                 | Yes                     | Yes                                     |
+| Get Challenge that has been joined                | GET                 | Yes                     | No                                  |
+| Parcitipate Challenge              | POST                | Yes                     | No                                      |
+| Confirmation Join Challenge        | POST                | Yes                     | No                                      |
+| Viev Monthly Leaderboard           | GET                 | Yes                     | Yes                                     |
+| Forum Feature                                                                                                                |
+| Get All Forum        | GET                | Yes                     | Yes                                      |
+| Get Forum by Id      | GET                | Yes                     | Yes                                      |
+| Create Forum         | POST               | Yes                     | No                                       |
+| Edit Forum           | PUT                | Yes                     | No                                       |
+| Delete Forum         | DELETE             | Yes                     | Yes                                      |
+| Create Message       | POST               | Yes                     | No                                       |
+| Edit Message         | POST               | Yes                     | No                                       |
+| Get Message by Id    | GET                | No                      | Yes                                      |
+| Delete Message       | DELETE             | Yes                     | Yes                                      |
+| Impact Category Feature                                                                                                |
+| Get All Impact Category       | GET                | NO                     | Yes                                      |
+| Create Impact Category        | POST               | NO                     | Yes                                      |
+| Edit Impact Category          | PUT                | NO                     | Yes                                      |
+| Delete Impact Category        | DELETE             | NO                     | Yes                                      |
+| Voucher Feature                                                                                                  |
+| Get All Voucher       | GET                  | Yes                    | Yes                                      |
+| Create Voucher        | POST                 | NO                     | Yes                                      |
+| Edit Voucher          | PUT                  | NO                     | Yes                                      |
+| Delete Voucher        | DELETE               | NO                     | Yes                                      |
+| Dashboard Feature                                                                                                    |
+| Get Dashboard              | GET                  | No                    | Yes                                      |
+| Get Orders Product         | GET                  | No                    | Yes                                      |
+| Get Orders Challenge       | GET                  | No                    | Yes                                      |
