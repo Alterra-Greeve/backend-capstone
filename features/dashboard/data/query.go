@@ -227,7 +227,7 @@ func (d *DashboardData) GetMonthlyImpactChallenge(month string) ([]dashboard.Imp
 		Joins("JOIN challenge_impact_categories ON challenge_impact_categories.challenge_id = challenges.id").
 		Joins("JOIN impact_categories ON impact_categories.id = challenge_impact_categories.impact_category_id").
 		Where("challenge_confirmations.created_at BETWEEN ? AND ?", startDate, endDate).
-		Where("challenge_confirmations.status = ?", "Berhasil").
+		Where("challenge_confirmations.status = ?", "Diterima").
 		Group("impact_categories.name").
 		Scan(&impactPoints).Error
 
@@ -251,7 +251,7 @@ func (d *DashboardData) GetChallengeCoinEarned(userId string) ([]dashboard.UserC
 	var challengeCoinEarned []dashboard.UserCoin
 
 	err := d.DB.Table("challenge_confirmations").
-		Select("challenge_confirmations.id as id, 'challenge' as type, challenges.coin as coin").
+		Select("challenge_confirmations.id as id, 'challenge' as type, challenges.coin as coin, challenges.title as name, challenge_confirmations.updated_at as date").
 		Joins("join challenges on challenge_confirmations.challenge_id = challenges.id").
 		Where("challenge_confirmations.user_id = ? AND challenge_confirmations.status = ?", userId, "Diterima").
 		Scan(&challengeCoinEarned).Error
@@ -267,7 +267,7 @@ func (d *DashboardData) GetTransactionCoinEarned(userId string) ([]dashboard.Use
 	var transactionCoinEarned []dashboard.UserCoin
 
 	err := d.DB.Table("transaction_items").
-		Select("transaction_items.id as id, 'transaction' as type, transaction_items.quantity * products.coin as coin").
+		Select("transaction_items.id as id, 'transaction' as type, transaction_items.quantity * products.coin as coin, products.name as name, transactions.updated_at as date").
 		Joins("join transactions on transaction_items.transaction_id = transactions.id").
 		Joins("join users on transactions.user_id = users.id").
 		Joins("join products on transaction_items.product_id = products.id").
@@ -279,4 +279,19 @@ func (d *DashboardData) GetTransactionCoinEarned(userId string) ([]dashboard.Use
 	}
 
 	return transactionCoinEarned, nil
+}
+
+func (d *DashboardData) GetUserSpending(userID string) ([]dashboard.UserSpending, error) {
+	var userSpending []dashboard.UserSpending
+	err := d.DB.Table("transactions").
+		Select("transactions.id as id, products.name as name, transactions.created_at as date, transactions.coin as coin").
+		Joins("join transaction_items on transaction_items.transaction_id = transactions.id").
+		Joins("join products on transaction_items.product_id = products.id").
+		Where("transactions.user_id = ?", userID).
+		Group("transactions.id, products.name, transactions.created_at").
+		Scan(&userSpending).Error
+	if err != nil {
+		return nil, err
+	}
+	return userSpending, nil
 }

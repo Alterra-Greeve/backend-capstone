@@ -3,7 +3,6 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/product"
-	"log"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -77,7 +76,8 @@ func (pd *ProductData) GetByPageAdmin(page int) ([]product.Product, int, error) 
 func (pd *ProductData) GetById(id string) (product.Product, error) {
 	var products product.Product
 
-	tx := pd.DB.Model(&Product{}).Preload("Images").Preload("ImpactCategories.ImpactCategory").
+	tx := pd.DB.Model(&Product{}).Preload("Images").
+		Preload("ImpactCategories.ImpactCategory").
 		Find(&products, "id = ?", id)
 	if tx.Error != nil {
 		return products, constant.ErrGetProduct
@@ -283,10 +283,8 @@ func (pd *ProductData) GetRecommendation(categoryId string) ([]product.Product, 
 		Where("product_impact_categories.impact_category_id = ?", categoryId).
 		Limit(10).Find(&products)
 	if tx.Error != nil {
-		log.Println(tx.Error)
 		return nil, constant.ErrGetProduct
 	}
-	log.Println(products)
 	return products, nil
 }
 

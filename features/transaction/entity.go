@@ -80,7 +80,7 @@ type TransactionDataInterface interface {
 	GetVoucherID(voucherCode string) (string, error)
 	AddTransactionItems(userId string, transactionId string) error
 	GetTotalPrice(userId string) (float64, error)
-	GetTotalPriceWithDiscount(userId string, voucherId string) (float64, error)
+	GetTotalPriceWithDiscount(total float64, voucherId string) (float64, error)
 	GetTotalPriceWithCoin(userId string) (float64, error)
 	GetTotalPriceWithDiscountAndCoin(userId string, voucherId string) (float64, error)
 }

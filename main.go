@@ -66,9 +66,10 @@ func main() {
 	if err != nil {
 		logrus.Error("terjadi kesalahan pada database, error:", err.Error())
 	}
-	database.Migrate(db)
 	// Run Dev Only
+	// database.Migrate(db)
 	// for _, seed := range seeds.Seeds() {
+	// 	logrus.Print(seed.Name)
 	// 	if err := seed.Run(db); err != nil {
 	// 		logrus.Error("terjadi kesalahan pada seed "+seed.Name+", error:", err.Error())
 	// 	}

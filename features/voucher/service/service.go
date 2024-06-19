@@ -20,6 +20,10 @@ func (s *VoucherService) GetAll() ([]voucher.Voucher, error) {
 	return s.d.GetAll()
 }
 
+func (s *VoucherService) GetVoucherUsed(voucherId string) (int, error) {
+	return s.d.GetVoucherUsed(voucherId)
+}
+
 func (s *VoucherService) GetByIdVoucher(id string) (voucher.Voucher, error) {
 	if id == "" {
 		return voucher.Voucher{}, constant.ErrGetVoucherById

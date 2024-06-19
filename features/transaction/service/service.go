@@ -3,6 +3,7 @@ package service
 import (
 	"backendgreeve/config"
 	"backendgreeve/features/transaction"
+	"log"
 
 	"github.com/google/uuid"
 	"github.com/midtrans/midtrans-go"
@@ -59,23 +60,22 @@ func (s *TransactionService) CreateTransaction(Transaction transaction.CreateTra
 	if err != nil {
 		return transaction.Transaction{}, err
 	}
-
+	log.Println(total)
 	transactionData.Total = total
 	if Transaction.VoucherCode != "" {
 		voucher, err := s.d.GetVoucherID(Transaction.VoucherCode)
 		if err != nil {
 			return transaction.Transaction{}, err
 		}
+		discount, err := s.d.GetTotalPriceWithDiscount(transactionData.Total, voucher)
+		if err != nil {
+			return transaction.Transaction{}, err
+		}
 		transactionData.VoucherID = voucher
+		transactionData.Total = discount
+		log.Println("after discount", transactionData.Total)
 	} else {
 		transactionData.VoucherID = ""
-	}
-
-	req := &snap.Request{
-		TransactionDetails: midtrans.TransactionDetails{
-			OrderID:  transactionData.ID,
-			GrossAmt: int64(transactionData.Total),
-		},
 	}
 
 	if Transaction.UsingCoin {
@@ -87,10 +87,18 @@ func (s *TransactionService) CreateTransaction(Transaction transaction.CreateTra
 		if err != nil {
 			return transaction.Transaction{}, err
 		}
+		log.Println("after coin", newTotal)
 		transactionData.Coin = usedCoin
 		transactionData.Total = newTotal
 	}
 
+	req := &snap.Request{
+		TransactionDetails: midtrans.TransactionDetails{
+			OrderID:  transactionData.ID,
+			GrossAmt: int64(transactionData.Total),
+		},
+	}
+	log.Println("before snap", transactionData.Total)
 	var client snap.Client
 	client.New(s.config.ServerKey, midtrans.Sandbox)
 	snapResponse, err := client.CreateTransaction(req)

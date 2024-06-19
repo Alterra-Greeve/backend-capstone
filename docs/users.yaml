@@ -4355,6 +4355,27 @@ paths:
                     type: boolean
                   message:
                     type: string
+  /coin/spending:
+    get:
+      tags:
+        - voucher
+      summary: Get Spending By User
+      description: User dapat melihat spending yang dimiliki
+      operationId: getSpending
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
 components:
   securitySchemes:
     bearerAuth:

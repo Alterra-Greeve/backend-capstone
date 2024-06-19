@@ -8,6 +8,8 @@ import (
 	"backendgreeve/features/users"
 	user "backendgreeve/features/users/data"
 	voucher "backendgreeve/features/voucher/data"
+	"strconv"
+	"strings"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -226,24 +228,19 @@ func (td *TransactionData) DecreaseUserCoin(userId string, coin int, total float
 		return total, 0, err
 	}
 
-	// Maksimal 80% dari total bisa ditukar dengan koin
 	maxCoin := int(total * 0.80)
 
-	// Jumlah koin yang digunakan
 	usedCoin := coin
 	if usedCoin > maxCoin {
 		usedCoin = maxCoin
 	}
 
-	// Jika koin yang dimiliki user kurang dari yang digunakan, gunakan semua koin yang dimiliki
 	if user.Coin < usedCoin {
 		usedCoin = user.Coin
 	}
 
-	// Update total transaksi
 	newTotal := total - float64(usedCoin)
 
-	// Update koin user
 	user.Coin -= usedCoin
 	err = td.DB.Save(&user).Error
 	if err != nil {
@@ -272,9 +269,36 @@ func (td *TransactionData) GetTotalPrice(userId string) (float64, error) {
 	return totalPrice, nil
 }
 
-func (td *TransactionData) GetTotalPriceWithDiscount(userId string, voucherId string) (float64, error) {
-	// Implement logic here
-	return 0.0, nil
+func (td *TransactionData) GetTotalPriceWithDiscount(total float64, voucherId string) (float64, error) {
+	var voucher voucher.Voucher
+	err := td.DB.Where("id = ?", voucherId).First(&voucher).Error
+	if err != nil {
+		return 0.0, err
+	}
+
+	discount := voucher.Discount
+
+	var discountedTotal float64
+
+	if strings.Contains(discount, "%") {
+		percentValue, err := strconv.ParseFloat(strings.TrimSuffix(discount, "%"), 64)
+		if err != nil {
+			return 0.0, err
+		}
+		discountedTotal = total - (total * percentValue / 100)
+	} else {
+		discountValue, err := strconv.ParseFloat(discount, 64)
+		if err != nil {
+			return 0.0, err
+		}
+		discountedTotal = total - discountValue
+	}
+
+	if discountedTotal < 0 {
+		discountedTotal = 0
+	}
+
+	return discountedTotal, nil
 }
 
 func (td *TransactionData) GetTotalPriceWithCoin(userId string) (float64, error) {

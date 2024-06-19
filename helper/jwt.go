@@ -143,11 +143,17 @@ func (j *JWT) ExtractAdminToken(token *jwt.Token) map[string]interface{} {
 }
 
 func (j *JWT) ValidateToken(token string) (*jwt.Token, error) {
+	if token == "" {
+		return nil, constant.ErrValidateJWT
+	}
+	if len(token) < 7 {
+		return nil, constant.ErrValidateJWT
+	}
 
 	var authHeader = token[7:]
 	parsedToken, err := jwt.Parse(authHeader, func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method %v", t.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method %v", t.Header["alg"])
 		}
 		return []byte(j.signKey), nil
 	})
@@ -156,3 +162,4 @@ func (j *JWT) ValidateToken(token string) (*jwt.Token, error) {
 	}
 	return parsedToken, nil
 }
+
