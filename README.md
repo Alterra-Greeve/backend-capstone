@@ -14,6 +14,7 @@
   Greeve is an innovative app that aims to increase user awareness and participation in environmental conservation and make it easier to purchase eco-friendly goods and equipment. The app not only offers a platform to purchase environmental goods and equipment, but also provides information on the impact of users' activities on the environment as well as how to measure and reduce that impact. The following is greeve documentation from the backend using golang programming language.
 </p> 
 
+### Features available in this project:
 | Feature           | Method              | Users                   |          Admin                           |
 | ----------------- | ------------------- | ----------------------- | ---------------------------------------- |
 | USERS FEATURE                                                                                                |
@@ -25,11 +26,11 @@
 | Manage User       | PUT                 | No                      | Yes                                      |
 | Delete User       | DELETE              | Yes                     | Yes                                      |
 | Product  FEATURE                                                                                             |
-| Create Data Product | POST                | NO                      | Yes                                      |
-| Edit Data Product   | PUT                 | NO                      | Yes                                      |
-| Create Data Product | POST                | NO                      | Yes                                      |
-| Get Product         | Get                 | Yes                     | Yes                                      |
-| Get Product by ID   | Get                 | Yes                     | Yes                                      |
+| Create Data Product | POST                | No                      | Yes                                      |
+| Edit Data Product   | PUT                 | No                      | Yes                                      |
+| Create Data Product | POST                | No                      | Yes                                      |
+| Get Product         | GET                 | Yes                     | Yes                                      |
+| Get Product by ID   | GET                 | Yes                     | Yes                                      |
 | View Item from Shooping cart       | GET                 | Yes                     | No                                      |
 | Add Item to Shooping cart          | POST                | Yes                     | No                                      |
 | Edit Item From Shooping cart       | PUT                 | Yes                     | No                                      |
@@ -58,16 +59,81 @@
 | Get Message by Id    | GET                | No                      | Yes                                      |
 | Delete Message       | DELETE             | Yes                     | Yes                                      |
 | Impact Category Feature                                                                                                |
-| Get All Impact Category       | GET                | NO                     | Yes                                      |
-| Create Impact Category        | POST               | NO                     | Yes                                      |
-| Edit Impact Category          | PUT                | NO                     | Yes                                      |
-| Delete Impact Category        | DELETE             | NO                     | Yes                                      |
+| Get All Impact Category       | GET                | No                     | Yes                                      |
+| Create Impact Category        | POST               | No                     | Yes                                      |
+| Edit Impact Category          | PUT                | No                     | Yes                                      |
+| Delete Impact Category        | DELETE             | No                     | Yes                                      |
 | Voucher Feature                                                                                                  |
 | Get All Voucher       | GET                  | Yes                    | Yes                                      |
-| Create Voucher        | POST                 | NO                     | Yes                                      |
-| Edit Voucher          | PUT                  | NO                     | Yes                                      |
-| Delete Voucher        | DELETE               | NO                     | Yes                                      |
+| Create Voucher        | POST                 | No                     | Yes                                      |
+| Edit Voucher          | PUT                  | No                     | Yes                                      |
+| Delete Voucher        | DELETE               | No                     | Yes                                      |
 | Dashboard Feature                                                                                                    |
 | Get Dashboard              | GET                  | No                    | Yes                                      |
 | Get Orders Product         | GET                  | No                    | Yes                                      |
 | Get Orders Challenge       | GET                  | No                    | Yes                                      |
+
+# Built With
+- <a href="https://github.com/golang">Golang</a>
+- <a href="https://github.com/labstack/echo">Echo</a>
+- <a href="https://github.com/go-gorm/gorm">Gorm</a>
+- <a href="https://github.com/mysql">MySql</a>
+# Getting Started
+## How to Use
+Clone the project
+
+```bash
+  git clone https://github.com/Alterra-Greeve/backend-capstone.git
+```
+Install required dependencies
+```bash
+  go mod tidy
+```
+Setting Environmental Variable on `.env` file
+```bash
+  DB_HOST=
+  DB_PORT=
+  DB_USER=
+  DB_PASS=
+  DB_NAME=
+  
+  SMTP_USER=
+  SMTP_PASS=
+  SMTP_HOST=
+  SMTP_PORT=
+  
+  JWT_SECRET=
+  
+  PROJECT_ID=
+  BUCKET_NAME=
+  GOOGLE_APPLICATION_CREDENTIALS=
+  
+  MIDTRANS_CLIENT_KEY=
+  MIDTRANS_SERVER_KEY=
+```
+Run `main.go` file
+```bash
+go run main.go
+```
+Run the endpoints as in the swagger documentation
+
+Docker & GCP
+```bash
+```
+
+
+# System Diagram and Architecture
+## ERD
+<div style="border: 1px solid #000; padding: 10px; display: inline-block;">
+  <img src="https://github.com/Alterra-Greeve/backend-capstone/assets/133726246/c6ddfcd2-2c8c-4d1e-a7c8-2587ec42adf6" alt="ERD_Capstone drawio">
+</div>
+
+## HLA
+
+# Contact 
+Link Project      : https://github.com/Alterra-Greeve
+API Documentation : https://api.greeve.store/#/
+
+## Contributor
+**Nur Faid Praseto** 
+**Chandra Wahyu Rafialdi**
