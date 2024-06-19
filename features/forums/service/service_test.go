@@ -3,6 +3,7 @@ package service
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -240,13 +241,17 @@ func TestForumService_DeleteForum(t *testing.T) {
 	mockData.AssertExpectations(t)
 }
 
-// func TestForumService_DeleteForum_Error(t *testing.T) {
-// 	mockData := new(MockForumData)
-// 	service := New(mockData)
+func TestForumService_DeleteForum_Error(t *testing.T) {
+	mockData := new(MockForumData)
+	service := New(mockData)
 
-// 	err := service.DeleteForum("")
-// 	assert.Error(t, err)
-// }
+	mockData.On("DeleteForum", "").Return(errors.New("some error"))
+
+	err := service.DeleteForum("")
+	assert.Error(t, err)
+
+	mockData.AssertExpectations(t)
+}
 
 func TestForumService_PostMessageForum(t *testing.T) {
 	mockData := new(MockForumData)
@@ -359,13 +364,17 @@ func TestForumService_DeleteMessageForum(t *testing.T) {
 	mockData.AssertExpectations(t)
 }
 
-// func TestForumService_DeleteMessageForum_Error(t *testing.T) {
-// 	mockData := new(MockForumData)
-// 	service := New(mockData)
+func TestForumService_DeleteMessageForum_Error(t *testing.T) {
+	mockData := new(MockForumData)
+	service := New(mockData)
 
-// 	err := service.DeleteMessageForum("")
-// 	assert.Error(t, err)
-// }
+	mockData.On("DeleteMessageForum", "").Return(errors.New("some error"))
+
+	err := service.DeleteMessageForum("")
+	assert.Error(t, err)
+
+	mockData.AssertExpectations(t)
+}
 
 func TestForumService_GetForumByUserID(t *testing.T) {
 	mockData := new(MockForumData)
@@ -402,20 +411,3 @@ func TestForumService_GetMessagesByForumID(t *testing.T) {
 	assert.Equal(t, expectedMessages, result)
 	mockData.AssertExpectations(t)
 }
-
-// func TestForumService_GetMessagesByForumIDWithPagination(t *testing.T) {
-// 	mockData := new(MockForumData)
-// 	service := New(mockData)
-
-// 	expectedMessages := []forums.MessageForum{
-// 		{ID: "1", ForumID: "1", Message: "Message 1"},
-// 	}
-
-// 	mockData.On("GetMessagesByForumIDWithPagination", "1", 1, 10).Return(expectedMessages, nil)
-
-// 	result, err := service.GetMessagesByForumIDWithPagination("1", 1, 10)
-
-// 	assert.NoError(t, err)
-// 	assert.Equal(t, expectedMessages, result)
-// 	mockData.AssertExpectations(t)
-// }
