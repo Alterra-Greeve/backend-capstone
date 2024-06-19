@@ -141,7 +141,7 @@ API Documentation: <br>
   <img src="https://img.shields.io/badge/Greeve-darkgreen?logo=swagger&logoColor=dark" alt="Swagger Badge">
 </a>
 ## Contributor
-**Nur Faid Praseto** <br>
+**Nur Faid Praseto** 
 <br>
 [![Nur Faid Prasetyo - LinkedIn](https://img.shields.io/badge/Nur_Faid_Prasetyo-blue?logo=linkedin)](https://www.linkedin.com/in/kzquandary)
 [![Nur Faid Prasetyo - GitHub](https://img.shields.io/badge/Nur_Faid_Prasetyo-black?logo=github)](https://github.com/kzquandary)
