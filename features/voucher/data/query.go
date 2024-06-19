@@ -50,6 +50,14 @@ func (u *VoucherData) Create(voucherData voucher.Voucher) error {
 	return nil
 }
 
+func (u *VoucherData) GetVoucherUsed(voucherId string) (int, error) {
+	var total int64
+	err := u.DB.Table("transactions").Where("voucher_id = ?", voucherId).Count(&total).Error
+	if err != nil {
+		return 0, err
+	}
+	return int(total), nil
+}
 func (u *VoucherData) Update(voucherData voucher.VoucherEdit) error {
 	var existingVoucher voucher.Voucher
 	if err := u.DB.Where("id = ? AND deleted_at is null", voucherData.ID).First(&existingVoucher).Error; err != nil {

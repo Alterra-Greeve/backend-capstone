@@ -40,7 +40,7 @@ func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 		}
 
 		var response []VoucherResponse
-		for _, vouchers := range voucher {
+		for i, vouchers := range voucher {
 			response = append(response, VoucherResponse{
 				ID:          vouchers.ID,
 				Name:        vouchers.Name,
@@ -49,6 +49,11 @@ func (h *VoucherHandler) GetAll() echo.HandlerFunc {
 				Description: vouchers.Description,
 				ExpiredAt:   vouchers.ExpiredAt.Format("02/01/2006 15:04"),
 			})
+			used, err := h.s.GetVoucherUsed(vouchers.ID)
+			if err != nil {
+				return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+			}
+			response[i].Used = used
 		}
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetAll, response))
 	}
@@ -80,6 +85,11 @@ func (h *VoucherHandler) GetByIdVoucher() echo.HandlerFunc {
 			Description: voucher.Description,
 			ExpiredAt:   voucher.ExpiredAt.Format("02/01/2006 15:04"),
 		}
+		used, err := h.s.GetVoucherUsed(voucher.ID)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		response.Used = used
 
 		return c.JSON(http.StatusOK, helper.ObjectFormatResponse(true, constant.VoucherSuccessGetByID, response))
 	}

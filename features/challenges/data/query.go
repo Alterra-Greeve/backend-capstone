@@ -3,6 +3,7 @@ package data
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
+	impactcategory "backendgreeve/features/impactcategory/data"
 	user "backendgreeve/features/users/data"
 	"math"
 	"time"
@@ -22,10 +23,11 @@ func New(db *gorm.DB) challenges.ChallengeDataInterface {
 }
 
 func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, error) {
-	var challenges []challenges.Challenge
+	var challengesList []challenges.Challenge
 
+	// Hitung total challenge
 	var totalChallenges int64
-	countTx := cd.DB.Model(&Challenge{}).Count(&totalChallenges)
+	countTx := cd.DB.Model(&challenges.Challenge{}).Count(&totalChallenges)
 	if countTx.Error != nil {
 		return nil, 0, countTx.Error
 	}
@@ -33,14 +35,51 @@ func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, 
 	challengePerPage := 20
 	totalPages := int(math.Ceil(float64(totalChallenges) / float64(challengePerPage)))
 
-	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").
-		Offset((page - 1) * challengePerPage).Find(&challenges)
+	// Ambil challenges dengan pagination
+	tx := cd.DB.
+		Table("challenges").
+		Select("challenges.*, cic.id AS cic_id, cic.challenge_id, cic.impact_category_id, ic.id AS ic_id, ic.name, ic.impact_point, ic.icon_url").
+		Joins("LEFT JOIN challenge_impact_categories AS cic ON cic.challenge_id = challenges.id AND cic.deleted_at IS NULL").
+		Joins("LEFT JOIN impact_categories AS ic ON cic.impact_category_id = ic.id").
+		Offset((page - 1) * challengePerPage).
+		Limit(challengePerPage).
+		Scan(&challengesList)
 
 	if tx.Error != nil {
 		return nil, 0, tx.Error
 	}
 
-	return challenges, totalPages, nil
+	// Manually map the results
+	for i := range challengesList {
+		challengesList[i].ImpactCategories = []challenges.ChallengeImpactCategory{}
+		rows, err := cd.DB.Raw(`
+			SELECT cic.id, cic.challenge_id, cic.impact_category_id, ic.id, ic.name, ic.impact_point, ic.icon_url
+			FROM challenge_impact_categories cic
+			JOIN impact_categories ic ON cic.impact_category_id = ic.id
+			WHERE cic.challenge_id = ? AND cic.deleted_at IS NULL
+		`, challengesList[i].ID).Rows()
+		if err != nil {
+			return nil, 0, err
+		}
+		defer rows.Close()
+
+		for rows.Next() {
+			var cic challenges.ChallengeImpactCategory
+			var ic impactcategory.ImpactCategory
+			if err := rows.Scan(&cic.ID, &cic.ChallengeID, &cic.ImpactCategoryID, &ic.ID, &ic.Name, &ic.ImpactPoint, &ic.IconURL); err != nil {
+				return nil, 0, err
+			}
+			cic.ImpactCategory = challenges.ImpactCategory{
+				ID:          ic.ID,
+				Name:        ic.Name,
+				ImpactPoint: ic.ImpactPoint,
+				IconURL:     ic.IconURL,
+			}
+			challengesList[i].ImpactCategories = append(challengesList[i].ImpactCategories, cic)
+		}
+	}
+
+	return challengesList, totalPages, nil
 }
 
 func (cd *ChallengeData) GetAllForUser(userId string) ([]challenges.Challenge, error) {
@@ -63,10 +102,49 @@ func (cd *ChallengeData) GetChallengeParticipant(challengeId string) (int, error
 }
 func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, error) {
 	var challenge challenges.Challenge
-	tx := cd.DB.Model(&Challenge{}).Preload("ImpactCategories.ImpactCategory").Find(&challenge, "id = ?", challengeId)
-	if tx.Error != nil {
-		return challenges.Challenge{}, tx.Error
+
+	err := cd.DB.Table("challenges").
+		Select("challenges.*, cic.id AS cic_id, cic.challenge_id, cic.impact_category_id, ic.id AS ic_id, ic.name, ic.impact_point, ic.icon_url").
+		Joins("LEFT JOIN challenge_impact_categories AS cic ON cic.challenge_id = challenges.id AND cic.deleted_at IS NULL").
+		Joins("LEFT JOIN impact_categories AS ic ON cic.impact_category_id = ic.id").
+		Where("challenges.id = ?", challengeId).
+		Scan(&challenge).Error
+
+	if err != nil {
+		return challenges.Challenge{}, err
 	}
+
+	// Manually map the results
+	challenge.ImpactCategories = []challenges.ChallengeImpactCategory{}
+	rows, err := cd.DB.Raw(`
+		SELECT cic.id, cic.challenge_id, cic.impact_category_id, ic.id, ic.name, ic.impact_point, ic.icon_url
+		FROM challenge_impact_categories cic
+		JOIN impact_categories ic ON cic.impact_category_id = ic.id
+		WHERE cic.challenge_id = ? AND cic.deleted_at IS NULL
+	`, challengeId).Rows()
+	if err != nil {
+		return challenges.Challenge{}, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var cic ChallengeImpactCategory
+		var ic impactcategory.ImpactCategory
+		if err := rows.Scan(&cic.ID, &cic.ChallengeID, &cic.ImpactCategoryID, &ic.ID, &ic.Name, &ic.ImpactPoint, &ic.IconURL); err != nil {
+			return challenges.Challenge{}, err
+		}
+		cic.ImpactCategory = ic
+		challenge.ImpactCategories = append(challenge.ImpactCategories, challenges.ChallengeImpactCategory{
+			ID: cic.ID,
+			ImpactCategory: challenges.ImpactCategory{
+				ID:          ic.ID,
+				Name:        ic.Name,
+				ImpactPoint: ic.ImpactPoint,
+				IconURL:     ic.IconURL,
+			},
+		})
+	}
+
 	return challenge, nil
 }
 
@@ -173,18 +251,30 @@ func (cd *ChallengeData) Update(challenge challenges.Challenge) error {
 	if tx.Error != nil {
 		return tx.Error
 	}
+
 	err := cd.DB.Model(&ChallengeImpactCategory{}).Where("challenge_id = ?", challenge.ID).Delete(&ChallengeImpactCategory{}).Error
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
-
 	err = cd.DB.Model(&Challenge{}).Where("id = ?", challenge.ID).Updates(&challenge).Error
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
-	
+	var challengeImpactCategories []ChallengeImpactCategory
+	for _, category := range challenge.ImpactCategories {
+		challengeImpactCategories = append(challengeImpactCategories, ChallengeImpactCategory{
+			ID:               uuid.New().String(),
+			ChallengeID:      challenge.ID,
+			ImpactCategoryID: category.ImpactCategoryID,
+		})
+	}
+	err = cd.DB.Create(&challengeImpactCategories).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
 	tx.Commit()
 	return nil
 }

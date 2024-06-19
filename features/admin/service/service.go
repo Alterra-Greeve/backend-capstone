@@ -4,6 +4,7 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/admin"
 	"backendgreeve/helper"
+	"strings"
 )
 
 type AdminService struct {
@@ -58,12 +59,35 @@ func (s *AdminService) Update(userAdmin admin.AdminUpdate) (admin.AdminUpdate, e
 		return admin.AdminUpdate{}, constant.ErrEditAdmin
 	}
 
+	if userAdmin.Username != "" {
+		trimmedUsername := strings.TrimSpace(userAdmin.Username)
+		isUsernameValid := helper.ValidateUsername(trimmedUsername)
+		if !isUsernameValid {
+			return admin.AdminUpdate{}, constant.ErrInvalidUsername
+		}
+		userAdmin.Username = trimmedUsername
+	}
+
 	if userAdmin.Password != "" {
 		hashedPassword, err := helper.HashPassword(userAdmin.Password)
 		if err != nil {
 			return admin.AdminUpdate{}, err
 		}
 		userAdmin.Password = hashedPassword
+	}
+
+	if userAdmin.Name != "" {
+		trimmedName := strings.TrimSpace(userAdmin.Name)
+		isNameValid := helper.IsValidInput(trimmedName)
+		if !isNameValid {
+			return admin.AdminUpdate{}, constant.ErrFieldData
+		}
+		userAdmin.Name = trimmedName
+	}
+
+	if userAdmin.Email != "" {
+		trimmedData := strings.TrimSpace(userAdmin.Email)
+		userAdmin.Email = trimmedData
 	}
 
 	userData, err := s.d.Update(userAdmin)

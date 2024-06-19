@@ -759,12 +759,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct11",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -811,12 +811,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct12",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -873,12 +873,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct13",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -925,12 +925,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct14",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -977,12 +977,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct15",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1029,12 +1029,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct16",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1081,12 +1081,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct17",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1133,12 +1133,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct18",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1194,12 +1194,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct19",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1246,12 +1246,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct20",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1298,12 +1298,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct21",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1370,12 +1370,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct22",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1451,12 +1451,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct23",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1503,12 +1503,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct24",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1555,12 +1555,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct25",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "02/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/02/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1627,12 +1627,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct26",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1679,12 +1679,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct27",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1741,12 +1741,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct28",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1793,12 +1793,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct29",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1845,12 +1845,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct30",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1897,12 +1897,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct31",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -1959,12 +1959,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct32",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2011,12 +2011,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct33",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "03/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/03/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2069,12 +2069,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct34",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2131,12 +2131,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct35",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2184,12 +2184,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct36",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2255,12 +2255,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct37",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2317,12 +2317,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct38",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2388,12 +2388,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct39",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2459,12 +2459,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct40",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2511,12 +2511,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct41",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "04/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/04/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2582,12 +2582,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct42",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2686,12 +2686,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct44",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2738,12 +2738,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct45",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "05/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/05/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2790,12 +2790,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct46",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2871,12 +2871,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct47",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2923,12 +2923,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct48",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -2975,12 +2975,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct49",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -3046,12 +3046,12 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateProduct50",
 			Run: func(db *gorm.DB) error {
-				createdAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				createdAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
 
-				updatedAt, err := time.Parse("02/01/2006 15:04:05", "06/01/2024 10:00:00")
+				updatedAt, err := time.Parse("02/01/2006 15:04:05", "01/06/2024 10:00:00")
 				if err != nil {
 					return err
 				}
@@ -4367,231 +4367,6 @@ func Seeds() []seed.Seed {
 		},
 		// End Voucher
 		// Start Challenge log
-		{
-			Name: "CreateTransaction1",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "7af9d694-63bf-42cd-9afc-8b00716a0083",
-					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID: "2e419999-cb91-4e36-a363-289976b7e83b",
-					Address:   "Jl. Sudirman No. 123, Jakarta",
-					Status:    "Berhasil",
-					Total:     105000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction2",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "3b7e3cde-a4ff-4be5-a583-f76bcc3fdf77",
-					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID: "2e419999-cb91-4e36-a363-289976b7e83b",
-					Address:   "Jl. Gajah Mada No. 456, Surabaya",
-					Status:    "Berhasil",
-					Total:     70000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction3",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "9f180211-bd78-483b-b824-0125376ba593",
-					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
-					Status:    "Gagal",
-					Total:     70000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction4",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "1c16e3ac-9a15-4203-8ff2-09f448a86228",
-					UserID:    "6932e20c-3c55-4d95-91c5-ce316cc5843f",
-					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:   "Jl. Diponegoro No. 321, Bandung",
-					Status:    "Berhasil",
-					Total:     1600000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction5",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "f129e567-fc84-437e-a0fd-2b4b94dd90f9",
-					UserID:    "8f25169f-5084-45c3-a99f-40daf59485d4",
-					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:   "Jl. Brawijaya No. 654, Malang",
-					Status:    "Berhasil",
-					Total:     20000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction6",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "7671e308-40e3-4c0c-b64a-982d4bb1c7e1",
-					UserID:    "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
-					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:   "Jl. Thamrin No. 987, Makassar",
-					Status:    "Berhasil",
-					Total:     70000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction7",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "41895902-5859-4f51-8023-5a4473978e08",
-					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID: "7e9c42d0-707c-4f88-b098-ae47888104fa",
-					Address:   "Jl. Sudirman No. 123, Jakarta",
-					Status:    "Berhasil",
-					Total:     17000,
-					Coin:      75,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction8",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "1e166b59-fdd2-4bce-93b6-d81d35723e41",
-					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID: "880d707a-744b-41b9-991f-65c306074c03",
-					Address:   "Jl. Gajah Mada No. 456, Surabaya",
-					Status:    "Gagal",
-					Total:     174000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction9",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "489b813b-ecdc-4fd6-90ea-3c692528a344",
-					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID: "880d707a-744b-41b9-991f-65c306074c03",
-					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
-					Status:    "Berhasil",
-					Total:     900000,
-					Coin:      25,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction10",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "e137483a-3426-4316-801e-4e992a6451c4",
-					UserID:    "6932e20c-3c55-4d95-91c5-ce316cc5843f",
-					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:   "Jl. Diponegoro No. 321, Bandung",
-					Status:    "Berhasil",
-					Total:     1500000,
-					Coin:      165,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction11",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "0970df7d-7d7d-4d1c-b435-8536a35efb81",
-					UserID:    "8f25169f-5084-45c3-a99f-40daf59485d4",
-					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:   "Jl. Brawijaya No. 654, Malang",
-					Status:    "Berhasil",
-					Total:     80000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction12",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "b063bb48-baa7-4ac9-9a1a-db57214dd3fd",
-					UserID:    "fbfccf91-f6ea-4b4f-952e-f371e9c69d9c",
-					VoucherID: "fb2643f7-796b-4a20-a3a7-bd009582215e",
-					Address:   "Jl. Thamrin No. 987, Makassar",
-					Status:    "Gagal",
-					Total:     245000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction13",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "44c09473-4b70-4849-90a7-8c5db2430e1f",
-					UserID:    "5dcdb121-85df-487c-8d4a-b4fd5033c9c0",
-					VoucherID: "83c4db38-d196-49c8-9cb7-b53423e1658f",
-					Address:   "Jl. Sudirman No. 123, Jakarta",
-					Status:    "Berhasil",
-					Total:     24000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction14",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "3cef7e44-efd9-4518-8f11-440f2db92b54",
-					UserID:    "5b9a23e5-e562-4fae-b11c-787e655a67d7",
-					VoucherID: "84c65b94-163f-4880-badd-ad10ff8bfead",
-					Address:   "Jl. Gajah Mada No. 456, Surabaya",
-					Status:    "Menunggu Pembayaran",
-					Total:     1405000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
-		{
-			Name: "CreateTransaction15",
-			Run: func(db *gorm.DB) error {
-				transaction := transaction.Transaction{
-					ID:        "59a80fc1-c324-4d65-8cf2-fc3e17793412",
-					UserID:    "d4a59d1b-38fa-4736-88d7-00cdc02ef5be",
-					VoucherID: "84c65b94-163f-4880-badd-ad10ff8bfead",
-					Address:   "Jl. Pahlawan No. 789, Yogyakarta",
-					Status:    "Berhasil",
-					Total:     955000,
-					Coin:      0,
-				}
-				return CreateTransaction(db, transaction)
-			},
-		},
 		// End Challenge
 		// Start Forum
 		{
@@ -4982,29 +4757,28 @@ func Seeds() []seed.Seed {
 					return err
 				}
 				for _, record := range records {
-					createdAt, err := time.Parse("2006-01-02 15:04:05", record[9])
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[8])
 					if err != nil {
 						return err
 					}
-
-					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[10])
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[9])
 					if err != nil {
 						return err
 					}
 					seed := transaction.Transaction{
-						Model: &gorm.Model{
-							CreatedAt: createdAt,
-							UpdatedAt: updatedAt,
-						},
 						ID:            record[0],
 						UserID:        record[1],
 						VoucherID:     record[2],
 						Address:       record[3],
-						Status:        record[5],
-						SnapURL:       record[6],
-						Total:         helper.Atof(record[7]),
-						PaymentMethod: record[8],
-						Coin:          helper.Atoi(record[11]),
+						Status:        record[4],
+						SnapURL:       record[10],
+						Total:         helper.Atof(record[5]),
+						PaymentMethod: record[7],
+						Coin:          helper.Atoi(record[6]),
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
 					}
 					err = CreateTransaction(db, seed)
 					if err != nil {
@@ -5015,7 +4789,7 @@ func Seeds() []seed.Seed {
 			},
 		},
 		{
-			Name: "TransactionSeeder",
+			Name: "TransactionItemsSeeder",
 			Run: func(db *gorm.DB) error {
 				file, err := os.Open("data/transaction-items-greeve.csv")
 				if err != nil {
@@ -5049,6 +4823,47 @@ func Seeds() []seed.Seed {
 						},
 					}
 					err = CreateTransactionItem(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
+			},
+		},
+		{
+			Name: "ChallengeConfirmationSeeder",
+			Run: func(db *gorm.DB) error {
+				file, err := os.Open("data/challenge-confirmation.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[5])
+					if err != nil {
+						return err
+					}
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[6])
+					if err != nil {
+						return err
+					}
+					seed := challenge.ChallengeConfirmation{
+						ID:          record[0],
+						ChallengeID: record[1],
+						UserID:      record[2],
+						Description: record[3],
+						Status:      record[4],
+						CreatedAt:   createdAt,
+						UpdatedAt:   updatedAt,
+					}
+					err = CreateChallengeConfirmation(db, seed)
 					if err != nil {
 						return err
 					}
