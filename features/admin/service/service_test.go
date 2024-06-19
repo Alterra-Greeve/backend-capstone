@@ -13,7 +13,6 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-// MockAdminData is a mock implementation of admin.AdminDataInterface
 type MockAdminData struct {
 	mock.Mock
 	Users   map[string]admin.Admin

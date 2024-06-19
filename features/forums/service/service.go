@@ -4,6 +4,7 @@ import (
 	"backendgreeve/constant"
 	"backendgreeve/features/forums"
 	"backendgreeve/helper"
+	"strings"
 )
 
 type ForumService struct {
@@ -45,11 +46,11 @@ func (s *ForumService) UpdateForum(forum forums.EditForum) error {
 	if forum.ID == "" {
 		return constant.ErrGetForumByID
 	}
-	if forum.Title == "" && forum.Description == " " {
-		return constant.ErrEditForum
+	if strings.TrimSpace(forum.Title) == "" || strings.TrimSpace(forum.Description) == "" {
+		return constant.ErrFieldForumCannotBeEmpty
 	}
 
-	if !helper.IsValidInput(forum.Title) && !helper.IsValidInput(forum.Description) {
+	if !helper.IsValidInput(forum.Title) || !helper.IsValidInput(forum.Description) {
 		return constant.ErrFieldData
 	}
 	return s.d.UpdateForum(forum)
