@@ -30,8 +30,15 @@
 | Create Data Product | POST                | NO                      | Yes                                      |
 | Get Product         | Get                 | Yes                     | Yes                                      |
 | Get Product by ID   | Get                 | Yes                     | Yes                                      |
+| View Item from Shooping cart       | GET                 | Yes                     | No                                      |
 | Add Item to Shooping cart          | POST                | Yes                     | No                                      |
 | Edit Item From Shooping cart       | PUT                 | Yes                     | No                                      |
 | Delete Item From Shooping cart     | DELETE              | Yes                     | No                                      |
-| Payment For Shooping cart     | POST              | Yes                     | No                                      |
-| Register          | POST                | Yes                     | Yes                                      |
+| Transaction  FEATURE                                                                                             |
+| Get All Transaction Data For User  | GET                 | Yes                     | Yes                                     |
+| Get Transaction Data For User by ID| GET                 | Yes                     | Yes                                     |
+| Create Transaction                 | POST                | Yes                     | No                                      |
+| Cancel Transaction                 | PUT                 | Yes                     | No                                      |
+| Payment For Transaction            | POST                | Yes                     | No                                      |
+| Challenge Feature                                                                                                            |
+| Payment For Shooping cart          | POST                | Yes                     | No                                      |
