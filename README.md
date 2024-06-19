@@ -131,9 +131,24 @@ Docker & GCP
 ## HLA
 
 # Contact 
-Link Project      : https://github.com/Alterra-Greeve
-API Documentation : https://api.greeve.store/#/
-
+Link Project: <br>
+<a href="https://github.com/Alterra-Greeve">
+  <img src="https://img.shields.io/badge/Greeve-black?logo=github" alt="GitHub Badge">
+</a>
+<br>
+API Documentation: <br>
+<a href="https://api.greeve.store/#/">
+  <img src="https://img.shields.io/badge/Greeve-darkgreen?logo=swagger&logoColor=dark" alt="Swagger Badge">
+</a>
 ## Contributor
-**Nur Faid Praseto** 
-**Chandra Wahyu Rafialdi**
+**Nur Faid Praseto** <br>
+<br>
+[![Nur Faid Prasetyo - LinkedIn](https://img.shields.io/badge/Nur_Faid_Prasetyo-blue?logo=linkedin)](https://www.linkedin.com/in/kzquandary)
+[![Nur Faid Prasetyo - GitHub](https://img.shields.io/badge/Nur_Faid_Prasetyo-black?logo=github)](https://github.com/kzquandary)
+
+**Chandra Wahyu Rafialdi** 
+<br>
+[![Chandra Wahyu Rafialdi - LinkedIn](https://img.shields.io/badge/Chandra_Wahyu_Rafialdi-blue?logo=linkedin)](https://www.linkedin.com/in/chandra-wahyu-r-8875b3297/)
+[![Chandra Wahyu Rafialdi - GitHub](https://img.shields.io/badge/Chandra_Wahyu_Rafialdi-black?logo=github)](https://github.com/ChandraWahyuR)
+
+
