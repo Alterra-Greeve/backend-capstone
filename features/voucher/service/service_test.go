@@ -24,6 +24,10 @@ func (m *MockVoucherData) GetByIdVoucher(ID string) (voucher.Voucher, error) {
 	return args.Get(0).(voucher.Voucher), args.Error(1)
 }
 
+func (m *MockVoucherData) GetVoucherUsed(voucherId string) (int, error) {
+	args := m.Called(voucherId)
+	return args.Int(0), args.Error(1)
+}
 func (m *MockVoucherData) Create(v voucher.Voucher) error {
 	args := m.Called(v)
 	return args.Error(0)
@@ -215,5 +219,21 @@ func TestVoucherService_Delete(t *testing.T) {
 	err := service.Delete(voucherID)
 
 	assert.NoError(t, err)
+	mockData.AssertExpectations(t)
+}
+
+func TestVoucherService_GetVoucherUsed(t *testing.T) {
+	mockData := new(MockVoucherData)
+	service := New(mockData)
+
+	voucherId := "1"
+	expectedUsedCount := 5
+
+	mockData.On("GetVoucherUsed", voucherId).Return(expectedUsedCount, nil)
+
+	result, err := service.GetVoucherUsed(voucherId)
+
+	assert.NoError(t, err)
+	assert.Equal(t, expectedUsedCount, result)
 	mockData.AssertExpectations(t)
 }
