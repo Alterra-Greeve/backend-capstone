@@ -56,6 +56,144 @@ paths:
                 example:
                   status: true
                   message: Get Dashboard Success
+                  data: 
+                    total_product: 100
+                    total_product_percentage: "0.00%"
+                    total_new_product_this_month: 0
+                    total_new_product_this_month_percentage: "100.00%"
+                    total_user: 15
+                    total_user_percentage: "6.25%"
+                    total_membership: 5
+                    new_products:
+                      - id: 123e4567-e89b-12d3-a456-426614174000
+                        product_id: 7beeb22b-1928-4f72-8e9e-55525d792d89
+                        name: Pot Bunga dari Ban Daur Ulang
+                        description: Beri kehidupan baru pada ban bekas dengan pot bunga unik ini.
+                        price: 200000
+                        coin: 30
+                        stock: 500
+                        created_at: 06/01/2024
+                        updated_at: 06/01/2024
+                        category:
+                        - impact_category:
+                          name: Mengurangi Limbah
+                          impact_point: 50
+                          icon_url: https://storage.googleapis.com/alterra-greeve/mengurangi-limbah.svg
+                        - impact_category:
+                          name: Mengurangi Pemanasan Global
+                          impact_point: 35
+                          icon_url: https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg
+                        images:
+                          - image_url:  https://storage.googleapis.com/alterra-greeve/greeve/e0ec28d3-9ed0-49e3-a898-ef497eca9c06Classic-Pot-L-Front.jpg
+                            position: 1
+                      - product_id: 66bcdf40-2544-4bec-b9be-0283a030e709
+                        name: Sweter Katun Organik
+                        description: Pakaian lembut dan berkelanjutan yang terbuat dari katun organik bersertifikat GOTS.
+                        price: 650000
+                        coin: 55
+                        stock: 500
+                        created_at: 06/01/2024
+                        updated_at: 06/01/2024
+                        category:
+                        - impact_category:
+                          name: Mengurangi Limbah
+                          impact_point: 50
+                          icon_url: https://storage.googleapis.com/alterra-greeve/mengurangi-limbah.svg
+                        images:
+                          - image_url: https://storage.googleapis.com/alterra-greeve/greeve/b422f557-fb5f-4bbc-a2c5-649f01642310136311-a18e6b57f5fd4fa488aaaa859c1d891a_900x.webp
+                            position: 1
+                        monthly_impact:
+                          - month: 2024-01
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 105
+                            - name: Hemat Uang
+                              point: 40
+                            - name: Mengurangi Limbah
+                              point: 600
+                            - name: Perluas Wawasan
+                              point: 0
+                          - month: 2024-02
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 175
+                            - name: Hemat Uang
+                              point: 120
+                            - name: Mengurangi Limbah
+                              point: 150
+                            - name: Perluas Wawasan
+                              point: 60
+                          - month: 2024-03
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 105
+                            - name: Hemat Uang
+                              point: 40
+                            - name: Mengurangi Limbah
+                              point: 600
+                            - name: Perluas Wawasan
+                              point: 0
+                          - month: 2024-04
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 105
+                            - name: Hemat Uang
+                              point: 40
+                            - name: Mengurangi Limbah
+                              point: 600
+                            - name: Perluas Wawasan
+                              point: 0
+                          - month: 2024-05
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 105
+                            - name: Hemat Uang
+                              point: 40
+                            - name: Mengurangi Limbah
+                              point: 600
+                            - name: Perluas Wawasan
+                              point: 0
+                          - month: 2024-06
+                            point:
+                            - name: Mengurangi Pemanasan Global
+                              point: 105
+                            - name: Hemat Uang
+                              point: 40
+                            - name: Mengurangi Limbah
+                              point: 600
+                            - name: Perluas Wawasan
+                              point: 0
+        "400": 
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Bad Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Unauthorized
                   data: null
   /order/product:
     get:
@@ -81,6 +219,68 @@ paths:
                 example:
                   status: true
                   message: Get Orders Success
+                  data: 
+                    - username: budi.santoso
+                      email: budi.santoso@example.com
+                      coin: 60
+                      qty: 3
+                      product_name: Lampu Taman Tenaga Surya
+                      total: 955000
+                      helps:
+                          - impact_category:
+                            - name: Mengurangi Pemanasan Global
+                              image_url: https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg
+                            - name: Hemat Uang
+                              image_url": https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg         
+                      impact_point: 75
+                      created_at: 16/06/24
+                      updated_at: 16/06/24         
+                    - username: budi.santoso
+                      email: budi.santoso@example.com
+                      coin: 6
+                      qty: 1
+                      product_name: Pembungkus Makanan yang Dapat Digunakan Kembali
+                      total: 955000
+                      helps:
+                          - impact_category:
+                            - name: Mengurangi Pemanasan Global
+                              image_url: https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg
+                            - name: Hemat Uang
+                              image_url": https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg         
+                      impact_point: 75
+                      created_at: 16/06/24
+                      updated_at: 16/06/24
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Bad Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Unauthorized
                   data: null
   /order/challenge:
     get:
@@ -106,13 +306,75 @@ paths:
                 example:
                   status: true
                   message: Get Orders Success
+                  data: 
+                    -  username: a12345678
+                       email: kzquandary@gmail.com
+                       challenge_name: Minggu Tanpa Limbah
+                       exp: 200
+                       difficulty: Sulit
+                       impact_point: 85
+                       helps:
+                       - impact_category:
+                          name: Mengurangi Pemanasan Global
+                          image_url: https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg
+                       - impact_category:
+                          name: Mengurangi Limbah
+                          image_url: https://storage.googleapis.com/alterra-greeve/greeve/91d948ca-3576-49e5-b435-0c3c7eccff7963ca36bac45556620e0ff4ba7ec5790d.jpeg
+                       createdAt: 16/06/24
+                       updatedAt: 16/06/24
+                    -  username: a12345678
+                       email: kzquandary@gmail.com
+                       challenge_name: Kerja Bakti Membersihkan Lingkungan
+                       exp: 50
+                       difficulty: Mudah
+                       impact_point: 80
+                       helps:
+                       - impact_category:
+                          name: Mengurangi Pemanasan Global
+                          image_url: https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg
+                       - impact_category:
+                          name: Perluas Wawasan
+                          image_url: https://storage.googleapis.com/alterra-greeve/greeve/fd98dcdc-4cea-428a-a008-e1ca6f972ca72f0376e551eec4f1af915d5983a621c1.jpeg
+                       createdAt: 16/06/24
+                       updatedAt: 16/06/24
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Bad Request
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                example:
+                  status: false
+                  message: Unauthorized
                   data: null
   /admin/login:
     post:
       tags:
         - admin
       summary: Login Admin
-      description: Admin melakukan login menggunakan email dan username, dan mendapatkan response token
+      description: Admin melakukan login menggunakan email dan password, kemudian mendapatkan response token
       operationId: login
       requestBody:
         content:
@@ -151,7 +413,7 @@ paths:
                 status: true
                 message: Login Success
                 data:
-                  - token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUxMjI3OTI3NjI3NjQwOSIsImlhdCI6MTY4MzUxMjYyMiwiZXhwIjoxNjgzNTIwNjIyfQ.3Qw6nZ1Nl9L3zKq8UcF8ZI6BjB4sZ9aJ5rSfJY1w7gM
         "400":
           description: Bad Request
           content:
@@ -203,7 +465,7 @@ paths:
                   status: true
                   message: Get User Success
                   data:
-                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      id: 123e4567-e89b-12d3-a456-426614174000
                       name: Admin Greeve
                       email: admin@greeve.store
                       username: admin
@@ -267,12 +529,7 @@ paths:
                 example:
                   status: true
                   message: Update Success
-                  data:   
-                      id: 422344
-                      name: Kaze User
-                      email: users@kzquandary.my.id
-                      address: Cimahi
-                      gender: Laki-laki
+                  data: null              
         "400":
           description: Bad Request
           content:
@@ -286,10 +543,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: Email or Username already taken by another admin
-                  data: null
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Field cannot be empty
+                    data: null
+                Email/Username Exist:
+                  value:
+                    status: false
+                    message: Email or Username already taken by another admin
+                    data: null
         "401":
           description: Unauthorized
           content:
@@ -477,10 +741,17 @@ paths:
                     type: string
                   data:
                     type: array
-                example:
-                  status: false
-                  message: Format data not valid
-                  data: null
+              examples:
+                Data Not Valid:
+                  value:
+                    status: false
+                    message: Format data not valid
+                    data: null
+                Page Not found:
+                  value:
+                    status: false
+                    message: Invalid page number  
+                    data: null
         "404":
           description: Not Found
           content:
@@ -492,10 +763,12 @@ paths:
                     type: boolean
                   message:
                     type: string
-                example:
-                  status: false
-                  message: Not Found  
-                  data: null
+              examples:                
+                Data Not Found:
+                  value:
+                    status: false
+                    message: Data not found
+                    data: null
   /admin/users/{user_id}:
     get: 
       tags:
@@ -591,7 +864,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: id user Not Found
+                  message: User ID Not Found
                   data: null
     put: 
       tags:
@@ -858,163 +1131,163 @@ paths:
                   status: false
                   message: Not Found
                   data: null
-  /admin/transactions/{transaction_id}:
-    get: 
-      tags:
-        - transaction
-      summary: Get Transaction Data By ID
-      description: Admin mendapatkan data transaction sesuai id yang dicari, untuk menggunakan route ini harus menggunakan token admin
-      operationId: getTransactionbyID
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: transaction_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Get Data by ID Transaction Success
-                  data: 
-                      id: 01
-                      user_id: 422344
-                      address: Cimahi
-                      description: pembayaran
-                      total: 100000
-                      status: pending
-                      date: 2022-10-10
-                      payment:
-                        payment_method: cash
+  # /admin/transactions/{transaction_id}:
+  #   get: 
+  #     tags:
+  #       - transaction
+  #     summary: Get Transaction Data By ID
+  #     description: Admin mendapatkan data transaction sesuai id yang dicari, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: getTransactionbyID
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: transaction_id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: 1
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Get Data by ID Transaction Success
+  #                 data: 
+  #                     id: 01
+  #                     user_id: 422344
+  #                     address: Cimahi
+  #                     description: pembayaran
+  #                     total: 100000
+  #                     status: pending
+  #                     date: 2022-10-10
+  #                     payment:
+  #                       payment_method: cash
         
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: ID Transaction Not Found
-                  data: null
-    put: 
-      tags:
-        - transaction
-      summary: Update Data Transactions By Admin
-      description: Admin dapat melakukan update data transaction, untuk menggunakan route ini harus menggunakan token admin
-      operationId: updateTransaction
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: transaction_id
-          in: path
-          required: true
-          schema:
-            type: string
-          example: 1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-              example:
-                  status: Success
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                example:
-                  status: true
-                  message: Update Data Transaction Success
-                  data: 
-                      id: 01
-                      user_id: 422344
-                      address: Cimahi
-                      description: pembayaran
-                      total: 100000
-                      status: Success
-                      date: 2022-10-10
-                      payment:
-                        payment_method: cash
-                      created_at: 2022-10-10
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Invalid Request
-                  data: null
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Unauthorized
-                  data: null
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                example:
-                  status: false
-                  message: Id Transaction Not Found
-                  data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: ID Transaction Not Found
+  #                 data: null
+  #   put: 
+  #     tags:
+  #       - transaction
+  #     summary: Update Data Transactions By Admin
+  #     description: Admin dapat melakukan update data transaction, untuk menggunakan route ini harus menggunakan token admin
+  #     operationId: updateTransaction
+  #     security:
+  #       - bearerAuth: []
+  #     parameters:
+  #       - name: transaction_id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #         example: 1
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               status:
+  #                 type: string
+  #             example:
+  #                 status: Success
+  #     responses:
+  #       "200":
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: array
+  #               example:
+  #                 status: true
+  #                 message: Update Data Transaction Success
+  #                 data: 
+  #                     id: 01
+  #                     user_id: 422344
+  #                     address: Cimahi
+  #                     description: pembayaran
+  #                     total: 100000
+  #                     status: Success
+  #                     date: 2022-10-10
+  #                     payment:
+  #                       payment_method: cash
+  #                     created_at: 2022-10-10
+  #       "400":
+  #         description: Bad Request
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Invalid Request
+  #                 data: null
+  #       "401":
+  #         description: Unauthorized
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Unauthorized
+  #                 data: null
+  #       "404":
+  #         description: Not Found
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status:
+  #                   type: boolean
+  #                 message:
+  #                   type: string
+  #               example:
+  #                 status: false
+  #                 message: Id Transaction Not Found
+  #                 data: null
   /products:
     get: 
       tags:
@@ -1079,37 +1352,38 @@ paths:
                   status: true
                   message: Product fetched successfully
                   data: 
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
+                    - id: 45b7212f-7b44-421c-8ac5-755a14051370
                       name: product 3
                       description: product
                       price: 30000
                       coin: 200
+                      stock: 500
+                      created_at: 16/06/24
+                      updated_at: 16/06/24
                       category: 
-                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
-                        
-                      images: 
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
+                            -  83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                            - 7d34a5fa-e2cf-466d-9f01-d731f6967082
+                            -  e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                            -  b5d07366-3b31-4011-95e3-34735b0b61f8                       
+                      image_url:
+                        - https://example.com/images/water-bottle3.jpg  
+                        - https://example.com/images/water-bottle3.jpg
+                    - id: 6e86a34e-01cc-487b-a179-4cda9ce2892c
+                      name: product 4
+                      description: product 4
                       price: 30000
                       coin: 200
+                      stock: 500
+                      created_at: 16/06/24
+                      updated_at: 16/06/24
                       category: 
-                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8                  
-                      images: 
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
+                            -  83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                            -  7d34a5fa-e2cf-466d-9f01-d731f6967082
+                            -  e8e714bd-c34e-4278-980c-39bd1f55b5fb
+                            -  b5d07366-3b31-4011-95e3-34735b0b61f8                       
+                      image_url:
+                        - https://example.com/images/water-bottle4.jpg  
+                        - https://example.com/images/water-bottle4.jpg
         "400":
           description: Bad Request
           content:
@@ -1298,21 +1572,19 @@ paths:
                   status: true
                   message: Product fetched successfully
                   data: 
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
+                      id: 08989b73-113e-4161-8047-9642db33fea3
+                      name: Lampu Hemat Energi
+                      description: Bola lampu LED yang menghemat energi dan tahan lama.
+                      price: 58000
+                      coin: 20
+                      stock: 500
+                      created_at: 01/01/2024
+                      updated_at: 01/01/2024
                       category: 
-                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8           
-                      images: 
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
+                            -  83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
+                            -  b5d07366-3b31-4011-95e3-34735b0b61f8                       
+                      image_url:
+                        -  https://storage.googleapis.com/alterra-greeve/greeve/4b5e6cab-59dd-4d81-988e-e1d390cb9b0c24ba49e1-c01c-4bff-bf1c-e26b0e3e660a.jpg.webp
         "401":
           description: Unauthorized
           content:
@@ -1411,37 +1683,58 @@ paths:
                 example:
                   status: true
                   message: Product fetched successfully
+                  metadata:
+                    page: 1
+                    total_page: 1
                   data: 
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
+                    - product_id: 644c996a-5407-416f-86a3-b8fa9233886f
+                      name: Lampu Taman Tenaga Surya
+                      description: Lampu taman yang bertenaga surya.
+                      price: 230000
+                      coin: 20
+                      stock: 500
+                      created_at: 02/01/24
+                      updated_at: 02/01/24
                       category: 
-                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
+                        - impact_category: 
+                            name: Mengurangi Pemanasan Global
+                            impact_point: 35
+                            icon_url: https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg
+                        - impact_category: 
+                            name: Hemat Uang
+                            impact_point: 40
+                            icon_url: https://storage.googleapis.com/alterra-greeve/hemat-uang.svg
                       images: 
-                        - image_url: https://example.com/images/water-bottle3.jpg
+                        - image_url: https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp
                           position: 1
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
+                        - image_url: https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg
+                          position: 3
+                        - image_url: https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg
+                          position: 2 
+                    - product_id: 005c310b-015a-4075-b3b5-575b1feb14d6
+                      name: Termostat Pintar
+                      description: Termostat yang dapat diprogram yang menghemat energi dan uang.
+                      price: 1500000
+                      coin: 50
+                      stock: 500
+                      created_at: 01/01/0001
+                      updated_at: 21/06/2024
                       category: 
-                        - id: 83808762-e2b8-4b34-a1eb-0ed8d4fda3dd
-                        - id: 7d34a5fa-e2cf-466d-9f01-d731f6967082
-                        - id: e8e714bd-c34e-4278-980c-39bd1f55b5fb
-                        - id: b5d07366-3b31-4011-95e3-34735b0b61f8
+                        - impact_category: 
+                            name: Mengurangi Pemanasan Global
+                            impact_point: 35
+                            icon_url: https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg
+                        - impact_category: 
+                            name: Hemat Uang
+                            impact_point: 40
+                            icon_url: https://storage.googleapis.com/alterra-greeve/hemat-uang.svg
                       images: 
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                        - image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp"
+                          "position": 1
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg"
+                          "position": 3
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg"
+                          "position": 2 
         "400":
           description: Bad Request
           content:
@@ -1541,48 +1834,30 @@ paths:
                   status: true
                   message: Product fetched successfully
                   data: 
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
+                    - product_id: 644c996a-5407-416f-86a3-b8fa9233886f
+                      name: Lampu Taman Tenaga Surya
+                      description: Lampu taman yang bertenaga surya.
+                      price: 230000
+                      coin: 20
+                      stock: 500
+                      created_at: 02/01/24
+                      updated_at: 02/01/24
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - impact_category: 
+                            name: Mengurangi Pemanasan Global
+                            impact_point: 35
+                            icon_url: https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg
+                        - impact_category: 
+                            name: Hemat Uang
+                            impact_point: 40
+                            icon_url: https://storage.googleapis.com/alterra-greeve/hemat-uang.svg
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
-                      category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp"
+                          "position": 1
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg"
+                          "position": 3
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg"
+                          "position": 2                   
         "400":
           description: Bad Request
           content:
@@ -1688,48 +1963,30 @@ paths:
                   status: true
                   message: Product fetched successfully
                   data: 
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
+                    - product_id: 644c996a-5407-416f-86a3-b8fa9233886f
+                      name: Lampu Taman Tenaga Surya
+                      description: Lampu taman yang bertenaga surya.
+                      price: 230000
+                      coin: 20
+                      stock: 500
+                      created_at: 02/01/24
+                      updated_at: 02/01/24
                       category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
+                        - impact_category: 
+                            name: Mengurangi Pemanasan Global
+                            impact_point: 35
+                            icon_url: https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg
+                        - impact_category: 
+                            name: Hemat Uang
+                            impact_point: 40
+                            icon_url: https://storage.googleapis.com/alterra-greeve/hemat-uang.svg
                       images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
-                    - id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                      name: product 3
-                      description: product
-                      price: 30000
-                      coin: 200
-                      category: 
-                        - id: 67617191-bc11-4367-9590-d088429c163f
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9d
-                        - id: deb66563-0946-4aac-a863-21c452d2da16
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          impact_category_id: e965bc1d-9bfa-4512-8e28-64a101201d9e
-                      images: 
-                        - id: 6883e579-9595-4e17-99c8-e22e67c94b77
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 2
-                        - id: 92b67fd4-1c27-46f7-9710-f9880a9d3477
-                          product_id: c7af1356-bdd5-42b3-a8c9-1669b71d9447
-                          image_url: https://example.com/images/water-bottle3.jpg
-                          position: 1
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/d063a9c6-3ade-4df4-b05a-c0efab059a7761z7WoMtSnL.__AC_SY445_SX342_QL70_FMwebp_.webp"
+                          "position": 1
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/1833a1e6-9302-4c92-837c-f1b7e90799ceimages (9).jpeg"
+                          "position": 3
+                        - "image_url": "https://storage.googleapis.com/alterra-greeve/greeve/b2aa4228-81ef-4d47-bd58-73c9bac47fe871hxa7Mtq+L._AC_SX679_.jpg"
+                          "position": 2   
         "400":
           description: Bad Request
           content:
@@ -2061,13 +2318,8 @@ paths:
                     type: array
                 example:
                   status: true
-                  message: Update Data Transaction Success
-                  data: 
-                      id: 014
-                      name: product 3
-                      price: 30000
-                      description: product keren
-                      image_url: https://example.com/images/item3.jpg
+                  message: Successfull Update Product
+                  data:  null                   
         "400":
           description: Bad Request
           content:
@@ -2081,7 +2333,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Invalid Request
+                  message: Format data not valid
                   data: null
         "401":
           description: Unauthorized
@@ -2172,7 +2424,7 @@ paths:
                     type: string
                 example:
                   status: false
-                  message: Id Product Not Found
+                  message: Product Not Found
                   data: null
   /admin/challenges:
     get:
@@ -3635,414 +3887,414 @@ paths:
                   status: false
                   message: Id Impact Not Found
                   data: null
-  # /admin/voucher:
-  #   get:
-  #     tags:
-  #       - voucher
-  #     summary: Get Data Voucher By Admin
-  #     description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
-  #     operationId: getDataVoucher
-  #     security:
-  #       - bearerAuth: []
-  #     responses:
-  #       "200":
-  #         description: OK
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: true
-  #                 message: Get Data Voucher Success
-  #                 data: 
-  #                   - id: eb628b30-9305-475f-9a54-85229936650a
-  #                     name: Voucher Lebaran
-  #                     code: A10238013
-  #                     discount: 10%
-  #                     description: Discount Hari Raya voucher terbatas hingga 5 Hari
-  #                     expired_at: 2024-07-30
-  #                   - id: eb628b30-9305-475f-9a54-852314936650a
-  #                     name: Surprise Voucher
-  #                     code: A10238013
-  #                     discount: 20%
-  #                     description: Discount Dadakan WOW!!!
-  #                     expired_at: 2024-08-01
+  /admin/voucher:
+    get:
+      tags:
+        - voucher
+      summary: Get Data Voucher By Admin
+      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataVoucher
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Data Voucher Success
+                  data: 
+                    - id: eb628b30-9305-475f-9a54-85229936650a
+                      name: Voucher Lebaran
+                      code: A10238013
+                      discount: 10%
+                      description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                      expired_at: 2024-07-30
+                    - id: eb628b30-9305-475f-9a54-852314936650a
+                      name: Surprise Voucher
+                      code: A10238013
+                      discount: 20%
+                      description: Discount Dadakan WOW!!!
+                      expired_at: 2024-08-01
                     
-  #       "401":
-  #         description: Unauthorized
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Unauthorized
-  #                 data: null
-  #       "404":  
-  #         description: Not Found
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Id Voucher Not Found
-  #                 data: null
-  #   post:
-  #     tags:
-  #       - voucher
-  #     summary: Add Data Voucher By Admin 
-  #     description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
-  #     operationId: addDataVoucher
-  #     security:
-  #       - bearerAuth: []
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema: 
-  #             type: object
-  #             properties:
-  #               name:
-  #                 type: string
-  #               code:
-  #                 type: string            
-  #               discount:
-  #                 type: string
-  #               description:
-  #                 type: string
-  #               expired_at:
-  #                 type: string
-  #             example: 
-  #               name: Discount Hari Raya
-  #               code: A10238013
-  #               discount: 10%
-  #               description: Discount Hari Raya voucher terbatas hingga 5 Hari
-  #               expired_at : "2024-10-30T00:00:00Z"
-  #     responses:
-  #       "200":
-  #         description: OK
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: true
-  #                 message: Add Data Voucher Success
-  #                 data: 
-  #                   id: 001
-  #                   name: Discount Hari Raya
-  #                   code: A10238013
-  #                   discount: 10%
-  #                   expired_at: 2024-10-30
-  #       "400":
-  #         description: Bad Request
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #                 data:
-  #                   type: array
-  #             examples:
-  #               Empty Field:
-  #                 value:
-  #                   status: false
-  #                   message: Failed to create voucher
-  #                   data: null
-  #               Code Exist:
-  #                 value:
-  #                   status: false
-  #                   message: Failed to create voucher, code already exist
-  #                   data: null
-  #               Bad Input:
-  #                 value:
-  #                   status: false
-  #                   message: Error when generate code voucher, at least 9 characters
-  #                   data: null
-  #       "401":
-  #         description: Unauthorized
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Unauthorized
-  #                 data: null
-  # /admin/voucher/{voucher_id}:
-  #   get:
-  #     tags:
-  #       - voucher
-  #     summary: Get Voucher Data By Admin
-  #     description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
-  #     operationId: getDataVoucherbyid
-  #     security:
-  #       - bearerAuth: []
-  #     parameters:
-  #       - name: voucher_id
-  #         in: path
-  #         required: true
-  #         schema:
-  #           type: string
-  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-  #     responses:
-  #       "200":
-  #         description: OK
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: true
-  #                 message: Get Data Voucher Success
-  #                 data: 
-  #                   id: 001
-  #                   name: Discount Hari Raya
-  #                   code: A10238013
-  #                   discount: 10%
-  #                   expired_at: 2024-10-30
-  #       "401":
-  #         description: Unauthorized
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Unauthorized
-  #                 data: null
-  #       "404":  
-  #         description: Not Found
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Id Voucher Not Found
-  #                 data: null
-  #   put:
-  #     tags:
-  #       - voucher
-  #     summary: Update Voucher Data By Admin
-  #     description: Admin dapat melakukan perintah update data voucher, untuk menggunakan route ini harus menggunakan token admin
-  #     operationId: updateDataVoucher
-  #     security:
-  #       - bearerAuth: []
-  #     parameters:
-  #       - name: voucher_id
-  #         in: path
-  #         required: true
-  #         schema:
-  #           type: string
-  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema: 
-  #             type: object
-  #             properties:
-  #               name:
-  #                 type: string
-  #               code:
-  #                 type: string            
-  #               discount:
-  #                 type: string
-  #               description:
-  #                 type: string
-  #               expired_at:
-  #                 type: string
-  #             example: 
-  #               name: Discount Hari Raya
-  #               code: A10238013
-  #               discount: 10%
-  #               description: Discount Hari Raya voucher terbatas hingga 5 Hari
-  #               expired_at : "2024-10-30T00:00:00Z"
-  #     responses:
-  #       "200":
-  #         description: OK
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: true
-  #                 message: Update Data Voucher Success
-  #                 data: 
-  #                   id: 001
-  #                   name: Discount Hari Raya
-  #                   code: A10238013
-  #                   discount: 10%
-  #                   expired_at: 2024-10-30
-  #       "400":
-  #         description: Bad Request
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #                 data:
-  #                   type: array
-  #             examples:
-  #               Empty Field:
-  #                 value:
-  #                   status: false
-  #                   message: Failed to create voucher
-  #                   data: null
-  #               Code Exist:
-  #                 value:
-  #                   status: false
-  #                   message: Failed to create voucher, code already exist
-  #                   data: null
-  #               Bad Input:
-  #                 value:
-  #                   status: false
-  #                   message: Error when generate code voucher, at least 9 characters
-  #                   data: null
-  #       "401":
-  #         description: Unauthorized
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Unauthorized
-  #                 data: null
-  #       "404":  
-  #         description: Not Found
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Id Voucher Not Found
-  #                 data: null
-  #   delete:
-  #     tags:
-  #       - voucher
-  #     summary: Delete Voucher Data By Admin
-  #     description: Admin dapat melakukan perintah delete data voucher, untuk menggunakan route ini harus menggunakan token admin
-  #     operationId: deleteDataVoucher
-  #     security:
-  #       - bearerAuth: []
-  #     parameters:
-  #       - name: voucher_id
-  #         in: path
-  #         required: true
-  #         schema:
-  #           type: string
-  #         example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
-  #     responses:
-  #       "200":
-  #         description: OK
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: true
-  #                 message: Delete Data Voucher Success
-  #                 data: null
-  #       "401":
-  #         description: Unauthorized
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Unauthorized
-  #                 data: null
-  #       "404":  
-  #         description: Not Found
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 status:
-  #                   type: boolean
-  #                 message:
-  #                   type: string
-  #               example:
-  #                 status: false
-  #                 message: Id Voucher Not Found
-  #                 data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
+    post:
+      tags:
+        - voucher
+      summary: Add Data Voucher By Admin 
+      description: Admin dapat membuat voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: addDataVoucher
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string            
+                discount:
+                  type: string
+                description:
+                  type: string
+                expired_at:
+                  type: string
+              example: 
+                name: Discount Hari Raya
+                code: A10238013
+                discount: 10%
+                description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                expired_at : "2024-10-30T00:00:00Z"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Add Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+  /admin/voucher/{voucher_id}:
+    get:
+      tags:
+        - voucher
+      summary: Get Voucher Data By Admin
+      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: getDataVoucherbyid
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
+    put:
+      tags:
+        - voucher
+      summary: Update Voucher Data By Admin
+      description: Admin dapat melakukan perintah update data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: updateDataVoucher
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string            
+                discount:
+                  type: string
+                description:
+                  type: string
+                expired_at:
+                  type: string
+              example: 
+                name: Discount Hari Raya
+                code: A10238013
+                discount: 10%
+                description: Discount Hari Raya voucher terbatas hingga 5 Hari
+                expired_at : "2024-10-30T00:00:00Z"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Update Data Voucher Success
+                  data: 
+                    id: 001
+                    name: Discount Hari Raya
+                    code: A10238013
+                    discount: 10%
+                    expired_at: 2024-10-30
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+              examples:
+                Empty Field:
+                  value:
+                    status: false
+                    message: Failed to create voucher
+                    data: null
+                Code Exist:
+                  value:
+                    status: false
+                    message: Failed to create voucher, code already exist
+                    data: null
+                Bad Input:
+                  value:
+                    status: false
+                    message: Error when generate code voucher, at least 9 characters
+                    data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
+    delete:
+      tags:
+        - voucher
+      summary: Delete Voucher Data By Admin
+      description: Admin dapat melakukan perintah delete data voucher, untuk menggunakan route ini harus menggunakan token admin
+      operationId: deleteDataVoucher
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: voucher_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: bfbc3bd1-17fc-4766-b1ae-fa7535b665b3
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Delete Data Voucher Success
+                  data: null
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Unauthorized
+                  data: null
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: false
+                  message: Id Voucher Not Found
+                  data: null
   /media/upload:
     post:
       tags:
