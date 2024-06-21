@@ -89,3 +89,30 @@ func (h *TransactionHandler) DeleteTransaction() echo.HandlerFunc {
 		return nil
 	}
 }
+
+func (h *TransactionHandler) GetAllTransaction() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		tokenString := c.Request().Header.Get("Authorization")
+		token, err := h.j.ValidateToken(tokenString)
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+
+		adminData := h.j.ExtractAdminToken(token)
+		role := adminData[constant.JWT_ROLE]
+
+		if role != constant.RoleAdmin {
+			return helper.UnauthorizedError(c)
+		}
+
+		transactions, err := h.s.GetAllTransaction()
+		if err != nil {
+			return c.JSON(helper.ConvertResponseCode(err), helper.FormatResponse(false, err.Error(), nil))
+		}
+		response := []TransactionAllUserResponses{}
+		for _, transaction := range transactions {
+			response = append(response, new(TransactionAllUserResponses).FromEntity(transaction))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, constant.TransactionSuccessGet, response))
+	}
+}

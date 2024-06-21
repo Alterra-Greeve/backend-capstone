@@ -27,3 +27,29 @@ func (t TransactionUserResponse) FromEntity(transaction transaction.TransactionD
 	response.ProductImage = transaction.TransactionItems[0].Product.Images[0].ImageURL
 	return response
 }
+
+type TransactionAllUserResponses struct {
+	ID           string  `json:"id"`
+	User         string  `json:"username"`
+	Total        float64 `json:"total_transaction"`
+	Status       string  `json:"status"`
+	SnapURL      string  `json:"snap_url"`
+	ProductName  string  `json:"product_name"`
+	ProductImage string  `json:"product_image"`
+}
+
+func (t *TransactionAllUserResponses) FromEntity(transaction transaction.TransactionData) TransactionAllUserResponses {
+	response := TransactionAllUserResponses{}
+	response.ID = transaction.ID
+	response.User = transaction.User.Name
+	response.Total = transaction.Total
+	response.Status = transaction.Status
+	response.SnapURL = transaction.SnapURL
+	if len(transaction.TransactionItems) > 0 {
+		response.ProductName = transaction.TransactionItems[0].Product.Name
+		if len(transaction.TransactionItems[0].Product.Images) > 0 {
+			response.ProductImage = transaction.TransactionItems[0].Product.Images[0].ImageURL
+		}
+	}
+	return response
+}

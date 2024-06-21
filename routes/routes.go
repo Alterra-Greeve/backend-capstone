@@ -98,6 +98,8 @@ func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, 
 	}
 	e.GET("/api/v1/transactions", th.GetUserTransaction(), echojwt.WithConfig(jwtConfig))
 	e.POST("/api/v1/transactions", th.CreateTransaction(), echojwt.WithConfig(jwtConfig))
+
+	e.GET("/api/v1/transactions", th.GetAllTransaction(), echojwt.WithConfig(jwtConfig))
 }
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{

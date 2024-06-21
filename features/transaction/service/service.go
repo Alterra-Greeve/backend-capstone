@@ -128,3 +128,7 @@ func (s *TransactionService) DeleteTransaction(transactionId string) error {
 	// Implement logic here
 	return nil
 }
+
+func (s *TransactionService) GetAllTransaction() ([]transaction.TransactionData, error) {
+	return s.d.GetAllTransaction()
+}
