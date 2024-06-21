@@ -1,11 +1,13 @@
 package seeds
 
 import (
+	admin "backendgreeve/features/admin/data"
 	challenge "backendgreeve/features/challenges/data"
 	forum "backendgreeve/features/forums/data"
 	product "backendgreeve/features/product/data"
 	transaction "backendgreeve/features/transaction/data"
 	user "backendgreeve/features/users/data"
+	voucher "backendgreeve/features/voucher/data"
 	"backendgreeve/helper"
 	"backendgreeve/utils/database/seed"
 	"encoding/csv"
@@ -21,103 +23,68 @@ func Seeds() []seed.Seed {
 		{
 			Name: "CreateAdmin01",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "16930c07-bdb5-49d2-8a81-32591833241b", "admin", "admin", "admin@greeve.store", "admin")
+				return CreateAdminLogin(db, admin.Admin{
+					ID:       "16930c07-bdb5-49d2-8a81-32591833241b",
+					Name:     "admin",
+					Username: "admin",
+					Email:    "admin@greeve.store",
+					Password: "admin",
+				})
 			},
 		},
 		{
 			Name: "CreateAdmin02",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "14adafd7-de6c-4586-a35e-3cf17ef3d351", "admin2", "admin2", "admin2@greeve.store", "admin2")
+				return CreateAdminLogin(db, admin.Admin{
+					ID:       "14adafd7-de6c-4586-a35e-3cf17ef3d351",
+					Name:     "admin2",
+					Username: "admin2",
+					Email:    "admin2@greeve.store",
+					Password: "admin2",
+				})
 			},
 		},
 		{
-			Name: "CreateAdmin3",
+			Name: "AdminDataSeeder",
 			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b1e7fdc4-6465-4f06-8914-85b36255368e", "Susanto Wijaya", "susantowijaya", "susantowijaya@example.com", "password123")
-			},
-		},
-		{
-			Name: "CreateAdmin4",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cf98c726-fb72-4687-9c88-e8ce671c32d6", "Indrianie Setiawati", "indrianisetiawati", "indrianisetiawati@example.com", "secret456")
-			},
-		},
-		{
-			Name: "CreateAdmin5",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "06db6d61-e7c8-4126-ab0f-f2b6bc1458d1", "Ahmad Rizki Putra", "ahmadrizkiputra", "ahmadrizkiputra@example.com", "qwerty789")
-			},
-		},
-		{
-			Name: "CreateAdmin6",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6a53c2db-2fa5-47df-8462-baea4308d48f", "Suci Mutiara", "sucimutiara", "sucimutiara@example.com", "12345abcd")
-			},
-		},
-		{
-			Name: "CreateAdmin7",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "90aae29b-bf80-44bd-ab59-e7388e84e27f", "Arie Ul Haq", "ariefulhaq", "ariefulhaq@example.com", "mypassword")
-			},
-		},
-		{
-			Name: "CreateAdmin8",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6112389a-2e44-4c78-ae64-849a5af60678", "Dewi Aninditya", "dewianinditya", "dewianinditya@example.com", "superstrong")
-			},
-		},
-		{
-			Name: "CreateAdmin9",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "9e66633a-cc3b-4887-8c44-dc8e4bf3530a", "Rahman Darmawan", "rahmandarmawan", "rahmandarmawan@example.com", "password!@#")
-			},
-		},
-		{
-			Name: "CreateAdmin10",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "b0835feb-2404-4a28-846a-52fafc8e6902", "Natasya Nurhaliza", "natasyanurhaliza", "natasyanurhaliza@example.com", "123456789")
-			},
-		},
-		{
-			Name: "CreateAdmin11",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "6562a858-84e7-412b-9e03-542f951fe0a2", "Ilham Fauzan", "ilhamfauzan", "ilhamfauzan@example.com", "password1")
-			},
-		},
-		{
-			Name: "CreateAdmin12",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "46a36705-f7d0-48a4-bb69-8cd5826b0da5", "Tiara Putri", "tiaraputri", "tiaraputri@example.com", "mypassword1")
-			},
-		},
-		{
-			Name: "CreateAdmin13",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "d1e93661-00b0-41a4-ab51-f2afaef8f86f", "Gilang Pratama", "gilangpratama", "gilangpratama@example.com", "secretpass")
-			},
-		},
-		{
-			Name: "CreateAdmin14",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "bb2c878b-2f05-4964-9307-a46d6bbccd31", "Riana Safitri", "rianasafitri", "rianasafitri@example.com", "strongpassword")
-			},
-		},
-		{
-			Name: "CreateAdmin15",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "7b8df5e7-c440-44f0-898a-d2714f762842", "Yudhistira Pratama", "yudhistirapratama", "yudhistirapratama@example.com", "password123!")
-			},
-		},
-		{
-			Name: "CreateAdmin16",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "98f9e9d2-9b19-4e14-b148-c1bb84104d07", "Aisyah Nuraini", "aisyahnuraini", "aisyahnuraini@example.com", "12345678")
-			},
-		},
-		{
-			Name: "CreateAdmin17",
-			Run: func(db *gorm.DB) error {
-				return CreateAdminLogin(db, "cea38442-5ede-409c-930f-d5f7dd772d5e", "Rizki Adnan", "rizkiadnan", "rizkiadnan@example.com", "mypassword2")
+				file, err := os.Open("data/admin-greeve.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[5])
+					if err != nil {
+						return err
+					}
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[6])
+					if err != nil {
+						return err
+					}
+					seed := admin.Admin{
+						ID:          record[0],
+						Username:    record[1],
+						Name:        record[2],
+						Email:       record[3],
+						Password:    record[4],
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
+					}
+					err = CreateAdminLogin(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
 			},
 		},
 		// End Admin
@@ -128,7 +95,15 @@ func Seeds() []seed.Seed {
 				description := "<div><p><strong>Save Money</strong> atau <strong>Hemat Uang</strong> adalah konsep yang mendorong individu untuk mengelola keuangan mereka dengan bijak. Ini melibatkan praktik-praktik seperti mengurangi pengeluaran yang tidak perlu, mencari cara untuk mendapatkan nilai lebih dari setiap pembelian, dan memaksimalkan efisiensi dalam penggunaan sumber daya. Dengan menghemat uang, individu dapat mencapai stabilitas finansial dan lebih mampu menghadapi situasi darurat atau merencanakan masa depan dengan lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Mengurangi emisi gas rumah kaca dari produksi dan transportasi barang</li><li>Menghemat sumber daya alam seperti air, kayu, dan energi</li><li>Mengurangi polusi udara dan air dari limbah industri dan rumah tangga</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/5af169b6-94b5-45a7-aee9-13fee0fcc1a32f0376e551eec4f1af915d5983a621c1.jpeg"
 				iconUrl := "https://storage.googleapis.com/alterra-greeve/hemat-uang.svg"
-				return CreateImpactCategory(db, "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd", "Hemat Uang", 40, description, imageUrl, iconUrl)
+				createdAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				updatedAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				return CreateImpactCategory(db, "83808762-e2b8-4b34-a1eb-0ed8d4fda3dd", "Hemat Uang", 40, description, imageUrl, iconUrl, createdAt, updatedAt)
 			},
 		},
 		{
@@ -137,7 +112,15 @@ func Seeds() []seed.Seed {
 				description := "<div><p><strong>Less Waste</strong> atau <strong>Mengurangi Limbah</strong> adalah pendekatan yang menekankan pada pengurangan jumlah limbah yang dihasilkan, baik oleh individu, komunitas, maupun perusahaan. Tujuannya adalah untuk meminimalisir dampak negatif terhadap lingkungan dengan cara mengelola sumber daya secara lebih efisien dan bertanggung jawab. Strategi ini mencakup berbagai tindakan seperti daur ulang, pengomposan, penggunaan ulang barang, dan pengurangan penggunaan bahan sekali pakai.</p><p>Contoh Dampak Positif Less Waste pada Lingkungan:</p><ul><li>Pengurangan Polusi Tanah dan Air</li><li>Penurunan Emisi Gas Rumah Kaca</li><li>Konservasi Sumber Daya Alam</li><li>Mengurangi Energi yang Dibutuhkan untuk Produksi</li><li>Mengurangi Beban Tempat Pembuangan Akhir</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/91d948ca-3576-49e5-b435-0c3c7eccff7963ca36bac45556620e0ff4ba7ec5790d.jpeg"
 				iconUrl := "https://storage.googleapis.com/alterra-greeve/mengurangi-limbah.svg"
-				return CreateImpactCategory(db, "7d34a5fa-e2cf-466d-9f01-d731f6967082", "Mengurangi Limbah", 50, description, imageUrl, iconUrl)
+				createdAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				updatedAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				return CreateImpactCategory(db, "7d34a5fa-e2cf-466d-9f01-d731f6967082", "Mengurangi Limbah", 50, description, imageUrl, iconUrl, createdAt, updatedAt)
 			},
 		},
 		{
@@ -146,7 +129,15 @@ func Seeds() []seed.Seed {
 				description := "<div><p><strong>Expand Your Mind</strong> atau <strong>Perluas Wawasan Anda</strong> adalah konsep yang mendorong individu untuk terbuka terhadap pengetahuan, ide, dan pengalaman baru. Ini melibatkan pembelajaran berkelanjutan, eksplorasi topik yang beragam, dan berpikir kritis. Dengan memperluas wawasan, kita tidak hanya meningkatkan pemahaman kita tentang dunia, tetapi juga mengembangkan empati, kreativitas, dan kemampuan untuk membuat keputusan yang lebih baik.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Kesadaran Lingkungan yang Lebih Tinggi</li><li>Inovasi dalam Solusi Ramah Lingkungan</li><li>Dukungan untuk Kebijakan Lingkungan yang Lebih Baik</li><li>Pengembangan Komunitas Berkelanjutan</li><li>Konsumsi yang Lebih Bertanggung Jawab</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/fd98dcdc-4cea-428a-a008-e1ca6f972ca72f0376e551eec4f1af915d5983a621c1.jpeg"
 				iconUrl := "https://storage.googleapis.com/alterra-greeve/menambah-wawasan.svg"
-				return CreateImpactCategory(db, "e8e714bd-c34e-4278-980c-39bd1f55b5fb", "Perluas Wawasan", 45, description, imageUrl, iconUrl)
+				createdAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				updatedAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				return CreateImpactCategory(db, "e8e714bd-c34e-4278-980c-39bd1f55b5fb", "Perluas Wawasan", 45, description, imageUrl, iconUrl, createdAt, updatedAt)
 			},
 		},
 		{
@@ -155,7 +146,15 @@ func Seeds() []seed.Seed {
 				description := "<div><p><strong>Less Global Warming</strong> atau <strong>Mengurangi Pemanasan Global</strong> adalah upaya untuk menurunkan peningkatan suhu rata-rata bumi yang disebabkan oleh aktivitas manusia, terutama melalui emisi gas rumah kaca seperti karbon dioksida (CO<sub>2</sub>) dan metana (CH<sub>4</sub>). Upaya ini mencakup berbagai tindakan, seperti meningkatkan efisiensi energi, menggunakan energi terbarukan, mengurangi deforestasi, dan mempromosikan praktik pertanian berkelanjutan. Tujuannya adalah untuk memperlambat perubahan iklim, melindungi ekosistem, dan menjaga keseimbangan alami bumi.</p><p>Contoh Dampak Positif Save Money pada Lingkungan:</p><ul><li>Pengurangan Fenomena Cuaca Ekstrem</li><li>Perlindungan Keanekaragaman Hayati</li><li>Stabilisasi Tingkat Permukaan Laut</li><li>Kualitas Udara yang Lebih Baik</li><li>Konservasi Sumber Daya Air</li></ul></div>"
 				imageUrl := "https://storage.googleapis.com/alterra-greeve/greeve/38c805dd-9fbf-4fa0-bef7-9adfce99add9d5787157f3d099da70dcbf8f3021c99b.jpeg"
 				iconUrl := "https://storage.googleapis.com/alterra-greeve/pemanasan-global-2.svg"
-				return CreateImpactCategory(db, "b5d07366-3b31-4011-95e3-34735b0b61f8", "Mengurangi Pemanasan Global", 35, description, imageUrl, iconUrl)
+				createdAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				updatedAt, err := time.Parse("2006-01-02 15:04:05", "2024-01-01 10:00:00")
+				if err != nil {
+					return err
+				}
+				return CreateImpactCategory(db, "b5d07366-3b31-4011-95e3-34735b0b61f8", "Mengurangi Pemanasan Global", 35, description, imageUrl, iconUrl, createdAt, updatedAt)
 			},
 		},
 		// Impact Categoreis End
@@ -4276,95 +4275,53 @@ func Seeds() []seed.Seed {
 		// End of Users
 		// Start of Vouchers
 		{
-			Name: "CreateVoucher1",
+			Name: "VoucherSeeder",
 			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "84c65b94-163f-4880-badd-ad10ff8bfead", "Promo Natal", "NATAL2024", "20000", "Diskon khusus untuk produk ramah lingkungan", time.Date(2024, 12, 25, 23, 59, 59, 0, time.UTC))
+				file, err := os.Open("data/voucher-greeve.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[6])
+					if err != nil {
+						return err
+					}
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[7])
+					if err != nil {
+						return err
+					}
+					expiredAt, err := time.Parse("2006-01-02 15:04:05", record[5])
+					if err != nil {
+						return err
+					}
+					seed := voucher.Voucher{
+						ID:          record[0],
+						Name:    record[1],
+						Code:       record[2],
+						Discount:    record[3],
+						Description: record[4],
+						ExpiredAt:   expiredAt,
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
+					}
+					err = CreateVoucher(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
 			},
-		},
-		{
-			Name: "CreateVoucher2",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "f1098036-cfa6-48ae-882c-00726d0c5d57", "Promo Idul Fitri", "PAKETLEBARAN", "15%", "Paket penawaran barang-barang ramah lingkungan untuk Lebaran", time.Date(2025, 5, 15, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher3",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "7e9c42d0-707c-4f88-b098-ae47888104fa", "Promo Hari Kemerdekaan Indonesia", "MERDEKA2024", "15000", "Diskon produk daur ulang untuk 17 Agustus", time.Date(2025, 8, 17, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher4",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "268a7851-53dd-4bc3-af91-0c84d00ea727", "Harga Spesial Tahun Baru", "TAHUNBARU2024", "30%", "Penawaran khusus pada sumber daya terbarukan untuk Tahun Baru", time.Date(2025, 1, 1, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher5",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "0e07708c-a23e-41a4-a999-58d4576743e4", "Promo Hari Bumi", "HARIBUMI2024", "10000", "Diskon barang biodegradable untuk Hari Bumi", time.Date(2025, 4, 22, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher6",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "fb2643f7-796b-4a20-a3a7-bd009582215e", "Diskon Halloween", "HALLOWEEN2024", "25%", "Penghematan produk hemat energi untuk Halloween", time.Date(2024, 10, 31, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher7",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "756945dc-7906-47b4-95c5-650f428d7767", "Potongan Harga Spesial Hari Kartini", "KARTINI2024", "30000", "Diskon item rendah karbon untuk Hari Kartini", time.Date(2025, 4, 21, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher8",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "2e419999-cb91-4e36-a363-289976b7e83b", "Promo Idul Adha", "IDULADHA2024", "20%", "Penawaran spesial produk hemat air untuk Idul Adha", time.Date(2025, 7, 10, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher9",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "880d707a-744b-41b9-991f-65c306074c03", "Batik Nasional", "BATIK2024", "35%", "Diskon besar produk zero waste di Hari Batik Nasional", time.Date(2025, 10, 2, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher10",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "4b7746fd-42ad-4090-8de9-b2fab6e1921c", "Tahun Baru Imlek", "IMLEK2024", "25%", "Diskon produk organik dan alami untuk Tahun Baru Imlek", time.Date(2025, 2, 1, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher11",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "485d5b86-c1f9-45c1-a542-7b61c6feeecf", "Promo Hari Kasih Sayang", "VALENTINE2024", "12000", "Potongan harga untuk Menghemat barang-barang rumah tangga tidak beracun di Hari Valentine", time.Date(2025, 2, 14, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher12",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "bfbc3bd1-17fc-4766-b1ae-fa7535b665b3", "Promo Spesial Earth Hour", "JAMBUMI2024", "15000", "Penawaran produk kompos untuk Earth Hour", time.Date(2025, 3, 29, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher13",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "c6613ef8-30a7-43ec-8b1f-78ae2491c7e5", "Diskon Hari Pendidikan ", "PENDIDIKAN2024", "20%", "Diskon barang pakai ulang dalam rangka Hari Pendidikan Nasional", time.Date(2025, 5, 2, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher14",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "83c4db38-d196-49c8-9cb7-b53423e1658f", "Diskon Hari Kesehatan Nasional", "KESEHATAN2024", "30000", "Penawaran khusus untuk produk daur ulang dalam rangka Hari Kesehatan Nasional", time.Date(2025, 11, 12, 23, 59, 59, 0, time.UTC))
-			},
-		},
-		{
-			Name: "CreateVoucher15",
-			Run: func(db *gorm.DB) error {
-				return CreateVoucher(db, "b1b68578-cba7-4b9d-8656-004737edc836", "Potongan Harga Spesial Hari Pancasila", "PANCASILA2024", "15%", "Penghematan produk bersertifikat perdagangan yang adil untuk Hari Pancasila", time.Date(2025, 6, 1, 23, 59, 59, 0, time.UTC))
-			},
-		},
+		},	
 		// End Voucher
 		// Start Challenge log
 		// End Challenge
@@ -4864,6 +4821,48 @@ func Seeds() []seed.Seed {
 						UpdatedAt:   updatedAt,
 					}
 					err = CreateChallengeConfirmation(db, seed)
+					if err != nil {
+						return err
+					}
+				}
+				return nil
+			},
+		},
+		{
+			Name: "ChallengeLogSeeder",
+			Run: func(db *gorm.DB) error {
+				file, err := os.Open("data/challenge-log.csv")
+				if err != nil {
+					return err
+				}
+				defer file.Close()
+
+				csvRead := csv.NewReader(file)
+				records, err := csvRead.ReadAll()
+
+				if err != nil {
+					return err
+				}
+				for _, record := range records {
+					createdAt, err := time.Parse("2006-01-02 15:04:05", record[4])
+					if err != nil {
+						return err
+					}
+					updatedAt, err := time.Parse("2006-01-02 15:04:05", record[5])
+					if err != nil {
+						return err
+					}
+					seed := challenge.ChallengeLog{
+						ID:          record[0],
+						ChallengeID: record[1],
+						UserID:      record[2],
+						Status:      record[3],
+						Model: &gorm.Model{
+							CreatedAt: createdAt,
+							UpdatedAt: updatedAt,
+						},
+					}
+					err = CreateChallengeLog(db, seed)
 					if err != nil {
 						return err
 					}

@@ -22,6 +22,7 @@ type GreeveConfig struct {
 	BUCKET_NAME string
 
 	Midtrans MidtransConfig
+	OpenAi   OpenAi
 }
 
 type SMTPConfig struct {
@@ -33,6 +34,10 @@ type SMTPConfig struct {
 type MidtransConfig struct {
 	ClientKey string
 	ServerKey string
+}
+
+type OpenAi struct {
+	ApiKey string
 }
 
 func InitConfig() *GreeveConfig {
@@ -58,6 +63,8 @@ func InitConfig() *GreeveConfig {
 
 	res.Midtrans.ClientKey = os.Getenv("MIDTRANS_CLIENT_KEY")
 	res.Midtrans.ServerKey = os.Getenv("MIDTRANS_SERVER_KEY")
+
+	res.OpenAi.ApiKey = os.Getenv("OPENAI_API_KEY")
 
 	return res
 }

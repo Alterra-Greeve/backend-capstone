@@ -11,7 +11,8 @@ import (
 	DataUsers "backendgreeve/features/users/data"
 	Voucher "backendgreeve/features/voucher/data"
 	WebhookData "backendgreeve/features/webhook/data"
-
+	Chatbot "backendgreeve/features/chatbot/data"
+	
 	"gorm.io/gorm"
 )
 
@@ -36,5 +37,6 @@ func Migrate(db *gorm.DB) error {
 	db.AutoMigrate(&Cart.Cart{})
 	db.AutoMigrate(&Transaction.Transaction{})
 	db.AutoMigrate(&Transaction.TransactionItem{})
+	db.AutoMigrate(&Chatbot.Chatbot{})
 	return nil
 }

@@ -207,6 +207,65 @@ func ConvertResponseCode(err error) int {
 		return http.StatusNotFound
 	case constant.ErrGetProductID:
 		return http.StatusNotFound
+
+	// Challenges Errors
+	case constant.ErrUserAlreadyParticipate:
+		return http.StatusBadRequest
+	case constant.ErrCreateChallenge:
+		return http.StatusInternalServerError
+	case constant.ErrGetChallenge:
+		return http.StatusInternalServerError
+	case constant.ErrGetChallengeByID:
+		return http.StatusNotFound
+	case constant.ErrEditChallenge:
+		return http.StatusBadRequest
+	case constant.ErrChallengeNotFound:
+		return http.StatusNotFound
+	case constant.ErrUpdateChallenge:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteChallenge:
+		return http.StatusInternalServerError
+	case constant.ErrChallengeField:
+		return http.StatusBadRequest
+	case constant.ErrChallengeFieldUpdate:
+		return http.StatusBadRequest
+	case constant.ErrChallengeFieldSwipe:
+		return http.StatusBadRequest
+	case constant.ErrChallengeType:
+		return http.StatusBadRequest
+	case constant.ErrChallengeFieldCreate:
+		return http.StatusBadRequest
+	case constant.ErrInsertChallengeLog:
+		return http.StatusInternalServerError
+	case constant.ErrChallengeLogType:
+		return http.StatusBadRequest
+	case constant.ErrParticipateChallenge:
+		return http.StatusInternalServerError
+
+	// Cart Errors
+	case constant.ErrCreateCart:
+		return http.StatusInternalServerError
+	case constant.ErrUpdateCart:
+		return http.StatusInternalServerError
+	case constant.ErrDeleteCart:
+		return http.StatusInternalServerError
+	case constant.ErrGetCart:
+		return http.StatusInternalServerError
+	case constant.ErrGetCartQty:
+		return http.StatusInternalServerError
+	case constant.ErrFieldChoiceOneType:
+		return http.StatusBadRequest
+	case constant.ErrCartNotFound:
+		return http.StatusNotFound
+	case constant.ErrFieldType:
+		return http.StatusBadRequest
+
+	// Transaction Errors
+	case constant.ErrAddressEmpty:
+		return http.StatusBadRequest
+	case constant.ErrCoinNotEnough:
+		return http.StatusBadRequest
+
 	// Default
 	default:
 		return http.StatusInternalServerError
