@@ -42,6 +42,9 @@ func (u *ForumData) GetAllByPage(page int) ([]forums.Forum, int, error) {
 	if tx.Error != nil {
 		return nil, 0, constant.ErrGetForum
 	}
+	if tx.RowsAffected == 0 {
+		return nil, 0, constant.ErrGetForum
+	}
 	return forum, totalPages, nil
 }
 

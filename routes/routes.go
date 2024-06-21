@@ -99,6 +99,8 @@ func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, 
 	}
 	e.GET("/api/v1/transactions", th.GetUserTransaction(), echojwt.WithConfig(jwtConfig))
 	e.POST("/api/v1/transactions", th.CreateTransaction(), echojwt.WithConfig(jwtConfig))
+
+	e.GET("/api/v1/transactions", th.GetAllTransaction(), echojwt.WithConfig(jwtConfig))
 }
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
@@ -118,9 +120,9 @@ func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.G
 		SigningKey:   []byte(cfg.JWT_Secret),
 		ErrorHandler: helper.JWTErrorHandler,
 	}
-	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/admin/voucher", vc.GetAll(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
-	e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
+	e.POST("/api/v1/admin/voucher", vc.Create(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
 }

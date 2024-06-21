@@ -147,3 +147,15 @@ func (cs *ChallengeService) EditChallengeForUserByID(challengeId string, images 
 	}
 	return cs.c.EditChallengeForUserByID(challengeId, images)
 }
+
+// Buat mock
+func (cs *ChallengeService) InsertCoinAndExpUser(challengeConfirmationId string) error {
+	if challengeConfirmationId == "" {
+		return constant.ErrGetChallengeByID
+	}
+	err := cs.c.InsertCoinAndExpUser(challengeConfirmationId)
+	if err != nil {
+		return err
+	}
+	return nil
+}

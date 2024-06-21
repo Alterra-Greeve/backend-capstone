@@ -58,3 +58,9 @@ const ProductSuccessCreate = "Successfull Create Product"
 const ProductSuccessGet = "Successfull Get Product"
 const ProductSuccessUpdate = "Successfull Update Product"
 const ProductSuccessDelete = "Successfull Delete Product"
+
+// Transaction Success Message
+const TransactionSuccessCreate = "Successfull Create Transaction"
+const TransactionSuccessGet = "Successfull Get Transaction"
+const TransactionSuccessUpdate = "Successfull Update Transaction"
+const TransactionSuccessDelete = "Successfull Delete Transaction"
