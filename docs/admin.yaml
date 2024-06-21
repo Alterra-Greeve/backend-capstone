@@ -3527,7 +3527,7 @@ paths:
                   status: false
                   message: error, id Message Not Found
                   data: nil
-  /admin/impact:
+  /impact:
     get:
       tags:
         - data impact
@@ -3681,7 +3681,7 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
-  /admin/impact/{impact_id}:
+  /impact/{impact_id}:
     get:
       tags:
         - data impact
