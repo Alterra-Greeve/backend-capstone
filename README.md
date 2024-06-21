@@ -117,9 +117,7 @@ go run main.go
 ```
 Run the endpoints as in the swagger documentation
 
-Docker & GCP
-```bash
-```
+
 
 
 # System Diagram and Architecture
@@ -129,6 +127,7 @@ Docker & GCP
 </div>
 
 ## HLA
+![HLA Capstone (3)](https://github.com/Alterra-Greeve/backend-capstone/assets/133726246/e6b4627a-7bfc-40c9-bd09-7b33ee583a22)
 
 # Contact 
 Link Project: <br>
