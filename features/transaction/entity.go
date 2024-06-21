@@ -58,6 +58,9 @@ type TransactionHandlerInterface interface {
 	CreateTransaction() echo.HandlerFunc
 	UpdateTransaction() echo.HandlerFunc
 	DeleteTransaction() echo.HandlerFunc
+
+	//
+	GetAllTransaction() echo.HandlerFunc
 }
 
 type TransactionServiceInterface interface {
@@ -66,6 +69,9 @@ type TransactionServiceInterface interface {
 	CreateTransaction(transaction CreateTransaction) (Transaction, error)
 	UpdateTransaction(transaction UpdateTransaction) error
 	DeleteTransaction(transactionId string) error
+
+	//
+	GetAllTransaction() ([]TransactionData, error)
 }
 
 type TransactionDataInterface interface {
@@ -83,4 +89,7 @@ type TransactionDataInterface interface {
 	GetTotalPriceWithDiscount(total float64, voucherId string) (float64, error)
 	GetTotalPriceWithCoin(userId string) (float64, error)
 	GetTotalPriceWithDiscountAndCoin(userId string, voucherId string) (float64, error)
+
+	//
+	GetAllTransaction() ([]TransactionData, error)
 }

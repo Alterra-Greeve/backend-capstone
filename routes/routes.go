@@ -6,6 +6,7 @@ import (
 	"backendgreeve/features/admin"
 	"backendgreeve/features/cart"
 	"backendgreeve/features/challenges"
+	"backendgreeve/features/chatbot"
 	"backendgreeve/features/dashboard"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
@@ -98,6 +99,8 @@ func RouteTransaction(e *echo.Echo, th transaction.TransactionHandlerInterface, 
 	}
 	e.GET("/api/v1/transactions", th.GetUserTransaction(), echojwt.WithConfig(jwtConfig))
 	e.POST("/api/v1/transactions", th.CreateTransaction(), echojwt.WithConfig(jwtConfig))
+
+	e.GET("/api/v1/transactions", th.GetAllTransaction(), echojwt.WithConfig(jwtConfig))
 }
 func RouteImpactCategory(e *echo.Echo, ic impactcategory.ImpactCategoryHandlerInterface, cfg config.GreeveConfig) {
 	jwtConfig := echojwt.Config{
@@ -117,9 +120,9 @@ func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.G
 		SigningKey:   []byte(cfg.JWT_Secret),
 		ErrorHandler: helper.JWTErrorHandler,
 	}
-	e.GET(route.VoucherPath, vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/admin/voucher", vc.GetAll(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
-	e.POST(route.VoucherPath, vc.Create(), echojwt.WithConfig(jwtConfig))
+	e.POST("/api/v1/admin/voucher", vc.Create(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
 }
@@ -194,4 +197,9 @@ func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg co
 	e.GET("/api/v1/dashboard", dh.GetDashboard(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/coin", dh.GetUserCoin(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/coin/spending", dh.GetUserSpending(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteChatbot(e *echo.Echo, ch chatbot.ChatbotHandlerInterface, cfg config.GreeveConfig) {
+	e.POST("/api/v1/chatbot", ch.Create())
+	e.GET("/api/v1/chatbot/:chat_id", ch.GetByID())
 }

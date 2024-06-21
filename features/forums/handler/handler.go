@@ -38,12 +38,15 @@ func (h *ForumHandler) GetAllForum() echo.HandlerFunc {
 		}
 
 		pageStr := c.QueryParam("page")
-		page, err := strconv.Atoi(pageStr)
-		if err != nil || page < 1 {
-			page = 1
+		page := 1
+		if pageStr != "" {
+			page, err = strconv.Atoi(pageStr)
+			if err != nil || page < 1 {
+				return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrPageInvalid.Error(), nil))
+			}
 		}
-		var totalPages int
 
+		var totalPages int
 		var forums []forums.Forum
 		forums, totalPages, err = h.s.GetAllByPage(page)
 		metadata := MetadataResponse{

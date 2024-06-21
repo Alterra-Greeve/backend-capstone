@@ -4376,6 +4376,86 @@ paths:
                     type: boolean
                   message:
                     type: string
+  /chatbot:
+    post:
+      tags:
+        - chatbot
+      summary: Create Chatbot
+      description: User dapat membuat chatbot
+      operationId: createChatbot
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                message:
+                  type: string
+              example:
+                id: 123e4567-e89b-12d3-a456-426614174000
+                message: Hello
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                example:
+                  status: true
+                  message: Create Chatbot Success
+                  data: 
+                    chat_id: 123e4567-e89b-12d3-a456-426614174000
+                    role: Assistant
+                    message: Hello
+                    created_at: 2024-01-01
+  /chatbot/{chat_id}:
+    get:
+      tags:
+        - chatbot
+      summary: Get Chatbot By User
+      description: User dapat melihat chatbot
+      operationId: getChatbot
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: chat_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  status: true
+                  message: Get Chatbot Success
+                  data: 
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      role: system
+                      message: You are a helpful assistant that can answer questions and help with tasks.
+                      created_at: 2024-01-01
 components:
   securitySchemes:
     bearerAuth:

@@ -310,3 +310,94 @@ func (td *TransactionData) GetTotalPriceWithDiscountAndCoin(userId string, vouch
 	// Implement logic here
 	return 0.0, nil
 }
+
+func (td *TransactionData) GetAllTransaction() ([]transaction.TransactionData, error) {
+	var transactions []Transaction
+
+	err := td.DB.Model(&Transaction{}).Preload("User").
+		Preload("TransactionItems").
+		Preload("TransactionItems.Product").
+		Preload("TransactionItems.Product.Images").
+		Preload("TransactionItems.Product.ImpactCategories").
+		Preload("TransactionItems.Product.ImpactCategories.ImpactCategory").
+		Find(&transactions).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	var result []transaction.TransactionData
+	for _, txn := range transactions {
+		var txnItems []transaction.TransactionItems
+		var images []product.ProductImage
+		var impactCategories []product.ProductImpactCategory
+		for _, item := range txn.TransactionItems {
+			for _, img := range item.Product.Images {
+				images = append(images, product.ProductImage{
+					ID:        img.ID,
+					ProductID: img.ProductID,
+					ImageURL:  img.ImageURL,
+					Position:  img.Position,
+				})
+			}
+			for _, impact := range item.Product.ImpactCategories {
+				impactCategories = append(impactCategories, product.ProductImpactCategory{
+					ID:               impact.ID,
+					ProductID:        impact.ProductID,
+					ImpactCategoryID: impact.ImpactCategoryID,
+					ImpactCategory: impactcategory.ImpactCategory{
+						ID:          impact.ImpactCategory.ID,
+						Name:        impact.ImpactCategory.Name,
+						ImpactPoint: impact.ImpactCategory.ImpactPoint,
+						IconURL:     impact.ImpactCategory.IconURL,
+					},
+				})
+			}
+			txnItems = append(txnItems, transaction.TransactionItems{
+				ID:            item.ID,
+				TransactionID: item.TransactionID,
+				ProductID:     item.ProductID,
+				Qty:           item.Quantity,
+				Product: product.Product{
+					ID:               item.Product.ID,
+					Name:             item.Product.Name,
+					Description:      item.Product.Description,
+					Price:            item.Product.Price,
+					Coin:             item.Product.Coin,
+					Stock:            item.Product.Stock,
+					Images:           images,
+					ImpactCategories: impactCategories,
+				},
+			})
+		}
+
+		result = append(result, transaction.TransactionData{
+			ID:        txn.ID,
+			VoucherID: txn.VoucherID,
+			Status:    txn.Status,
+			Total:     txn.Total,
+			Coin:      txn.Coin,
+			SnapURL:   txn.SnapURL,
+			User: users.User{
+				ID:        txn.User.ID,
+				Name:      txn.User.Name,
+				Email:     txn.User.Email,
+				Username:  txn.User.Username,
+				Password:  txn.User.Password,
+				Address:   txn.User.Address,
+				Gender:    txn.User.Gender,
+				Phone:     txn.User.Phone,
+				Coin:      txn.User.Coin,
+				Exp:       txn.User.Exp,
+				AvatarURL: txn.User.AvatarURL,
+				CreatedAt: txn.User.CreatedAt,
+				UpdatedAt: txn.User.UpdatedAt,
+			},
+			TransactionItems: txnItems,
+			CreatedAt:        txn.CreatedAt,
+			UpdatedAt:        txn.UpdatedAt,
+		})
+	}
+
+	return result, nil
+}
