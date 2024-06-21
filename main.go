@@ -58,7 +58,6 @@ import (
 	"backendgreeve/routes"
 	"backendgreeve/utils/bucket"
 	"backendgreeve/utils/database"
-	"backendgreeve/utils/database/seeds"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -72,13 +71,13 @@ func main() {
 		logrus.Error("terjadi kesalahan pada database, error:", err.Error())
 	}
 	// Run Dev Only
-	database.Migrate(db)
-	for _, seed := range seeds.Seeds() {
-		logrus.Print(seed.Name)
-		if err := seed.Run(db); err != nil {
-			logrus.Error("terjadi kesalahan pada seed "+seed.Name+", error:", err.Error())
-		}
-	}
+	// database.Migrate(db)
+	// for _, seed := range seeds.Seeds() {
+	// 	logrus.Print(seed.Name)
+	// 	if err := seed.Run(db); err != nil {
+	// 		logrus.Error("terjadi kesalahan pada seed "+seed.Name+", error:", err.Error())
+	// 	}
+	// }
 
 	mailer := helper.NewMailer(cfg.SMTP)
 	jwt := helper.NewJWT(cfg.JWT_Secret)
