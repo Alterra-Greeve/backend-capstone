@@ -3,6 +3,7 @@ package service
 import (
 	"backendgreeve/constant"
 	"backendgreeve/features/challenges"
+	"log"
 	"math/rand"
 )
 
@@ -36,6 +37,7 @@ func (cs *ChallengeService) GetChallengeParticipant(challengeId string) (int, er
 }
 func (cs *ChallengeService) GetByID(challengeId string) (challenges.Challenge, error) {
 	challenge, err := cs.c.GetByID(challengeId)
+	log.Println(challenge)
 	if err != nil {
 		return challenges.Challenge{}, err
 	}

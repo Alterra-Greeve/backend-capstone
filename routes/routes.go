@@ -6,6 +6,7 @@ import (
 	"backendgreeve/features/admin"
 	"backendgreeve/features/cart"
 	"backendgreeve/features/challenges"
+	"backendgreeve/features/chatbot"
 	"backendgreeve/features/dashboard"
 	"backendgreeve/features/forums"
 	"backendgreeve/features/impactcategory"
@@ -194,4 +195,9 @@ func RouteDashboard(e *echo.Echo, dh dashboard.DashboardHandlerInterface, cfg co
 	e.GET("/api/v1/dashboard", dh.GetDashboard(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/coin", dh.GetUserCoin(), echojwt.WithConfig(jwtConfig))
 	e.GET("/api/v1/coin/spending", dh.GetUserSpending(), echojwt.WithConfig(jwtConfig))
+}
+
+func RouteChatbot(e *echo.Echo, ch chatbot.ChatbotHandlerInterface, cfg config.GreeveConfig) {
+	e.POST("/api/v1/chatbot", ch.Create())
+	e.GET("/api/v1/chatbot/:chat_id", ch.GetByID())
 }

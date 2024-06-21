@@ -5,6 +5,7 @@ import (
 	"backendgreeve/features/challenges"
 	impactcategory "backendgreeve/features/impactcategory/data"
 	user "backendgreeve/features/users/data"
+	"log"
 	"math"
 	"time"
 
@@ -35,23 +36,19 @@ func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, 
 	challengePerPage := 20
 	totalPages := int(math.Ceil(float64(totalChallenges) / float64(challengePerPage)))
 
-	// Ambil challenges dengan pagination
+	// Ambil challenges dengan pagination tanpa JOIN
 	tx := cd.DB.
 		Table("challenges").
-		Select("challenges.*, cic.id AS cic_id, cic.challenge_id, cic.impact_category_id, ic.id AS ic_id, ic.name, ic.impact_point, ic.icon_url").
-		Joins("LEFT JOIN challenge_impact_categories AS cic ON cic.challenge_id = challenges.id AND cic.deleted_at IS NULL").
-		Joins("LEFT JOIN impact_categories AS ic ON cic.impact_category_id = ic.id").
 		Offset((page - 1) * challengePerPage).
-		Limit(challengePerPage).
 		Scan(&challengesList)
 
 	if tx.Error != nil {
 		return nil, 0, tx.Error
 	}
 
-	// Manually map the results
+	// Ambil kategori dampak untuk setiap challenge
 	for i := range challengesList {
-		challengesList[i].ImpactCategories = []challenges.ChallengeImpactCategory{}
+		var impactCategories []challenges.ChallengeImpactCategory
 		rows, err := cd.DB.Raw(`
 			SELECT cic.id, cic.challenge_id, cic.impact_category_id, ic.id, ic.name, ic.impact_point, ic.icon_url
 			FROM challenge_impact_categories cic
@@ -75,8 +72,9 @@ func (cd *ChallengeData) GetAllForAdmin(page int) ([]challenges.Challenge, int, 
 				ImpactPoint: ic.ImpactPoint,
 				IconURL:     ic.IconURL,
 			}
-			challengesList[i].ImpactCategories = append(challengesList[i].ImpactCategories, cic)
+			impactCategories = append(impactCategories, cic)
 		}
+		challengesList[i].ImpactCategories = impactCategories
 	}
 
 	return challengesList, totalPages, nil
@@ -144,7 +142,10 @@ func (cd *ChallengeData) GetByID(challengeId string) (challenges.Challenge, erro
 			},
 		})
 	}
-
+	log.Println(challenge)
+	if challenge.ID == "" {
+		return challenges.Challenge{}, constant.ErrChallengeNotFound
+	}
 	return challenge, nil
 }
 

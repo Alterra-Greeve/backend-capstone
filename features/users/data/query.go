@@ -262,7 +262,8 @@ func (u *UserData) GetAllByPageForAdmin(page int) ([]users.User, int, error) {
 	dataforumPerPage := 20
 	totalPages := int((total + int64(dataforumPerPage) - 1) / int64(dataforumPerPage))
 
-	tx := u.DB.Model(&User{}).Offset((page - 1) * dataforumPerPage).Limit(dataforumPerPage).Find(&forum)
+	tx := u.DB.Model(&User{}).Offset((page - 1) * dataforumPerPage).
+		Find(&forum)
 	if tx.Error != nil {
 		return nil, 0, constant.ErrGetUser
 	}

@@ -13,3 +13,7 @@ func CreateChallenge(db *gorm.DB, challenge data.Challenge) error {
 func CreateChallengeConfirmation(db *gorm.DB, challengeConfirmation data.ChallengeConfirmation) error {
 	return db.Where("id = ?", challengeConfirmation.ID).FirstOrCreate(&challengeConfirmation).Error
 }
+
+func CreateChallengeLog(db *gorm.DB, challengeLog data.ChallengeLog) error {
+	return db.Where("id = ?", challengeLog.ID).FirstOrCreate(&challengeLog).Error
+}
