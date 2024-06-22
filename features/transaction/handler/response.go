@@ -36,6 +36,8 @@ type TransactionAllUserResponses struct {
 	SnapURL      string  `json:"snap_url"`
 	ProductName  string  `json:"product_name"`
 	ProductImage string  `json:"product_image"`
+	CreatedAt    string  `json:"created_at"`
+	UpdatedAt    string  `json:"updated_at"`
 }
 
 func (t *TransactionAllUserResponses) FromEntity(transaction transaction.TransactionData) TransactionAllUserResponses {
@@ -51,5 +53,7 @@ func (t *TransactionAllUserResponses) FromEntity(transaction transaction.Transac
 			response.ProductImage = transaction.TransactionItems[0].Product.Images[0].ImageURL
 		}
 	}
+	response.CreatedAt = transaction.CreatedAt.Format("02/01/2006 15:04")
+	response.UpdatedAt = transaction.UpdatedAt.Format("02/01/2006 15:04")
 	return response
 }
