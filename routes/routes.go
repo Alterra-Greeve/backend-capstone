@@ -120,8 +120,11 @@ func RouteVoucher(e *echo.Echo, vc voucher.VoucherHandlerInterface, cfg config.G
 		SigningKey:   []byte(cfg.JWT_Secret),
 		ErrorHandler: helper.JWTErrorHandler,
 	}
+
 	e.GET("/api/v1/admin/voucher", vc.GetAll(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/voucher", vc.GetAll(), echojwt.WithConfig(jwtConfig))
 	e.GET(route.VoucherByID, vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
+	e.GET("/api/v1/admin/voucher/:id", vc.GetByIdVoucher(), echojwt.WithConfig(jwtConfig))
 	e.POST("/api/v1/admin/voucher", vc.Create(), echojwt.WithConfig(jwtConfig))
 	e.PUT(route.VoucherByID, vc.Update(), echojwt.WithConfig(jwtConfig))
 	e.DELETE(route.VoucherByID, vc.Delete(), echojwt.WithConfig(jwtConfig))
