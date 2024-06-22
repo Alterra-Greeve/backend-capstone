@@ -320,6 +320,7 @@ func (td *TransactionData) GetAllTransaction() ([]transaction.TransactionData, e
 		Preload("TransactionItems.Product.Images").
 		Preload("TransactionItems.Product.ImpactCategories").
 		Preload("TransactionItems.Product.ImpactCategories.ImpactCategory").
+		Order("created_at DESC").
 		Find(&transactions).Error
 
 	if err != nil {
