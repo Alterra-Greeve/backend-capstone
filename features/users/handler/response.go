@@ -33,12 +33,9 @@ type UserbyAdminandPageResponse struct {
 	Name       string `json:"name"`
 	Email      string `json:"email"`
 	Username   string `json:"username"`
-	Password   string `json:"password"`
 	Address    string `json:"address"`
 	Gender     string `json:"gender"`
 	Phone      string `json:"phone"`
-	Coin       int    `json:"coin"`
-	Exp        int    `json:"exp"`
 	Membership bool   `json:"membership"`
 	AvatarURL  string `json:"avatar_url"`
 	CreatedAt  string `json:"created_at"`
@@ -50,12 +47,9 @@ type UserbyAdminResponse struct {
 	Name       string `json:"name"`
 	Email      string `json:"email"`
 	Username   string `json:"username"`
-	Password   string `json:"password"`
 	Address    string `json:"address"`
 	Gender     string `json:"gender"`
 	Phone      string `json:"phone"`
-	Coin       int    `json:"coin"`
-	Exp        int    `json:"exp"`
 	Membership bool   `json:"membership"`
 	AvatarURL  string `json:"avatar_url"`
 	CreatedAt  string `json:"created_at"`

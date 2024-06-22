@@ -422,17 +422,16 @@ func (h *UserHandler) GetAllUsersForAdmin() echo.HandlerFunc {
 		var response []UserbyAdminandPageResponse
 		for _, user := range user {
 			response = append(response, UserbyAdminandPageResponse{
-				ID:        user.ID,
-				Name:      user.Name,
-				Email:     user.Email,
-				Username:  user.Username,
-				Password:  user.Password,
-				Address:   user.Address,
-				Gender:    user.Gender,
-				Phone:     user.Phone,
-				Coin:      user.Coin,
-				Exp:       user.Exp,
-				AvatarURL: user.AvatarURL,
+				ID:         user.ID,
+				Name:       user.Name,
+				Email:      user.Email,
+				Username:   user.Username,
+				Address:    user.Address,
+				Gender:     user.Gender,
+				Phone:      user.Phone,
+				Membership: user.Membership,
+				AvatarURL:  user.AvatarURL,
+
 				CreatedAt: user.CreatedAt.Format("02/01/06"),
 				UpdatedAt: user.UpdatedAt.Format("02/01/06"),
 			})
@@ -476,13 +475,11 @@ func (h *UserHandler) GetUserByIDForAdmin() echo.HandlerFunc {
 			Name:      users.Name,
 			Email:     users.Email,
 			Username:  users.Username,
-			Password:  users.Password,
 			Address:   users.Address,
 			Gender:    users.Gender,
 			Phone:     users.Phone,
-			Coin:      users.Coin,
-			Exp:       users.Exp,
 			AvatarURL: users.AvatarURL,
+			Membership: users.Membership,
 			CreatedAt: users.CreatedAt.Format("02/01/06"),
 			UpdatedAt: users.UpdatedAt.Format("02/01/06"),
 		}
