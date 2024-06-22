@@ -1056,7 +1056,7 @@ paths:
                   status: false
                   message: User ID Not Found
                   data: null
-  /transactions:
+  /admin/transactions:
     get: 
       tags:
         - transaction
