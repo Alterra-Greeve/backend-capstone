@@ -4050,7 +4050,7 @@ paths:
                   status: false
                   message: Unauthorized
                   data: null
-  /admin/voucher/{voucher_id}:
+  /voucher/{voucher_id}:
     get:
       tags:
         - voucher

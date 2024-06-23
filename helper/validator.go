@@ -41,3 +41,14 @@ func ValidatePhone(phone string) bool {
 	regex := regexp.MustCompile(`^08\d{8,11}$`)
 	return regex.MatchString(trimmed)
 }
+
+func ValidateDiscount(discount string) bool {
+	trimmed := strings.TrimSpace(discount)
+	regex := regexp.MustCompile(`^(100|[1-9]\d?)%$`)
+	return regex.MatchString(trimmed)
+}
+
+func ValidateCode(code string) bool {
+	regex := regexp.MustCompile(`^[a-zA-Z0-9]+$`)
+	return regex.MatchString(code)
+}
