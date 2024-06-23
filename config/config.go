@@ -41,7 +41,7 @@ type OpenAi struct {
 }
 
 func InitConfig() *GreeveConfig {
-	_ = godotenv.Load(".env.prod")
+	_ = godotenv.Load(".env.local")
 
 	var res = new(GreeveConfig)
 
