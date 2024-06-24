@@ -64,8 +64,13 @@ func (u *VoucherData) Update(voucherData voucher.VoucherEdit) error {
 		return err
 	}
 
-	if err := u.DB.Where("code = ?", voucherData.Code).First(&existingVoucher).Error; err == nil {
-		return constant.ErrCodeVoucherExists
+	if voucherData.Code != "" {
+		var checkVoucher voucher.Voucher
+		if err := u.DB.Where("code = ? AND id <> ?", voucherData.Code, voucherData.ID).First(&checkVoucher).Error; err == nil {
+			return constant.ErrCodeVoucherExists
+		} else if err != gorm.ErrRecordNotFound {
+			return err
+		}
 	}
 
 	err := u.DB.Model(&existingVoucher).Updates(voucherData).Error

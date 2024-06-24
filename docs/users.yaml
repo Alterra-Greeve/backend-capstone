@@ -4203,8 +4203,8 @@ paths:
     get:
       tags:
         - voucher
-      summary: Get Data Voucher By Admin
-      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      summary: Get Data Voucher By User
+      description: User dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token User
       operationId: getDataVoucher
       security:
         - bearerAuth: []
@@ -4271,8 +4271,8 @@ paths:
     get:
       tags:
         - voucher
-      summary: Get Voucher Data By Admin
-      description: Admin dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token admin
+      summary: Get Voucher Data By User
+      description: User dapat melihat data voucher, untuk menggunakan route ini harus menggunakan token user
       operationId: getDataVoucherbyid
       security:
         - bearerAuth: []
