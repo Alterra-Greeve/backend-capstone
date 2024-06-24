@@ -120,8 +120,16 @@ func (h *VoucherHandler) Create() echo.HandlerFunc {
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
 
+		if !helper.ValidateDiscount(voucherRequest.Discount) {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Error Discount Format", nil))
+		}
+
 		if len(voucherRequest.Code) != 9 {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCodeVoucher.Error(), nil))
+		}
+
+		if len(voucherRequest.Code) == 9 && !helper.ValidateCode(voucherRequest.Code) {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Format Code Wrong", nil))
 		}
 
 		voucherData := voucher.Voucher{
@@ -175,10 +183,18 @@ func (h *VoucherHandler) Update() echo.HandlerFunc {
 			code, message := helper.HandleEchoError(err)
 			return c.JSON(code, helper.FormatResponse(false, message, nil))
 		}
+
+		if !helper.ValidateDiscount(voucherRequest.Discount) {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Error Discount Format", nil))
+		}
+
 		if voucherRequest.Code != "" && len(voucherRequest.Code) != 9 {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrCodeVoucher.Error(), nil))
 		}
 
+		if len(voucherRequest.Code) == 9 && !helper.ValidateCode(voucherRequest.Code) {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Format Code Wrong", nil))
+		}
 		voucherData := voucher.VoucherEdit{
 			ID:          existingVoucher.ID,
 			Name:        voucherRequest.Name,
@@ -192,6 +208,9 @@ func (h *VoucherHandler) Update() echo.HandlerFunc {
 		if err != nil {
 			if err == constant.ErrCodeVoucherExists {
 				return c.JSON(helper.ConvertResponseCode(constant.ErrCodeVoucherExists), helper.FormatResponse(false, constant.ErrCodeVoucherExists.Error(), nil))
+			}
+			if err == constant.ErrVoucherField {
+				return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, constant.ErrVoucherField.Error(), nil))
 			}
 			return c.JSON(helper.ConvertResponseCode(constant.ErrUpdateVoucher), helper.FormatResponse(false, constant.ErrUpdateVoucher.Error(), nil))
 		}
